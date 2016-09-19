@@ -43,9 +43,6 @@ def main_pipeline_run():
     if dbc_config['active']:
         define_dbc_pipe(pipeline, dbc_config)
 
-    if timeff_config['active']:
-        define_timeff_pipe(pipeline, timeff_config)
-
     pipeline.run()
 
 
