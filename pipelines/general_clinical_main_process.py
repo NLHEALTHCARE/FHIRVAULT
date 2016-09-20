@@ -1,5 +1,3 @@
-from etl_mappings.timeff.timeff_proces import define_timeff_pipe
-
 from etl_mappings.adres_nl.adresnl_process import define_adres_nl_pipe
 from etl_mappings.dbc.dbc_proces import define_dbc_pipe
 from etl_mappings.manual_data.manula_data_proces import define_manual_data_pipe
@@ -9,12 +7,15 @@ from etl_mappings.vektis_agb.vektis_agb_proces import define_vektis_agb_pipe, co
 from pipelines.general_clinical_configs import *
 
 # from etl_mappings.vektis_uzovi.vektis_uzovi_proces import create_vektis_uzovi_pipe
+# from pyelt.pipeline import Pipeline
 from pyelt.pipeline import Pipeline
 
 
 def create_vektis_uzovi_pipe(pipeline):
     pass
 
+def test5():
+    pass
 
 def main_pipeline_run():
     #
