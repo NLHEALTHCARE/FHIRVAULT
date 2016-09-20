@@ -1,5 +1,6 @@
 from domainmodels.entity_domain import AdresNL
-from pipelines.clinics.clinics_configs import adresnl_config
+from pipelines.general_clinical_configs import adresnl_config
+
 from pyelt.mappings.base import ConstantValue
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
@@ -15,39 +16,46 @@ def init_source_to_sor_mappings(pipe):
     # adresnl
     ###############################
     data_path = adresnl_config['data_path']
-    # source_file = CsvFile(data_path + 'pcdata_output2.csv', delimiter=';')  #deel adresnlbestand
-    # source_file = CsvFile(data_path + 'adresnl_voorpostbussentesten.csv', delimiter=';')  #deel adresnlbestand bevat ook postbussen om te testen
-    # source_file = CsvFile(data_path + 'adresnl_1000.csv', delimiter=';')  # deel adresnlbestand
-    # source_file = CsvFile(data_path + '/adresnl_compleet.csv', delimiter=';')  # compleetadresnlbestand
-    source_file = CsvFile(data_path + '/adresnl_update_20160801-20160905.csv', delimiter=';')  #  update van adresnlbestand
-    # source_file = CsvFile(data_path + '{}'.format(pcnl.csv_name), delimiter=';')  #  update van adresnlbestand
-
+    adresnl_file = adresnl_config['adresnl_file']
+    source_file = CsvFile(data_path + adresnl_file, delimiter=';')
     source_file.reflect()
     source_file.set_primary_key(['wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
 
     sor_mapping = SourceToSorMapping(source_file, 'adresnl_hstage', auto_map=True)
     mappings.append(sor_mapping)
+    # source_file = CsvFile(data_path + 'pcdata_output2.csv', delimiter=';')  #deel adresnlbestand
+    # source_file = CsvFile(data_path + 'adresnl_voorpostbussentesten.csv', delimiter=';')  #deel adresnlbestand bevat ook postbussen om te testen
+    # source_file = CsvFile(data_path + 'adresnl_1000.csv', delimiter=';')  # deel adresnlbestand
+      # compleetadresnlbestand
+    # source_file = CsvFile(data_path + '/adresnl_update_20160801-20160905.csv', delimiter=';')  #  update van adresnlbestand
+    # source_file = CsvFile(data_path + '{}'.format(pcnl.csv_name), delimiter=';')  #  update van adresnlbestand
+
+
 
     ###############################
     # cbsbuurten
     ###############################
 
     data_path = adresnl_config['data_path']
+    cbs_buurten_file = adresnl_config['cbs_buurten_file']
+    source_file = CsvFile(data_path + cbs_buurten_file, delimiter=';')  # compleet adresbestand ,geen empty lines aan eind document
+    source_file.reflect()
+    source_file.set_primary_key(['POSTCODE', 'HUISNUMMER'])
+    sor_mapping = SourceToSorMapping(source_file, 'cbsbuurten_hstage', auto_map=True)
+    mappings.append(sor_mapping)
     # source_file = CsvFile(data_path + '/cbs_buurten_compleet.txt', delimiter=';') # compleetadresnlbestand
     # source_file = CsvFile(data_path + '/cbs_buurten_tm1011DD.txt', delimiter=';')  # deel adresnlbestand
     # source_file = CsvFile(data_path + '/cbs_buurten_encodingtest.txt', encoding='Latin-1', delimiter=';')  # deel adresnlbestand
     # source_file = CsvFile(data_path + '/cbs_buurten_utf8.txt', delimiter=';')  # deel adresnlbestand
-    source_file = CsvFile(data_path + '/cbs_buurten_compleet_utf8m.txt', delimiter=';')  # compleet adresbestand ,geen empty lines aan eind document
+    # source_file = CsvFile(data_path + '/cbs_buurten_compleet_utf8m.txt', delimiter=';')  # compleet adresbestand ,geen empty lines aan eind document
 
 
 
 
-    source_file.reflect()
-    source_file.set_primary_key(['POSTCODE', 'HUISNUMMER'])
-    sor_mapping = SourceToSorMapping(source_file, 'cbsbuurten_hstage', auto_map=True)
 
 
-    mappings.append(sor_mapping)
+
+
 
 
     return mappings
