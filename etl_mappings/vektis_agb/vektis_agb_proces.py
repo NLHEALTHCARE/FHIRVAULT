@@ -10,7 +10,7 @@ from pyelt.pipeline import Pipeline
 import domainmodels
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
 from etl_mappings.vektis_agb.vektis_agb_mappings import init_source_to_sor_mappings
-from pipelines.general_clinical_configs import general_config, vektis_agb_config
+
 
 __author__ = 'hvreenen'
 
@@ -30,6 +30,7 @@ def define_vektis_agb_pipe(pipeline, vektis_agb_config):
 
 
 def vektis_main(*args):
+    from pipelines.general_clinical_configs import general_config, vektis_agb_config
     start = time.time()
 
     pipeline = Pipeline(general_config)

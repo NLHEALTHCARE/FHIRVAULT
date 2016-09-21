@@ -3,8 +3,6 @@ from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.mappings.validations import SorValidation
 from pyelt.sources.files import CsvFile
 
-from pipelines.general_clinical_configs import nictiz_config
-
 
 def init_source_to_sor_mappings(pipe):
     mappings = []
@@ -13,7 +11,7 @@ def init_source_to_sor_mappings(pipe):
     ###############################
     # valuesets
     ###############################
-    data_path = nictiz_config['data_path']
+    data_path = pipe.config['data_path']
     source_file = CsvFile(data_path + '/valuesets.csv', delimiter=';')
 
     source_file.reflect()

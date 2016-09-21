@@ -1,14 +1,10 @@
-# from etl_processes.dbc.dbc_importdef import dbc_import_def
-
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.sources.files import CsvFile
 
-from pipelines.general_clinical_configs import dbc_config
 
-
-def init_source_to_sor_mappings():
+def init_source_to_sor_mappings(pipe):
     mappings = []
-    path = dbc_config['data_path']
+    path = pipe.config['data_path']
 
     source_file = CsvFile('{}{}'.format(path, 'Zorgproductgroepen Tabel v20150701.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()

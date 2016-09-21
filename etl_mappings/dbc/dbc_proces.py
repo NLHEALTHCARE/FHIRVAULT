@@ -8,7 +8,7 @@ __author__ = 'hvreenen'
 def define_dbc_pipe(pipeline, dbc_config):
     pipe = pipeline.get_or_create_pipe('sor_dbc', dbc_config)
 
-    source_to_sor_mappings = init_source_to_sor_mappings()
+    source_to_sor_mappings = init_source_to_sor_mappings(pipe)
     pipe.mappings.extend(source_to_sor_mappings)
 
     # sor_to_dv_mappings = init_sor_to_dv_mappings()

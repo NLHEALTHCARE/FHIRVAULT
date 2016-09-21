@@ -1,7 +1,5 @@
 from domainmodels.entity_domain import AdresNL
-from pipelines.general_clinical_configs import adresnl_config
 
-from pyelt.mappings.base import ConstantValue
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.sources.files import CsvFile
@@ -15,8 +13,8 @@ def init_source_to_sor_mappings(pipe):
     ###############################
     # adresnl
     ###############################
-    data_path = adresnl_config['data_path']
-    adresnl_file = adresnl_config['adresnl_file']
+    data_path = pipe.config['data_path']
+    adresnl_file = pipe.config['adresnl_file']
     source_file = CsvFile(data_path + adresnl_file, delimiter=';')
     source_file.reflect()
     source_file.set_primary_key(['wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
@@ -35,9 +33,7 @@ def init_source_to_sor_mappings(pipe):
     ###############################
     # cbsbuurten
     ###############################
-
-    data_path = adresnl_config['data_path']
-    cbs_buurten_file = adresnl_config['cbs_buurten_file']
+    cbs_buurten_file = pipe.config['cbs_buurten_file']
     source_file = CsvFile(data_path + cbs_buurten_file, delimiter=';')  # compleet adresbestand ,geen empty lines aan eind document
     source_file.reflect()
     source_file.set_primary_key(['POSTCODE', 'HUISNUMMER'])
