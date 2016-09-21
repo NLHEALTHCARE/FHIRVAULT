@@ -7,6 +7,7 @@ from etl_mappings.adres_nl._adresnl_unzip import PostcodesNL
 """Doel: oorspronkelijke csv file van AdresNL bevat geen header-rij. In onderstaande code worden de juiste headers toegevoegd."""
 
 
+
 pcnl = PostcodesNL()
 pcnl.set_URL('https://retrieve.postcode.nl/retrieve.php?hash=63e7fad64879ff12bd87e18bfac71b2c') #todo: deze url verandert waarschijnlijk bij iedere nieuwe update. Moet waarschijnlijk dus handmatig aangepast gaan worden iedere keer.
 pcnl.get_zip_name()
