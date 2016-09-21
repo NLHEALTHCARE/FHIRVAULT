@@ -29,14 +29,15 @@ class Valuesets():
                 # naam: ) 'conceptList, ongeacht waar deze zich bevinden
 
                 for concept in conceptlist:
-                    rows_temp = list(concept.attrib.values()) + [valueset.attrib.get('id')] + [valueset.attrib.get('displayName')] + [valueset.attrib.get('effectiveDate')] + [
-                        valueset.attrib.get('statusCode')]
+                    # onderstaande regel zorgt dat er een vaste volgorde van de kolommen ontstaat
+                    rows_temp = [concept.attrib.get('level')] + [concept.attrib.get('type')] + [concept.attrib.get('code')] + [concept.attrib.get('displayName')] + [concept.attrib.get('codeSystem')] \
+                    + [valueset.attrib.get('id')] + [valueset.attrib.get('displayName')] + [valueset.attrib.get('effectiveDate')] + [valueset.attrib.get('statusCode')]
                     if len(rows_temp) == 9:  # de gelezen rij wordt alleen mee genomen indien de lengte gelijk is aan het
                         # aantal kolommen; let op is nu nog hardgecodeerd!
                         self.rows.append(rows_temp)
                     if self.counter == 0:
-                        headers_temp = list(concept.attrib.keys()) + ['id', 'valueset', 'ingangsdatum', 'codestatus']
-                        # "concept.attrib.keys())" maakt een list van de keys in de attrib dictionary van concept.
+                        headers_temp = ['level', 'type', 'code', 'displayName', 'codeSystem', 'id', 'valueset', 'ingangsdatum', 'codestatus']
+
                         self.headers.append(headers_temp)
                         self.counter += 1
                 headers = self.headers
@@ -47,7 +48,7 @@ class Valuesets():
 
 
 class Nictiz_CSV_writer():
-    def __init__(self, file_name, data_path):
+    def __init__(self, data_path, file_name):
         self.file_name = file_name
         self.data_path = data_path
 
@@ -113,6 +114,7 @@ def scrape_from_web(configs):
 
         # path = 'https://decor.nictiz.nl/decor/services/'
         scrape_url = configs['scrape_url']
+        data_path = configs['data_path']
 
         for xml_ref in xml_refs:
 
@@ -127,8 +129,8 @@ def scrape_from_web(configs):
                 # opgehaald indien 'concepList' bestaat in het xml bestand dat nu gelezen wordt.
                 headers, rows = valueset_values.get_headers_and_rows()
 
-        new_csv = Nictiz_CSV_writer('valuesets.csv')
+        new_csv = Nictiz_CSV_writer(data_path, 'valuesets.csv')
         new_csv.save_as_csv(headers, rows)
 
-        data_path = configs['data_path']
+
         print('Data saved to valuesets.csv in {}'.format(data_path))
