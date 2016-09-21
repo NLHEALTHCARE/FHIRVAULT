@@ -40,5 +40,8 @@ def init_sor_to_dv_mappings():
     ref_mapping.map_descr_field('displayName')
     ref_mapping.map_type_field('valueset', 'id')
     ref_mapping.map_level_field('level')
+    ###
+    ref_mapping.map_leveltype_field('type')
+    ###
     mappings.append(ref_mapping)
     return mappings

@@ -4,7 +4,7 @@ from etl_mappings.nictiz_webscraping.nictiz_mappings import init_source_to_sor_m
 from etl_mappings.nictiz_webscraping.xml_parser_nictiz import scrape_from_web
 
 
-# from etl_mappings.nictiz_webscraping import xml_parser_nictiz # niet wegdoen!; nodig vanwege wanneer scraping van nictiz bestanden gewenst is.
+from etl_mappings.nictiz_webscraping import xml_parser_nictiz # niet wegdoen!; nodig vanwege wanneer scraping van nictiz bestanden gewenst is.
 
 
 
@@ -20,6 +20,8 @@ def define_nictiz_pipe(pipeline, nictiz_config):
 
 def nictiz_main(*args):
     from pipelines.general_clinical_configs import general_config, nictiz_config
+
+
     scrape_from_web(nictiz_config)
     pipeline = Pipeline(general_config)
     define_nictiz_pipe(pipeline, nictiz_config)
