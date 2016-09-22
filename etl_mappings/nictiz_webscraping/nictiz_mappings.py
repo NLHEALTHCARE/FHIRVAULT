@@ -40,6 +40,8 @@ def init_sor_to_dv_mappings():
     ref_mapping.map_level_field('level')
     ###
     ref_mapping.map_leveltype_field('type')
+    ref_mapping.map_tempid_field('temp_id')
+    ref_mapping.map_tempfk_field('temp_fk')
     ###
     mappings.append(ref_mapping)
     return mappings

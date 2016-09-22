@@ -452,3 +452,28 @@ class RoleLinkType:
     part = 'PART'
     repl = 'REPL' #todo: niet letterlijk teruggevonden in tabel
 
+
+
+### voorbeeld stuk voor Rob voor opzet boomstructuur uitgevoerd in classes (gebruik dit voor de nictiz-data)
+# class RoleTypes:
+#     personen = 'PRS'
+#     class PersoonTypes:
+#         default = 'PRS'
+#         patient = 'PAT'
+#         klanten = 'KLT'
+#         class MedewerkerType:
+#             default = 'MDW'
+#             hulpverlener = 'HLP'
+#             artsen = 'ART'
+#             class Artsen:
+#                 default = 'ART'
+#         class PatientTypes:
+#             pass
+#
+#
+#
+#
+# RoleTypes.PersoonTypes.MedewerkerType.Artsen.default
+
+
+### einde voorbeeld
