@@ -74,6 +74,7 @@ class Nictiz_CSV_writer():
                         """'Administrative Gender (HL7 V3)' is niet opgenomen in 'valuesets.csv'. Reden: Deze oid (2.16.840.1.113883.1.11.1) wordt ook door 'AdministrativeGender' gebruikt. Deze laatste bevat precies dezelfde values en is bovendien van een recentere datum.""")
 
 
+
     def save_csv_headers(self, headers):
         """
         door het aanroepen van deze functie wordt de oude csv-file overschreven  (writer setting = 'w') door een bestand
