@@ -94,7 +94,7 @@ def init_sor_to_dv_mappings(pipe):
     # mapping.map_field('??',AdresNL.Default.additionele_informatie)
     mapping.map_field('provincienaam', AdresNL.Default.provincie)
 
-    mapping.map_field('update_type', AdresNL.ExtraInfo.update_type)
+    mapping.map_field('update_type', AdresNL.ExtraInfo.status_temp)
     mapping.map_field('perceeltype ', AdresNL.ExtraInfo.perceeltype)
     mapping.map_field('huisnr_bag_toevoeging', AdresNL.ExtraInfo.bag_huisnummertoevoeging)
     mapping.map_field('gebruiksdoel', AdresNL.ExtraInfo.gebruiksdoel)

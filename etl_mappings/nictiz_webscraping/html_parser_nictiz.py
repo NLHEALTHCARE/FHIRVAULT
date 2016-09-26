@@ -51,4 +51,4 @@ if __name__ == "__main__":
 
     xml_refs = parser.xml_refs
     print(xml_refs)
-    print(xml_refs[0])
+    # print(xml_refs[0])
