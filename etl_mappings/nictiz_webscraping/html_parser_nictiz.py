@@ -13,7 +13,7 @@ def html_to_string(url):
 
 
 # Kennelijk gebruikt  de HTMLParser strings als input. Echter de html data die binnenkomt dankzij 'urllib.request.urlopen' is in bytes.
-# Om dit op te lossen wordt de data eerst in een list veranderd met ".decode('utf-8')" en vervolgens wordt deze list omgezet in een string
+# Om dit op te lossen wordt de data eerst in een list veranderd met ".decode('utf-8')" en vervolgens wordt deze list omgezet in een string.
 
 
 
