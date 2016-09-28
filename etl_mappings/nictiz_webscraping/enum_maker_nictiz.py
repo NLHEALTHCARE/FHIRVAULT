@@ -1,4 +1,24 @@
-"""maakt boomstructuur voor hl7rim_enums weergave van Nictiz XML bestanden"""
+"""
+Maakt boomstructuur voor hl7rim_enums weergave van Nictiz XML bestanden.
+
+    Gebruik:
+    Maak een csv bestand van nictiz xml file(s) met nictiz_process.py. Run enum_maker_nictiz.py.
+    Kopieer de gewenste boomstructuur (en plaats deze bijvoorbeeld in hl7rim_enums.py).
+    Let hierbij op het volgende: door de opbouw van de xml bestanden komen sommige boomstructuren vaker voor.
+    Let verder op dat sommige "leafs" niet direct onder de default van hetzelfde niveau komen te staan maar
+    onderbroken worden door een "stem" op dat zelfde niveau. Corrigeer dit dan handmatig.
+    Voorbeeld:
+            Class GeneticobservationinterpretationAbstractTypes:
+                default = '_GeneticObservationInterpretation'
+                carrier = 'CAR'
+                ...
+                Class AbnormalTypes:
+                    default = 'A'
+                ...
+                normal = 'N'
+
+    In bovenstaand voorbeeld moet de regel met "normal = 'N'" verplaatst worden naar direct onder "carier' = 'CAR'.
+"""
 
 import os
 import csv
@@ -99,3 +119,5 @@ with open('valuesets.csv', newline='', encoding='UTF-8') as f:
                     else:
                         leaf = "{} = '{}'".format(set_attribute_name(templst[3]), templst[2])
                         print(''.ljust(indent+indent*int(templst[0])) + leaf)
+
+
