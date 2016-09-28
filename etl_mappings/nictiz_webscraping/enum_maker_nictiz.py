@@ -8,11 +8,11 @@ Maakt boomstructuur voor hl7rim_enums weergave van Nictiz XML bestanden.
     Let verder op dat sommige "leafs" niet direct onder de default van hetzelfde niveau komen te staan maar
     onderbroken worden door een "stem" op dat zelfde niveau. Corrigeer dit dan handmatig.
     Voorbeeld:
-            Class GeneticobservationinterpretationAbstractTypes:
+            class GeneticobservationinterpretationAbstractTypes:
                 default = '_GeneticObservationInterpretation'
                 carrier = 'CAR'
                 ...
-                Class AbnormalTypes:
+                class AbnormalTypes:
                     default = 'A'
                 ...
                 normal = 'N'
@@ -48,7 +48,8 @@ def set_class_name(string):
     Een class naam is camelcased en bevat geen leestekens.
 
     """
-    string = string.title()  # .title() Capitalizes each word
+    if " " in string:
+        string = string.title()  # .title() Capitalizes each word
     for j in string:
         if j.isalpha():
             pass
@@ -84,17 +85,18 @@ with open('valuesets.csv', newline='', encoding='UTF-8') as f:
                         current_base_class = templst[6]
                         print('')
                         print('')
-                        print("Class {}: ".format(set_class_name(templst[6])))  # dit is de naam van de valueset waaruit deze boomstructuur wordt opgebouwd.
-                        if templst[1] == 'A':  # waarde van column 'type'
-                            new_class = "Class {}AbstractTypes:".format(set_class_name(templst[3]))  # waarde van column 'DisplayName'
-                            print(''.ljust(indent + indent*int(templst[0])) + new_class)  # waarde van column 'level'
-                            default = "default = '{}'".format(templst[2])  # waarde van column 'code'
-                            print(''.ljust(2*indent + indent*int(templst[0])) + default)
-                        elif templst[1] == 'S':
-                            new_class = "Class {}Types:".format(set_class_name(templst[3]))
-                            print(''.ljust(indent + indent*int(templst[0])) + new_class)
-                            default = "default = '{}'".format(templst[2])
-                            print(''.ljust(2*indent + indent*int(templst[0])) + default)
+                        print("class {}: ".format(set_class_name(templst[6])))  # dit is de naam van de valueset waaruit deze boomstructuur wordt opgebouwd.
+                    print('')
+                    if templst[1] == 'A':  # waarde van column 'type'
+                        new_class = "class {}AbstractTypes:".format(set_class_name(templst[3]))  # waarde van column 'DisplayName'
+                        print(''.ljust(indent + indent*int(templst[0])) + new_class)  # waarde van column 'level'
+                        default = "default = '{}'".format(templst[2])  # waarde van column 'code'
+                        print(''.ljust(2*indent + indent*int(templst[0])) + default)
+                    elif templst[1] == 'S':
+                        new_class = "class {}Types:".format(set_class_name(templst[3]))
+                        print(''.ljust(indent + indent*int(templst[0])) + new_class)
+                        default = "default = '{}'".format(templst[2])
+                        print(''.ljust(2*indent + indent*int(templst[0])) + default)
 
             else:
 
@@ -104,10 +106,10 @@ with open('valuesets.csv', newline='', encoding='UTF-8') as f:
                     else:
                         print('')
                         if templst[1] == 'A':
-                            new_class = "Class {}AbstractTypes:".format(set_class_name(templst[3]))
+                            new_class = "class {}AbstractTypes:".format(set_class_name(templst[3]))
                             print(''.ljust(indent + indent*int(templst[0])) + new_class)
                         elif templst[1] == 'S':
-                            new_class = "Class {}Types:".format(set_class_name(templst[3]))
+                            new_class = "class {}Types:".format(set_class_name(templst[3]))
                             print(''.ljust(indent + indent*int(templst[0])) + new_class)
 
                         default = "default = '{}'".format(templst[2])

@@ -470,7 +470,7 @@ class RoleLinkType:
 #         class PatientTypes:
 #             pass
 #
-#
+# #
 #
 #
 # RoleTypes.PersoonTypes.MedewerkerType.Artsen.default
@@ -482,4 +482,237 @@ class RoleLinkType:
 Enum gebaseerd op Nictiz bestanden:
 """
 
+
+
+class RolecodenlZorgverlenertypePersonen:
+    class AssignedRoleType:  # Oorspronkelijk: EenRoltypeWordtGebruiktOmEenEntiteitVerderAanTeDuidenDieEenRolSpeeltMetAssignedentityAlsModelattribuutRoleclassAbstractTypes
+        default = 'AssignedRoleType'
+
+        class ArtsTypes:
+            default = '01.000'
+            internist_allergoloog = '01.002'
+            anesthesioloog = '01.003'
+            apotheekhoudende_huisarts = '01.004'
+            bedrijfsarts = '01.008'
+            cardioloog = '01.010'
+            cardiothoracaal_chirurg = '01.011'
+            dermatoloog = '01.012'
+            arts_v_maag_darm_leverziekten = '01.013'
+            chirurg = '01.014'
+            huisarts = '01.015'
+            internist = '01.016'
+            keel__neus__en_oorarts = '01.018'
+            kinderarts = '01.019'
+            arts_klinische_chemie = '01.020'
+            klinisch_geneticus = '01.021'
+            klinisch_geriater = '01.022'
+            longarts = '01.023'
+            arts_microbioloog = '01.024'
+            neurochirurg = '01.025'
+            neuroloog = '01.026'
+            nucleair_geneeskundige = '01.030'
+            oogarts = '01.031'
+            orthopedisch_chirurg = '01.032'
+            patholoog = '01.033'
+            plastisch_chirurg = '01.034'
+            psychiater = '01.035'
+            radioloog = '01.039'
+            radiotherapeut = '01.040'
+            reumatoloog = '01.041'
+            revalidatiearts = '01.042'
+            uroloog = '01.045'
+            gynaecoloog = '01.046'
+            specialist_ouderengeneeskunde = '01.047'
+            verzekeringsarts = '01.048'
+            zenuwarts = '01.050'
+            arts_maatschappij_en_gezondheid = '01.055'
+            arts_voor_verstandelijk_gehandicapten = '01.056'
+            jeugdarts = '01.070'
+            spoedeisende_hulp_arts = '01.071'
+            sportarts = '01.074'
+
+        class TandartsTypes:
+            default = '02.000'
+            orthodontist = '02.053'
+            kaakchirurg = '02.054'
+
+        class VerloskundigeTypes:
+            default = '03.000'
+
+        class FysiotherapeutTypes:
+            default = '04.000'
+
+        class PsychotherapeutTypes:
+            default = '16.000'
+
+        class ApothekerTypes:
+            default = '17.000'
+            ziekenhuisapotheker = '17.060'
+            openbaar_apotheker = '17.075'
+
+        class GezondheidszorgpsycholoogTypes:
+            default = '25.000'
+            klinisch_psycholoog = '25.061'
+            klinisch_neuropsycholoog = '25.063'
+
+        class VerpleegkundigeTypes:
+            default = '30.000'
+            verpl_spec_prev_zorg_bij_som_aandoeningen = '30.065'
+            verpl_spec_acute_zorg_bij_som_aandoeningen = '30.066'
+            verpl_spec_intensieve_zorg_bij_som_aandoeningen = '30.067'
+            verpl_spec_chronische_zorg_bij_som_aandoeningen = '30.068'
+            verpl_spec_geestelijke_gezondheidszorg = '30.069'
+
+        class ApothekersassistentTypes:
+            default = '83.000'
+
+        class KlinischFysicusTypes:
+            default = '84.000'
+
+        class TandprotheticusTypes:
+            default = '85.000'
+
+        class VigErTypes:
+            default = '86.000'
+
+        class OptometristTypes:
+            default = '87.000'
+
+        class HuidtherapeutTypes:
+            default = '88.000'
+
+        class DietistTypes:
+            default = '89.000'
+
+        class ErgotherapeutTypes:
+            default = '90.000'
+
+        class LogopedistTypes:
+            default = '91.000'
+
+        class MondhygienistTypes:
+            default = '92.000'
+
+        class OefentherapeutMensendieckTypes:
+            default = '93.000'
+
+        class OefentherapeutCesarTypes:
+            default = '94.000'
+
+        class OrthoptistTypes:
+            default = '95.000'
+
+        class PodotherapeutTypes:
+            default = '96.000'
+
+        class RadiodiagnistischLaborantTypes:
+            default = '97.000'
+
+        class RadiotherapeutischLaborantTypes:
+            default = '98.000'
+
+
+class ObservationInterpretation:
+
+    class GeneticObservationInterpretationAbstractTypes:
+        default = '_GeneticObservationInterpretation'
+        carrier = 'CAR'
+        carrier = 'Carrier'
+
+    class ObservationInterpretationChangeAbstractTypes:
+        default = '_ObservationInterpretationChange'
+        better = 'B'
+        significant_change_down = 'D'
+        significant_change_up = 'U'
+        worse = 'W'
+
+    class ObservationInterpretationExceptionsAbstractTypes:
+        default = '_ObservationInterpretationExceptions'
+        off_scale_low = '<'
+        off_scale_high = '>'
+        anti_complementary_substances_present = 'AC'
+        insufficient_evidence = 'IE'
+        quality_control_failure = 'QCF'
+        cytotoxic_substance_present = 'TOX'
+
+    class ObservationInterpretationNormalityAbstractTypes:
+        default = '_ObservationInterpretationNormality'
+
+        class AbnormalTypes:
+            default = 'A'
+            normal = 'N'
+
+            class CriticalAbnormalTypes:
+                default = 'AA'
+                critical_high = 'HH'
+                critical_low = 'LL'
+
+            class HighTypes:
+                default = 'H'
+
+                class SignificantlyHighTypes:
+                    default = 'H>'
+                    critical_high = 'HH'
+
+                class SignificantlyHighTypes:
+                    default = 'HU'
+
+            class LowTypes:
+                default = 'L'
+
+                class SignificantlyLowTypes:
+                    default = 'L<'
+                    critical_low = 'LL'
+
+                class SignificantlyLowTypes:
+                    default = 'LU'
+
+    class ObservationInterpretationSusceptibilityAbstractTypes:
+        default = '_ObservationInterpretationSusceptibility'
+        intermediate = 'I'
+        moderately_susceptible = 'MS'
+        non_susceptible = 'NS'
+        very_susceptible = 'VS'
+
+        class ResistantTypes:
+            default = 'R'
+            synergy___resistant = 'SYN-R'
+
+        class SusceptibleTypes:
+            default = 'S'
+            susceptible_dose_dependent = 'SDD'
+            synergy___susceptible = 'SYN-S'
+
+    class OutsideThresholdTypes:
+        default = 'EX'
+        above_high_threshold = 'HX'
+        below_low_threshold = 'LX'
+
+    class ObservationInterpretationDetectionAbstractTypes:
+        default = 'ObservationInterpretationDetection'
+
+        class IndeterminateTypes:
+            default = 'IND'
+            equivocal = 'E'
+
+        class NegativeTypes:
+            default = 'NEG'
+            not_detected = 'ND'
+
+        class PositiveTypes:
+            default = 'POS'
+            detected = 'DET'
+
+    class ObservationInterpretationExpectationAbstractTypes:
+        default = 'ObservationInterpretationExpectation'
+        expected = 'EXP'
+        unexpected = 'UNE'
+
+    class ReactivityObservationInterpretationAbstractTypes:
+        default = 'ReactivityObservationInterpretation'
+        non_reactive = 'NR'
+
+        class ReactiveTypes:
+            default = 'RR'
+            weakly_reactive = 'WR'
 
