@@ -477,3 +477,9 @@ class RoleLinkType:
 
 
 ### einde voorbeeld
+
+"""
+Enum gebaseerd op Nictiz bestanden:
+"""
+
+

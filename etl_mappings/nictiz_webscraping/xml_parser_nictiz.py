@@ -123,11 +123,11 @@ def scrape_from_web(configs):
         """maak hieronder een comment van de xml_refs versie die je niet wil gebruiken   """
         """versie 1: alle xml_refs afkomstig van Nictiz; let op! duurt bijna een uur om beide csv tabellen te verkrijgen, met
                      name de tabel valueset_values duurt lang"""
-        xml_refs = parser.xml_refs
+        # xml_refs = parser.xml_refs
         """versie 2: beperkt aantal xml_refs om programma mee te testen"""
         # xml_refs = ['RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.1.11.2&effectiveDate=&prefix=hg-&format=xml&language=nl-NL', 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.13&effectiveDate=&prefix=hg-&format=xml&language=nl-NL', 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=hg-&format=xml&language=nl-NL','RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.11&effectiveDate=&prefix=hg-&format=xml&language=nl-NL']
         """versie 3: selectie van xml_refs afkomstig van Nictiz:"""
-        # xml_refs = parser.xml_refs[20:40]
+        xml_refs = parser.xml_refs[0:10]
         # print(xml_refs)
         """versie 4: 3x adressoort, met als enige verschil naar welk project ze refereren"""
         # xml_refs = ['RetrieveValueSet?id=2.16.840.1.113883.3.88.12.3221.7.4&effectiveDate=&prefix=hg-&format=xml&language=nl-NL', 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=naw-&format=xml&language=nl-NL','RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=kz-&format=xml&language=nl-NL']
