@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 from etl_mappings.nictiz_webscraping.html_parser_nictiz import html_to_string, NicTizParser
 
 
-class Valuesets():
+class Valuesets:
     def __init__(self, root):
         self.root = root
         self.headers = []
@@ -43,11 +43,10 @@ class Valuesets():
                 headers = self.headers
 
                 rows = self.get_only_unique(self.rows)  # verbruikt veel tijd indien alle xml bestanden worden gelezen!
-                # alternatief: rows = self.rows
                 return headers, rows
 
 
-class Nictiz_CSV_writer():
+class NictizCSVWriter:
     def __init__(self, data_path, file_name):
         self.file_name = file_name
         self.data_path = data_path
@@ -64,7 +63,6 @@ class Nictiz_CSV_writer():
 
             f_csv = csv.writer(f, delimiter=';')  # als de delimiter niet specifiek gedefinieerd wordt, wordt
             # als default een komma als delimiter gebruikt.
-            # f_csv.writerows(headers)
             for row in rows:
                 if "Administrative Gender (HL7 V3)" not in row:
                     f_csv.writerow(row)
@@ -72,8 +70,6 @@ class Nictiz_CSV_writer():
                 if "Administrative Gender (HL7 V3)" in row:
                     print(
                         """'Administrative Gender (HL7 V3)' is niet opgenomen in 'valuesets.csv'. Reden: Deze oid (2.16.840.1.113883.1.11.1) wordt ook door 'AdministrativeGender' gebruikt. Deze laatste bevat precies dezelfde values en is bovendien van een recentere datum.""")
-
-
 
     def save_csv_headers(self, headers):
         """
@@ -92,10 +88,8 @@ class Nictiz_CSV_writer():
             f_csv.writerows(headers)
 
 
-
-
 def scrape_from_web(configs):
-    root = None
+
     if configs['use_scraping'] == False:
         print('In de config file staat use_scraping op False. Gevolg: webscraping van nictiz vindt niet plaats.')
     elif configs['use_scraping']:  # indien True dan runt de code, anders niet.
@@ -107,19 +101,6 @@ def scrape_from_web(configs):
         parser.feed(html_as_string)
         parser.close()
 
-        # !!onderstaande xml_ref(s) verwijzen naar respectievelijk 'Adressoort', 'naamgebruik' , 'land' , ' RoleCodeNLZorgverlenertypen'
-        # De indeling is grofweg hetzelfde
-        # maar niet helemaal <conceptList> zit bij de Adressoort op knoop root[0][0][2], en bij 'naamgebruik op knoop root[0][0][3]
-        # gevolg: harde codering geeft niet gewenst resultaat voor csv file van naamgebruik.
-        # 'land' heeft geen knoop 'conceptList'
-        # 'RoleCodeNLZorgverlenertypen' heeft 3x een concept list. Deze hebben exact dezelfde inhoud.
-
-
-        # xml_ref = 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=hg-&format=xml&language=nl-NL'
-        # xml_ref = 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.11&effectiveDate=&prefix=hg-&format=xml&language=nl-NL'
-        # xml_ref = 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.13&effectiveDate=&prefix=hg-&format=xml&language=nl-NL'
-        # xml_ref = 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.1.11.2&effectiveDate=&prefix=hg-&format=xml&language=nl-NL'
-
         """maak hieronder een comment van de xml_refs versie die je niet wil gebruiken   """
         """versie 1: alle xml_refs afkomstig van Nictiz; let op! duurt bijna een uur om beide csv tabellen te verkrijgen, met
                      name de tabel valueset_values duurt lang"""
@@ -127,7 +108,7 @@ def scrape_from_web(configs):
         """versie 2: beperkt aantal xml_refs om programma mee te testen"""
         # xml_refs = ['RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.1.11.2&effectiveDate=&prefix=hg-&format=xml&language=nl-NL', 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.13&effectiveDate=&prefix=hg-&format=xml&language=nl-NL', 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=hg-&format=xml&language=nl-NL','RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.11&effectiveDate=&prefix=hg-&format=xml&language=nl-NL']
         """versie 3: selectie van xml_refs afkomstig van Nictiz:"""
-        xml_refs = parser.xml_refs[0:10]
+        xml_refs = parser.xml_refs[20:30]
         # print(xml_refs)
         """versie 4: 3x adressoort, met als enige verschil naar welk project ze refereren"""
         # xml_refs = ['RetrieveValueSet?id=2.16.840.1.113883.3.88.12.3221.7.4&effectiveDate=&prefix=hg-&format=xml&language=nl-NL', 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=naw-&format=xml&language=nl-NL','RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=kz-&format=xml&language=nl-NL']
@@ -137,11 +118,9 @@ def scrape_from_web(configs):
         verzamelen van valuesets:
         """
 
-        # path = 'https://decor.nictiz.nl/decor/services/'
         scrape_url = configs['scrape_url']
         data_path = configs['data_path']
         counter = 0
-
 
         for xml_ref in xml_refs:
 
@@ -150,26 +129,15 @@ def scrape_from_web(configs):
             tree = ET.parse(u)
             root = tree.getroot()
             valueset_values = Valuesets(root)
-            # valueset_values.root = root
-
-            # for valueset in root.iter('valueSet'):
-
 
             for conceptlist in root.iter('conceptList'):  # deze regel zorgt ervoor dat er alleen headers en rows worden
                 # opgehaald indien 'concepList' bestaat in het xml bestand dat nu gelezen wordt.
                 headers, rows = valueset_values.get_headers_and_rows()
 
-
-
-
-                new_csv = Nictiz_CSV_writer(data_path, 'valuesets.csv')
+                new_csv = NictizCSVWriter(data_path, 'valuesets.csv')
                 if counter < 1:
                     new_csv.save_csv_headers(headers)
                     counter += 1
                 new_csv.save_as_csv(rows)
 
-
         print('Data saved to valuesets.csv in {}'.format(data_path))
-
-
-

@@ -1,12 +1,6 @@
 from pyelt.pipeline import Pipeline
-
 from etl_mappings.nictiz_webscraping.nictiz_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
 from etl_mappings.nictiz_webscraping.xml_parser_nictiz import scrape_from_web
-
-
-
-
-
 
 
 def define_nictiz_pipe(pipeline, nictiz_config):
@@ -17,15 +11,13 @@ def define_nictiz_pipe(pipeline, nictiz_config):
     pipe.mappings.extend(init_sor_to_dv_mappings())
 
 
-def nictiz_main(*args):
+def nictiz_main():
     from pipelines.general_clinical_configs import general_config, nictiz_config
 
     pipeline = Pipeline(general_config)
     define_nictiz_pipe(pipeline, nictiz_config)
     if nictiz_config['use_scraping']:
         scrape_from_web(nictiz_config)
-    # pipeline = Pipeline(general_config)
-    # define_nictiz_pipe(pipeline, nictiz_config)
     pipeline.run()
 
 

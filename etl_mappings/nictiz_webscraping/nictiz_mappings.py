@@ -14,8 +14,6 @@ def init_source_to_sor_mappings(pipe):
     data_path = pipe.config['data_path']
     source_file = CsvFile(data_path + '/valuesets.csv', delimiter=';')
 
-
-
     source_file.reflect()
     source_file.set_primary_key(['id', 'code', 'ingangsdatum', 'level', 'type'])
     sor_mapping = SourceToSorMapping(source_file, 'valuesets_hstage', auto_map=True)

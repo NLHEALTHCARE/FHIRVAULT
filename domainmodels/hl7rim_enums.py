@@ -479,7 +479,7 @@ class RoleLinkType:
 ### einde voorbeeld
 
 """
-Enum gebaseerd op Nictiz bestanden:
+Enum gebaseerd op Nictiz bestanden gegenereerd met enum_maker_nictiz en handmatig aangepast indien nodig (zie enum_maker.py):
 """
 
 
@@ -715,4 +715,121 @@ class ObservationInterpretation:
         class ReactiveTypes:
             default = 'RR'
             weakly_reactive = 'WR'
+
+
+class NullFlavor:
+
+    class NoInformationTypes:
+        default = 'NI'
+        masked = 'MSK'
+        not_applicable = 'NA'
+
+        class InvalidTypes:
+            default = 'INV'
+            derived = 'DER'
+            un_encoded = 'UNC'
+
+            class OtherTypes:
+                default = 'OTH'
+                negative_infinity = 'NINF'
+                positive_infinity = 'PINF'
+
+
+        class UnknownTypes:
+            default = 'UNK'
+
+            class AskedButUnknownTypes:
+                default = 'ASKU'
+                temporarily_unavailable = 'NAV'
+            not_asked = 'NASK'
+
+            class NotAvailableTypes:
+                default = 'NAVU'
+            sufficient_quantity = 'QS'
+            trace = 'TRC'
+
+
+class AcknowledgementDetailCode:
+
+    class SyntaxErrorTypes:
+        default = 'SYN'
+        data_type_error = 'SYN102'
+        mandatory_element_with_null_value = 'SYN109'
+        value_does_not_match_fixed_value = 'SYN111'
+        formal_constraint_violation = 'SYN113'
+
+        class RequiredElementMissingTypes:
+            default = 'SYN105'
+
+        class TerminologyErrorTypes:
+            default = 'SYN106'
+
+        class NumberOfRepetitionsExceedsLimitTypes:
+            default = 'SYN108'
+
+    class AcknowledgementDetailNotSupportedCodeAbstractTypes:
+        default = '_AcknowledgementDetailNotSupportedCode'
+        unsupported_interaction = 'NS200'
+        unsupported_processing_id = 'NS202'
+        unsupported_version_id = 'NS203'
+        unsupported_processing_mode = 'NS250'
+        unknown_sender = 'NS260'
+        unrecognized_attentionline = 'NS261'
+
+# de class EntitClass is hierboven al gedefinieerd maar dan zonder hierarchie,
+# class EntityClass:
+#
+#     class EntityTypes:
+#         default = 'ENT'
+#         health_chart_entity = 'HCE'
+#         group = 'RGRP'
+#
+#         class LivingSubjectTypes:
+#             default = 'LIV'
+#
+#             class NonPersonLivingSubjectTypes:
+#                 default = 'NLIV'
+#                 animal = 'ANM'
+#                 microorganism = 'MIC'
+#                 plant = 'PLNT'
+#             person = 'PSN'
+#
+#         class MaterialTypes:
+#             default = 'MAT'
+#             chemical_substance = 'CHEM'
+#             food = 'FOOD'
+#
+#             class ManufacturedMaterialTypes:
+#                 default = 'MMAT'
+#
+#                 class ContainerTypes:
+#                     default = 'CONT'
+#                     holder = 'HOLD'
+#
+#                 class DeviceTypes:
+#                     default = 'DEV'
+#                     certificate_representation = 'CER'
+#                     imaging_modality_imagingmodalityentity = 'MODDV'
+#
+#         class OrganizationTypes:
+#             default = 'ORG'
+#             public_institution = 'PUB'
+#
+#             class StateTypes:
+#                 default = 'STATE'
+#                 nation = 'NAT'
+#
+#         class PlaceTypes:
+#             default = 'PLC'
+#             city_or_town = 'CITY'
+#             country = 'COUNTRY'
+#             county_or_parish = 'COUNTY'
+#             state_or_province = 'PROVINCE'
+
+
+
+
+ # todo: xmls gedaan van 0 tot en met 30, rest nog niet
+
+
 

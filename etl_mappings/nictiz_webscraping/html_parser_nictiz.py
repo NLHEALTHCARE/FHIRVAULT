@@ -11,10 +11,8 @@ def html_to_string(url):
     html_as_string = ''.join(str(e) for e in html_string_list)
     return html_as_string
 
-
 # Kennelijk gebruikt  de HTMLParser strings als input. Echter de html data die binnenkomt dankzij 'urllib.request.urlopen' is in bytes.
 # Om dit op te lossen wordt de data eerst in een list veranderd met ".decode('utf-8')" en vervolgens wordt deze list omgezet in een string.
-
 
 
 class NicTizParser(HTMLParser):
@@ -41,7 +39,6 @@ class NicTizParser(HTMLParser):
                 if name == "href" and str in value:
                     self.xml_refs.append(value)
 
-
 html_as_string = html_to_string('https://decor.nictiz.nl/decor/services/ValueSetIndex?ref=2.16.840.1.113883.2.4.3.11.60.101')
 
 if __name__ == "__main__":
@@ -50,5 +47,3 @@ if __name__ == "__main__":
     parser.close()
 
     xml_refs = parser.xml_refs
-    print(xml_refs)
-    # print(xml_refs[0])

@@ -1,10 +1,13 @@
 """
-Maakt boomstructuur voor hl7rim_enums weergave van Nictiz XML bestanden.
+Maakt een boomstructuur voor hl7rim_enums gebaseerd op Nictiz XML bestanden.
 
     Gebruik:
-    Maak een csv bestand van nictiz xml file(s) met nictiz_process.py. Run enum_maker_nictiz.py.
+    Maak een csv bestand van nictiz xml file(s) met nictiz_process.py. Doe dit iedere keer in gedeeltes door in
+    xml_parser_nictiz.py de regel "xml_refs = parser.xml_refs[20:30]" aan te passen. Run nictiz_proces.
+    Run daarna enum_maker_nictiz.py.
     Kopieer de gewenste boomstructuur (en plaats deze bijvoorbeeld in hl7rim_enums.py).
-    Let hierbij op het volgende: door de opbouw van de xml bestanden komen sommige boomstructuren vaker voor.
+    Let hierbij op het volgende: door de opbouw van de xml bestanden komen sommige boomstructuren vaker voor, let dus
+    op dubbelingen.
     Let verder op dat sommige "leafs" niet direct onder de default van hetzelfde niveau komen te staan maar
     onderbroken worden door een "stem" op dat zelfde niveau. Corrigeer dit dan handmatig.
     Voorbeeld:
@@ -29,11 +32,12 @@ os.chdir('C:/!OntwikkelDATA/nictiz')
 
 def set_attribute_name(string):
     """
-    Een attribute naam mag alleen maar kleine letters hebben, geen leestekens bevatten en ipv spaties worden underscores gebruikt.
+    Een attribute naam mag alleen maar kleine letters hebben, geen leestekens bevatten en ipv spaties worden underscores
+    gebruikt.
 
     """
     string = string.lower()
-    string = string.replace("-", "_")
+    string = string.replace("-", "_")  # voor behoud van leesbaarheid
     string = string.replace(" ", "_")
     for k in string:
         if k.isalpha() or k == "_":
@@ -48,13 +52,15 @@ def set_class_name(string):
     Een class naam is camelcased en bevat geen leestekens.
 
     """
+    string = string.capitalize()
     if " " in string:
         string = string.title()  # .title() Capitalizes each word
+
     for j in string:
         if j.isalpha():
             pass
         else:
-            string = string.replace(j, "")
+            string = string.replace(j, "")  # verwijdert leestekens en spaties
     return string
 
 with open('valuesets.csv', newline='', encoding='UTF-8') as f:
@@ -65,7 +71,7 @@ with open('valuesets.csv', newline='', encoding='UTF-8') as f:
     r = csv.reader(f)
     data = []
     headers = ['temp_id', 'temp_fk', 'level', 'type', 'code', 'displayName', 'codeSystem', 'id', 'valueset', 'ingangsdatum', 'codestatus']
-    indent = 4  # identatie
+    indent = 4  # Python indentatie
     current_base_class = ''
     for (i, line) in enumerate(r):
 
@@ -75,12 +81,12 @@ with open('valuesets.csv', newline='', encoding='UTF-8') as f:
         tempstr2 = tempstr.replace('"', '')  # verwijdert de " indien aanwezig in de string, want deze geeft later een error doordat dit bijvoorbeeld een '4' verandert in '"4'
         tempstr2 = tempstr2.replace("', '", ",")
 
-        templst = re.split(r";", tempstr2)  # maakt van resultaat een list; kolommen hebben vaste volgorde
+        templst = re.split(r";", tempstr2)  # maakt van resultaat een list; kolommen hebben vaste volgorde.
 
         if i >= 1:  # hierdoor sla je de header regel over dit voorkomt dat er later een error optreedt.
             if templst[0] == '0':  # Abstract/Stem
-                if templst[1] != 'L':   # data met level 0 en type "L" bevat geen hierarchie en kan dus geskipped worden.
 
+                if templst[1] != 'L':   # data met level 0 en type "L" bevat geen hierarchie: kan dus geskipped worden.
                     if current_base_class != str(templst[6]):  # waarde van column 'valueset'
                         current_base_class = templst[6]
                         print('')
@@ -106,10 +112,10 @@ with open('valuesets.csv', newline='', encoding='UTF-8') as f:
                     else:
                         print('')
                         if templst[1] == 'A':
-                            new_class = "class {}AbstractTypes:".format(set_class_name(templst[3]))
+                            new_class = "class {}AbstractTypes:".format(set_class_name(templst[3]))  # indien het een "Abstract" betreft plak "AbstractTypes" achter de class name
                             print(''.ljust(indent + indent*int(templst[0])) + new_class)
                         elif templst[1] == 'S':
-                            new_class = "class {}Types:".format(set_class_name(templst[3]))
+                            new_class = "class {}Types:".format(set_class_name(templst[3])) # indien het een "Stem" betreft plak "Types" achter de class name
                             print(''.ljust(indent + indent*int(templst[0])) + new_class)
 
                         default = "default = '{}'".format(templst[2])
@@ -121,5 +127,3 @@ with open('valuesets.csv', newline='', encoding='UTF-8') as f:
                     else:
                         leaf = "{} = '{}'".format(set_attribute_name(templst[3]), templst[2])
                         print(''.ljust(indent+indent*int(templst[0])) + leaf)
-
-
