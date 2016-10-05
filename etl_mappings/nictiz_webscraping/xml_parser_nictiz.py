@@ -108,7 +108,7 @@ def scrape_from_web(configs):
         """versie 2: beperkt aantal xml_refs om programma mee te testen"""
         # xml_refs = ['RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.1.11.2&effectiveDate=&prefix=hg-&format=xml&language=nl-NL', 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.13&effectiveDate=&prefix=hg-&format=xml&language=nl-NL', 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=hg-&format=xml&language=nl-NL','RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.11&effectiveDate=&prefix=hg-&format=xml&language=nl-NL']
         """versie 3: selectie van xml_refs afkomstig van Nictiz:"""
-        xml_refs = parser.xml_refs[0:2]
+        xml_refs = parser.xml_refs[0:7]
         # print(xml_refs)
         """versie 4: 3x adressoort, met als enige verschil naar welk project ze refereren"""
         # xml_refs = ['RetrieveValueSet?id=2.16.840.1.113883.3.88.12.3221.7.4&effectiveDate=&prefix=hg-&format=xml&language=nl-NL', 'RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=naw-&format=xml&language=nl-NL','RetrieveValueSet?id=2.16.840.1.113883.2.4.3.11.60.101.11.6&effectiveDate=&prefix=kz-&format=xml&language=nl-NL']
