@@ -231,7 +231,7 @@ class AdresNL(DvEntity, Entity):
         # geen onderdeel zijn van de default sat zoals hierboven gedefinieerd is.
     class ExtraInfo(Sat):
 
-        status_temp = Columns.TextColumn() # record_status kan zijn "downdate, update, delete en insert"; komt voor in de update bestanden van postcodeNL.
+#         status_temp = Columns.TextColumn() # record_status kan zijn "downdate, update, delete en insert"; komt voor in de update bestanden van postcodeNL.
         perceeltype = Columns.TextColumn() # type perceel (verblijfsobject, standplaats, ligplaats, postbus)
         bag_huisnummertoevoeging = Columns.TextColumn() # verwijst naar actieve BAG (Basisadministratie Adressen en Gebouwen) aanduiding
         gebruiksdoel = Columns.TextColumn()
