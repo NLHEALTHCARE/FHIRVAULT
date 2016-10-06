@@ -4,8 +4,8 @@
 import os
 import zipfile
 import glob
-from pipelines.clinics.clinics_configs import adresnl_config
-# import cProfile
+# from pipelines.clinics import clinics_config
+
 
 class PostcodesNL:
     def __init__(self):
@@ -73,11 +73,11 @@ if __name__ == '__main__':
 
     pcnl = PostcodesNL()
     pcnl.postcodenl_run()
-    # cProfile.run(pcnl.postcodenl_run())
+
 
 
     # pcnl = PostcodesNL()
-    # pcnl.set_URL('https://retrieve.postcode.nl/retrieve.php?hash=63e7fad64879ff12bd87e18bfac71b2c') #todo: deze url verandert waarschijnlijk bij iedere nieuwe update. Moet waarschijnlijk dus handmatig aangepast gaan worden iedere keer.
+    # pcnl.set_URL('https://retrieve.postcode.nl/retrieve.php?hash=89bf575f699daba0c46c53493f63ac3b') #todo: deze url verandert waarschijnlijk bij iedere nieuwe update. Moet waarschijnlijk dus handmatig aangepast gaan worden iedere keer.
     # pcnl.get_zip_name()
     # pcnl.unzip_file()
     # pcnl.get_zip_date()
