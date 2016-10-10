@@ -252,6 +252,12 @@ class Medewerker(DvEntity, Role):
         geboortedatum = Columns.DateColumn()
         geslacht_code = Columns.RefColumn(RefTypes.geslacht_types)
 
+    class Sleutels(Sat):
+        medewerker_nummer = Columns.TextColumn()
+        medewerker_id = Columns.TextColumn()
+        medewerker_code = Columns.TextColumn()
+
+
     class Contract(Sat):
         functie = Columns.TextColumn()
         afdeling = Columns.TextColumn()
