@@ -43,6 +43,7 @@ class VerkoopprijsParticipatieLink(Link, Participation):
 class AfspraakParticipationLink(Link,Participation):
     patient = LinkReference(Patient)
     afspraak = LinkReference(Afspraak)
+    instelling = LinkReference(Zorgaanbieder)
 
 
 

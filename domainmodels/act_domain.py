@@ -184,6 +184,24 @@ class Afspraak(DvEntity,Act):
         afspraak_nummer = Columns.TextColumn()
 
 
+#todo: aparte tabel voor medewerkers bij personen?
+class Afspraak_deelnemer(DvEntity,Act):
+
+    class Default(Sat):
+        agb = Columns.TextColumn()
+        big = Columns.TextColumn()
+        naam = Columns.TextColumn()
+        functie = Columns.TextColumn()
+        hoedanigheid = Columns.TextColumn()
+        eigenaar_type = Columns.TextColumn()
+
+
+    class Sleutels(Sat):
+        medewerker_id = Columns.TextColumn()
+        medewerker_code = Columns.TextColumn()
+        afspraak_nummer = Columns.TextColumn()
+
+
 
 
 
