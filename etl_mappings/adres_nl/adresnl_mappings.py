@@ -202,9 +202,9 @@ def init_sor_to_dv_mappings(pipe):
                             || (CASE WHEN huisnr_bag_toevoeging IS NOT NULL THEN '-' || huisnr_bag_toevoeging
                             ELSE '' END)"""])
 
-    mapping.map_field('bag_nummeraandingid', AdresNL.Deleted.bag_nummeraanduiding_del)
-    mapping.map_field('bag_adresseerbaarobjectid', AdresNL.Deleted.bag_adresseerbaarobject_del)
-    mapping.map_field('update_type', AdresNL.Deleted.update_type_del)
+     # mapping.map_field('bag_nummeraandingid', AdresNL.Deleted.bag_nummeraanduiding_del)
+    # mapping.map_field('bag_adresseerbaarobjectid', AdresNL.Deleted.bag_adresseerbaarobject_del)
+    mapping.map_field('update_type', AdresNL.RecordStatus.status)
 
     mappings.append(mapping)
 
@@ -217,9 +217,9 @@ def init_sor_to_dv_mappings(pipe):
                             || (CASE WHEN huisnr_bag_toevoeging IS NOT NULL THEN '-' || huisnr_bag_toevoeging
                             ELSE '' END)"""])
 
-    mapping.map_field('bag_nummeraandingid', AdresNL.Deleted.bag_nummeraanduiding_del)
-    mapping.map_field('bag_adresseerbaarobjectid', AdresNL.Deleted.bag_adresseerbaarobject_del)
-    mapping.map_field('update_type', AdresNL.Deleted.update_type_del)
+    # mapping.map_field('bag_nummeraandingid', AdresNL.Deleted.bag_nummeraanduiding_del)
+    # mapping.map_field('bag_adresseerbaarobjectid', AdresNL.Deleted.bag_adresseerbaarobject_del)
+    mapping.map_field('update_type', AdresNL.RecordStatus.status)
 
     mappings.append(mapping)
 

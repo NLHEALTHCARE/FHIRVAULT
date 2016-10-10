@@ -270,11 +270,6 @@ class AdresNL(DvEntity, Entity):
         cebucocode = Columns.IntColumn() # code gebruikt door DeBuCo (Centraal Bureau voor Courantenpubliciteit)
         provinciecode = Columns.TextColumn() # Postcode.nl identifier for 'provincie' level
         
-    class Deleted(Sat):   
-        bag_nummeraanduiding_del = Columns.TextColumn()        
-        bag_adresseerbaarobject_del = Columns.TextColumn()
-        update_type_del = Columns.TextColumn()
-        
     class CBS_buurten(Sat): # let op dit is een ander bronbestand (cbs_buurten) dan de bovenstaande sats.
 
         wijkcode = Columns.IntColumn()  # let op: niet verwarren met de wijkcode van adres_nl; betekent niet hetzelfde
