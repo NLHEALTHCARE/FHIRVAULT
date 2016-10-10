@@ -4,7 +4,9 @@
 import os
 import zipfile
 import glob
-# from pipelines.clinics import clinics_config
+
+
+from pipelines.clinics import adresnl_config
 
 
 class PostcodesNL:
