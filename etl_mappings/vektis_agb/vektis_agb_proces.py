@@ -9,8 +9,7 @@ from pyelt.pipeline import Pipeline
 
 import domainmodels
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
-from etl_mappings.vektis_agb.vektis_agb_mappings import init_source_to_sor_mappings
-
+from etl_mappings.vektis_agb.vektis_agb_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
 
 __author__ = 'hvreenen'
 
@@ -22,11 +21,11 @@ def define_vektis_agb_pipe(pipeline, vektis_agb_config):
     source_to_sor_mappings = init_source_to_sor_mappings(vektis_agb_config['data_path'])
     pipe.mappings.extend(source_to_sor_mappings)
     #
-    # sor_to_ref_mappings = init_sor_to_ref_mappings()
-    # pipe.mappings.extend(sor_to_ref_mappings)
+    sor_to_ref_mappings = init_sor_to_dv_mappings(pipe)
+    pipe.mappings.extend(sor_to_ref_mappings)
     #
-    # sor_to_dv_mappings = init_sor_to_dv_mappings(pipe)
-    # pipe.mappings.extend(sor_to_dv_mappings)
+    sor_to_dv_mappings = init_sor_to_dv_mappings(pipe)
+    pipe.mappings.extend(sor_to_dv_mappings)
 
 
 def vektis_main(*args):
@@ -35,7 +34,7 @@ def vektis_main(*args):
 
     pipeline = Pipeline(general_config)
 
-    define_vektis_agb_pipe(pipeline)
+    define_vektis_agb_pipe(pipeline, vektis_agb_config)
 
     # convert_vektis_zips_to_csv()
 
