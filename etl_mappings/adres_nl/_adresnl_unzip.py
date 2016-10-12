@@ -6,7 +6,8 @@ import zipfile
 import glob
 
 
-from pipelines.clinics import adresnl_config
+# from pipelines.clinics import adresnl_config
+from pipelines.general_clinical_configs import general_config, adresnl_config
 
 
 class PostcodesNL:

@@ -1,7 +1,8 @@
 import csv
 import os
-from pipelines.clinics.clinics_configs import general_config, adresnl_config
+# from pipelines.clinics.clinics_configs import general_config, adresnl_config
 from etl_mappings.adres_nl._adresnl_unzip import PostcodesNL
+from pipelines.general_clinical_configs import adresnl_config
 
 """De oorspronkelijk database is ter download te verkrijgen op: https://retrieve.postcode.nl/retrieve.php?hash=fde151728040ad8cad2498583a8492f1 """
 """Doel: oorspronkelijke csv file van AdresNL bevat geen header-rij. In onderstaande code worden de juiste headers toegevoegd."""
