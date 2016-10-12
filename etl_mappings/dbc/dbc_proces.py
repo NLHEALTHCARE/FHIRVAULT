@@ -16,10 +16,10 @@ def define_dbc_pipe(pipeline, dbc_config):
 
 
 def dbc_main(*args):
-    from pipelines.general_clinical_configs import general_config
+    from pipelines.general_clinical_configs import general_config, dbc_config
     pipeline = Pipeline(general_config)
 
-    define_dbc_pipe(pipeline)
+    define_dbc_pipe(pipeline, dbc_config)
 
     pipeline.run()
 
