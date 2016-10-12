@@ -4,9 +4,6 @@
 import os
 import zipfile
 import glob
-
-
-# from pipelines.clinics import adresnl_config
 from pipelines.general_clinical_configs import general_config, adresnl_config
 
 
@@ -23,7 +20,8 @@ class PostcodesNL:
     def get_zip_name(self):
         os.chdir(self.download_path)
         zip_name = glob.glob('mut*.zip')
-        assert len(zip_name) == 1, 'Er zijn geen zip files die starten met "mut" of er zijn er meerdere. Er zou maar 1 zip file startend met "mut" moeten zijn (oude varianten worden na unzippen verwijderd'
+        assert len(zip_name) == 1, 'Er zijn geen zip files die starten met "mut" of er zijn er meerdere. Er zou maar 1 \
+        zip file startend met "mut" moeten zijn (oude varianten worden na unzippen verwijderd'
 
         self.zip_name = zip_name[0]
 
@@ -57,7 +55,6 @@ class PostcodesNL:
         self.csv_name = 'adresnl_update{}.csv'.format(self.zip_date)
         return self.csv_name
 
-
     def postcodenl_run(self):
 
         pcnl = PostcodesNL()
@@ -65,7 +62,6 @@ class PostcodesNL:
         pcnl.get_zip_name()
         pcnl.unzip_file()
         pcnl.get_zip_date()
-        # pcnl.rename_csv_and_schema()
         pcnl.get_csv_name()
 
         print(pcnl.csv_name)
@@ -84,7 +80,6 @@ if __name__ == '__main__':
     # pcnl.get_zip_name()
     # pcnl.unzip_file()
     # pcnl.get_zip_date()
-    # # pcnl.rename_csv_and_schema()
     # pcnl.get_csv_name()
     #
     # print(pcnl.csv_name)
