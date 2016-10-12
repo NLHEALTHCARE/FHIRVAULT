@@ -1,5 +1,7 @@
 __author__ = 'hvreenen'
 
+"""Met een 'True' value wordt hier aangegeven dat dit veld meegenomen moet worden voor het verkrijgen van de bk."""
+
 vektis_import_def = {
     'instel': (
         ('soort_instelling', 2),
@@ -16,7 +18,7 @@ vektis_import_def = {
     'fagbx20': (
         ('aanduiding_oud', 1),
         ('bestandcode', 2),
-        ('zorgverlenersoort', 2),
+        ('zorgverlenersoort', 2, True),
         ('zorgverlenersnummer', 6, True),
         ('naam', 25),
         ('voorletters', 6),
