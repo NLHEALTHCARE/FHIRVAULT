@@ -29,8 +29,9 @@ def define_vektis_agb_pipe(pipeline, vektis_agb_config):
 
 
 def vektis_main(*args):
-    print('running vektis_agb')
+    print('running vektis_agb through general_clinical_configs.py')
     from pipelines.general_clinical_configs import general_config, vektis_agb_config
+
     start = time.time()
 
     pipeline = Pipeline(general_config)
