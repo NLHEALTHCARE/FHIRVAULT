@@ -109,7 +109,6 @@ class value_x:      # FHIR name: value[x]
                     # de elementnaam [x] wordt vervangen door de Title cased name of the data type
     value = Columns.TextColumn()
 
-
 class Extension:
     url = Columns.TextColumn()  # indentifies the meaning of the extension
     value = value_x.value
@@ -117,7 +116,7 @@ class Extension:
 class BackBoneElement:
     modifier_extension = Extension()
 
-print(type(BackBoneElement.modifier_extension.url))
+# print(type(BackBoneElement.modifier_extension.url))
 
 
 

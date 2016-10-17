@@ -1,5 +1,5 @@
 from domainmodel_fhir.element_domain import CodeableConcept, Coding, Period, HumanName, ContactPoint, Address, \
-    Attachment
+    Attachment, BackBoneElement
 from domainmodels.entity_domain import RefTypes  # todo: RefTypes in fhir_domain.py zelf definieren?
 from domainmodels.hl7rim_base_domain import *
 from pyelt.datalayers.database import Columns
@@ -20,7 +20,7 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
 
     class Default(Sat):
         active = Columns.BoolColumn()  # patient record active?
-        gender = Columns.RefColumn(RefTypes.geslacht_types)
+        # gender = Columns.RefColumn(RefTypes.geslacht_types)
         birthdate = Columns.DateColumn()
         # deceased + deceased_date voorbeeld van "type[x]" , meer dan 1 datatype voor content. (=polymorphic in OO)
         # voor meer info zie http://hl7.org/fhir/formats.html#choice
@@ -29,6 +29,13 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
         # type[x]
         multiple_birth_boolean = Columns.BoolColumn()
         multiple_birth_integer = Columns.IntColumn()
+
+    class Gender(HybridSat):
+        class gender(HybridSat.Types):  # FHIR: AdministrativeGender(Required) 	http://hl7.org/fhir/ValueSet/administrative-gender
+            male = 'male'
+            female = 'female'
+            other = 'other'
+            unknown = 'unknown'
 
     class Identifier(HybridSat):      #FHIR type: Element (http://hl7.org/fhir/element.html#1.21.0)
         class use(HybridSat.Types):
@@ -127,8 +134,108 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
 # print(type(Patient.photo.content_type))
 # print(type(Patient.photo.creation))
 
-    class contact:
-        pass
+    class contact:      # FHIR type: BackBoneElement
+        modifier_extension = BackBoneElement.modifier_extension
+        url = BackBoneElement.modifier_extension.url
+        value = BackBoneElement.modifier_extension.value
+
+        class Name(HybridSat):
+            class use(HybridSat.Types):     # zie ook utility class HumanName; #todo wat is de meest logische plaats voor deze hybridsat?
+                usual = 'usual'
+                official = 'official'
+                temp = 'temp'
+                nickname = 'nickname'
+                anonymous = 'anonymous'
+                old = 'old'
+                maiden = 'maiden'
+            text = HumanName.text
+            family = HumanName.family   # family name (or surname)
+            given = HumanName.given
+            prefix = HumanName.prefix
+            suffix = HumanName.suffix
+            start = HumanName.start
+            end = HumanName.end
+
+        class telecom(HybridSat):
+            class system(HybridSat.Types): # todo: FHIR remark: ContactPointSystem(Required); verwijst naar een valueset http://hl7.org/fhir/ValueSet/contact-point-system
+                phone = 'phone'
+                fax = 'fax'
+                email = 'email'
+                pager = 'pager'
+                other = 'other'
+            value = ContactPoint.value
+            class use(HybridSat.Types):     # todo: FHIR remark: ContactPointUse(Required); verwijst naar een valueset http://hl7.org/fhir/valueset-contact-point-use.html
+                home = 'home'
+                work = 'work'
+                temp = 'temp'
+                old = 'old'
+                mobile = 'mobile'
+            rank = ContactPoint.rank     # moet positieve integer zijn!; specify preferred order of use (1 = highest)
+            start = ContactPoint.start
+            end = ContactPoint.end
+        class address(HybridSat):
+            class use(HybridSat.Types):  # hoe wordt dit adres gebruikt; todo: AddressUse(Required): verwijst naar http://hl7.org/fhir/valueset-address-use.html
+                home = 'home'
+                work = 'work'
+                temp = 'temp'
+                old = 'old'
+
+        class type(HybridSat.Types):    # todo: AddressType(Required): verwijst naar http://hl7.org/fhir/ValueSet/address-type
+            postal = 'postal'
+            physical = 'physical'
+            both = 'both'
+
+        text = Address.text         # text representation of the address
+        line = Address.line         # street name, number, direction & P.O. Box etc.
+        city = Address.city
+        district = Address.district     # district name (aka county)
+        state = Address.state        # sub_unit of country (abbreviations ok)
+        postalcode = Address.postalcode
+        country = Address.country
+        # Country(can be ISO 3166 3 letter code)
+        start = Address.start
+        end = Address.end
+
+        class Gender(HybridSat):
+            class gender(HybridSat.Types):  # FHIR: AdministrativeGender(Required) 	http://hl7.org/fhir/ValueSet/administrative-gender
+                male = 'male'
+                female = 'female'
+                other = 'other'
+                unknown = 'unknown'
+
+        # organization = ??  # Reference(Organization)
+
+        start = Period.start  # The period during which this contact person or organization is valid to be contacted with regard to this patient
+        end = Period.end
+
+# print(type(Patient.contact.country))
+
+    class communication:      # FHIR type: BackBoneElement
+        modifier_extension = BackBoneElement.modifier_extension
+        url = BackBoneElement.modifier_extension.url
+        value = BackBoneElement.modifier_extension.value
+
+        # language = ??             # FHIR: Language(Required) https://tools.ietf.org/html/bcp47
+        preferred = Columns.BoolColumn  # language preference indicator
+
+    # careprovider + ??     # FHIR: Reference(Organization| Practioner); patients nominated primary care provider
+
+    # managingOrganization  # FHIR: Reference(Organization) Organization that is the custodian of the patient record
+
+    class link(HybridSat):      # FHIR type: BackBoneElement; Link to another patient resource that concerns the same actual person
+        modifier_extension = BackBoneElement.modifier_extension
+        url = BackBoneElement.modifier_extension.url
+        value = BackBoneElement.modifier_extension.value
+
+        # other = ??      # Reference(Patient);   the other patient resource that the link refers to
+        class type(HybridSat.Types):    # LinkType(Required): http://hl7.org/fhir/ValueSet/link-type
+            replace = 'replace'
+            refer = 'refer'
+            seealso = 'seealso'
+
+
+
+
 
 
 
