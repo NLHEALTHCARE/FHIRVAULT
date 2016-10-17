@@ -50,7 +50,11 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
         coding_user_selected = Columns.BoolColumn(Coding.user_selected)  # indien deze codering door de user zelf was gekozen
 
         period_start = Columns.DateTimeColumn(Period.start)
+        # period_start = Period.start
         period_end = Columns.DateTimeColumn(Period.end)
+
+    class Name(Sat):
+
 
 
 """utility classes?:"""
@@ -62,16 +66,29 @@ class Coding:
     display = Columns.TextColumn()  # weergave gedefinieerd door het systeem
     user_selected = Columns.BoolColumn()  # indien deze codering door de user zelf was gekozen
 
-
-
 class CodeableConcept(Coding):  # todo: overerving nodig?
     text = Columns.TextColumn() # plain text weergave van het concept
-
-
-
-
-
 
 class Period:    # FHIR type: Element; de class Period wordt niet alleen door de class Identifier (van de class Patient) gebruikt maar ook door andere classes
     start = Columns.DateTimeColumn() # Starting time with inclusive boundary
     end = Columns.DateTimeColumn()  # 	End time with inclusive boundary, if not ongoing
+
+class HumanName:    #FHIR type: Element
+    class use(HybridSat.Types):
+        usual = 'usual'
+        official = 'official'
+        temp = 'temp'
+        nickname = 'nickname'
+        anonymous = 'anonymous'
+        old = 'old'
+        maiden = 'maiden'
+    text = Columns.TextColumn()     # text representation of the full name
+    family = Columns.TextColumn()   # family name (or surname)
+    given = Columns.TextColumn()    # given names (not always 'first'); includes middle names
+    prefix = Columns.TextColumn()   # Parts that come before the name
+    suffix = Columns.TextColumn()   # Part that come after the name
+    period_start = Columns.DateTimeColumn(Period.start)
+    # period_start = Period.start
+    period_end = Columns.DateTimeColumn(Period.end)
+
+
