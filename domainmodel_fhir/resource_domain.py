@@ -1,4 +1,5 @@
-from domainmodel_fhir.element_domain import CodeableConcept, Coding, Period, HumanName, ContactPoint
+from domainmodel_fhir.element_domain import CodeableConcept, Coding, Period, HumanName, ContactPoint, Address, \
+    Attachment
 from domainmodels.entity_domain import RefTypes  # todo: RefTypes in fhir_domain.py zelf definieren?
 from domainmodels.hl7rim_base_domain import *
 from pyelt.datalayers.database import Columns
@@ -82,6 +83,52 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
         rank = ContactPoint.rank     # moet positieve integer zijn!; specify preferred order of use (1 = highest)
         start = ContactPoint.start
         end = ContactPoint.end
+    class address(HybridSat):
+        class use(HybridSat.Types):  # hoe wordt dit adres gebruikt; todo: AddressUse(Required): verwijst naar http://hl7.org/fhir/valueset-address-use.html
+            home = 'home'
+            work = 'work'
+            temp = 'temp'
+            old = 'old'
+
+    class type(HybridSat.Types):    # todo: AddressType(Required): verwijst naar http://hl7.org/fhir/ValueSet/address-type
+        postal = 'postal'
+        physical = 'physical'
+        both = 'both'
+
+    text = Address.text         # text representation of the address
+    line = Address.line         # street name, number, direction & P.O. Box etc.
+    city = Address.city
+    district = Address.district     # district name (aka county)
+    state = Address.state        # sub_unit of country (abbreviations ok)
+    postalcode = Address.postalcode
+    country = Address.country
+    # Country(can be ISO 3166 3 letter code)
+    start = Address.start
+    end = Address.end
+
+    class marital_status:                # Marital (civil status of a patient; todo: Marital Status Codes (Required): verwijst naar 	http://hl7.org/fhir/ValueSet/marital-status
+        text = CodeableConcept.text
+        system = Coding.system   #system heeft FIHR type: uri; Uniform Resource Identifier ( http://hl7.org/fhir/datatypes.html#uri)
+        version = Coding.version
+        code = Coding.code  # symbool in syntax gedefinieerd door het systeem (http://hl7.org/fhir/datatypes.html#code)
+        display = Coding.display  # weergave gedefinieerd door het systeem
+        user_selected = Coding.user_selected
+
+    class photo(Attachment):
+        content_type = Attachment.content_type     # Mime type of the content, with charset etc. ; todo: MimeType (Required) http://www.rfc-editor.org/bcp/bcp13.txt
+        language = Attachment.language          # Human language of the content (BPC-47) ; todo: Language (Required) https://tools.ietf.org/html/bcp47
+        data = Attachment.data             # Data inline, base64ed
+        url = Attachment.url              # Uri(Uniform Resource Identifier) where the data can be found
+        size = Attachment.size              # positieve integer; number of bytes of content (if url provided)
+        hash = Attachment.hash            # hash of the data (sha-1, base64ed)
+        title = Attachment.title            # label to display instead of the data
+        creation = Attachment.creation
+
+# print(type(Patient.photo.content_type))
+# print(type(Patient.photo.creation))
+
+
+
 
 
 

@@ -48,7 +48,7 @@ class HumanName(HybridSat):    #FHIR type: Element
 # print(type(humanname.start))
 
 class Reference:
-    reference = Columns.TextColumn()    # Relative, internal or absolute UL reference
+    reference = Columns.TextColumn()    # Relative, internal or absolute URL reference
     display = Columns.TextColumn()      # Text alternative for the resource
 
 class ContactPoint(HybridSat):
@@ -68,6 +68,40 @@ class ContactPoint(HybridSat):
     rank = Columns.IntColumn()      # moet positieve integer zijn!; specify preferred order of use (1 = highest)
     start = Period.start
     end = Period.end
+
+class Address(HybridSat):
+    class use(HybridSat.Types):  # hoe wordt dit adres gebruikt; todo: AddressUse(Required): verwijst naar http://hl7.org/fhir/valueset-address-use.html
+        home = 'home'
+        work = 'work'
+        temp = 'temp'
+        old = 'old'
+
+    class type(HybridSat.Types):    # todo: AddressType(Required): verwijst naar http://hl7.org/fhir/ValueSet/address-type
+        postal = 'postal'
+        physical = 'physical'
+        both = 'both'
+
+    text = Columns.TextColumn()         # text representation of the address
+    line = Columns.TextColumn()         # street name, number, direction & P.O. Box etc.
+    city = Columns.TextColumn()
+    district = Columns.TextColumn()     # district name (aka county)
+    state = Columns.TextColumn()        # sub_unit of country (abbreviations ok)
+    postalcode = Columns.TextColumn()
+    country = Columns.TextColumn()      # Country(can be ISO 3166 3 letter code)
+    start = Period.start
+    end = Period.end
+
+
+class Attachment:
+    content_type = Columns.TextColumn()     # Mime type of the content, with charset etc. ; todo: MimeType (Required) http://www.rfc-editor.org/bcp/bcp13.txt -> soort RefType?
+    language = Columns.TextColumn()          # Human language of the content (BPC-47) ; todo: Language (Required) https://tools.ietf.org/html/bcp47
+    data = Columns.TextColumn()             # Data inline, base64ed
+    url = Columns.TextColumn()              # Uri(Uniform Resource Identifier) where the data can be found
+    size = Columns.IntColumn()              # positieve integer; number of bytes of content (if url provided)
+    hash = Columns.TextColumn()             # hash of the data (sha-1, base64ed)
+    title = Columns.TextColumn()            # label to display instead of the data
+    creation = Columns.DateTimeColumn()     # date attachement was first created
+
 
 
 
