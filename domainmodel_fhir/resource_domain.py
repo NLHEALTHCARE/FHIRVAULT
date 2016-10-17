@@ -127,6 +127,10 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
 # print(type(Patient.photo.content_type))
 # print(type(Patient.photo.creation))
 
+    class contact:
+        pass
+
+
 
 
 
