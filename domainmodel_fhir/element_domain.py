@@ -51,3 +51,23 @@ class Reference:
     reference = Columns.TextColumn()    # Relative, internal or absolute UL reference
     display = Columns.TextColumn()      # Text alternative for the resource
 
+class ContactPoint(HybridSat):
+    class system(HybridSat.Types): # todo: FHIR remark: ContactPointSystem(Required); verwijst naar een valueset http://hl7.org/fhir/ValueSet/contact-point-system
+        phone = 'phone'
+        fax = 'fax'
+        email = 'email'
+        pager = 'pager'
+        other = 'other'
+    value = Columns.TextColumn()    # the actual contact point details
+    class use(HybridSat.Types):     # todo: FHIR remark: ContactPointUse(Required); verwijst naar een valueset http://hl7.org/fhir/valueset-contact-point-use.html
+        home = 'home'
+        work = 'work'
+        temp = 'temp'
+        old = 'old'
+        mobile = 'mobile'
+    rank = Columns.IntColumn()      # moet positieve integer zijn!; specify preferred order of use (1 = highest)
+    start = Period.start
+    end = Period.end
+
+
+

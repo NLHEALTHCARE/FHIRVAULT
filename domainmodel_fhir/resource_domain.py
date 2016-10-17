@@ -1,4 +1,4 @@
-from domainmodel_fhir.element_domain import CodeableConcept, Coding, Period, HumanName
+from domainmodel_fhir.element_domain import CodeableConcept, Coding, Period, HumanName, ContactPoint
 from domainmodels.entity_domain import RefTypes  # todo: RefTypes in fhir_domain.py zelf definieren?
 from domainmodels.hl7rim_base_domain import *
 from pyelt.datalayers.database import Columns
@@ -64,6 +64,24 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
         suffix = HumanName.suffix
         start = HumanName.start
         end = HumanName.end
+
+    class telecom(HybridSat):
+        class system(HybridSat.Types): # todo: FHIR remark: ContactPointSystem(Required); verwijst naar een valueset http://hl7.org/fhir/ValueSet/contact-point-system
+            phone = 'phone'
+            fax = 'fax'
+            email = 'email'
+            pager = 'pager'
+            other = 'other'
+        value = ContactPoint.value
+        class use(HybridSat.Types):     # todo: FHIR remark: ContactPointUse(Required); verwijst naar een valueset http://hl7.org/fhir/valueset-contact-point-use.html
+            home = 'home'
+            work = 'work'
+            temp = 'temp'
+            old = 'old'
+            mobile = 'mobile'
+        rank = ContactPoint.rank     # moet positieve integer zijn!; specify preferred order of use (1 = highest)
+        start = ContactPoint.start
+        end = ContactPoint.end
 
 
 
