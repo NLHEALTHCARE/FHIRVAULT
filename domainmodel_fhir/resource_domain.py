@@ -11,7 +11,7 @@ from pyelt.datalayers.dv import DvEntity, Sat, HybridSat, Link, LinkReference
 #                                                                                                       #
 #########################################################################################################
 
-
+# todo: "base_domain" , reftypes-achtigs toevoegen
 
 """ Resource classes (Patient is een DomainResource) """
 
