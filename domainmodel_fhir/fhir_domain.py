@@ -31,14 +31,21 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
             temp = 'temp'
             secondary = 'secondary (If known)'
         class type(HybridSat.Types):    # type heeft FHIR type: CodeableConcept (http://hl7.org/fhir/datatypes.html#codeableconcept)
+        # class type(Sat):  # todo: misschien op deze manier beter?
             text = Columns.TextColumn() # plain text weergave van het concept
             class coding(HybridSat.Types.Coding):  # coding heeft FHIR type: Element; todo: hoe om te gaan met deze extra laag? HybridSat.Types.Coding bestaat nog niet
+            # class coding(Sat):   # todo: misschien op deze manier beter?
                 system = Columns.TextColumn()   #system heeft FIHR type: uri; Uniform Resource Identifier ( http://hl7.org/fhir/datatypes.html#uri)
                 text = Columns.TextColumn() # string that represents the concept; identiteit van terminologie systeem
                 version = Columns.TextColumn()
                 code = Columns.TextColumn()  # symbool in syntax gedefinieerd door het systeem (http://hl7.org/fhir/datatypes.html#code)
                 display = Columns.TextColumn()  # weergave gedefinieerd door het systeem
                 user_selected = Columns.BoolColumn()  # indien deze codering door de user zelf was gekozen
+        period_start = Columns.DateTimeColumn(Period.start)
+        period_end = Columns.DateTimeColumn(Period.end)
 
 
 
+class Period:    # FHIR type: Element; de class Period wordt niet alleen door de class Identifier (van de class Patient) gebruikt maar ook door andere classes
+    start = Columns.DateTimeColumn() # Starting time with inclusive boundary
+    end = Columns.DateTimeColumn()  # 	End time with inclusive boundary, if not ongoing
