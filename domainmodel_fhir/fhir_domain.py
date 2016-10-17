@@ -10,7 +10,7 @@ from pyelt.datalayers.dv import DvEntity, Sat, HybridSat, Link, LinkReference
 #########################################################################################################
 
 
-class Patient(DvEntity, Entity):   # FHIR: DomainResource (http://hl7.org/fhir/domainresource.html#1.20)
+class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/fhir/domainresource.html#1.20)
 
     class Default(Sat):
         active = Columns.BoolColumn()  # patient record active?
@@ -24,4 +24,28 @@ class Patient(DvEntity, Entity):   # FHIR: DomainResource (http://hl7.org/fhir/d
         multiple_birth_boolean = Columns.BoolColumn()
         multiple_birth_integer = Columns.IntColumn()
 
+    class Identifier(HybridSat):      #FHIR type: Element (http://hl7.org/fhir/element.html#1.21.0)
+        class use(HybridSat.Types):
+            usual = 'usual'
+            official = 'official'
+            temp = 'temp'
+            secondary = 'secondary (If known)'
+        class type(HybridSat.Types):    # type heeft FHIR type: CodeableConcept (http://hl7.org/fhir/datatypes.html#codeableconcept)
+            text = Columns.TextColumn() # plain text weergave van het concept
+            class coding(HybridSat.Type.coding):  # coding heeft FHIR type: Element
+                system = Columns.TextColumn()   #system heeft FIHR type: uri; Uniform Resource Identifier ( http://hl7.org/fhir/datatypes.html#uri)
+                text = Columns.TextColumn() # string that represents the concept; identiteit van terminologie systeem
+                version = Columns.TextColumn()
+                code = Columns.TextColumn()  # symbool in syntax gedefinieerd door het systeem (http://hl7.org/fhir/datatypes.html#code)
+                display = Columns.TextColumn()  # weergave gedefinieerd door het systeem
+                user_selected = Columns.BoolColumn()  # indien deze codering door de user zelf was gekozen
+
+
+    class Identificatie(HybridSat):
+        class Types(HybridSat.Types):
+            bsn = 'BSN'
+            rijbewijs = 'rijbewijs'
+            paspoort = 'paspoort'
+
+        nummer = Columns.TextColumn()
 
