@@ -20,7 +20,7 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
         # voor meer info zie http://hl7.org/fhir/formats.html#choice
         deceased_boolean = Columns.BoolColumn()
         deceased_datetime = Columns.DateTimeColumn()
-        # type[x}
+        # type[x]
         multiple_birth_boolean = Columns.BoolColumn()
         multiple_birth_integer = Columns.IntColumn()
 
@@ -32,7 +32,7 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
             secondary = 'secondary (If known)'
         class type(HybridSat.Types):    # type heeft FHIR type: CodeableConcept (http://hl7.org/fhir/datatypes.html#codeableconcept)
             text = Columns.TextColumn() # plain text weergave van het concept
-            class coding(HybridSat.Type.coding):  # coding heeft FHIR type: Element
+            class coding(HybridSat.Types.Coding):  # coding heeft FHIR type: Element; todo: hoe om te gaan met deze extra laag? HybridSat.Types.Coding bestaat nog niet
                 system = Columns.TextColumn()   #system heeft FIHR type: uri; Uniform Resource Identifier ( http://hl7.org/fhir/datatypes.html#uri)
                 text = Columns.TextColumn() # string that represents the concept; identiteit van terminologie systeem
                 version = Columns.TextColumn()
@@ -41,11 +41,4 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
                 user_selected = Columns.BoolColumn()  # indien deze codering door de user zelf was gekozen
 
 
-    class Identificatie(HybridSat):
-        class Types(HybridSat.Types):
-            bsn = 'BSN'
-            rijbewijs = 'rijbewijs'
-            paspoort = 'paspoort'
-
-        nummer = Columns.TextColumn()
 
