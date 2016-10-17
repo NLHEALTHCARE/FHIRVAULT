@@ -45,6 +45,8 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
 
         start = Period.start
         period_end = Period.end
+        # assigner = ??? # todo: assigner heeft FHIR type: Reference(Organization); Je referereert hier dus naar een
+                    # andere DomainResource (hier is dat "Organization"; Patient is ook een DomainResource) Hoe implementeren?
 
     class Name(HybridSat):
         class use(HybridSat.Types):     # zie ook utility class HumanName; #todo wat is de meest logische plaats voor deze hybridsat?

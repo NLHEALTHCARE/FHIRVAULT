@@ -40,9 +40,14 @@ class HumanName(HybridSat):    #FHIR type: Element
     end = Period.end
 
 # todo: mag weg na testen:
-humanname = HumanName()
-print(type(humanname))
-print(type(humanname.use))
-print(type(humanname.use.maiden))
-print(type(Period.start))
-print(type(humanname.start))
+# humanname = HumanName()
+# print(type(humanname))
+# print(type(humanname.use))
+# print(type(humanname.use.maiden))
+# print(type(Period.start))
+# print(type(humanname.start))
+
+class Reference:
+    reference = Columns.TextColumn()    # Relative, internal or absolute UL reference
+    display = Columns.TextColumn()      # Text alternative for the resource
+
