@@ -13,7 +13,7 @@ from pyelt.datalayers.dv import DvEntity, Sat, HybridSat, Link, LinkReference
 
 # todo: "base_domain" , reftypes-achtigs toevoegen
 
-""" Resource classes (Patient is een DomainResource) """
+""" Resource classes (Patient is een DomainResource) http://hl7.org/fhir/patient.html """
 
 
 class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/fhir/domainresource.html#1.20)
