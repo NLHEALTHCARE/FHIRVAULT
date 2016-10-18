@@ -102,6 +102,24 @@ class Attachment:
     title = Columns.TextColumn()            # label to display instead of the data
     creation = Columns.DateTimeColumn()     # date attachement was first created
 
+class value_x:      # FHIR name: value[x]
+                    # dit is een voorbeeld van een FHIR OpenTypeElement: deze hebben geen gespecificeerd
+                    # type en worden weergegeven met de wilcard '*'.
+                    # lijst van OpenTypeElements: http://hl7.org/fhir/datatypes.html#open
+                    # de elementnaam [x] wordt vervangen door de Title cased name of the data type
+    value = Columns.TextColumn()
+
+class Extension:
+    url = Columns.TextColumn()  # indentifies the meaning of the extension
+    value = value_x.value
+
+class BackBoneElement:
+    modifier_extension = Extension()
+
+# print(type(BackBoneElement.modifier_extension.url))
+
+
+
 
 
 
