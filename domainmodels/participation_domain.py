@@ -18,6 +18,10 @@ class SubtrajectParticipationLink(Link, Participation):
     huisarts = LinkReference(Zorgverlener)  # type = primary information recipient
     instelling = LinkReference(Zorgaanbieder)
 
+class FactuurregelParticipationLink(Link, Participation):
+    factuurregel = LinkReference(Factuurregel)  # type = object
+    patient = LinkReference(Patient)
+    subtraject = LinkReference(Subtraject)
 
 class ZorgactviteitParticipationLink(Link, Participation):
     """
