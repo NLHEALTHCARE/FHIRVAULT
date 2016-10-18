@@ -103,7 +103,7 @@ class Zorgactiviteit(DvEntity, Act):
         interne_verrichtingcode = Columns.TextColumn()
         begindatumtijd = Columns.DateTimeColumn()
         einddatumtijd = Columns.DateTimeColumn()
-        aantal = Columns.IntColumn()
+        aantal = Columns.FloatColumn()
         aanvragend_specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
         uitvoerend_specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
         cbv_code = Columns.RefColumn(RefTypes.cbv_codes)  # CBV verrichtingcodes zijn veel uitgebreider dan DBC Zorgactiviteitcodes
