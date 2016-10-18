@@ -109,6 +109,7 @@ class Zorgactiviteit(DvEntity, Act):
         cbv_code = Columns.RefColumn(RefTypes.cbv_codes)  # CBV verrichtingcodes zijn veel uitgebreider dan DBC Zorgactiviteitcodes
         anatomische_locatie = Columns.TextColumn()
 
+
     #Todo: JVL naamgeving? wat doen we met OZP dan ook seperate SAT?
     class AddOn(Sat):
         "Kenmerken wanneer zorgactiviteit een los te declareren add-on betreft"
