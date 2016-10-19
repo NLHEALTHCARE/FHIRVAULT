@@ -16,3 +16,10 @@ test_configs = {
         'msg': 'Hierbij de pyelt log\n\n\n(deze mail niet beantwoorden)\n\n'
     }
 }
+
+test_config = {
+    'sor_schema': 'sor_test',
+    'data_path': test_configs['data_root'] + '/jsontest/',
+
+    'active': True
+}

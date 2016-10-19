@@ -12,15 +12,17 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
 
 
     class Default(Sat):
-        active = Columns.BoolColumn()  # patient record active?
+        patient_nummer = Columns.TextColumn()  # dit staat niet zo in FHIR, hier geplaatst voor het testen.
+        # active = Columns.BoolColumn()  # patient record active?
         # gender = Columns.RefColumn(RefTypes.geslacht_types)
         birthdate = Columns.DateColumn()
         gender = Columns.TextColumn(default_value=AbstractPerson.GenderTypes.unknown)
-        # deceased + deceased_date voorbeeld van "type[x]" , meer dan 1 datatype voor content. (=polymorphic in OO)
-        # voor meer info zie http://hl7.org/fhir/formats.html#choice
+
         deceased_boolean = Columns.BoolColumn()
         deceased_datetime = Columns.DateTimeColumn()
         extra = Columns.JsonColumn()
-        # type[x]
+
         multiple_birth_boolean = Columns.BoolColumn()
         multiple_birth_integer = Columns.IntColumn()
+
+
