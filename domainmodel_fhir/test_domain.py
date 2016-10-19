@@ -21,6 +21,7 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
         deceased_boolean = Columns.BoolColumn()
         deceased_datetime = Columns.DateTimeColumn()
         extra = Columns.JsonColumn()
+        extra2 = Columns.JsonColumn()
 
         multiple_birth_boolean = Columns.BoolColumn()
         multiple_birth_integer = Columns.IntColumn()

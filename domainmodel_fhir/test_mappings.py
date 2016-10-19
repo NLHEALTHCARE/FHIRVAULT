@@ -36,13 +36,17 @@ def init_sor_to_dv_mappings(pipe):
     mapping.map_bk('patient_nummer')
     mapping.map_field("patient_nummer", Patient.Default.patient_nummer)
     # mapping.map_field("active::boolean", Patient.Default.active)
-    mapping.map_field("birthdate::date", Patient.Default.birthdate)
+
     # mapping.map_field("gender", Patient.Default.gender)
-    mapping.map_field("deceased_boolean::boolean", Patient.Default.deceased_boolean)
-    mapping.map_field("deceased_datetime::date", Patient.Default.deceased_datetime)
+
     mapping.map_field("extra::jsonb", Patient.Default.extra)
-    mapping.map_field("multiple_birth_boolean::boolean", Patient.Default.multiple_birth_boolean)
-    mapping.map_field("multiple_birth_integer::integer", Patient.Default.multiple_birth_integer)
+
+
+    mapping.map_field("deceased_boolean::boolean", Patient.Default.extra2, json_field='overleden')
+    mapping.map_field("deceased_datetime::date", Patient.Default.extra2, json_field = 'datum_overleden')
+    mapping.map_field("birthdate::date", Patient.Default.birthdate)
+    mapping.map_field("multiple_birth_boolean::boolean", Patient.Default.extra2)
+    mapping.map_field("multiple_birth_integer::integer", Patient.Default.extra2)
 
 
     mappings.append(mapping)
