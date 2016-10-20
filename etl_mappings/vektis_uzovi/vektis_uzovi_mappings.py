@@ -1,4 +1,4 @@
-from domainmodels.role_domain import Zorgverzekeraar
+from domainmodels.role_domain import *
 from etl_mappings.vektis_uzovi.vektis_uzovi_domain import *
 from pyelt.datalayers.database import Table
 from pyelt.helpers.mappingcreator import MappingWriter
@@ -28,8 +28,8 @@ def init_source_to_sor_mappings(source_db):
 def init_sor_to_dv_mappings(pipe):
     mappings = []
     mapping = SorToEntityMapping('uzovi_hstage', Zorgverzekeraar, pipe.sor)
-    mapping.map_bk(['uzovi_code'])
-    mapping.map_field('uzovi_code', Zorgverzekeraar.Default.uzovi_nummer)
+    mapping.map_bk(["right('0'||uzovi_code, 4)"])
+    mapping.map_field("right('0'||uzovi_code, 4)", Zorgverzekeraar.Default.uzovi_nummer)
     mapping.map_field('naam', Zorgverzekeraar.Default.naam)
     mapping.filter = "einddatum IS NULL"
     mappings.append(mapping)
@@ -43,7 +43,7 @@ def init_sor_to_dv_mappings(pipe):
     link_mapping = SorToLinkMapping('uzovi_hstage', ZorginkoopcombinatieLink, pipe.sor)
     link_mapping.map_entity(ZorginkoopcombinatieLink.verzekeraar)
     link_mapping.map_entity(ZorginkoopcombinatieLink.inkoopcombinatie)
-    pipe.mappings.append(link_mapping)
+    mappings.append(link_mapping)
 
     link_mapping = SorToLinkMapping("uzovi_hstage", ZorgverzekeraarKoepelLink, pipe.sor)
     link_mapping.map_entity(ZorgverzekeraarKoepelLink.parent)
@@ -51,13 +51,10 @@ def init_sor_to_dv_mappings(pipe):
     # link_mapping.map_field('fk_zorgverzekeraar_hub', ZorgverzekeraarKoepelLink.parent)
     # link_mapping.map_field('relatie_met_uzovi_code', ZorgverzekeraarKoepelLink.child)
     link_mapping.filter = "relatierol = 'verzekeraar van'"
-    pipe.mappings.append(link_mapping)
+    mappings.append(link_mapping)
 
     # TODO BOVENSTAANDE KOPIEREN EN VOORWAARDE "relatierol = 'verzekeraar van'" OMKEREN <>
 
     return mappings
 
-def init_sor_to_dv_mappings(pipe):
-    sor = pipe.sor
-    mappings = []
-    return mappings
+
