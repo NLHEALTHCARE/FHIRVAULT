@@ -49,7 +49,7 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
             temp = 'temp'
             secondary = 'secondary (If known)'
 
-        use = Columns.TextColumn()
+        use = Columns.TextColumn(default_value='official')
         # text = CodeableConcept.text
         system = Coding.system   #system heeft FIHR type: uri; Uniform Resource Identifier ( http://hl7.org/fhir/datatypes.html#uri)
         version = Coding.version
@@ -63,7 +63,8 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
         # assigner = ??? # todo: assigner heeft FHIR type: Reference(Organization); Je referereert hier dus naar een
                     # andere DomainResource (hier is dat "Organization"; Patient is ook een DomainResource) Hoe implementeren?
 
-    class Name(HybridSat):
+    class Name(HybridSat):      # naar JSONB
+        #todo mag in json
         class Types(HybridSat.Types):     # zie ook utility class HumanName; #todo wat is de meest logische plaats voor deze hybridsat?
             usual = 'usual'
             official = 'official'
@@ -92,12 +93,14 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
             pager = 'pager'
             other = 'other'
         value = ContactPoint.value
+        #todo mag in json
         class Types(HybridSat.Types):     # todo: FHIR remark: ContactPointUse(Required); verwijst naar een valueset http://hl7.org/fhir/valueset-contact-point-use.html
             home = 'home'
             work = 'work'
             temp = 'temp'
             old = 'old'
             mobile = 'mobile'
+        use = Columns.TextColumn()
         rank = ContactPoint.rank     # moet positieve integer zijn!; specify preferred order of use (1 = highest)
         start = ContactPoint.start
         end = ContactPoint.end
@@ -108,7 +111,7 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
             work = 'work'
             temp = 'temp'
             old = 'old'
-
+        #todo mag in json
         class type(HybridSat.Types):    # todo: AddressType(Required): verwijst naar http://hl7.org/fhir/ValueSet/address-type
             postal = 'postal'
             physical = 'physical'
