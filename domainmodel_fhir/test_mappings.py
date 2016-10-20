@@ -42,11 +42,11 @@ def init_sor_to_dv_mappings(pipe):
     mapping.map_field("extra::jsonb", Patient.Default.extra)
 
 
-    mapping.map_field("deceased_boolean::boolean", Patient.Default.extra2, json_field='overleden')
-    mapping.map_field("deceased_datetime::date", Patient.Default.extra2, json_field = 'datum_overleden')
+    mapping.map_field("deceased_boolean", Patient.Default.extra2)  # keyword "true" is lowercase voor JSON(B); deze wijze ook in bronbestand gebruikt
+    mapping.map_field("deceased_datetime::date", Patient.Default.extra2)
     mapping.map_field("birthdate::date", Patient.Default.birthdate)
-    mapping.map_field("multiple_birth_boolean::boolean", Patient.Default.extra2)
-    mapping.map_field("multiple_birth_integer::integer", Patient.Default.extra2)
+    # mapping.map_field("multiple_birth_boolean::boolean", Patient.Default.extra2)  # keyword als "True" niet de JSONB notatie dus casten naar boolean, anders krijg je een error
+    # mapping.map_field("multiple_birth_integer", Patient.Default.extra2)
 
 
     mappings.append(mapping)
