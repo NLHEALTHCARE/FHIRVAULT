@@ -5,6 +5,7 @@ from domainmodels.hl7rim_base_domain import *
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Sat, HybridSat, Link, LinkReference
 
+
 #########################################################################################################
 #                                                                                                       #
 # Domein model volgens FHIR-standaard (hl7.org.fhir). Iedere Entiteit heeft als type "DomainResource"   #
