@@ -6,7 +6,7 @@ from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMappi
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.sources.databases import SourceTable, SourceQuery
 from pyelt.sources.files import CsvFile
-from etl_mappings.vektis.vektis_configs import vektis_config
+from pipelines.general_clinical_configs import vektis_uzovi_config
 
 __author__ = 'cmesu'
 
@@ -18,7 +18,7 @@ def init_source_to_sor_mappings(source_db):
     # UZOVI
     # gangbare rollen: ZV, CV, GA, LA
     ###############################
-    source_file = CsvFile(vektis_config['data_path'] + '20160419_UZOVI_register_met_relaties.csv', delimiter=';', encoding='LATIN1')
+    source_file = CsvFile(vektis_uzovi_config['data_path'] + '20160419_UZOVI_register_met_relaties.csv', delimiter=';', encoding='LATIN1')
     source_file.set_primary_key(['UZOVI_code', 'Begindatum', 'Relatie_met_UZOVI_code', 'Relatierol', 'Begindatum_relatie'])
     sor_mapping = SourceToSorMapping(source_file, 'uzovi_hstage', auto_map=True)
     mappings.append(sor_mapping)
@@ -55,4 +55,9 @@ def init_sor_to_dv_mappings(pipe):
 
     # TODO BOVENSTAANDE KOPIEREN EN VOORWAARDE "relatierol = 'verzekeraar van'" OMKEREN <>
 
+    return mappings
+
+def init_sor_to_dv_mappings(pipe):
+    sor = pipe.sor
+    mappings = []
     return mappings
