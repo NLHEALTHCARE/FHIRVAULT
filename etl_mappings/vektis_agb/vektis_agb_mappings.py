@@ -5,8 +5,8 @@ from domainmodels.role_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZo
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
 from etl_mappings.vektis_agb.vektis_agb_reference_data import vektis_ref_data
 from etl_mappings.vektis_agb.vektis_agb_transformations import VektisTransformations
-from PYELT.pyelt.mappings.base import ConstantValue
-from PYELT.pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping, SorToRefMapping, EntityViewToEntityMapping, EntityViewToLinkMapping, \
+from pyelt.mappings.base import ConstantValue
+from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping, SorToRefMapping, EntityViewToEntityMapping, EntityViewToLinkMapping, \
     SorToEntityMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.mappings.transformations import FieldTransformation
