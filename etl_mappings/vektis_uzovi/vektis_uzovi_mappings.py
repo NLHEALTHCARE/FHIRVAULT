@@ -1,10 +1,11 @@
+from domainmodels.role_domain import Zorgverzekeraar
+from etl_mappings.vektis_uzovi.vektis_uzovi_domain import *
 from pyelt.datalayers.database import Table
 from pyelt.helpers.mappingcreator import MappingWriter
-from pyelt.sources.databases import SourceTable, SourceQuery
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
+from pyelt.sources.databases import SourceTable, SourceQuery
 from pyelt.sources.files import CsvFile
-from domainmodels.role_domain import *
 from etl_mappings.vektis.vektis_configs import vektis_config
 
 __author__ = 'cmesu'
