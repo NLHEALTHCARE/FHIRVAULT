@@ -40,6 +40,7 @@ class Subtraject(DvEntity, Act):
         behandeling_zijde = Columns.TextColumn()
         status = Columns.TextColumn(RefTypes.subtraject_status)
         disdatum = Columns.DateColumn()
+        uzovinummer = Columns.TextColumn()
 
     #overleg met HJ deze even deze naamgeving omdat het anders inconsistent is met Role_patient (identificatie_SAT). Alle
     # hubs krijgen een sleutel Sat
@@ -102,11 +103,12 @@ class Zorgactiviteit(DvEntity, Act):
         interne_verrichtingcode = Columns.TextColumn()
         begindatumtijd = Columns.DateTimeColumn()
         einddatumtijd = Columns.DateTimeColumn()
-        aantal = Columns.IntColumn()
+        aantal = Columns.FloatColumn()
         aanvragend_specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
         uitvoerend_specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
         cbv_code = Columns.RefColumn(RefTypes.cbv_codes)  # CBV verrichtingcodes zijn veel uitgebreider dan DBC Zorgactiviteitcodes
         anatomische_locatie = Columns.TextColumn()
+
 
     #Todo: JVL naamgeving? wat doen we met OZP dan ook seperate SAT?
     class AddOn(Sat):
@@ -202,6 +204,62 @@ class Afspraak_deelnemer(DvEntity,Act):
         afspraak_nummer = Columns.TextColumn()
 
 
+class Factuurregel(DvEntity,Act):
+
+    class Default(Sat):
+        omzet_totaal = Columns.FloatColumn()
+        omzet_kostendeel = Columns.FloatColumn()
+        omzet_honorarium_poort = Columns.FloatColumn()
+        omzet_honorarium_ondersteuners = Columns.FloatColumn()
+        factuurdatum = Columns.DateColumn()
+        is_credit = Columns.TextColumn()
+
+    class Hl7(Sat):
+        act_class = Columns.TextColumn(default_value=ActClass.account)
+        act_mood = Columns.TextColumn(default_value=ActMood.event_occurrence)
+
+    class Subtraject(Sat):
+        behandelend_specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
+        diagnose_code = Columns.RefColumn(RefTypes.dbc_diagnoses)
+        zorgtype = Columns.RefColumn(RefTypes.dbc_zorgtypes)
+        zorgvraag = Columns.RefColumn(RefTypes.dbc_zorgvraag_codes)
+        begindatum = Columns.DateColumn()
+        einddatum = Columns.DateColumn()
+        verwijscode = Columns.RefColumn(RefTypes.dbc_verwijscodes)
+        afsluitreden = Columns.RefColumn(RefTypes.dbc_afsluitredenen)
+        zorgproduct_code = Columns.RefColumn(RefTypes.dbc_zorgproducten)
+        declaratie_code = Columns.RefColumn(RefTypes.dbc_declaraties)
+        icd10_diagnose = Columns.TextColumn()
+        behandeling_naam = Columns.TextColumn()
+        behandeling_zijde = Columns.TextColumn()
+        subtrajectnummer = Columns.TextColumn()
+        subtrajectnummer = Columns.TextColumn()
+        uzovinummer = Columns.TextColumn()
+        verwijzer = Columns.TextColumn()
+
+    class Zorgtraject(Sat):
+        zorgtrajectnummer = Columns.TextColumn()
+        begindatum = Columns.DateColumn()
+        einddatum = Columns.DateColumn()
+
+    class Sleutels(Sat):
+        patient_nr = Columns.TextColumn()
+        vestiging_agb = Columns.TextColumn()
+        nummer = Columns.TextColumn()
+        extern_nummer = Columns.TextColumn()
+        code = Columns.TextColumn()
+        bron_id = Columns.TextColumn()
+        factuurnummer = Columns.TextColumn()
+        factuurregelnummer = Columns.TextColumn()
+
+    class Grouper(Sat):
+        grouper_versie = Columns.TextColumn()
+        groupercertificaatversie = Columns.TextColumn()
+        hashzpzv = Columns.TextColumn()
+
+    class Verzekering(Sat):
+        assurantiepolis = Columns.TextColumn()
+        debiteurnaam = Columns.TextColumn()
 
 
 
