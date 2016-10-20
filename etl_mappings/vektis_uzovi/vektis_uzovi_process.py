@@ -1,7 +1,7 @@
-from etl_mappings.vektis.vektis_configs import vektis_config
+from pipelines.general_clinical_configs import vektis_uzovi_config
 
 from domainmodels import role_domain
-from etl_mappings.vektis_uzovi.vektis_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
+from etl_mappings.vektis_uzovi.vektis_uzovi_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
 from pipelines.general_clinical_configs import general_config
 from pyelt.pipeline import Pipeline
 
