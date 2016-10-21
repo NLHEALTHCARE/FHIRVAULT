@@ -31,18 +31,13 @@ def define_vektis_agb_pipe(pipeline, vektis_agb_config):
 def vektis_main(*args):
     print('running vektis_agb through general_clinical_configs.py')
     from pipelines.general_clinical_configs import general_config, vektis_agb_config
-
     start = time.time()
-
-    pipeline = Pipeline(general_config)
-
-    define_vektis_agb_pipe(pipeline, vektis_agb_config)
-
     if vektis_agb_config['convert_vektis_zips_to_csv']:
             convert_vektis_zips_to_csv(vektis_agb_config)
     else:
         print(" vektis zips to csv converter inactief")
-
+    pipeline = Pipeline(general_config)
+    define_vektis_agb_pipe(pipeline, vektis_agb_config)
     pipeline.run()
 
 
@@ -81,7 +76,7 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                         # alternatief HJ
                         data_row = []
                         start_pos = 0
-                        line = line.replace(";", ":")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
+                        line = line.replace(";", "_")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
                         for field_def in import_def:
                             field_name = field_def[0]
                             field_len = field_def[1]
