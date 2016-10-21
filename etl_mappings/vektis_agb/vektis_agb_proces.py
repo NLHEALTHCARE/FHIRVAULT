@@ -81,7 +81,7 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                         # alternatief HJ
                         data_row = []
                         start_pos = 0
-                        line = line.replace(";", "")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
+                        line = line.replace(";", "_")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
                         for field_def in import_def:
                             field_name = field_def[0]
                             field_len = field_def[1]
