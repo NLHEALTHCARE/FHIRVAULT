@@ -8,7 +8,6 @@ import zipfile
 from pyelt.pipeline import Pipeline
 from domainmodels import role_domain
 
-
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
 from etl_mappings.vektis_agb.vektis_agb_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
 
