@@ -1,6 +1,6 @@
-from pyelt.pipeline import Pipeline
 from etl_mappings.nictiz_webscraping.nictiz_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
 from etl_mappings.nictiz_webscraping.xml_parser_nictiz import scrape_from_web
+from pyelt.pipeline import Pipeline
 
 
 def define_nictiz_pipe(pipeline, nictiz_config):

@@ -1,10 +1,11 @@
 """Unzippen van postcodenl update bestanden bijvoorbeeld van https://retrieve.postcode.nl/retrieve.php?hash=63e7fad64879ff12bd87e18bfac71b2c
    en de bestandsnamen aanpassen zodat de periode waarvoor die update goldt terug te zien is in de bestandsnaam"""
 
+import glob
 import os
 import zipfile
-import glob
-from pipelines.general_clinical_configs import general_config, adresnl_config
+
+from pipelines.general_clinical_configs import adresnl_config
 
 
 class PostcodesNL:

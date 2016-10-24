@@ -1,6 +1,5 @@
-from pyelt.pipeline import Pipeline
-
 from etl_mappings.dbc.dbc_mappings import init_source_to_sor_mappings
+from pyelt.pipeline import Pipeline
 
 __author__ = 'hvreenen'
 
