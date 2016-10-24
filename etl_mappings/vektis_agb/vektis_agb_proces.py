@@ -4,9 +4,6 @@ import io
 import os
 import time
 import zipfile
-import sys
-sys.path.insert(0, '/home/costiaan/PYELT')
-sys.path.insert(0, '/home/costiaan/CLINICAL_DATAVAULT')
 
 from pyelt.pipeline import Pipeline
 from domainmodels import role_domain
