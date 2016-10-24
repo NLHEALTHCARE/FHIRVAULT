@@ -1,4 +1,4 @@
-from pipelines.general_clinical_configs import vektis_uzovi_config
+from pipelines.clinics_configs import vektis_uzovi_config
 
 from domainmodels.role_domain import *
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping
