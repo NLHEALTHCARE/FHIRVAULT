@@ -411,6 +411,7 @@ class Factuurregel(DvEntity,Act):
 # #
 # # class LinkSubtrajectVerrichting(ActRelationship):
 # #     pass
+# #     pass
 # #     # todo act_relationship_type = ActRelationshipType.PART        # Verrichting is-part-of Subtraject
 # #
 # #
