@@ -5,11 +5,10 @@ import os
 import time
 import zipfile
 
-from pyelt.pipeline import Pipeline
 from domainmodels import role_domain
-
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
 from etl_mappings.vektis_agb.vektis_agb_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
+from pyelt.pipeline import Pipeline
 
 __author__ = 'hvreenen'
 
@@ -29,8 +28,8 @@ def define_vektis_agb_pipe(pipeline, vektis_agb_config):
 
 
 def vektis_main(*args):
-    print('running vektis_agb through general_clinical_configs.py')
-    from pipelines.general_clinical_configs import general_config, vektis_agb_config
+#    print('running vektis_agb through general_clinical_configs.py')
+    from pipelines.clinics_configs import general_config, vektis_agb_config
     start = time.time()
     if vektis_agb_config['convert_vektis_zips_to_csv']:
             convert_vektis_zips_to_csv(vektis_agb_config)

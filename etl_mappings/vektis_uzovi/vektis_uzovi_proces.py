@@ -1,11 +1,8 @@
-# import sys
-# sys.path.insert(0, '/home/costiaan/PYELT')
-# sys.path.insert(0, 'C:/!Ontwikkel/PYELT')
+from pipelines.clinics_configs import general_config, vektis_uzovi_config
 
-from pyelt.pipeline import Pipeline
 from domainmodels import role_domain
-from pipelines.general_clinical_configs import general_config, vektis_uzovi_config
 from etl_mappings.vektis_uzovi.vektis_uzovi_mappings import init_sor_to_dv_mappings, init_source_to_sor_mappings
+from pyelt.pipeline import Pipeline
 
 
 def run():
