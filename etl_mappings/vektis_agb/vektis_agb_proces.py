@@ -29,7 +29,7 @@ def define_vektis_agb_pipe(pipeline, vektis_agb_config):
 
 def vektis_main(*args):
 #    print('running vektis_agb through general_clinical_configs.py')
-    from pipelines.clinics_configs import general_config, vektis_agb_config
+    from pipelines.general_configs import general_config, vektis_agb_config
     start = time.time()
     if vektis_agb_config['convert_vektis_zips_to_csv']:
             convert_vektis_zips_to_csv(vektis_agb_config)

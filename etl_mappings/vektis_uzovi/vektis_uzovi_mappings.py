@@ -1,5 +1,3 @@
-from pipelines.clinics_configs import vektis_uzovi_config
-
 from domainmodels.role_domain import *
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
@@ -8,14 +6,14 @@ from pyelt.sources.files import CsvFile
 __author__ = 'cmesu'
 
 
-def init_source_to_sor_mappings(source_db):
+def init_source_to_sor_mappings(path):
     mappings = []
 
     ###############################
     # UZOVI
     # gangbare rollen: ZV, CV, GA, LA
     ###############################
-    source_file = CsvFile(vektis_uzovi_config['data_path'] + '20160419_UZOVI_register_met_relaties.csv', delimiter=';', encoding='LATIN1')
+    source_file = CsvFile(path + '20160419_UZOVI_register_met_relaties.csv', delimiter=';', encoding='LATIN1')
     source_file.set_primary_key(['UZOVI_code', 'Begindatum', 'Relatie_met_UZOVI_code', 'Relatierol', 'Begindatum_relatie'])
     sor_mapping = SourceToSorMapping(source_file, 'uzovi_hstage', auto_map=True)
     mappings.append(sor_mapping)
