@@ -6,3 +6,5 @@ This repository contains the general clinical domain classes and mipping files t
 It's design accordion to international standards of HL7 RIM.
 
 Based upon the python pyelt framework.
+
+Test
