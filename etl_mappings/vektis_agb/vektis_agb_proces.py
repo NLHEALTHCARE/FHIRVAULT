@@ -72,13 +72,13 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                     csv_column_names = []
 
                     fixed_length_indices = get_fixed_length_indices(csv_column_names, def_name, fixed_length_file_defs)
-
                     for line in file_wrapper:
+                        line = line.encode(encoding='cp1252').decode(encoding='cp1252')
                         # alternatief HJ
                         data_row = []
                         start_pos = 0
                         #line = line.unicode().decode(encoding='cp1252').encode(encoding='utf8')
-                        line = line.replace(";", ":").replace("|", ":").encode(encoding='utf8')  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
+                        line = line.replace(";", ":").replace("|", ":")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
                         for field_def in import_def:
                             field_name = field_def[0]
                             field_len = field_def[1]
