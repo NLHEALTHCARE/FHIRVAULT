@@ -42,13 +42,15 @@ def vektis_main(*args):
 
 def convert_vektis_zips_to_csv(vektis_agb_config):
     path = vektis_agb_config['data_path']
+    print(path)
     """convert zip files met fixed length naar losse csv-files"""
-    print(" vektis zips to csv converter actief")
+    print(" vektis zips to csv converter actief") ##
 
     fixed_length_file_defs = vektis_import_def
 
     os.chdir(path)
     for zip_file_name in glob.glob("*.zip"):
+        print(zip_file_name) ##
         with zipfile.ZipFile(zip_file_name, 'r') as archive:
             file_names = archive.namelist()
 
