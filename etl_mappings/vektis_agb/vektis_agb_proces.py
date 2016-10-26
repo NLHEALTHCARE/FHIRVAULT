@@ -65,19 +65,18 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                     if not def_name in fixed_length_file_defs:
                         continue
                     import_def = fixed_length_file_defs[def_name]
-                    file_wrapper = io.TextIOWrapper(io.BytesIO(binary_str))
+                    file_wrapper = io.TextIOWrapper(io.BytesIO(binary_str), encoding='cp1252')
                     csv_file = open(path + file_name + '.csv', 'w', encoding='utf8')
                     file_name_list.append(file_name)
                     data_list = []
                     csv_column_names = []
-
+                    print(file_wrapper)
                     fixed_length_indices = get_fixed_length_indices(csv_column_names, def_name, fixed_length_file_defs)
                     for line in file_wrapper:
                         line = line.encode(encoding='cp1252').decode(encoding='cp1252')
                         # alternatief HJ
                         data_row = []
                         start_pos = 0
-                        #line = line.unicode().decode(encoding='cp1252').encode(encoding='utf8')
                         line = line.replace(";", ":").replace("|", ":")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
                         for field_def in import_def:
                             field_name = field_def[0]
@@ -91,7 +90,6 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                         #         break
                         #     else:
                         #         data_row.append(line[fixed_length_indices[i]: fixed_length_indices[i+1]].strip())
-                        print(1)
                         data_list.append(data_row)
 
                     with open(path + file_name + '.csv', 'w', newline='', encoding='utf8') as fp:
