@@ -70,10 +70,8 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                     file_name_list.append(file_name)
                     data_list = []
                     csv_column_names = []
-                    print(file_wrapper)
                     fixed_length_indices = get_fixed_length_indices(csv_column_names, def_name, fixed_length_file_defs)
                     for line in file_wrapper:
-                        #line = line.encode(encoding='cp1252').decode(encoding='cp1252')
                         # alternatief HJ
                         data_row = []
                         start_pos = 0
