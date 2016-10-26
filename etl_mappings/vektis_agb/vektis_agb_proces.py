@@ -66,7 +66,7 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                         continue
                     import_def = fixed_length_file_defs[def_name]
                     file_wrapper = io.TextIOWrapper(io.BytesIO(binary_str))
-                    csv_file = open(path + file_name + '.csv', 'w', encoding='utf8')
+                    csv_file = open(path + file_name + '.csv', 'w', encoding='dbcs')
                     file_name_list.append(file_name)
                     data_list = []
                     csv_column_names = []
