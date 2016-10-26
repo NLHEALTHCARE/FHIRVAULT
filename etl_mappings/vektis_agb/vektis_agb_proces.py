@@ -84,13 +84,14 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                             end_pos = start_pos + field_len
                             data_row.append(line[start_pos:end_pos].strip())
                             start_pos = end_pos
+                            print(1)
                         # end alternatief
                         # for i in range(len(fixed_length_indices)):
                         #     if i == len(fixed_length_indices) - 1:
                         #         break
                         #     else:
                         #         data_row.append(line[fixed_length_indices[i]: fixed_length_indices[i+1]].strip())
-                        print(1)
+
                         data_list.append(data_row)
 
                     with open(path + file_name + '.csv', 'w', newline='', encoding='utf8') as fp:
