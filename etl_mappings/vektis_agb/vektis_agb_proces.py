@@ -76,6 +76,7 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                         # alternatief HJ
                         data_row = []
                         start_pos = 0
+                        print(2)
                         line = line.replace(";", ":").replace("|", ":")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
                         for field_def in import_def:
                             field_name = field_def[0]
@@ -91,7 +92,7 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                         #         data_row.append(line[fixed_length_indices[i]: fixed_length_indices[i+1]].strip())
                         print(1)
                         data_list.append(data_row)
-                        print(2)
+
                     with open(path + file_name + '.csv', 'w', newline='', encoding='utf8') as fp:
                         csv_file = csv.writer(fp, delimiter=';')
                         csv_file.writerow(csv_column_names)
