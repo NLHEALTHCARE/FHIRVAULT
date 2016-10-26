@@ -6,10 +6,11 @@ from pyelt.datalayers.dv import EnsembleView
 
 
 class ZorgaanbiederEnsemble(EnsembleView):
-    # zorginstelling = Zorgaanbieder
-    # huisarts = Zorgverlener
-    # fysio = Zorgverlener
-    # link1 = ZorgverlenerZorgaanbiederLink
+    zorginstelling = Zorgaanbieder
+    huisarts = Zorgverlener
+    fysio = Zorgverlener
+    link = ZorgverlenerZorgaanbiederLink
+
 
     def __init__(self):
         EnsembleView.__init__(self, name='', entity_and_link_list=[])

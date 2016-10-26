@@ -352,9 +352,6 @@ class Zorgverlener(Medewerker):
     BIG code = 11 cijfers, met prefix BIG
     """
 
-    class Hl7(Sat):
-        role_class = Columns.TextColumn(default_value=RoleClass.assigned_entity)
-
     class Identificatie(Sat):
         agb_code = Columns.TextColumn()
         big_code = Columns.TextColumn()
@@ -376,8 +373,8 @@ class Zorgaanbieder(DvEntity, Role):
     Business key: AGB-code
     """
 
-    class Hl7(Sat):
-        role_class = Columns.TextColumn(default_value=RoleClass.healthcare_provider)
+    # class Hl7(Sat):
+    #     role_class = Columns.TextColumn(default_value=RoleClass.healthcare_provider)
 
 
     class Default(Sat):
