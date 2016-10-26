@@ -1,16 +1,22 @@
-from pyelt.datalayers.dv import Ensemble_view
+from domainmodels.role_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZorgaanbiederLink, Medewerker
+from pyelt.datalayers.dv import EnsembleView
 
 
 # from _unit_tests.unit_tests_rob._domain_rob import *
 
 
-class TestEnsemble(Ensemble_view):
+class ZorgaanbiederEnsemble(EnsembleView):
+    # zorginstelling = Zorgaanbieder
+    # huisarts = Zorgverlener
+    # fysio = Zorgverlener
+    # link1 = ZorgverlenerZorgaanbiederLink
+
     def __init__(self):
-        Ensemble_view.__init__(self, name='', entity_and_link_list=[])
+        EnsembleView.__init__(self, name='', entity_and_link_list=[])
         self.name = 'test_view'  # naam van de ensemble_view
-        self.add_entity_or_link(Zorginstelling)  # alleen entiteit aangegeven, alias is niet verplicht
+        self.add_entity_or_link(Zorgaanbieder)  # alleen entiteit aangegeven, alias is niet verplicht
         self.add_entity_or_link(Zorgverlener, 'huisarts')  # hier wordt het alias 'huisarts' aangemaakt
         self.add_entity_or_link(Zorgverlener, 'fysio')
-        self.add_entity_or_link(Zorgverlener_Zorginstelling_Link, 'link')
+        self.add_entity_or_link(ZorgverlenerZorgaanbiederLink, 'link')
 
 

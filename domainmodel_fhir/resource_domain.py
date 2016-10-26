@@ -24,8 +24,6 @@ class AbstractPerson:
         unknown = 'unknown'
 
 class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/fhir/domainresource.html#1.20)
-
-
     class Default(Sat):
         active = Columns.BoolColumn()  # patient record active?
         # gender = Columns.RefColumn(RefTypes.geslacht_types)
@@ -35,12 +33,22 @@ class Patient(DvEntity, Entity):   # FHIR type: DomainResource (http://hl7.org/f
         # voor meer info zie http://hl7.org/fhir/formats.html#choice
         deceased_boolean = Columns.BoolColumn()
         deceased_datetime = Columns.DateTimeColumn()
+        class Extra(Columns.JsonColumn):
+            deceased = False
+            deceased = Columns.DateTimeColumn()
+            multiple_birth_boolean  = Columns.BoolColumn()
+            multiple_birth_integer = Columns.IntColumn()
         extra = Columns.JsonColumn()
+
+        def extra(self):
+            a = 1
+            b = 2
+
+
 
         # type[x]
         multiple_birth_boolean = Columns.BoolColumn()
         multiple_birth_integer = Columns.IntColumn()
-
 
 
     class Identifier(HybridSat):      #FHIR type: Element (http://hl7.org/fhir/element.html#1.21.0)
