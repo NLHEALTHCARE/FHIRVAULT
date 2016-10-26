@@ -52,17 +52,20 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
 
             file_name_list = []
             for file_name in file_names:
-                if '__MACOSX' in file_name: continue
+                if '__MACOSX' in file_name:
+                    continue
                 try:
                     raw_file = archive.open(file_name, 'r')
                     binary_str = raw_file.read()
-                    if not binary_str: continue
+                    if not binary_str:
+                        continue
 
                     def_name = file_name.split('.')[0]
-                    if not def_name in fixed_length_file_defs: continue
+                    if not def_name in fixed_length_file_defs:
+                        continue
                     import_def = fixed_length_file_defs[def_name]
                     file_wrapper = io.TextIOWrapper(io.BytesIO(binary_str))
-                    csv_file = open(path + file_name + '.csv', 'w')
+                    csv_file = open(path + file_name + '.csv', 'w', encoding='latin1')
                     file_name_list.append(file_name)
                     data_list = []
                     csv_column_names = []
