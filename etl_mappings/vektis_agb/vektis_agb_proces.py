@@ -46,8 +46,7 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
     print(" vektis zips to csv converter actief") ##
     fixed_length_file_defs = vektis_import_def
     os.chdir(path)
-    print(glob.glob('*.zip') or glob.glob('*.ZIP'))
-    for zip_file_name in glob.glob('*.zip') or glob.glob('*.ZIP'):
+    for zip_file_name in (glob.glob('*.zip') or glob.glob('*.ZIP')):
         with zipfile.ZipFile(zip_file_name, 'r') as archive:
             file_names = archive.namelist()
 
