@@ -72,10 +72,8 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                         # alternatief HJ
                         data_row = []
                         start_pos = 0
-                        line = line.replace(";", ":").replace("|", ":")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
+                        line = line.replace(";", ":").replace("|", ":").decode('latin-1').encode("utf-8")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
                         for field_def in import_def:
-                            print('BREAK 2')  ##
-                            print(field_def)
                             field_name = field_def[0]
                             field_len = field_def[1]
                             end_pos = start_pos + field_len
