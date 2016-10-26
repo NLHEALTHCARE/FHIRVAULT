@@ -50,7 +50,7 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
 
     os.chdir(path)
     for zip_file_name in glob.glob("*.zip"):
-        print(zip_file_name) ##
+        print(zip_file_name) ###
         with zipfile.ZipFile(zip_file_name, 'r') as archive:
             file_names = archive.namelist()
 
