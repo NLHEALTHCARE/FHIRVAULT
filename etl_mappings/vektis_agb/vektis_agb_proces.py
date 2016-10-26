@@ -4,6 +4,7 @@ import io
 import os
 import time
 import zipfile
+from chardet import detect
 
 from domainmodels import role_domain
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
@@ -75,7 +76,6 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                         # alternatief HJ
                         data_row = []
                         start_pos = 0
-                        print(type(line))
                         line = line.replace(";", ":").replace("|", ":")  # dit voorkomt een error wanneer een veld een ";" bevat in de de veldwaarde
                         for field_def in import_def:
                             field_name = field_def[0]
