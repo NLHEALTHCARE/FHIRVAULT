@@ -89,8 +89,8 @@ def convert_vektis_zips_to_csv(vektis_agb_config):
                         #     else:
                         #         data_row.append(line[fixed_length_indices[i]: fixed_length_indices[i+1]].strip())
                         data_list.append(data_row)
-                    with open(path + file_name + '.csv', 'w', newline='', encoding='latin1') as fp:
-                        print(1)
+                    print(1)
+                    with open(path + file_name + '.csv', 'w', newline='', encoding='ISO-8859-1') as fp:
                         csv_file = csv.writer(fp, delimiter=';')
                         csv_file.writerow(csv_column_names)
                         csv_file.writerows(data_list)
