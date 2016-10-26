@@ -28,6 +28,7 @@ def define_vektis_agb_pipe(pipeline, vektis_agb_config):
     # pipe.mappings.extend(sor_to_dv_mappings)
 
 
+
 def vektis_main(*args):
 #    print('running vektis_agb through general_clinical_configs.py')
     from pipelines.general_configs import general_config, vektis_agb_config
