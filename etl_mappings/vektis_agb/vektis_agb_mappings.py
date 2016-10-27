@@ -98,27 +98,27 @@ def init_sor_to_dv_mappings(pipe):
     link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
     mappings.append(link_mapping)
 
-    mapping = SorToEntityMapping('fagbx23_hstage', Zorgaanbieder, sor)
-    mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
-
-    # mapping.map_field("aanduiding_oud", );
-    # mapping.map_field("bestandcode", );
-    mapping.map_field("zorgverlenersoort", Zorgaanbieder.Default.afdeling_specialisme_code)
-    mapping.map_field("praktijknummer", Zorgaanbieder.Identificatie.agb_code)
-    mapping.map_field("naam_deel_1", Zorgaanbieder.Default.naam)  # todo\review klopt dit?
-    mapping.map_field("telefoonnummer", Zorgaanbieder.Telefoon.nummer, type=Zorgaanbieder.Telefoon.Types.zakelijk)
-    mapping.map_field("datum_aanvang_praktijk", );  # todo
-    mapping.map_field("datum_einde_praktijk", );  # todo
-    # mapping.map_field("filler", );
-    mapping.map_field("organisatievorm", Zorgaanbieder.Default.organisatie_type)
-    # mapping.map_field("mutatiesoort", );
-    # mapping.map_field("reserve", );
-    mappings.append(mapping)
-
-    link_mapping = SorToLinkMapping('fagbx24_hstage', ZorgverlenerZorgaanbiederLink, sor)
-    link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
-    link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'instellingsnummer'))
-    mappings.append(link_mapping)
+    # mapping = SorToEntityMapping('fagbx23_hstage', Zorgaanbieder, sor)
+    # mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
+    #
+    # # mapping.map_field("aanduiding_oud", );
+    # # mapping.map_field("bestandcode", );
+    # mapping.map_field("zorgverlenersoort", Zorgaanbieder.Default.afdeling_specialisme_code)
+    # mapping.map_field("praktijknummer", Zorgaanbieder.Identificatie.agb_code)
+    # mapping.map_field("naam_deel_1", Zorgaanbieder.Default.naam)  # todo\review klopt dit?
+    # mapping.map_field("telefoonnummer", Zorgaanbieder.Telefoon.nummer, type=Zorgaanbieder.Telefoon.Types.zakelijk)
+    # mapping.map_field("datum_aanvang_praktijk", );  # todo
+    # mapping.map_field("datum_einde_praktijk", );  # todo
+    # # mapping.map_field("filler", );
+    # mapping.map_field("organisatievorm", Zorgaanbieder.Default.organisatie_type)
+    # # mapping.map_field("mutatiesoort", );
+    # # mapping.map_field("reserve", );
+    # # mappings.append(mapping)
+    #
+    # link_mapping = SorToLinkMapping('fagbx24_hstage', ZorgverlenerZorgaanbiederLink, sor)
+    # link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
+    # link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'instellingsnummer'))
+    # mappings.append(link_mapping)
     #
     # # mapping = SorToEntityMapping('fagbx24.s01.csv_hstage', 'fagbx24.s01.csv_entity')
     # # mapping.map_field("aanduiding_oud                 => aanduiding_oud text")
