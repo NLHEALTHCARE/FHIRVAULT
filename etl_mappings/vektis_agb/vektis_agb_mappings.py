@@ -58,7 +58,8 @@ def init_sor_to_dv_mappings(pipe):
     # mapping.map_field("aanduiding_oud", );
     # mapping.map_field("bestandcode",  );
     mapping.map_field("zorgverlenersoort", Zorgverlener.Identificatie.specialisme)
-    mapping.map_field("zorgverlenersnummer", Zorgverlener.Identificatie.agb_code)
+    #aangepast, mijns inziens is de agb altijd volledig (8 posities) (CM)
+    mapping.map_field(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'), Zorgverlener.Identificatie.agb_code)
     mapping.map_field("initcap(naam)", Zorgverlener.Naamgegevens.geslachtsnaam)
     mapping.map_field("voorletters", Zorgverlener.Naamgegevens.initialen)
     mapping.map_field("lower(voorvoegsel)", Zorgverlener.Naamgegevens.geslachtsnaam_voorvoegsels)
