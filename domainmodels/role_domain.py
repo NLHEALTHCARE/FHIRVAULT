@@ -334,7 +334,8 @@ class Medewerker(DvEntity, Role):
         nummer = Columns.TextColumn()
 
 
-class Zorgverlener(Medewerker):
+class Zorgverlener(Medewerker, DvEntity, Role):
+
     """https://zibs.nl/wiki/Zorgverlener
 
     ZIBS concept van Zorgverlener maakt geen onderscheidt tussen Persoon(Entity), Role en Participation.
