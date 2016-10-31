@@ -5,7 +5,7 @@ from pyelt.pipeline import Pipeline
 # from pipelines.general_clinical_configs import general_config
 
 
-"""vektis agb_codes komen van https://www.zorgprisma.nl  """
+
 
 def define_adres_nl_pipe(pipeline, adresnl_config):
     pipe = pipeline.get_or_create_pipe('adresnl', config=adresnl_config)

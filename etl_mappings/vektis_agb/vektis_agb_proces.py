@@ -13,6 +13,7 @@ from pyelt.pipeline import Pipeline
 
 __author__ = 'hvreenen'
 
+"""vektis agb_codes komen van https://www.zorgprisma.nl  """
 
 def define_vektis_agb_pipe(pipeline, vektis_agb_config):
     pipe = pipeline.get_or_create_pipe('vektis_agb', vektis_agb_config)
