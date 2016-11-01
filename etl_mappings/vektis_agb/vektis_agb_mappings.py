@@ -133,7 +133,7 @@ def init_sor_to_dv_mappings(pipe):
     # mapping.map_field("aanduiding_oud", );
     # mapping.map_field("bestandcode", );
     # mapping.map_field("zorgverlenersoort", Zorgaanbieder.Default.afdeling_specialisme_code)
-    # mapping.map_field(VektisTransformations.make_agb("zorgverlenersoort", "praktijknummer"), Zorgaanbieder.Identificatie.agb_code)
+    mapping.map_field(VektisTransformations.make_agb("zorgverlenersoort", "praktijknummer"), Zorgaanbieder.Identificatie.agb_code)
     # mapping.map_field("praktijkadres_volgnummer", ); #todo
     mapping.map_field(ConstantValue('NL'), Zorgaanbieder.Adres.land_code, type=Zorgaanbieder.Adres.Types.officieel_adres)
     mapping.map_field("straat", Zorgaanbieder.Adres.straat, type=Zorgaanbieder.Adres.Types.officieel_adres)
