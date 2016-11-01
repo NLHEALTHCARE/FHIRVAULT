@@ -54,7 +54,7 @@ vektis_import_def = {
     'fagbx22': (
         ('aanduiding_oud', 1),
         ('bestandcode', 2),
-        ('zorgverlenersoort', 2),
+        ('zorgverlenersoort', 2, True),
         ('zorgverlenersnummer', 6, True),
         ('praktijknummer', 5, True),
         ('datum_toetreding_praktijk', 8),
