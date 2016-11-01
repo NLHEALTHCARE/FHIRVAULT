@@ -87,6 +87,7 @@ class Zorgactiviteit(DvEntity, Act):
     Business key: AGB-code zorgaanbieder + subtrajectnummer
     """
 
+
     class Hl7(Sat):
         act_class = Columns.TextColumn(default_value=ActClass.account)
         act_mood = Columns.TextColumn(default_value=ActMood.event_occurrence)
