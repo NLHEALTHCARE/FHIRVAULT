@@ -8,7 +8,7 @@ __author__ = 'cmesu'
 
 def init_source_to_sor_mappings(path):
     mappings = []
-    source_file = CsvFile(path + 'NHG-Tabel 2-Proefje.txt', delimiter='\t',  encoding='utf8')
+    source_file = CsvFile(path + 'NHG-Tabel 2-Proefje.txt', delimiter='\t', encoding='utf8')
     source_file.set_primary_key(['Code'])
     sor_mapping = SourceToSorMapping(source_file, 'nhg2_proefje_hstage', auto_map=True)
     mappings.append(sor_mapping)
