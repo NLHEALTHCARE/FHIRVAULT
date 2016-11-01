@@ -1,5 +1,5 @@
 from domainmodels import role_domain
-from etl_mappings.vektis_uzovi.vektis_uzovi_mappings import init_sor_to_dv_mappings, init_source_to_sor_mappings
+from etl_mappings.nhg.nhg_mappings import init_sor_to_dv_mappings, init_source_to_sor_mappings
 from pyelt.pipeline import Pipeline
 
 
@@ -10,11 +10,11 @@ def define_nhg_pipe(pipeline, nhg_config):
     source_to_sor_mappings = init_source_to_sor_mappings(nhg_config['data_path'])
     pipe.mappings.extend(source_to_sor_mappings)
     #
-    sor_to_ref_mappings = init_sor_to_dv_mappings(pipe)
-    pipe.mappings.extend(sor_to_ref_mappings)
-    #
-    sor_to_dv_mappings = init_sor_to_dv_mappings(pipe)
-    pipe.mappings.extend(sor_to_dv_mappings)
+    # sor_to_ref_mappings = init_sor_to_dv_mappings(pipe)
+    # pipe.mappings.extend(sor_to_ref_mappings)
+    # #
+    # sor_to_dv_mappings = init_sor_to_dv_mappings(pipe)
+    # pipe.mappings.extend(sor_to_dv_mappings)
 
 
 def nhg_main(*args):
