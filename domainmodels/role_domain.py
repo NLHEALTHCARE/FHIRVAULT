@@ -334,7 +334,7 @@ class Medewerker(DvEntity, Role):
         nummer = Columns.TextColumn()
 
 
-class Zorgverlener(Medewerker, DvEntity, Role):
+class Zorgverlener(Medewerker, Role):
 
     """https://zibs.nl/wiki/Zorgverlener
 
