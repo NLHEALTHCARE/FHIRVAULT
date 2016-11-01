@@ -53,47 +53,46 @@ def init_sor_to_ref_mappings():
 def init_sor_to_dv_mappings(pipe):
     mappings = []
     sor = pipe.sor
-    # mapping = SorToEntityMapping('fagbx20_hstage', Zorgverlener, sor)
-    # mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
-    # mapping.map_field("concat(zorgverlenersoort, nadere_verbijzondering_zvl_srt)", Zorgverlener.Identificatie.specialisme)
-    # mapping.map_field(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'), Zorgverlener.Identificatie.agb_code)
-    # mapping.map_field("initcap(naam)", Zorgverlener.Naamgegevens.geslachtsnaam)
-    # mapping.map_field("voorletters", Zorgverlener.Naamgegevens.initialen)
-    # mapping.map_field("lower(voorvoegsel)", Zorgverlener.Naamgegevens.geslachtsnaam_voorvoegsels)
-    # mapping.map_field("adellijke_titel", Zorgverlener.Titels.adelijke_titel, ref='adelijke titels')
-    # mapping.map_field("lower(academische_titel)", Zorgverlener.Titels.academische_titel, ref='academische_titels')
-    # mapping.map_field("straat", Zorgverlener.Adres.straat, type=Zorgverlener.Adres.Types.officieel_adres)
-    # mapping.map_field("huisnummer::integer", Zorgverlener.Adres.huisnummer, type=Zorgverlener.Adres.Types.officieel_adres)
-    # mapping.map_field("huisnummer_toevoeging", Zorgverlener.Adres.huisnummertoevoeging, type=Zorgverlener.Adres.Types.officieel_adres)
-    # mapping.map_field("postcode", Zorgverlener.Adres.postcode, type=Zorgverlener.Adres.Types.officieel_adres)
-    # mapping.map_field("initcap(plaatsnaam)", Zorgverlener.Adres.woonplaats, type=Zorgverlener.Adres.Types.officieel_adres)
-    # mapping.map_field("telefoonnummer", Zorgverlener.Telefoon.nummer, type=Zorgverlener.Telefoon.Types.zakelijk)
-    # mapping.map_field(VektisTransformations.text_to_date_transform('geboortedatum'), Zorgverlener.Default.geboortedatum)
-    # mapping.map_field("geslacht", Zorgverlener.Default.geslacht_code);
-    # mapping.map_field(VektisTransformations.text_to_date_transform('datum_aanvang_beroep'), Zorgverlener.BeroepsGegevens.datum_aanvang_beroep);
-    # # mapping.map_field("sor_vektis.convert_to_date(datum_einde_beroep)", Zorgverlener.BeroepsGegevens.datum_einde_beroep);
-    # mapping.map_field(VektisTransformations.text_to_date_transform('datum_einde_beroep'), Zorgverlener.BeroepsGegevens.datum_einde_beroep);
-    #
-    # # mapping.map_field("nadere_verbijzondering_zvl_srt", ); #todo\review ZBIS moet dit misschien "Zorgverlener.Default.specialisme_code worden?    mapping.map_field("mutatiesoort",                   => mutatiesoort text")
-    # # mapping.map_field("reserve", );
-    # mappings.append(mapping)
-    #
-    # mapping = SorToEntityMapping('fagbx21_hstage', Zorgverlener, sor)
-    # mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
-    # # mapping.map_field("aanduiding_oud", );
-    # # mapping.map_field("bestandcode",  );
-    # # mapping.map_field("zorgverlenersoort", Zorgverlener.Default.zorgverlener_rol)
-    # # mapping.map_field("zorgverlenersnummer", Zorgverlener.Default.zorgverlener_identificatienummer)
-    # mapping.map_field("(case when indicatie_hoogleraar='1' then True else False end)", Zorgverlener.BeroepsGegevens.is_hoogleraar);
-    # mapping.map_field("reden_einde_beroep", Zorgverlener.BeroepsGegevens.reden_einde_beroep);
-    # # mapping.map_field("mutatiesoort", );
-    # # mapping.map_field("reserve", );
-    # mappings.append(mapping)
-    #
-    # link_mapping = SorToLinkMapping('fagbx22_hstage', ZorgverlenerZorgaanbiederLink, sor)
-    # link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
-    # link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
-    # mappings.append(link_mapping)
+    mapping = SorToEntityMapping('fagbx20_hstage', Zorgverlener, sor)
+    mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
+    mapping.map_field("concat(zorgverlenersoort, nadere_verbijzondering_zvl_srt)", Zorgverlener.Identificatie.specialisme)
+    mapping.map_field(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'), Zorgverlener.Identificatie.agb_code)
+    mapping.map_field("initcap(naam)", Zorgverlener.Naamgegevens.geslachtsnaam)
+    mapping.map_field("voorletters", Zorgverlener.Naamgegevens.initialen)
+    mapping.map_field("lower(voorvoegsel)", Zorgverlener.Naamgegevens.geslachtsnaam_voorvoegsels)
+    mapping.map_field("adellijke_titel", Zorgverlener.Titels.adelijke_titel, ref='adelijke titels')
+    mapping.map_field("lower(academische_titel)", Zorgverlener.Titels.academische_titel, ref='academische_titels')
+    mapping.map_field("straat", Zorgverlener.Adres.straat, type=Zorgverlener.Adres.Types.officieel_adres)
+    mapping.map_field("huisnummer::integer", Zorgverlener.Adres.huisnummer, type=Zorgverlener.Adres.Types.officieel_adres)
+    mapping.map_field("huisnummer_toevoeging", Zorgverlener.Adres.huisnummertoevoeging, type=Zorgverlener.Adres.Types.officieel_adres)
+    mapping.map_field("postcode", Zorgverlener.Adres.postcode, type=Zorgverlener.Adres.Types.officieel_adres)
+    mapping.map_field("initcap(plaatsnaam)", Zorgverlener.Adres.woonplaats, type=Zorgverlener.Adres.Types.officieel_adres)
+    mapping.map_field("telefoonnummer", Zorgverlener.Telefoon.nummer, type=Zorgverlener.Telefoon.Types.zakelijk)
+    mapping.map_field(VektisTransformations.text_to_date_transform('geboortedatum'), Zorgverlener.Default.geboortedatum)
+    mapping.map_field("geslacht", Zorgverlener.Default.geslacht_code);
+    mapping.map_field(VektisTransformations.text_to_date_transform('datum_aanvang_beroep'), Zorgverlener.BeroepsGegevens.datum_aanvang_beroep);
+    # mapping.map_field("sor_vektis.convert_to_date(datum_einde_beroep)", Zorgverlener.BeroepsGegevens.datum_einde_beroep);
+    mapping.map_field(VektisTransformations.text_to_date_transform('datum_einde_beroep'), Zorgverlener.BeroepsGegevens.datum_einde_beroep);
+    # mapping.map_field("nadere_verbijzondering_zvl_srt", ); #todo\review ZBIS moet dit misschien "Zorgverlener.Default.specialisme_code worden?    mapping.map_field("mutatiesoort",                   => mutatiesoort text")
+    # mapping.map_field("reserve", );
+    mappings.append(mapping)
+
+    mapping = SorToEntityMapping('fagbx21_hstage', Zorgverlener, sor)
+    mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
+    # mapping.map_field("aanduiding_oud", );
+    # mapping.map_field("bestandcode",  );
+    # mapping.map_field("zorgverlenersoort", Zorgverlener.Default.zorgverlener_rol)
+    # mapping.map_field("zorgverlenersnummer", Zorgverlener.Default.zorgverlener_identificatienummer)
+    mapping.map_field("(case when indicatie_hoogleraar='1' then True else False end)", Zorgverlener.BeroepsGegevens.is_hoogleraar);
+    mapping.map_field("reden_einde_beroep", Zorgverlener.BeroepsGegevens.reden_einde_beroep);
+    # mapping.map_field("mutatiesoort", );
+    # mapping.map_field("reserve", );
+    mappings.append(mapping)
+
+    link_mapping = SorToLinkMapping('fagbx22_hstage', ZorgverlenerZorgaanbiederLink, sor)
+    link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
+    link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
+    mappings.append(link_mapping)
 
     mapping = SorToEntityMapping('fagbx23_hstage', Zorgaanbieder, sor)
     mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
@@ -144,6 +143,7 @@ def init_sor_to_dv_mappings(pipe):
     mapping.map_field("initcap(plaatsnaam)", Zorgaanbieder.Adres.woonplaats, type=Zorgaanbieder.Adres.Types.officieel_adres)
     # mapping.map_field("mutatiesoort", );
     # mapping.map_field("reserve", );
+    mapping.filter="praktijkadres_volgnummer='1'"
     mappings.append(mapping)
 
     mapping = SorToEntityMapping('instel_hstage', Zorgaanbieder, sor)
