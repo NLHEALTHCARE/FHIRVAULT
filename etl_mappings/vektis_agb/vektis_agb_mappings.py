@@ -73,7 +73,6 @@ def init_sor_to_dv_mappings(pipe):
     mapping.map_field(VektisTransformations.text_to_date_transform('datum_aanvang_beroep'), Zorgverlener.BeroepsGegevens.datum_aanvang_beroep);
     # mapping.map_field("sor_vektis.convert_to_date(datum_einde_beroep)", Zorgverlener.BeroepsGegevens.datum_einde_beroep);
     mapping.map_field(VektisTransformations.text_to_date_transform('datum_einde_beroep'), Zorgverlener.BeroepsGegevens.datum_einde_beroep);
-
     # mapping.map_field("nadere_verbijzondering_zvl_srt", ); #todo\review ZBIS moet dit misschien "Zorgverlener.Default.specialisme_code worden?    mapping.map_field("mutatiesoort",                   => mutatiesoort text")
     # mapping.map_field("reserve", );
     mappings.append(mapping)
@@ -133,7 +132,7 @@ def init_sor_to_dv_mappings(pipe):
     mapping.map_bk(VektisTransformations.make_agb("zorgverlenersoort", "praktijknummer"))
     # mapping.map_field("aanduiding_oud", );
     # mapping.map_field("bestandcode", );
-    mapping.map_field("zorgverlenersoort", Zorgaanbieder.Default.afdeling_specialisme_code)
+    # mapping.map_field("zorgverlenersoort", Zorgaanbieder.Default.afdeling_specialisme_code)
     mapping.map_field(VektisTransformations.make_agb("zorgverlenersoort", "praktijknummer"), Zorgaanbieder.Identificatie.agb_code)
     # mapping.map_field("praktijkadres_volgnummer", ); #todo
     mapping.map_field(ConstantValue('NL'), Zorgaanbieder.Adres.land_code, type=Zorgaanbieder.Adres.Types.officieel_adres)
@@ -144,6 +143,7 @@ def init_sor_to_dv_mappings(pipe):
     mapping.map_field("initcap(plaatsnaam)", Zorgaanbieder.Adres.woonplaats, type=Zorgaanbieder.Adres.Types.officieel_adres)
     # mapping.map_field("mutatiesoort", );
     # mapping.map_field("reserve", );
+    mapping.filter="praktijkadres_volgnummer='1'"
     mappings.append(mapping)
 
     mapping = SorToEntityMapping('instel_hstage', Zorgaanbieder, sor)

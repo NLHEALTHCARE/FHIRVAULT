@@ -4,7 +4,7 @@ __author__ = 'hvreenen'
 
 vektis_import_def = {
     'instel': (
-        ('soort_instelling', 2),
+        ('soort_instelling', 2, True),
         ('instellingsnummer', 6, True),
         ('naam_instelling', 60),
         ('straat', 24),
@@ -43,7 +43,7 @@ vektis_import_def = {
     'fagbx21': (
         ('aanduiding_oud', 1),
         ('bestandcode', 2),
-        ('zorgverlenersoort', 2),
+        ('zorgverlenersoort', 2, True),
         ('zorgverlenersnummer', 6, True),
         ('indicatie_hoogleraar', 1),
         ('reden_einde_beroep', 1),
@@ -54,7 +54,7 @@ vektis_import_def = {
     'fagbx22': (
         ('aanduiding_oud', 1),
         ('bestandcode', 2),
-        ('zorgverlenersoort', 2),
+        ('zorgverlenersoort', 2, True),
         ('zorgverlenersnummer', 6, True),
         ('praktijknummer', 5, True),
         ('datum_toetreding_praktijk', 8),
@@ -68,7 +68,7 @@ vektis_import_def = {
     'fagbx23': (
         ('aanduiding_oud', 1),
         ('bestandcode', 2),
-        ('zorgverlenersoort', 2),
+        ('zorgverlenersoort', 2, True),
         ('praktijknummer', 5, True),
         ('naam_deel_1', 46),
         ('telefoonnummer', 11),
@@ -83,7 +83,7 @@ vektis_import_def = {
     'fagbx24': (
         ('aanduiding_oud', 1),
         ('bestandcode', 2),
-        ('zorgverlenersoort', 2),
+        ('zorgverlenersoort', 2, True),
         ('zorgverlenersnummer', 6, True),
         ('instellingsnummer', 6, True),
         ('datum_toetreding_praktijk', 8),
@@ -96,7 +96,7 @@ vektis_import_def = {
     'fagbx25': (
         ('aanduiding_oud', 1),
         ('bestandcode', 2),
-        ('zorgverlenersoort', 2),
+        ('zorgverlenersoort', 2, True),
         ('praktijknummer', 5, True),
         ('praktijkadres_volgnummer', 2, True),
         ('straat', 24),
