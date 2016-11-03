@@ -7,7 +7,7 @@ import csv
 __author__ = 'cmesu'
 
 
-def convert_txt_csv(filename, **args):
+def convert_txt2csv(filename, **args):
     delimiter = ';'
     encoding = 'utf8'
     skiplines = 0
@@ -33,7 +33,7 @@ def convert_txt_csv(filename, **args):
 
 def init_source_to_sor_mappings(path):
     mappings = []
-    file = convert_txt_csv(path + 'NHG-Tabel 2-Proef.txt', skiplines=1, delimiter='\t', encoding='utf16')
+    file = convert_txt2csv(path + 'NHG-Tabel 2-Proef.txt', skiplines=1, delimiter='\t', encoding='utf16')
     source_file = CsvFile(file, delimiter=';', encoding='utf8')
     source_file.set_primary_key(['Code'])
     sor_mapping = SourceToSorMapping(source_file, 'nhg2_proef_hstage', auto_map=True)
