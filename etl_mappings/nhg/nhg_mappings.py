@@ -22,7 +22,6 @@ def init_source_to_sor_mappings(path):
         mappings.append(sor_mapping)
     return mappings
 
-
 def init_sor_to_dv_mappings(pipe):
     mappings = []
     return mappings

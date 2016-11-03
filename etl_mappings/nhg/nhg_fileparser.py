@@ -6,8 +6,6 @@ def parse_txt(filename, **args):
     delimiter = ';'
     encoding = 'utf8'
     skiplines = 0
-    file_in = None
-    file_out = None
     for k, v in args.items():
         if k == 'skiplines':
             skiplines = range(v)
