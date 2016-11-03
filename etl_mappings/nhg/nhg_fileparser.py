@@ -6,6 +6,8 @@ def parse_txt(filename, **args):
     delimiter = ';'
     encoding = 'utf8'
     skiplines = 0
+    file_in = None
+    file_out = None
     for k, v in args.items():
         if k == 'skiplines':
             skiplines = range(v)
@@ -21,13 +23,15 @@ def parse_txt(filename, **args):
             next(file_in)
         for line in file_in:
             file_out.write(str(line.replace(delimiter, ';')))
-    except:
-        print(Fore.RED, filename)
         file_in.close()
         file_out.close()
+    except:
+        print(Fore.RED, filename)
+    try:
+        file_out.close()
+        os.remove(file_out.name)
+    except:
         pass
-    file_in.close()
-    file_out.close()
     return file_out.name
 
 def parse_key(source_file):

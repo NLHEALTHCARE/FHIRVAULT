@@ -15,13 +15,11 @@ def init_source_to_sor_mappings(path):
     os.chdir(path)
     for textfile in glob.glob('*.txt'):
         decoded_file = parse_txt(path + textfile, skiplines=1, delimiter='\t', encoding='utf_16')
-        if decoded_file:
-            source_file = CsvFile(decoded_file, delimiter=';', encoding='utf8')
-        if source_file:
-            source_file.set_primary_key(parse_key(source_file))
-            target_tbl = parse_name(source_file)
-            sor_mapping = SourceToSorMapping(source_file, target_tbl, auto_map=True)
-            mappings.append(sor_mapping)
+        source_file = CsvFile(decoded_file, delimiter=';', encoding='utf8')
+        source_file.set_primary_key(parse_key(source_file))
+        target_tbl = parse_name(source_file)
+        sor_mapping = SourceToSorMapping(source_file, target_tbl, auto_map=True)
+        mappings.append(sor_mapping)
     return mappings
 
 
