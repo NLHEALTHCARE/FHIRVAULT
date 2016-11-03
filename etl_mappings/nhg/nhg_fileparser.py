@@ -1,6 +1,6 @@
 import os
 import re
-
+from colorama import Fore, Back, Style
 
 def parse_txt(filename, **args):
     delimiter = ';'
@@ -13,14 +13,19 @@ def parse_txt(filename, **args):
             delimiter = v
         elif k == 'encoding':
             encoding = v
-    file_in = open(filename, 'r', encoding=encoding)
-    file_in.close()
-    file_in = open(file_in.name, 'r', encoding=file_in.encoding)
-    file_out = open(file_in.name.replace(file_in.name[-4:], '.csv'), 'w', encoding='utf8')
-    for _ in skiplines:
-        next(file_in)
-    for line in file_in:
-        file_out.write(str(line.replace(delimiter, ';')))
+    try:
+        file_in = open(filename, 'r', encoding=encoding)
+        file_out = open(file_in.name.replace(file_in.name[-4:], '.csv'), 'w', encoding='utf8')
+        print(filename)
+        for _ in skiplines:
+            next(file_in)
+        for line in file_in:
+            file_out.write(str(line.replace(delimiter, ';')))
+    except:
+        print(Fore.RED, filename)
+        file_in.close()
+        file_out.close()
+        pass
     file_in.close()
     file_out.close()
     return file_out.name
