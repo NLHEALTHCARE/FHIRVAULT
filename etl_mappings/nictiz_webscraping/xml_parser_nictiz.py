@@ -85,7 +85,7 @@ class NictizCSVWriter:
 
             f_csv = csv.writer(f, headers, delimiter=';') # als de delimiter niet specifiek gedefinieerd wordt, wordt
             # als default een komma als delimiter gebruikt.
-            f_csv.writerows(headers)
+            f_csv.writerow(headers)
 
 
 def scrape_from_web(configs):

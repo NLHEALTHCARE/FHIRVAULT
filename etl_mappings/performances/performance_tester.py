@@ -6,14 +6,29 @@ from etl_mappings.performances.performance_mappings import execute_sql, execute_
 import timeit
 import time
 from functools import wraps
+import datetime
+
+
+# def timethis(func):
+#     @wraps(func)
+#     def wrapper(*args, **kwargs):
+#         start = time.perf_counter()
+#         r = func(*args, ** kwargs)
+#         end = time.perf_counter()  # http://stackoverflow.com/questions/25785243/understanding-time-perf-counter-and-time-process-time
+#         # print('[].{}: {}'.format(func.__module, func.__name__, end - start))
+#         print('{}: {}'.format(func.__name__, end - start))
+#         return r
+#     return wrapper
 
 
 def timethis(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        start = time.perf_counter()
+        start = datetime.datetime.now()
+        # print("start: ", start)
         r = func(*args, ** kwargs)
-        end = time.perf_counter()  # http://stackoverflow.com/questions/25785243/understanding-time-perf-counter-and-time-process-time
+        end = datetime.datetime.now()  # http://stackoverflow.com/questions/25785243/understanding-time-perf-counter-and-time-process-time
+        # print("end: ", end)
         # print('[].{}: {}'.format(func.__module, func.__name__, end - start))
         print('{}: {}'.format(func.__name__, end - start))
         return r
@@ -110,6 +125,15 @@ def select_like_gewoon(substring):
     result = execute_sql2(sql)
     return result
 
+
+@timethis
+def update_like_gewoon(substring):
+    sql = """UPDATE FROM sor_test.performtester_gewoon
+    SET waarde1 = 'bevatte een 4'
+    where waarde1 in (SELECT waarde1
+                      FROM sor_test.performtester_gewoon
+                      WHERE waarde1 LIKE '%{}%');""".format(substring)
+    execute_sql(sql)
 
 @timethis
 def delete_like_gewoon(substring):
@@ -220,6 +244,9 @@ def select_like_jsonb(substring):
     return result
 
 
+
+
+
 @timethis
 def delete_like_jsonb(substring):
     sql = """
@@ -287,55 +314,55 @@ def join_jsonb():
 
 """ test of een insert verandert bij steeds groter wordende tabellen:  (kijk of @timethis actief is of niet voor "insert_gewoon1mil()" en "insert_jsonb1mil()") """
 
-print("verandert de hoeveelheid benodigde tijd wanneer er vaker een insert gedaan wordt?")
-counter = 0
-while counter < 5:
-    init_performtester_gewoon_tabel()
-    # insert_gewoon100()
-    insert_gewoon1mil()
-    insert_gewoon1mil()
-    insert_gewoon1mil()
-    insert_gewoon1mil()
-    insert_gewoon1mil()
-    counter += 1
+# print("verandert de hoeveelheid benodigde tijd wanneer er vaker een insert gedaan wordt?")
+# counter = 0
+# while counter < 5:
+#     init_performtester_gewoon_tabel()
+#     # insert_gewoon100()
+#     insert_gewoon1mil()
+#     insert_gewoon1mil()
+#     insert_gewoon1mil()
+#     insert_gewoon1mil()
+#     insert_gewoon1mil()
+#     counter += 1
+#
+#
+# counter = 0
+# while counter < 5:
+#     init_performtester_jsonb_tabel()
+#     # insert_jsonb100()
+#     insert_jsonb1mil()
+#     insert_jsonb1mil()
+#     insert_jsonb1mil()
+#     insert_jsonb1mil()
+#     insert_jsonb1mil()
+#
+#     counter += 1
+#
 
-
-counter = 0
-while counter < 5:
-    init_performtester_jsonb_tabel()
-    # insert_jsonb100()
-    insert_jsonb1mil()
-    insert_jsonb1mil()
-    insert_jsonb1mil()
-    insert_jsonb1mil()
-    insert_jsonb1mil()
-
-    counter += 1
-
-
-""" testen of het beter is om 10x 1miljoen rijen te inserten of 1x 10 miljoen rijen (check of de @timethis actief zijn"""
-
-print("Testen of het beter is om 10x 1miljoen rijen te inserten of 1x 10 miljoen rijen: \n")
-
-init_performtester_gewoon_tabel()
-insert_gewoon10mil()
-
-init_performtester_gewoon_tabel()
-insert_gewoon10x1mil()
-
-init_performtester_jsonb_tabel()
-insert_jsonb10mil()
-
-init_performtester_jsonb_tabel()
-insert_jsonb10x1mil()
-
-
-""" select statements testen"""
-
-print("select statements testen:")
-print("")
-print("")
-
+# """ testen of het beter is om 10x 1miljoen rijen te inserten of 1x 10 miljoen rijen (check of de @timethis actief zijn"""
+#
+# print("Testen of het beter is om 10x 1miljoen rijen te inserten of 1x 10 miljoen rijen: \n")
+#
+# init_performtester_gewoon_tabel()
+# insert_gewoon10mil()
+#
+# init_performtester_gewoon_tabel()
+# insert_gewoon10x1mil()
+#
+# init_performtester_jsonb_tabel()
+# insert_jsonb10mil()
+#
+# init_performtester_jsonb_tabel()
+# insert_jsonb10x1mil()
+#
+#
+# """ select statements testen"""
+#
+# print("select statements testen:")
+# print("")
+# print("")
+#
 print("Gewone variant:")
 print("")
 
@@ -347,6 +374,7 @@ insert_gewoon1mil()
 waarde = select_gewoon_specwaarde1(999999)
 select_gewoon_results(waarde)
 result = select_like_gewoon('4')
+update_like_gewoon('4')
 delete_like_gewoon('4')
 
 print("")
@@ -360,22 +388,22 @@ waarde = select_jsonb_specwaarde1(999999)
 select_jsonb_results(waarde)
 result = select_like_jsonb('4')
 delete_like_jsonb('4')  # dit duurt exteem lang indien de tabel uit 10 miljoen rijen bestaat
-
-
-""" conversie naar een array   """
-
-print("")
-print("conversie naar een array\n")
-
-
-array_to_json100()
-array_to_json1mil()  # deze werkt maar duurt heel lang voor dit de resultaat tabel geladen is om te bekijken. Niet praktisch dus
-## array_to_json10mil() resulteert in: "psycopg2.OperationalError: array size exceeds the maximum allowed (1073741823)"
-
-
-""" testen van joinen"""
-
-print("")
-print("testen van joinen\n")
-join_gewoon()
-join_jsonb()
+#
+#
+# """ conversie naar een array   """
+#
+# print("")
+# print("conversie naar een array\n")
+#
+#
+# array_to_json100()
+# array_to_json1mil()  # deze werkt maar duurt heel lang voor dit de resultaat tabel geladen is om te bekijken. Niet praktisch dus
+# ## array_to_json10mil() resulteert in: "psycopg2.OperationalError: array size exceeds the maximum allowed (1073741823)"
+#
+#
+# """ testen van joinen"""
+#
+# print("")
+# print("testen van joinen\n")
+# join_gewoon()
+# join_jsonb()
