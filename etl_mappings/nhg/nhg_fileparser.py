@@ -18,7 +18,6 @@ def parse_txt(filename, **args):
     try:
         file_in = open(filename, 'r', encoding=encoding)
         file_out = open(file_in.name.replace(file_in.name[-4:], '.csv'), 'w', encoding='utf8')
-        print(filename)
         for _ in skiplines:
             next(file_in)
         for line in file_in:
@@ -27,11 +26,12 @@ def parse_txt(filename, **args):
         file_out.close()
     except:
         print(Fore.RED, filename)
-    try:
-        file_out.close()
-        os.remove(file_out.name)
-    except:
-        pass
+        try:
+            file_out.close()
+            os.remove(file_out.name)
+        except:
+            pass
+        file_out = None
     return file_out.name
 
 def parse_key(source_file):
