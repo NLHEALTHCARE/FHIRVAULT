@@ -5,7 +5,8 @@
 #  2016, SMART Health IT.
 
 
-from . import resource
+from domainmodel_fhir._samples import resource
+
 
 class DomainResource(resource.Resource):
     """ A resource with narrative, extensions, and contained resources.
@@ -55,5 +56,5 @@ class DomainResource(resource.Resource):
         return js
 
 
-from . import extension
-from . import narrative
+from domainmodel_fhir import extension
+from domainmodel_fhir import narrative

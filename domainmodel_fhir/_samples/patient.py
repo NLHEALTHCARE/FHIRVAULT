@@ -5,7 +5,8 @@
 #  2016, SMART Health IT.
 
 
-from . import domainresource
+from domainmodel_fhir._samples import domainresource
+
 
 class Patient(domainresource.DomainResource):
     """ Information about an individual or animal receiving health care services.
@@ -133,7 +134,7 @@ class Patient(domainresource.DomainResource):
         return js
 
 
-from . import backboneelement
+from domainmodel_fhir import backboneelement
 
 class PatientAnimal(backboneelement.BackboneElement):
     """ This patient is known to be an animal (non-human).
@@ -319,12 +320,12 @@ class PatientLink(backboneelement.BackboneElement):
         return js
 
 
-from . import address
-from . import attachment
-from . import codeableconcept
-from . import contactpoint
-from . import fhirdate
-from . import fhirreference
-from . import humanname
-from . import identifier
-from . import period
+from domainmodel_fhir import address
+from domainmodel_fhir import attachment
+from domainmodel_fhir import codeableconcept
+from domainmodel_fhir import contactpoint
+from domainmodel_fhir import fhirdate
+from domainmodel_fhir import fhirreference
+from domainmodel_fhir import humanname
+from domainmodel_fhir import identifier
+from domainmodel_fhir import period

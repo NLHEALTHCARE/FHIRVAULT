@@ -5,7 +5,8 @@
 #  2016, SMART Health IT.
 
 
-from . import fhirabstractresource
+from domainmodel_fhir._samples import fhirabstractresource
+
 
 class Resource(fhirabstractresource.FHIRAbstractResource):
     """ Base Resource.
@@ -55,4 +56,4 @@ class Resource(fhirabstractresource.FHIRAbstractResource):
         return js
 
 
-from . import meta
+from domainmodel_fhir import meta
