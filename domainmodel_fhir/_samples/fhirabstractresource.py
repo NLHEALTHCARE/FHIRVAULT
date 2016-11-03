@@ -4,7 +4,7 @@
 #  Base class for FHIR resources.
 #  2014, SMART Health IT.
 
-from . import fhirabstractbase
+from domainmodel_fhir._samples import fhirabstractbase
 
 
 class FHIRAbstractResource(fhirabstractbase.FHIRAbstractBase):
@@ -187,6 +187,5 @@ class FHIRAbstractResource(fhirabstractbase.FHIRAbstractBase):
         return fhirsearch.FHIRSearch(cls, struct)
 
 
-from . import fhirdate
-from . import fhirsearch
-from . import fhirelementfactory
+from domainmodel_fhir import fhirsearch
+from domainmodel_fhir import fhirelementfactory

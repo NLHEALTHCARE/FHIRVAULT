@@ -1,8 +1,9 @@
-import psycopg2
 import json
-from sqlalchemy import create_engine, text
-from domainmodel_fhir.test_config import test_configs, test_config
 
+import psycopg2
+from sqlalchemy import create_engine
+
+from domainmodel_fhir.test_config import test_configs
 
 "test om jsonfile naar een postgrestabel te krijgen"
 
