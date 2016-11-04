@@ -1,6 +1,6 @@
 import os
 import re
-from colorama import Fore, Back, Style
+
 
 def parse_txt(filename, **args):
     delimiter = ';'
@@ -29,7 +29,7 @@ def parse_txt(filename, **args):
         file_out.close()
         return file_out.name
     else:
-        print(Fore.RED, 'Onbekende file-encoding: '+filename)
+        print('Onbekende file-encoding: '+filename)
         return None
 
 def parse_key(source_file):
