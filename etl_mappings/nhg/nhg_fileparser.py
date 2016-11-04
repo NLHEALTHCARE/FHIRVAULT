@@ -16,7 +16,7 @@ def parse_txt(filename, **args):
         except:
             pass
     if file_in:
-        file_out = open(file_in.name.replace(file_in.name[-4:], '.csv'), 'w', encoding='utf8')
+        file_out = open(file_in.name.replace('\u00EB','e').replace(file_in.name[-4:], '.csv'), 'w', encoding='utf8')
         file_in.seek(0)
         header = next(file_in).lower()
         if 'nhg' in header:
