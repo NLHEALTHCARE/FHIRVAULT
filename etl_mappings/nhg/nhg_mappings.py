@@ -1,5 +1,6 @@
 import os
 import glob
+from colorama import Fore
 
 from domainmodels.role_domain import *
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping
@@ -14,12 +15,16 @@ def init_source_to_sor_mappings(path):
     mappings = []
     os.chdir(path)
     for textfile in glob.glob('*.txt'):
-        decoded_file = parse_txt(path + textfile, skiplines=1, delimiter='\t', encoding='utf_16')
-        source_file = CsvFile(decoded_file, delimiter=';', encoding='utf8')
-        source_file.set_primary_key(parse_key(source_file))
-        target_tbl = parse_name(source_file)
-        sor_mapping = SourceToSorMapping(source_file, target_tbl, auto_map=True)
-        mappings.append(sor_mapping)
+        try:
+            decoded_file = parse_txt(path + textfile, skiplines=1, delimiter='\t')
+            source_file = CsvFile(decoded_file, delimiter=';', encoding='utf8')
+            source_file.set_primary_key(parse_key(source_file))
+            print(Fore.WHITE, source_file.name, source_file.primary_keys())
+            target_tbl = parse_name(source_file)
+            sor_mapping = SourceToSorMapping(source_file, target_tbl, auto_map=True)
+            mappings.append(sor_mapping)
+        except:
+            print(Fore.RED, textfile)
     return mappings
 
 def init_sor_to_dv_mappings(pipe):
