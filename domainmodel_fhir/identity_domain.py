@@ -7,8 +7,6 @@ from pyelt.datalayers.dv import DvEntity, Sat, Link, HybridSat, HybridLink, Link
 #                                                                                                       #
 #########################################################################################################
 
-
-
 ##### GROUPS #####
 
 class Organization(DvEntity):
@@ -24,10 +22,10 @@ class Organization(DvEntity):
             secondary = 'secondary (If known)'
 
         use = Columns.TextColumn(default_value=Types.official)
-        org_type = Columns.FHIR.CodeableConceptColumn()
+#        org_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
         value = Columns.TextColumn()
-        period = Columns.FHIR.PeriodColumn()
+#        period = Columns.FHIR.PeriodColumn()
 
     #todo: afmaken mat andere sats
 
@@ -70,7 +68,7 @@ class Patient(DvEntity):
         id_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
         value = Columns.TextColumn()
-        period = Columns.FHIR.PeriodColumn()
+#        period = Columns.FHIR.PeriodColumn()
 
 
     class Name(HybridSat):
@@ -145,7 +143,7 @@ class Patient(DvEntity):
         state = Columns.TextColumn()
         postalcode = Columns.TextColumn()
         country = Columns.TextColumn()
-        period = Columns.FHIR.PeriodColumn()
+#        period = Columns.FHIR.PeriodColumn()
 
 
 
