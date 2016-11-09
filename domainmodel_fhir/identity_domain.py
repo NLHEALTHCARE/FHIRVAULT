@@ -1,27 +1,24 @@
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Sat, Link, HybridSat, HybridLink, LinkReference
 
-
 #########################################################################################################
 #                                                                                                       #
 # Domein model volgens FHIR-standaard (hl7.org.fhir). Iedere Entiteit heeft als type "DomainResource"   #
 #                                                                                                       #
 #########################################################################################################
 
-
 ##### INDIVIDUALS #####
 
-class GenderTypes:
-    """enum met codes"""
-    male = 'male'
-    female = 'female'
-    other = 'other'
-    unknown = 'unknown'
 
 # https://www.hl7.org/fhir/patient.html
-
 class Patient(DvEntity):
     class Default(Sat):
+        class GenderTypes:
+            """enum met codes"""
+            male = 'male'
+            female = 'female'
+            other = 'other'
+            unknown = 'unknown'
         active = Columns.BoolColumn()
         gender = Columns.TextColumn(default_value=GenderTypes.unknown)
         birthdate = Columns.DateColumn()
@@ -54,6 +51,7 @@ class Patient(DvEntity):
             old = 'old'
             maiden = 'maiden'
             none = ''
+
         use = Columns.TextColumn(default_value=Types.none)
         text = Columns.TextColumn()
         family = Columns.TextArrayColumn()
@@ -69,13 +67,13 @@ class Patient(DvEntity):
             temp = 'temp'
             old = 'old'
             mobile = 'mobile'
+
         class Systems():
             phone = 'phone'
             fax = 'fax'
             email = 'email'
             pager = 'pager'
             other = 'other'
-
         use = Columns.TextColumn()
         system = Columns.TextColumn()
         value = Columns.TextColumn()
@@ -94,7 +92,7 @@ class Patient(DvEntity):
             physical = 'physical'
             both = 'both'
 
-        use= Columns.TextColumn()
+        use = Columns.TextColumn()
         add_type = Columns.TextColumn()
         text = Columns.TextColumn()
         line = Columns.TextArrayColumn()
@@ -110,11 +108,9 @@ class Patient(DvEntity):
         preffered = Columns.BoolColumn()
 
     class Extra(Sat):
-        # contactpersoon
+        #contactpersoon
         contact = Columns.JsonColumn()
-        # mag weg
-        animal = Columns.JsonColumn()
-        photo = Columns.TextColumn()
+
 
 class PatientManagingOrganizationLink(Link):
     patient = LinkReference(Patient)
@@ -146,11 +142,52 @@ class Organization(DvEntity):
         value = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn()
 
-    #todo: afmaken mat andere sats
+    class Telecom(HybridSat):
+        class Types(HybridSat.Types):
+            work = 'work'
+            temp = 'temp'
+            old = 'old'
+            mobile = 'mobile'
+
+        class Systems():
+            phone = 'phone'
+            fax = 'fax'
+            email = 'email'
+            pager = 'pager'
+            other = 'other'
+
+        use = Columns.TextColumn()
+        system = Columns.TextColumn()
+        value = Columns.TextColumn()
+        rank = Columns.IntColumn()
+        period = Columns.FHIR.PeriodColumn()
+
+    class Address(HybridSat):
+        class Types(HybridSat.Types):
+            work = 'work'
+            temp = 'temp'
+            old = 'old'
+
+        class AddressTypes():
+            postal = 'postal'
+            physical = 'physical'
+            both = 'both'
+
+        use = Columns.TextColumn()
+        add_type = Columns.TextColumn()
+        text = Columns.TextColumn()
+        line = Columns.TextArrayColumn()
+        city = Columns.TextColumn()
+        district = Columns.TextColumn()
+        state = Columns.TextColumn()
+        postalcode = Columns.TextColumn()
+        country = Columns.TextColumn()
+        period = Columns.FHIR.PeriodColumn()
+
 
 class OrganizationOrganizationLink(Link):
     organization = LinkReference(Organization)
-    linked_to_organization = LinkReference(Organization)
+    part_of_organization = LinkReference(Organization)
 
 
 # https://www.hl7.org/fhir/practitioner.html
@@ -159,11 +196,8 @@ class Practitioner(DvEntity):
     pass
 
 
-
-
 # Organisatie: https://simplifier.net/Nictiz/bgz-Organization
 # Zorgaanbieder: https://simplifier.net/Nictiz/bgz-CareProvider
-#
 #
 # Zorgverzekeraar : https://www.hl7.org/fhir/coverage.html
 # Afdeling : https://simplifier.net/Nictiz/bgz-DepartmentType

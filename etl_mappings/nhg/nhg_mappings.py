@@ -13,7 +13,7 @@ __author__ = 'cmesu'
 def init_source_to_sor_mappings(path):
     mappings = []
     os.chdir(path)
-    for textfile in glob.glob('*.txt'):
+    for textfile in glob.glob('*.txt') or glob.glob('*.TXT'):
         try:
             decoded_file = parse_txt(path + textfile, skiplines=1, delimiter='\t')
             source_file = CsvFile(decoded_file, delimiter=';', encoding='utf8')
