@@ -40,6 +40,7 @@ class Patient(DvEntity):
         value = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn()
 
+    # https: // www.hl7.org / fhir / datatypes.html  # HumanName
     # https://simplifier.net/NL-BasicComponents/nl-core-humanname
     class Name(HybridSat):
         class Types(HybridSat.Types):
@@ -118,8 +119,127 @@ class PatientManagingOrganizationLink(Link):
 
 class PatientCareProviderLink(Link):
     patient = LinkReference(Patient)
-    practioner = LinkReference(Practitioner)
+    Practitioner = LinkReference(Practitioner)
     organization = LinkReference(Organization)
+
+
+# https://www.hl7.org/fhir/practitioner.html
+# https://simplifier.net/Nictiz/bgz-Practitioner
+class Practitioner(DvEntity):
+    class Default(Sat):
+        class GenderTypes:
+            """enum met codes"""
+            male = 'male'
+            female = 'female'
+            other = 'other'
+            unknown = 'unknown'
+        active = Columns.BoolColumn()
+        gender = Columns.TextColumn(default_value=GenderTypes.unknown)
+        birthdate = Columns.DateColumn()
+
+    class Identifier(HybridSat):
+        class Types(HybridSat.Types):
+            usual = 'usual'
+            official = 'official'
+            temp = 'temp'
+            secondary = 'secondary (If known)'
+        use = Columns.TextColumn(default_value=Types.official)
+        id_type = Columns.FHIR.CodeableConceptColumn()
+        system = Columns.TextColumn()
+        value = Columns.TextColumn()
+        period = Columns.FHIR.PeriodColumn()
+
+    class Name(Sat):
+        class Types(Sat.Types):
+            usual = 'usual'
+            official = 'official'
+            temp = 'temp'
+            nickname = 'nickname'
+            anonymous = 'anonymous'
+            old = 'old'
+            maiden = 'maiden'
+
+        use = Columns.TextColumn(default_value=Types.none)
+        text = Columns.TextColumn()
+        family = Columns.TextArrayColumn()
+        given = Columns.TextArrayColumn()
+        prefix = Columns.TextArrayColumn()
+        suffix = Columns.TextArrayColumn()
+        period = Columns.FHIR.PeriodColumn()
+
+    class Telecom(HybridSat):
+        class Types(HybridSat.Types):
+            home = 'home'
+            work = 'work'
+            temp = 'temp'
+            old = 'old'
+            mobile = 'mobile'
+
+        class Systems():
+            phone = 'phone'
+            fax = 'fax'
+            email = 'email'
+            pager = 'pager'
+            other = 'other'
+        use = Columns.TextColumn()
+        system = Columns.TextColumn()
+        value = Columns.TextColumn()
+        rank = Columns.IntColumn()
+        period = Columns.FHIR.PeriodColumn()
+
+    class Address(HybridSat):
+        class Types(HybridSat.Types):
+            home = 'home'
+            work = 'work'
+            temp = 'temp'
+            old = 'old'
+
+        class AddressTypes():
+            postal = 'postal'
+            physical = 'physical'
+            both = 'both'
+
+        use = Columns.TextColumn()
+        add_type = Columns.TextColumn()
+        text = Columns.TextColumn()
+        line = Columns.TextArrayColumn()
+        city = Columns.TextColumn()
+        district = Columns.TextColumn()
+        state = Columns.TextColumn()
+        postalcode = Columns.TextColumn()
+        country = Columns.TextColumn()
+        period = Columns.FHIR.PeriodColumn()
+
+    class Communication(Sat):
+        language = Columns.FHIR.CodeableConceptColumn()
+
+    class Extra(Sat):
+        qualification = Columns.JsonColumn()
+
+
+class PractitionerRole(DvEntity):
+    class Default(Sat):
+        role = Columns.FHIR.CodeableConceptColumn()
+        speciality = Columns.FHIR.CodeableConceptColumn()
+        period = Columns.FHIR.PeriodColumn
+
+
+class PractitionerRolePractitioner(Link):
+    PractitionerRole = LinkReference(PractitionerRole)
+    Practitioner = LinkReference(Practitioner)
+
+
+class PractitionerRoleManagingOrganization(Link):
+    PractitionerRole = LinkReference(PractitionerRole)
+    organization = LinkReference(Organization)
+
+
+class PractitionerRoleLocation(Link):
+    pass
+
+
+class PractitionerRoleHealthcareService(Link):
+    pass
 
 
 ##### GROUPS #####
@@ -190,13 +310,8 @@ class OrganizationOrganizationLink(Link):
     part_of_organization = LinkReference(Organization)
 
 
-# https://www.hl7.org/fhir/practitioner.html
-# https://simplifier.net/Nictiz/bgz-Practitioner
-class Practitioner(DvEntity):
-    pass
 
 
-# Organisatie: https://simplifier.net/Nictiz/bgz-Organization
 # Zorgaanbieder: https://simplifier.net/Nictiz/bgz-CareProvider
 #
 # Zorgverzekeraar : https://www.hl7.org/fhir/coverage.html
