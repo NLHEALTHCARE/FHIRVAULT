@@ -10,6 +10,7 @@ from domainmodel_fhir.identity_domain import Organization, Practitioner
 
 ##### PATIENT MANAGEMENT #####
 
+
 class EpisodeOfCare(DvEntity):
     class Default(Sat):
         status = Columns.TextColumn()
@@ -39,13 +40,13 @@ class EpisodeOfCare(DvEntity):
         status = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn
 
-    #careteam
-    class EpisodeOfCareOrganizationLink(Link):
-        episodeofcare = LinkReference(EpisodeOfCare)
-        organization = LinkReference(Organization)
-        practitioner = LinkReference(Practitioner)
+#careteam
+class EpisodeOfCareOrganizationLink(Link):
+    episodeofcare = LinkReference(EpisodeOfCare)
+    organization = LinkReference(Organization)
+    practitioner = LinkReference(Practitioner)
 
-        class Default(Sat):
-            role = Columns.FHIR.CodeableConceptColumn()
-            period = Columns.FHIR.PeriodColumn
+    class Default(Sat):
+        role = Columns.FHIR.CodeableConceptColumn()
+        period = Columns.FHIR.PeriodColumn
 
