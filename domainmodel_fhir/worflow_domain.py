@@ -1,6 +1,6 @@
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Sat, Link, HybridSat, HybridLink, LinkReference
-from domainmodel_fhir.identity_domain import Organization
+from domainmodel_fhir.identity_domain import Organization, Practitioner
 
 #########################################################################################################
 #                                                                                                       #
@@ -43,6 +43,7 @@ class EpisodeOfCare(DvEntity):
     class EpisodeOfCareOrganizationLink(Link):
         episodeofcare = LinkReference(EpisodeOfCare)
         organization = LinkReference(Organization)
+        practitioner = LinkReference(Practitioner)
 
         class Default(Sat):
             role = Columns.FHIR.CodeableConceptColumn()
