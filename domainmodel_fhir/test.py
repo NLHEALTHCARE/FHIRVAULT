@@ -1,4 +1,4 @@
-from domainmodel_fhir import identity_domain
+from domainmodel_fhir import identity_domain, worflow_domain
 from domainmodel_fhir.test_configs import test_configs
 from pyelt.pipeline import Pipeline
 
