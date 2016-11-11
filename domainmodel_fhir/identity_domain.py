@@ -112,7 +112,14 @@ class Patient(DvEntity):
         #contactpersoon
         contact = Columns.JsonColumn()
 
+class PatientManagingOrganizationLink(Link):
+    patient = LinkReference(Patient)
+    organization = LinkReference(Organization)
 
+class PatientCareProviderLink(Link):
+    patient = LinkReference(Patient)
+    practitioner = LinkReference(Practitioner)
+    organization = LinkReference(Organization)
 
 # https://www.hl7.org/fhir/practitioner.html
 # https://simplifier.net/Nictiz/bgz-Practitioner
@@ -208,12 +215,11 @@ class Practitioner(DvEntity):
         qualification = Columns.JsonColumn()
 
 
-
-
-
 class PractitionerOrganizationLink(Link):
     practitioner = LinkReference(Practitioner)
     organization = LinkReference(Organization)
+    # location = LinkReference(Location)
+    # healthcareServices = LinkReference(HealthcareServices)
 
     class Default(Sat):
         role = Columns.FHIR.CodeableConceptColumn()
@@ -284,31 +290,11 @@ class Organization(DvEntity):
         country = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn()
 
-
-##### LINKS #####
-
 class OrganizationOrganizationLink(Link):
     organization = LinkReference(Organization)
     part_of_organization = LinkReference(Organization)
 
-class PatientManagingOrganizationLink(Link):
-    patient = LinkReference(Patient)
-    organization = LinkReference(Organization)
 
-class PatientCareProviderLink(Link):
-    patient = LinkReference(Patient)
-    practitioner = LinkReference(Practitioner)
-    organization = LinkReference(Organization)
-
-#
-# class PractitionerRolePractitioner(Link):
-#     PractitionerRole = LinkReference(PractitionerRole)
-#     Practitioner = LinkReference(Practitioner)
-
-
-# class PractitionerRoleManagingOrganization(Link):
-#     PractitionerRole = LinkReference(PractitionerRole)
-#     organization = LinkReference(Organization)
 
 # Zorgaanbieder: https://simplifier.net/Nictiz/bgz-CareProvider
 #
