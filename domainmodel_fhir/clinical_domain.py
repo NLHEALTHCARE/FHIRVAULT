@@ -68,6 +68,63 @@ class Condition(DvEntity):
         notes = Columns.JsonColumn
 
 
+# CAREPROVISION
+class ReferralRequest(DvEntity):
+    class Default (Sat):
+        class StatusTypes():
+            draft = 'draft'
+            requested = 'requested'
+            active = 'active'
+            cancelled = 'cancelled'
+            accepted = 'accepted'
+            rejected = 'rejected'
+            completed = 'completed'
+
+        status = Columns.TextColumn()
+        date = Columns.DateTimeColumn()
+        type = Columns.FHIR.CodeableConceptColumn()
+        specialty = Columns.FHIR.CodeableConceptColumn()
+        priority = Columns.FHIR.CodeableConceptColumn()
+        dateSent = Columns.DateTimeColumn
+        reason = Columns.FHIR.CodeableConceptColumn()
+        description = Columns.TextColumn()
+        serviceRequested = Columns.FHIR.CodeableConceptColumn()
+        fulfillmentTime = Columns.FHIR.PeriodColumn()
+
+    class Identifier(HybridSat):
+        class Types(HybridSat.Types):
+            usual = 'usual'
+            official = 'official'
+            temp = 'temp'
+            secondary = 'secondary (If known)'
+        use = Columns.TextColumn(default_value=Types.official)
+        id_type = Columns.FHIR.CodeableConceptColumn()
+        system = Columns.TextColumn()
+        value = Columns.TextColumn()
+        period = Columns.FHIR.PeriodColumn()
+
+
+class ReferralRequestPatientLink(Link):
+    referralrequest = LinkReference(ReferralRequest)
+    patient = LinkReference(Patient)
+
+
+class ReferralRequestRequesterLink(Link):
+    referralrequest = LinkReference(ReferralRequest)
+    practitioner = LinkReference(Practitioner)
+    organization = LinkReference(Organization)
+
+
+class ReferralRequestRecipientLink(Link):
+    referralrequest = LinkReference(ReferralRequest)
+    practitioner = LinkReference(Practitioner)
+    organization = LinkReference(Organization)
+
+
+# class ReferralRequestEncounterLink(Link):
+#     referralrequest = LinkReference(ReferralRequest)
+#     encounter = LinkReference(Encounter)
+
 # class ConditionAssessmentLink(Link)
 #     condition = LinkReference(condition)
 #     clinicalimpression = LinkReference(ClinicalImpression)
