@@ -42,6 +42,7 @@ class Condition(DvEntity):
         clinicalStatus = Columns.TextColumn()
         verificationStatus = Columns.TextColumn()
         severity = Columns.FHIR.CodeableConceptColumn()
+
         # stage
         # summary
         # code
