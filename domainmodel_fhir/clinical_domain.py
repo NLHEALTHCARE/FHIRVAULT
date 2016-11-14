@@ -65,6 +65,7 @@ class Condition(DvEntity):
 
 
 # CAREPROVISION
+# https://www.hl7.org/fhir/referralrequest.html
 class ReferralRequest(DvEntity):
     class Default (Sat):
         class StatusTypes():
