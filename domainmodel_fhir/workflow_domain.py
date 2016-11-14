@@ -1,6 +1,6 @@
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Sat, Link, HybridSat, HybridLink, LinkReference
-from domainmodel_fhir.identity_domain import Organization, Practitioner
+from domainmodel_fhir.identity_domain import Organization, Practitioner, Patient
 
 #########################################################################################################
 #                                                                                                       #
@@ -10,7 +10,7 @@ from domainmodel_fhir.identity_domain import Organization, Practitioner
 
 ##### PATIENT MANAGEMENT #####
 
-
+# https://www.hl7.org/fhir/episodeofcare.html
 class EpisodeOfCare(DvEntity):
     class Default(Sat):
         status = Columns.TextColumn()
@@ -40,8 +40,23 @@ class EpisodeOfCare(DvEntity):
         status = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn
 
-#careteam
-class EpisodeOfCareOrganizationLink(Link):
+
+class EpisodeOfCarePatientLink(Link):
+    episodeofcare = LinkReference(EpisodeOfCare)
+    patient = LinkReference(Patient)
+
+
+class EpisodeOfCareManagingOrganizationLink(Link):
+    episodeofcare = LinkReference(EpisodeOfCare)
+    organization = LinkReference(Organization)
+
+
+class EpisodeOfCarePCareManagerLink(Link):
+    episodeofcare = LinkReference(EpisodeOfCare)
+    practitioner = LinkReference(Practitioner)
+
+
+class EpisodeOfCareCareTeamLink(Link):
     episodeofcare = LinkReference(EpisodeOfCare)
     organization = LinkReference(Organization)
     practitioner = LinkReference(Practitioner)
@@ -49,4 +64,17 @@ class EpisodeOfCareOrganizationLink(Link):
     class Default(Sat):
         role = Columns.FHIR.CodeableConceptColumn()
         period = Columns.FHIR.PeriodColumn
+
+# class EpisodeOfCareConditionLink(Link):
+#     episodeofcare = LinkReference(EpisodeOfCare)
+#     condition = LinkReference(Condition)
+#
+# class EpisodeOfCareReferralRequestLink(Link):
+#     episodeofcare = LinkReference(EpisodeOfCare)
+#     referralrequest = LinkReference(ReferralRequest)
+
+# Contact : https://www.hl7.org/fhir/encounter.html
+# Afspraak: https://www.hl7.org/fhir/appointment.html
+# Labresult: https://www.hl7.org/fhir/observation.html
+#
 

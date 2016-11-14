@@ -88,7 +88,7 @@ class Patient(DvEntity):
             temp = 'temp'
             old = 'old'
 
-        class AddressTypes():
+        class AddressTypes:
             postal = 'postal'
             physical = 'physical'
             both = 'both'
@@ -297,10 +297,5 @@ class PractitionerOrganizationLink(Link):
 # Afdeling : https://simplifier.net/Nictiz/bgz-DepartmentType
 #
 # Zorgactiviteit : https://www.hl7.org/fhir/episodeofcare.html
-# Traject / subtraject :  https://www.hl7.org/fhir/episodeofcare.html
-#
-# Contact : https://www.hl7.org/fhir/encounter.html
-# Afspraak: https://www.hl7.org/fhir/appointment.html
-# Labresult: https://www.hl7.org/fhir/observation.html
-#
+
 # https://simplifier.net/NL-BasicComponents/nl-core-humanname
