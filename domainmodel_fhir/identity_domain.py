@@ -207,6 +207,8 @@ class Practitioner(DvEntity):
 
 ##### GROUPS #####
 
+
+# https://www.hl7.org/fhir/organization.html
 class Organization(DvEntity):
     class Default(Sat):
         active = Columns.BoolColumn()

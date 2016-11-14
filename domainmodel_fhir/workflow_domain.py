@@ -42,6 +42,7 @@ class EpisodeOfCare(DvEntity):
         status = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn
 
+
 # https://www.hl7.org/fhir/encounter.html
 class Encounter(DvEntity):
     class Default:
@@ -154,7 +155,7 @@ class EpisodeOfCareCareTeamLink(Link):
 #     episodeofcare = LinkReference(EpisodeOfCare)
 #     referralrequest = LinkReference(ReferralRequest)
 
-# Contact : https://www.hl7.org/fhir/encounter.html
+
 # Afspraak: https://www.hl7.org/fhir/appointment.html
 # Labresult: https://www.hl7.org/fhir/observation.html
 #
