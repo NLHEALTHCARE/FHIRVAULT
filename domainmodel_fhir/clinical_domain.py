@@ -43,8 +43,6 @@ class Condition(DvEntity):
         verificationStatus = Columns.TextColumn()
         severity = Columns.FHIR.CodeableConceptColumn()
 
-        # stage
-        # summary
         # code
         # notes
 
@@ -60,6 +58,22 @@ class Condition(DvEntity):
         value = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn()
 
-    class Extra:
-        onset = Columns.JsonColumn
-        abatement = Columns.JsonColumn
+    class Bodysite(Sat):
+        bodysite = Columns.FHIR.CodeableConceptColumn()
+
+    class Extra(Sat):
+        onset = Columns.JsonColumn()
+        abatement = Columns.JsonColumn()
+        evidence = Columns.JsonColumn()
+        notes = Columns.JsonColumn
+
+
+# class ConditionAssessmentLink(Link)
+#     condition = LinkReference(condition)
+#     clinicalimpression = LinkReference(ClinicalImpression)
+#     diagnosticreport = LinkReference(DiagnosticReport)
+#
+#     class Default:
+#         summary = Columns.TextColumn
+
+
