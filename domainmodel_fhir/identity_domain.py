@@ -267,18 +267,22 @@ class Organization(DvEntity):
         country = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn()
 
+
 class OrganizationOrganizationLink(Link):
     organization = LinkReference(Organization)
     part_of_organization = LinkReference(Organization)
+
 
 class PatientManagingOrganizationLink(Link):
     patient = LinkReference(Patient)
     organization = LinkReference(Organization)
 
+
 class PatientCareProviderLink(Link):
     patient = LinkReference(Patient)
     practitioner = LinkReference(Practitioner)
     organization = LinkReference(Organization)
+
 
 class PractitionerOrganizationLink(Link):
     practitioner = LinkReference(Practitioner)

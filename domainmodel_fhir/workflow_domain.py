@@ -11,6 +11,7 @@ from domainmodel_fhir.clinical_domain import Condition, ReferralRequest
 
 ##### PATIENT MANAGEMENT #####
 
+
 # https://www.hl7.org/fhir/episodeofcare.html
 class EpisodeOfCare(DvEntity):
     class Default(Sat):
