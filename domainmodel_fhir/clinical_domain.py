@@ -1,7 +1,6 @@
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Sat, Link, HybridSat, HybridLink, LinkReference
 from domainmodel_fhir.identity_domain import Organization, Practitioner, Patient
-from domainmodel_fhir.workflow_domain import EpisodeOfCare
 
 #########################################################################################################
 #                                                                                                       #
@@ -42,9 +41,6 @@ class Condition(DvEntity):
         clinicalStatus = Columns.TextColumn()
         verificationStatus = Columns.TextColumn()
         severity = Columns.FHIR.CodeableConceptColumn()
-
-        # code
-        # notes
 
     class Identifier(HybridSat):
         class Types(HybridSat.Types):
@@ -120,10 +116,6 @@ class ReferralRequestRecipientLink(Link):
     practitioner = LinkReference(Practitioner)
     organization = LinkReference(Organization)
 
-
-# class ReferralRequestEncounterLink(Link):
-#     referralrequest = LinkReference(ReferralRequest)
-#     encounter = LinkReference(Encounter)
 
 # class ConditionAssessmentLink(Link)
 #     condition = LinkReference(condition)
