@@ -15,4 +15,43 @@ from domainmodel_fhir.workflow_domain import  EpisodeOfCare, Encounter
 
 # https://www.hl7.org/fhir/claim.html
 class Claim(DvEntity):
-    pass
+    class Default(Sat):
+
+        class ClaimTypes:
+            institutional = 'Institutional'
+            oral = 'Oral'
+            pharmacy = 'Pharmacy'
+            professional = 'Professional'
+            vision = 'Vision'
+
+
+    class Identifier(HybridSat):
+        class Types(HybridSat.Types):
+            usual = 'usual'
+            official = 'official'
+            temp = 'temp'
+            secondary = 'secondary (If known)'
+
+        use = Columns.TextColumn(default_value=Types.official)
+        id_type = Columns.FHIR.CodeableConceptColumn()
+        system = Columns.TextColumn()
+        value = Columns.TextColumn()
+        period = Columns.FHIR.PeriodColumn()
+
+    class Ruleset(Sat):
+        system = Columns.TextColumn()
+        version = Columns.TextColumn()
+        code = Columns.TextColumn()
+        display = Columns.TextColumn()
+        userselected = Columns.BoolColumn()
+
+    class originalRuleset(Sat):
+        system = Columns.TextColumn()
+        version = Columns.TextColumn()
+        code = Columns.TextColumn()
+        display = Columns.TextColumn()
+        userselected = Columns.BoolColumn()
+
+    type = Columns.TextColumn()
+    created = Columns.DateTimeColumn
+
