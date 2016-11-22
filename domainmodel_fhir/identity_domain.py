@@ -75,8 +75,8 @@ class Patient(DvEntity):
             email = 'email'
             pager = 'pager'
             other = 'other'
-        use = Columns.TextColumn()
-        system = Columns.TextColumn()
+        use = Columns.TextColumn(default_value=Types.home)
+        system = Columns.TextColumn(default_value=Systems.other)
         value = Columns.TextColumn()
         rank = Columns.IntColumn()
         period = Columns.FHIR.PeriodColumn()
@@ -93,8 +93,8 @@ class Patient(DvEntity):
             physical = 'physical'
             both = 'both'
 
-        use = Columns.TextColumn()
-        add_type = Columns.TextColumn()
+        use = Columns.TextColumn(default_value=Types.home)
+        add_type = Columns.TextColumn(default_value=AddressTypes.postal)
         text = Columns.TextColumn()
         line = Columns.TextArrayColumn()
         city = Columns.TextColumn()
@@ -229,6 +229,7 @@ class Organization(DvEntity):
 
     class Telecom(HybridSat):
         class Types(HybridSat.Types):
+            home = 'home'
             work = 'work'
             temp = 'temp'
             old = 'old'
@@ -240,7 +241,6 @@ class Organization(DvEntity):
             email = 'email'
             pager = 'pager'
             other = 'other'
-
         use = Columns.TextColumn()
         system = Columns.TextColumn()
         value = Columns.TextColumn()
@@ -249,6 +249,7 @@ class Organization(DvEntity):
 
     class Address(HybridSat):
         class Types(HybridSat.Types):
+            home = 'home'
             work = 'work'
             temp = 'temp'
             old = 'old'

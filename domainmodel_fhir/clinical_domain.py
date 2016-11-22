@@ -20,12 +20,14 @@ class Condition(DvEntity):
             symptom = 'Symptom'
             finding = 'Finding'
             diagnosis = 'Diagnosis'
+            unknown = 'Unknown'
 
         class ClinicalStatusTypes:
             active = 'Active'
             relapse = 'Relapse'
             remission = 'Remission'
             resolved = 'Resolved'
+            unknown = 'Unknown'
 
         class VerificationStatusTypes:
             provisional = 'Provisional'
@@ -37,9 +39,9 @@ class Condition(DvEntity):
 
         dateRecorded = Columns.DateColumn()
         code = Columns.FHIR.CodeableConceptColumn()
-        category = Columns.FHIR.CodeableConceptColumn()
-        clinicalStatus = Columns.TextColumn()
-        verificationStatus = Columns.TextColumn()
+        category = Columns.FHIR.CodeableConceptColumn(default_value=CategoryTypes.unknown)
+        clinicalStatus = Columns.TextColumn(default_value=ClinicalStatusTypes.unknown)
+        verificationStatus = Columns.TextColumn(default_value=VerificationStatusTypes.unknown)
         severity = Columns.FHIR.CodeableConceptColumn()
 
     class Identifier(HybridSat):
@@ -68,7 +70,7 @@ class Condition(DvEntity):
 # https://www.hl7.org/fhir/referralrequest.html
 class ReferralRequest(DvEntity):
     class Default (Sat):
-        class StatusTypes():
+        class StatusTypes:
             draft = 'draft'
             requested = 'requested'
             active = 'active'
@@ -76,8 +78,9 @@ class ReferralRequest(DvEntity):
             accepted = 'accepted'
             rejected = 'rejected'
             completed = 'completed'
+            unknown = 'Unknown'
 
-        status = Columns.TextColumn()
+        status = Columns.TextColumn(default_value=StatusTypes.unknown)
         date = Columns.DateTimeColumn()
         type = Columns.FHIR.CodeableConceptColumn()
         specialty = Columns.FHIR.CodeableConceptColumn()

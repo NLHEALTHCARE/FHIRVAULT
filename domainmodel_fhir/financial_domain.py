@@ -24,6 +24,22 @@ class Claim(DvEntity):
             professional = 'Professional'
             vision = 'Vision'
 
+        class Uses:
+            complete = 'Complete'
+            proposed = 'Proposed'
+            exploratory = 'exploratory'
+            other = 'Other'
+
+    ruleset = Columns.FHIR.CodingColumn()
+    originalruleset = Columns.FHIR.CodingColumn()
+    type = Columns.TextColumn()
+    created = Columns.DateTimeColumn()
+    use = Columns.TextColumn()
+    priority = Columns.TextColumn()
+    fundsReserve = Columns.TextColumn()
+    school = Columns.TextColumn()
+    accident = Columns.DateTimeColumn()
+    accidentType = Columns.FHIR.CodingColumn()
 
     class Identifier(HybridSat):
         class Types(HybridSat.Types):
@@ -38,10 +54,13 @@ class Claim(DvEntity):
         value = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn()
 
-    ruleset = Columns.FHIR.CodingColumn()
-    originalruleset = Columns.FHIR.CodingColumn()
-    type = Columns.TextColumn()
-    created = Columns.DateTimeColumn()
+
+#condition (coding)
+#exception (coding)
+
+# diagnosis (SAT?)
+# sequence
+# diagnosis
 
 
 #HYBRIDLINK?
@@ -51,10 +70,16 @@ class Claim(DvEntity):
 # organization	Reference(Organization)
 # person	Reference(Patient)
 
-#HYBRIDLINK? / LINKSAT?
-# COVERAGE
-# coverage	Reference(Coverage)
-# claimResponse	Reference(ClaimResponse)
+# LINKSAT?
+# coverage	Σ	0.*	BackboneElement
+# sequence	Σ	0.1	positiveInt
+# focal	Σ	0.1	boolean
+# coverage	Σ	0.1	Reference(Coverage)
+# businessArrangement	Σ	0.1	string
+# relationship	Σ	0.1	Coding
+# preAuthRef	Σ	0.*	string
+# claimResponse	Σ	0.1	Reference(ClaimResponse)
+# originalRuleset	Σ	0.1	Coding
 
 
 # LINKS CLAIM
