@@ -38,20 +38,35 @@ class Claim(DvEntity):
         value = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn()
 
-    class Ruleset(Sat):
-        system = Columns.TextColumn()
-        version = Columns.TextColumn()
-        code = Columns.TextColumn()
-        display = Columns.TextColumn()
-        userselected = Columns.BoolColumn()
-
-    class originalRuleset(Sat):
-        system = Columns.TextColumn()
-        version = Columns.TextColumn()
-        code = Columns.TextColumn()
-        display = Columns.TextColumn()
-        userselected = Columns.BoolColumn()
-
+    ruleset = Columns.FHIR.CodingColumn()
+    originalruleset = Columns.FHIR.CodingColumn()
     type = Columns.TextColumn()
-    created = Columns.DateTimeColumn
+    created = Columns.DateTimeColumn()
+
+
+#HYBRIDLINK?
+# PAYEE
+# Type
+# provider	Reference(Practitioner)
+# organization	Reference(Organization)
+# person	Reference(Patient)
+
+#HYBRIDLINK? / LINKSAT?
+# COVERAGE
+# coverage	Reference(Coverage)
+# claimResponse	Reference(ClaimResponse)
+
+
+# LINKS CLAIM
+# target	Reference(Organization)
+# provider	Reference(Practitioner)
+# organization	Reference(Organization)
+# enterer	Reference(Practitioner)
+# facility	Reference(Location)
+# prescription	Reference(MedicationOrder|VisionPrescription)
+# originalPrescription	Reference(MedicationOrder)
+# referral	Reference(ReferralRequest)
+# patient	Reference(Patient)
+# provider	Reference(Practitioner)
+
 
