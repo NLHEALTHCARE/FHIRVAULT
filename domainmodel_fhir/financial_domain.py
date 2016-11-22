@@ -57,6 +57,57 @@ class Claim(DvEntity):
 
 #condition (coding)
 #exception (coding)
+#interventionException (coding)
+#additionalMaterials (coding)
+
+# item	BackboneElement
+# sequence	positiveInt
+# type	Coding
+# provider	Reference(Practitioner)
+# diagnosisLinkId	positiveInt
+# service	Coding
+# serviceDate	date
+# quantity	SimpleQuantity
+# unitPrice	Money
+# factor	decimal
+# points	decimal
+# net	Money
+# udi	Coding
+# bodySite	Coding
+# subSite	Coding
+# modifier	Coding
+    # detail	BackboneElement
+    # sequence	positiveInt
+    # type	Coding
+    # service	Coding
+    # quantity	SimpleQuantity
+    # unitPrice	Money
+    # factor	decimal
+    # points	decimal
+    # net	Money
+    # udi	Coding
+        # subDetail	BackboneElement
+        # sequence	positiveInt
+        # type	Coding
+        # service	Coding
+        # quantity	SimpleQuantity
+        # unitPrice	Money
+        # factor	decimal
+        # points	decimal
+        # net	Money
+        # udi	Coding
+    # prosthesis	BackboneElement
+    # initial	boolean
+    # priorDate	date
+    # priorMaterial	Coding
+# missingTeeth	BackboneElement
+# tooth	Coding
+# reason	Coding
+# extractionDate	date
+
+
+
+
 
 # diagnosis (SAT?)
 # sequence
