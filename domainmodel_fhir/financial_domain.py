@@ -46,7 +46,7 @@ class Claim(DvEntity):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
-            secondary = 'secondary (If known)'
+            secondary = 'secondary'
 
         use = Columns.TextColumn(default_value=Types.official)
         id_type = Columns.FHIR.CodeableConceptColumn()
@@ -106,9 +106,6 @@ class Claim(DvEntity):
 # extractionDate	date
 
 
-
-
-
 # diagnosis (SAT?)
 # sequence
 # diagnosis
@@ -133,16 +130,48 @@ class Claim(DvEntity):
 # originalRuleset	Σ	0.1	Coding
 
 
-# LINKS CLAIM
-# target	Reference(Organization)
-# provider	Reference(Practitioner)
-# organization	Reference(Organization)
-# enterer	Reference(Practitioner)
-# facility	Reference(Location)
+# LINKS
+class ClaimTargetOrganizationLink(Link):
+    claim = LinkReference(Claim)
+    organization = LinkReference(Organization)
+
+
+class ClaimProviderLink(Link):
+    claim = LinkReference(Claim)
+    practitioner = LinkReference(Practitioner)
+
+
+class ClaimOrganizationLink(Link):
+    claim = LinkReference(Claim)
+    organization = LinkReference(Organization)
+
+
+class ClaimEntererLink(Link):
+    claim = LinkReference(Claim)
+    practitioner = LinkReference(Practitioner)
+
+
+class ClaimReferralRequestLink(Link):
+    claim = LinkReference(Claim)
+    referralrequest = LinkReference(ReferralRequest)
+
+
+class ClaimPatientLink(Link):
+    claim = LinkReference(Claim)
+    patient = LinkReference(Patient)
+
+
+class ClaimProviderLink(Link):
+    claim = LinkReference(Claim)
+    practitioner = LinkReference(Practitioner)
+
+
+# class ClaimFacilityLink(Link):
+#     claim = LinkReference(Claim)
+#     location = LinkReference(Location)
+
 # prescription	Reference(MedicationOrder|VisionPrescription)
 # originalPrescription	Reference(MedicationOrder)
-# referral	Reference(ReferralRequest)
-# patient	Reference(Patient)
-# provider	Reference(Practitioner)
+
 
 

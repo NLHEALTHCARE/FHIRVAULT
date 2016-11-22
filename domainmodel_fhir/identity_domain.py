@@ -33,7 +33,7 @@ class Patient(DvEntity):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
-            secondary = 'secondary (If known)'
+            secondary = 'secondary'
         use = Columns.TextColumn(default_value=Types.official)
         id_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
@@ -131,7 +131,7 @@ class Practitioner(DvEntity):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
-            secondary = 'secondary (If known)'
+            secondary = 'secondary'
         use = Columns.TextColumn(default_value=Types.official)
         id_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
@@ -219,7 +219,7 @@ class Organization(DvEntity):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
-            secondary = 'secondary (If known)'
+            secondary = 'secondary'
 
         use = Columns.TextColumn(default_value=Types.official)
         org_type = Columns.FHIR.CodeableConceptColumn()

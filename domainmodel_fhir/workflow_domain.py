@@ -24,7 +24,8 @@ class EpisodeOfCare(DvEntity):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
-            secondary = 'secondary (If known)'
+            secondary = 'secondary'
+            
         use = Columns.TextColumn(default_value=Types.official)
         id_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
@@ -60,7 +61,7 @@ class Encounter(DvEntity):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
-            secondary = 'secondary (If known)'
+            secondary = 'secondary'
         use = Columns.TextColumn(default_value=Types.official)
         id_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
@@ -71,7 +72,7 @@ class Encounter(DvEntity):
         class Types(HybridSat.Types):
             planned = 'planned'
             arrived = 'arrived'
-            in_progress = 'in-progress'
+            in_progress = 'in_progress'
             onleave = 'onleave'
             finished = 'finished'
             cancelled = 'cancelled'
