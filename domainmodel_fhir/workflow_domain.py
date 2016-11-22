@@ -48,7 +48,7 @@ class Encounter(DvEntity):
     class Default:
         status = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn()
-        Encounterclass = Columns.TextColumn()
+        encounter_class = Columns.TextColumn()
         type = Columns.FHIR.CodeableConceptColumn()
         priority = Columns.FHIR.CodeableConceptColumn()
         period = Columns.FHIR.CodeableConceptColumn()
