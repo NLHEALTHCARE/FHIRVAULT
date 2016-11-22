@@ -30,16 +30,16 @@ class Claim(DvEntity):
             exploratory = 'exploratory'
             other = 'Other'
 
-    ruleset = Columns.FHIR.CodingColumn()
-    originalruleset = Columns.FHIR.CodingColumn()
-    type = Columns.TextColumn()
-    created = Columns.DateTimeColumn()
-    use = Columns.TextColumn()
-    priority = Columns.TextColumn()
-    fundsReserve = Columns.TextColumn()
-    school = Columns.TextColumn()
-    accident = Columns.DateTimeColumn()
-    accidentType = Columns.FHIR.CodingColumn()
+        ruleset = Columns.FHIR.CodingColumn()
+        originalruleset = Columns.FHIR.CodingColumn()
+        type = Columns.TextColumn()
+        created = Columns.DateTimeColumn()
+        use = Columns.TextColumn()
+        priority = Columns.TextColumn()
+        fundsReserve = Columns.TextColumn()
+        school = Columns.TextColumn()
+        accident = Columns.DateTimeColumn()
+        accidentType = Columns.FHIR.CodingColumn()
 
     class Identifier(HybridSat):
         class Types(HybridSat.Types):
