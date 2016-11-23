@@ -55,12 +55,13 @@ class Claim(DvEntity):
         period = Columns.FHIR.PeriodColumn()
 
 
-#condition (coding)
-#exception (coding)
-#interventionException (coding)
-#additionalMaterials (coding)
+##CODING elementen (0 *)
+# condition (coding)
+# exception (coding)
+# interventionException (coding)
+# additionalMaterials (coding)
 
-# item	BackboneElement
+## ITEM (0 *)
 # sequence	positiveInt
 # type	Coding
 # provider	Reference(Practitioner)
@@ -76,7 +77,7 @@ class Claim(DvEntity):
 # bodySite	Coding
 # subSite	Coding
 # modifier	Coding
-    # detail	BackboneElement
+    ## DETAIL (0 *)
     # sequence	positiveInt
     # type	Coding
     # service	Coding
@@ -86,7 +87,7 @@ class Claim(DvEntity):
     # points	decimal
     # net	Money
     # udi	Coding
-        # subDetail	BackboneElement
+        # SUBDETAIL (0 *)
         # sequence	positiveInt
         # type	Coding
         # service	Coding
@@ -105,29 +106,25 @@ class Claim(DvEntity):
 # reason	Coding
 # extractionDate	date
 
-
-# diagnosis (SAT?)
+# diagnosis
 # sequence
 # diagnosis
 
-
-#HYBRIDLINK?
-# PAYEE
+## PAYEE
 # Type
 # provider	Reference(Practitioner)
 # organization	Reference(Organization)
 # person	Reference(Patient)
 
-# LINKSAT?
-# coverage	Σ	0.*	BackboneElement
-# sequence	Σ	0.1	positiveInt
-# focal	Σ	0.1	boolean
-# coverage	Σ	0.1	Reference(Coverage)
-# businessArrangement	Σ	0.1	string
-# relationship	Σ	0.1	Coding
-# preAuthRef	Σ	0.*	string
-# claimResponse	Σ	0.1	Reference(ClaimResponse)
-# originalRuleset	Σ	0.1	Coding
+## COVERAGE
+# sequence
+# focal
+# coverage
+# businessArrangement
+# relationship
+# preAuthRef
+# claimResponse
+# originalRuleset
 
 
 # LINKS
