@@ -110,12 +110,6 @@ class Claim(DvEntity):
 # sequence
 # diagnosis
 
-## PAYEE
-# Type
-# provider	Reference(Practitioner)
-# organization	Reference(Organization)
-# person	Reference(Patient)
-
 ## COVERAGE
 # sequence
 # focal
@@ -128,6 +122,21 @@ class Claim(DvEntity):
 
 
 # LINKS
+class ClaimPayeeLink(Link):
+    claim = LinkReference(Claim)
+    practitioner = LinkReference(Practitioner)
+    organization = LinkReference(Organization)
+    patient = LinkReference(Patient)
+
+    class Default(Sat):
+
+        class Types(HybridLink.Types):
+            subscriber = 'subscriber'
+            provider = 'provider'
+            other = 'other'
+        type = Columns.TextColumn(default_value=Types.other)
+
+
 class ClaimTargetOrganizationLink(Link):
     claim = LinkReference(Claim)
     organization = LinkReference(Organization)
@@ -166,7 +175,6 @@ class ClaimProviderLink(Link):
 # class ClaimFacilityLink(Link):
 #     claim = LinkReference(Claim)
 #     location = LinkReference(Location)
-
 # prescription	Reference(MedicationOrder|VisionPrescription)
 # originalPrescription	Reference(MedicationOrder)
 
