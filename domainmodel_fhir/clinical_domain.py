@@ -13,6 +13,7 @@ from domainmodel_fhir.identity_domain import Organization, Practitioner, Patient
 
 # https://www.hl7.org/fhir/condition.html
 class Condition(DvEntity):
+
     class Default(Sat):
 
         class CategoryTypes:
@@ -45,6 +46,7 @@ class Condition(DvEntity):
         severity = Columns.FHIR.CodeableConceptColumn()
 
     class Identifier(HybridSat):
+
         class Types(HybridSat.Types):
             usual = 'usual'
             official = 'official'
@@ -69,7 +71,9 @@ class Condition(DvEntity):
 # CAREPROVISION
 # https://www.hl7.org/fhir/referralrequest.html
 class ReferralRequest(DvEntity):
+
     class Default (Sat):
+
         class StatusTypes:
             draft = 'draft'
             requested = 'requested'
@@ -92,11 +96,13 @@ class ReferralRequest(DvEntity):
         fulfillmentTime = Columns.FHIR.PeriodColumn()
 
     class Identifier(HybridSat):
+
         class Types(HybridSat.Types):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
             secondary = 'secondary'
+
         use = Columns.TextColumn(default_value=Types.official)
         id_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
@@ -105,17 +111,20 @@ class ReferralRequest(DvEntity):
 
 
 class ReferralRequestPatientLink(Link):
+
     referralrequest = LinkReference(ReferralRequest)
     patient = LinkReference(Patient)
 
 
 class ReferralRequestRequesterLink(Link):
+
     referralrequest = LinkReference(ReferralRequest)
     practitioner = LinkReference(Practitioner)
     organization = LinkReference(Organization)
 
 
 class ReferralRequestRecipientLink(Link):
+
     referralrequest = LinkReference(ReferralRequest)
     practitioner = LinkReference(Practitioner)
     organization = LinkReference(Organization)

@@ -12,13 +12,16 @@ from pyelt.datalayers.dv import DvEntity, Sat, Link, HybridSat, HybridLink, Link
 
 # https://www.hl7.org/fhir/patient.html
 class Patient(DvEntity):
+
     class Default(Sat):
+
         class GenderTypes:
             """enum met codes"""
             male = 'male'
             female = 'female'
             other = 'other'
             unknown = 'unknown'
+
         active = Columns.BoolColumn()
         gender = Columns.TextColumn(default_value=GenderTypes.unknown)
         birthdate = Columns.DateColumn()
@@ -29,11 +32,13 @@ class Patient(DvEntity):
         multiple_birth_integer = Columns.IntColumn()
 
     class Identifier(HybridSat):
+
         class Types(HybridSat.Types):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
             secondary = 'secondary'
+
         use = Columns.TextColumn(default_value=Types.official)
         id_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
@@ -43,6 +48,7 @@ class Patient(DvEntity):
     # https: // www.hl7.org / fhir / datatypes.html  # HumanName
     # https://simplifier.net/NL-BasicComponents/nl-core-humanname
     class Name(HybridSat):
+
         class Types(HybridSat.Types):
             usual = 'usual'
             official = 'official'
@@ -62,6 +68,7 @@ class Patient(DvEntity):
         period = Columns.FHIR.PeriodColumn()
 
     class Telecom(HybridSat):
+
         class Types(HybridSat.Types):
             home = 'home'
             work = 'work'
@@ -75,6 +82,7 @@ class Patient(DvEntity):
             email = 'email'
             pager = 'pager'
             other = 'other'
+
         use = Columns.TextColumn(default_value=Types.home)
         system = Columns.TextColumn(default_value=Systems.other)
         value = Columns.TextColumn()
@@ -82,6 +90,7 @@ class Patient(DvEntity):
         period = Columns.FHIR.PeriodColumn()
 
     class Address(HybridSat):
+
         class Types(HybridSat.Types):
             home = 'home'
             work = 'work'
@@ -116,22 +125,26 @@ class Patient(DvEntity):
 # https://simplifier.net/Nictiz/bgz-Practitioner
 class Practitioner(DvEntity):
     class Default(Sat):
+
         class GenderTypes:
             """enum met codes"""
             male = 'male'
             female = 'female'
             other = 'other'
             unknown = 'unknown'
+
         active = Columns.BoolColumn()
         gender = Columns.TextColumn(default_value=GenderTypes.unknown)
         birthdate = Columns.DateColumn()
 
     class Identifier(HybridSat):
+
         class Types(HybridSat.Types):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
             secondary = 'secondary'
+
         use = Columns.TextColumn(default_value=Types.official)
         id_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
@@ -139,7 +152,8 @@ class Practitioner(DvEntity):
         period = Columns.FHIR.PeriodColumn()
 
     class Name(Sat):
-        class Types():
+
+        class Types:
             usual = 'usual'
             official = 'official'
             temp = 'temp'
@@ -157,6 +171,7 @@ class Practitioner(DvEntity):
         period = Columns.FHIR.PeriodColumn()
 
     class Telecom(HybridSat):
+
         class Types(HybridSat.Types):
             home = 'home'
             work = 'work'
@@ -164,12 +179,13 @@ class Practitioner(DvEntity):
             old = 'old'
             mobile = 'mobile'
 
-        class Systems():
+        class Systems:
             phone = 'phone'
             fax = 'fax'
             email = 'email'
             pager = 'pager'
             other = 'other'
+
         use = Columns.TextColumn()
         system = Columns.TextColumn()
         value = Columns.TextColumn()
@@ -177,13 +193,14 @@ class Practitioner(DvEntity):
         period = Columns.FHIR.PeriodColumn()
 
     class Address(HybridSat):
+
         class Types(HybridSat.Types):
             home = 'home'
             work = 'work'
             temp = 'temp'
             old = 'old'
 
-        class AddressTypes():
+        class AddressTypes:
             postal = 'postal'
             physical = 'physical'
             both = 'both'
@@ -210,6 +227,7 @@ class Practitioner(DvEntity):
 
 # https://www.hl7.org/fhir/organization.html
 class Organization(DvEntity):
+
     class Default(Sat):
         active = Columns.BoolColumn()
         name = Columns.TextColumn()
@@ -228,6 +246,7 @@ class Organization(DvEntity):
         period = Columns.FHIR.PeriodColumn()
 
     class Telecom(HybridSat):
+
         class Types(HybridSat.Types):
             home = 'home'
             work = 'work'
@@ -235,7 +254,7 @@ class Organization(DvEntity):
             old = 'old'
             mobile = 'mobile'
 
-        class Systems():
+        class Systems:
             phone = 'phone'
             fax = 'fax'
             email = 'email'
@@ -248,13 +267,14 @@ class Organization(DvEntity):
         period = Columns.FHIR.PeriodColumn()
 
     class Address(HybridSat):
+
         class Types(HybridSat.Types):
             home = 'home'
             work = 'work'
             temp = 'temp'
             old = 'old'
 
-        class AddressTypes():
+        class AddressTypes:
             postal = 'postal'
             physical = 'physical'
             both = 'both'
@@ -272,28 +292,33 @@ class Organization(DvEntity):
 
 
 class OrganizationOrganizationLink(Link):
+
     organization = LinkReference(Organization)
     part_of_organization = LinkReference(Organization)
 
 
 class PatientManagingOrganizationLink(Link):
+
     patient = LinkReference(Patient)
     organization = LinkReference(Organization)
 
 
 class PatientCareProviderLink(Link):
+
     patient = LinkReference(Patient)
     practitioner = LinkReference(Practitioner)
     organization = LinkReference(Organization)
 
 
 class PractitionerOrganizationLink(Link):
+
     practitioner = LinkReference(Practitioner)
     organization = LinkReference(Organization)
     # location = LinkReference(Location)
     # healthcareServices = LinkReference(HealthcareServices)
 
     class Default(Sat):
+
         role = Columns.FHIR.CodeableConceptColumn()
         speciality = Columns.FHIR.CodeableConceptColumn()
         period = Columns.FHIR.PeriodColumn

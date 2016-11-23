@@ -15,6 +15,7 @@ from domainmodel_fhir.workflow_domain import  EpisodeOfCare, Encounter
 
 # https://www.hl7.org/fhir/claim.html
 class Claim(DvEntity):
+
     class Default(Sat):
 
         class ClaimTypes:
@@ -42,6 +43,7 @@ class Claim(DvEntity):
         accidentType = Columns.FHIR.CodingColumn()
 
     class Identifier(HybridSat):
+
         class Types(HybridSat.Types):
             usual = 'usual'
             official = 'official'
@@ -123,6 +125,7 @@ class Claim(DvEntity):
 
 # LINKS
 class ClaimPayeeLink(Link):
+
     claim = LinkReference(Claim)
     practitioner = LinkReference(Practitioner)
     organization = LinkReference(Organization)
@@ -138,36 +141,43 @@ class ClaimPayeeLink(Link):
 
 
 class ClaimTargetOrganizationLink(Link):
+
     claim = LinkReference(Claim)
     organization = LinkReference(Organization)
 
 
 class ClaimProviderLink(Link):
+
     claim = LinkReference(Claim)
     practitioner = LinkReference(Practitioner)
 
 
 class ClaimOrganizationLink(Link):
+
     claim = LinkReference(Claim)
     organization = LinkReference(Organization)
 
 
 class ClaimEntererLink(Link):
+
     claim = LinkReference(Claim)
     practitioner = LinkReference(Practitioner)
 
 
 class ClaimReferralRequestLink(Link):
+
     claim = LinkReference(Claim)
     referralrequest = LinkReference(ReferralRequest)
 
 
 class ClaimPatientLink(Link):
+
     claim = LinkReference(Claim)
     patient = LinkReference(Patient)
 
 
 class ClaimProviderLink(Link):
+
     claim = LinkReference(Claim)
     practitioner = LinkReference(Practitioner)
 
