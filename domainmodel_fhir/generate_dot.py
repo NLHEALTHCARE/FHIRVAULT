@@ -43,9 +43,9 @@ for row in result:
 
 
 graph = """graph fhir {\n\toverlap=false;\n\tsplines=true;
-\n\tnode [shape=box fontsize=12 fontname="arial" fontcolor=black style=filled fillcolor=lightblue];\n\t\t"""+hubs+"""
-\n\tnode [shape=box fontsize=10 fontname="arial" fontcolor=black style=filled fillcolor="#ff9900"];\n\t\t"""+links+"""
-\n\tedge [arrowhead=none color="#ff9900"];\n"""+joins+"""\n}
+\n\tnode [shape=box fontsize=12 fontname="arial" fontcolor=black style=filled fillcolor=lightblue];\n\t\t"""+(hubs or'')+"""
+\n\tnode [shape=box fontsize=10 fontname="arial" fontcolor=black style=filled fillcolor="#ff9900"];\n\t\t"""+(links or'')+"""
+\n\tedge [arrowhead=none color="#ff9900"];\n"""+(joins or '')+"""}
 """
 
 graphfile = open('fhir_datavault.gv', "w")
