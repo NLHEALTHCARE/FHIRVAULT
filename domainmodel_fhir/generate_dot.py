@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
+from domainmodel_fhir.test_configs import test_configs
 
-engine = create_engine("postgresql://costiaan:taichi78@127.0.0.1:5432/fhir", echo=True)
+engine = create_engine(test_configs['conn_dwh'])
 
 result = engine.execute("""
         SELECT table_name
