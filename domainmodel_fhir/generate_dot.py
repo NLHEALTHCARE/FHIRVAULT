@@ -39,7 +39,7 @@ result = engine.execute("""
 
 joins = ""
 for row in result:
-    joins += """\t\t"""+row[0]+""" -- """+row[1][3:]+"\n"
+    joins += """\t\t"""+row[0]+""" -- """+row[1][3:].replace('part_of_', '')+"\n"
 
 
 graph = """graph fhir {\n\toverlap=false;\n\tsplines=true;
