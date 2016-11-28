@@ -1,0 +1,67 @@
+graph fhir {
+	overlap=false;
+	splines=true;
+
+	node [shape=box fontsize=12 fontname="arial" fontcolor=black style=filled fillcolor=lightblue];
+		claim_hub; condition_hub; encounter_hub; episodeofcare_hub; organization_hub; patient_hub; practitioner_hub; referralrequest_hub; 
+
+	node [shape=box fontsize=10 fontname="arial" fontcolor=black style=filled fillcolor="#ff9900"];
+		claim_enterer_link; claim_organization_link; claim_patient_link; claim_payee_link; claim_provider_link; claim_referral_request_link; claim_target_organization_link; encounter_encounter_link; encounter_episode_of_care_link; encounter_indication_link; encounter_participant_link; encounter_patient_link; encounter_referral_request_link; episode_of_care_care_team_link; episode_of_care_managing_organization_link; episode_of_care_p_care_manager_link; episode_of_care_patient_link; organization_organization_link; patient_care_provider_link; patient_managing_organization_link; practitioner_organization_link; referral_request_patient_link; referral_request_recipient_link; referral_request_requester_link; 
+
+	edge [arrowhead=none color="#ff9900"];
+		claim_enterer_link -- claim_hub
+		claim_enterer_link -- practitioner_hub
+		claim_organization_link -- organization_hub
+		claim_organization_link -- claim_hub
+		claim_patient_link -- claim_hub
+		claim_patient_link -- patient_hub
+		claim_payee_link -- patient_hub
+		claim_payee_link -- practitioner_hub
+		claim_payee_link -- claim_hub
+		claim_payee_link -- organization_hub
+		claim_provider_link -- practitioner_hub
+		claim_provider_link -- claim_hub
+		claim_referral_request_link -- referralrequest_hub
+		claim_referral_request_link -- claim_hub
+		claim_target_organization_link -- claim_hub
+		claim_target_organization_link -- organization_hub
+		encounter_encounter_link -- encounter_hub
+		encounter_encounter_link -- part_of_encounter_hub
+		encounter_episode_of_care_link -- episodeofcare_hub
+		encounter_episode_of_care_link -- encounter_hub
+		encounter_indication_link -- encounter_hub
+		encounter_indication_link -- condition_hub
+		encounter_participant_link -- practitioner_hub
+		encounter_participant_link -- encounter_hub
+		encounter_patient_link -- patient_hub
+		encounter_patient_link -- encounter_hub
+		encounter_referral_request_link -- referralrequest_hub
+		encounter_referral_request_link -- encounter_hub
+		episode_of_care_care_team_link -- practitioner_hub
+		episode_of_care_care_team_link -- organization_hub
+		episode_of_care_care_team_link -- episodeofcare_hub
+		episode_of_care_managing_organization_link -- episodeofcare_hub
+		episode_of_care_managing_organization_link -- organization_hub
+		episode_of_care_p_care_manager_link -- practitioner_hub
+		episode_of_care_p_care_manager_link -- episodeofcare_hub
+		episode_of_care_patient_link -- patient_hub
+		episode_of_care_patient_link -- episodeofcare_hub
+		organization_organization_link -- part_of_organization_organization_hub
+		organization_organization_link -- organization_hub
+		patient_care_provider_link -- practitioner_hub
+		patient_care_provider_link -- patient_hub
+		patient_care_provider_link -- organization_hub
+		patient_managing_organization_link -- patient_hub
+		patient_managing_organization_link -- organization_hub
+		practitioner_organization_link -- organization_hub
+		practitioner_organization_link -- practitioner_hub
+		referral_request_patient_link -- patient_hub
+		referral_request_patient_link -- referralrequest_hub
+		referral_request_recipient_link -- organization_hub
+		referral_request_recipient_link -- referralrequest_hub
+		referral_request_recipient_link -- practitioner_hub
+		referral_request_requester_link -- referralrequest_hub
+		referral_request_requester_link -- practitioner_hub
+		referral_request_requester_link -- organization_hub
+
+}
