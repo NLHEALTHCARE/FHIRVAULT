@@ -1,16 +1,13 @@
-import glob, os, io, zipfile
-# from etl_mappings.vektis_agb.vektis_importdef import vektis_import_def
+import glob
+import os
 
-from domainmodels.role_domain import *
+from domainmodel_fhir_simplified.identity_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZorgaanbiederLink
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
 from etl_mappings.vektis_agb.vektis_agb_reference_data import vektis_ref_data
 from etl_mappings.vektis_agb.vektis_agb_transformations import VektisTransformations
 from pyelt.mappings.base import ConstantValue
-from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping, SorToRefMapping, EntityViewToEntityMapping, EntityViewToLinkMapping, \
-    SorToEntityMapping
+from pyelt.mappings.sor_to_dv_mappings import SorToLinkMapping, SorToRefMapping, SorToEntityMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
-from pyelt.mappings.transformations import FieldTransformation
-from pyelt.mappings.validations import Validation
 from pyelt.sources.files import CsvFile
 
 
@@ -53,7 +50,7 @@ def init_sor_to_ref_mappings():
 def init_sor_to_dv_mappings(pipe):
     mappings = []
     sor = pipe.sor
-    mapping = SorToEntityMapping('fagbx20_hstage', Zorgverlener, sor)
+    mapping = SorToEntityMapping('fagbx_20_all_ab_hstage', Zorgverlener, sor)
     mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
     mapping.map_field("concat(zorgverlenersoort, nadere_verbijzondering_zvl_srt)", Zorgverlener.Identificatie.specialisme)
     mapping.map_field(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'), Zorgverlener.Identificatie.agb_code)
@@ -77,7 +74,7 @@ def init_sor_to_dv_mappings(pipe):
     # mapping.map_field("reserve", );
     mappings.append(mapping)
 
-    mapping = SorToEntityMapping('fagbx21_hstage', Zorgverlener, sor)
+    mapping = SorToEntityMapping('fagbx_21_all_ab_hstage', Zorgverlener, sor)
     mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
     # mapping.map_field("aanduiding_oud", );
     # mapping.map_field("bestandcode",  );
@@ -89,12 +86,12 @@ def init_sor_to_dv_mappings(pipe):
     # mapping.map_field("reserve", );
     mappings.append(mapping)
 
-    link_mapping = SorToLinkMapping('fagbx22_hstage', ZorgverlenerZorgaanbiederLink, sor)
+    link_mapping = SorToLinkMapping('fagbx_22_all_ab_hstage', ZorgverlenerZorgaanbiederLink, sor)
     link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
     link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
     mappings.append(link_mapping)
 
-    mapping = SorToEntityMapping('fagbx23_hstage', Zorgaanbieder, sor)
+    mapping = SorToEntityMapping('fagbx_23_all_ab_hstage', Zorgaanbieder, sor)
     mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
     # mapping.map_field("aanduiding_oud", );
     # mapping.map_field("bestandcode", );
@@ -110,7 +107,7 @@ def init_sor_to_dv_mappings(pipe):
     # mapping.map_field("reserve", );
     mappings.append(mapping)
 
-    link_mapping = SorToLinkMapping('fagbx24_hstage', ZorgverlenerZorgaanbiederLink, sor)
+    link_mapping = SorToLinkMapping('fagbx_24_all_ab_hstage', ZorgverlenerZorgaanbiederLink, sor)
     link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
     link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'instellingsnummer'))
     mappings.append(link_mapping)
@@ -128,7 +125,7 @@ def init_sor_to_dv_mappings(pipe):
     # mapping.map_field("reserve                        => reserve text")
     # mappings.append(mapping)
 
-    mapping = SorToEntityMapping('fagbx25_hstage', Zorgaanbieder, sor)
+    mapping = SorToEntityMapping('fagbx_25_all_ab_hstage', Zorgaanbieder, sor)
     mapping.map_bk(VektisTransformations.make_agb("zorgverlenersoort", "praktijknummer"))
     # mapping.map_field("aanduiding_oud", );
     # mapping.map_field("bestandcode", );
@@ -146,7 +143,7 @@ def init_sor_to_dv_mappings(pipe):
     mapping.filter="praktijkadres_volgnummer='1'"
     mappings.append(mapping)
 
-    mapping = SorToEntityMapping('instel_hstage', Zorgaanbieder, sor)
+    mapping = SorToEntityMapping('agb_759_hstage', Zorgaanbieder, sor)
     # mapping.map_bk(['soort_instelling||instellingsnummer'])
     mapping.map_bk(VektisTransformations.make_agb('soort_instelling', 'instellingsnummer'))
     mapping.map_field("soort_instelling", Zorgaanbieder.Default.organisatie_type)

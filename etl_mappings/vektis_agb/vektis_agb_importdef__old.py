@@ -1,9 +1,9 @@
 __author__ = 'hvreenen'
 
-"""Met een 'True' value wordt hier aangegeven dat dit veld meegenomen moet worden voor het verkrijgen van de sleutel."""
+"""Met een 'True' value wordt hier aangegeven dat dit veld meegenomen moet worden voor het verkrijgen van de bk."""
 
 vektis_import_def = {
-    'AGBU_759_AB': (
+    'instel': (
         ('soort_instelling', 2, True),
         ('instellingsnummer', 6, True),
         ('naam_instelling', 60),
@@ -15,9 +15,9 @@ vektis_import_def = {
         ('telefoon', 11),
         ('datum_einde', 8)
     ),
-    'FAGBX_20_All_AB': (
+    'fagbx20': (
         ('aanduiding_oud', 1),
-        ('bestandcode', 2, True),
+        ('bestandcode', 2),
         ('zorgverlenersoort', 2, True),
         ('zorgverlenersnummer', 6, True),
         ('naam', 25),
@@ -36,36 +36,38 @@ vektis_import_def = {
         ('datum_aanvang_beroep', 8),
         ('datum_einde_beroep', 8),
         ('nadere_verbijzondering_zvl_srt', 2),
-        ('reserve', 97)
+        ('mutatiesoort', 1),
+        ('reserve', 96)
     ),
 
-    'FAGBX_21_All_AB': (
+    'fagbx21': (
         ('aanduiding_oud', 1),
-        ('bestandcode', 2, True),
+        ('bestandcode', 2),
         ('zorgverlenersoort', 2, True),
         ('zorgverlenersnummer', 6, True),
         ('indicatie_hoogleraar', 1),
         ('reden_einde_beroep', 1),
-        ('reserve', 143)
+        ('mutatiesoort', 1),
+        ('reserve', 142)
     ),
 
-    'FAGBX_22_All_AB': (
+    'fagbx22': (
         ('aanduiding_oud', 1),
-        ('bestandcode', 2, True),
+        ('bestandcode', 2),
         ('zorgverlenersoort', 2, True),
         ('zorgverlenersnummer', 6, True),
         ('praktijknummer', 5, True),
-        ('datum_toetreding_praktijk', 8, True),
+        ('datum_toetreding_praktijk', 8),
         ('datum_uittreding_praktijk', 8),
         ('status_in_de_praktijk', 1),
         ('mutatiesoort', 1),
-        ('praktijksoort', 2, True),
+        ('praktijksoort', 2),
         ('reserve', 220)
     ),
 
-    'FAGBX_23_All_AB': (
+    'fagbx23': (
         ('aanduiding_oud', 1),
-        ('bestandcode', 2, True),
+        ('bestandcode', 2),
         ('zorgverlenersoort', 2, True),
         ('praktijknummer', 5, True),
         ('naam_deel_1', 46),
@@ -74,24 +76,26 @@ vektis_import_def = {
         ('datum_einde_praktijk', 8),
         ('filler', 1),
         ('organisatievorm', 1),
-        ('reserve', 143)
+        ('mutatiesoort', 1),
+        ('reserve', 142)
     ),
 
-    'FAGBX_24_All_AB': (
+    'fagbx24': (
         ('aanduiding_oud', 1),
-        ('bestandcode', 2, True),
+        ('bestandcode', 2),
         ('zorgverlenersoort', 2, True),
         ('zorgverlenersnummer', 6, True),
         ('instellingsnummer', 6, True),
         ('datum_toetreding_praktijk', 8),
         ('datum_uittreding_praktijk', 8),
         ('status_in_de_instelling', 1),
-        ('reserve', 221)
+        ('mutatiesoort', 1),
+        ('reserve', 220)
     ),
 
-    'FAGBX_25_All_AB': (
+    'fagbx25': (
         ('aanduiding_oud', 1),
-        ('bestandcode', 2, True),
+        ('bestandcode', 2),
         ('zorgverlenersoort', 2, True),
         ('praktijknummer', 5, True),
         ('praktijkadres_volgnummer', 2, True),
@@ -100,6 +104,7 @@ vektis_import_def = {
         ('huisnummer_toevoeging', 5),
         ('postcode', 6),
         ('plaatsnaam', 24),
-        ('reserve', 180)
+        ('mutatiesoort', 1),
+        ('reserve', 220)
     )
 }

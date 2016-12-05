@@ -21,6 +21,13 @@ class VektisTransformations():
         transform.new_step("CONCAT(lpad(" + specialisme_code_field + ", 2, '0'), {fld})")
         return transform
 
+    @staticmethod
+    def agb_code_to_gender(agb_gender_field):
+        transform = FieldTransformation()
+        transform.field_name = agb_gender_field
+        transform.new_step("CASE WHEN {fld} = '1' THEN 'm' WHEN {fld} = '2' THEN 'v' ELSE 'o' END")
+        return transform
+
 # transform = FieldTransformation('BK zorgverlener')
 # transform.steps['1'] = FieldTransformStep(1, 'make 6 positions, add zero to the left', "lpad({fld}, 6, '0')")
 # transform.steps['2'] = FieldTransformStep(2, 'concat zorgverlenersoort', "CONCAT(lpad(zorgverlenersoort, 2, '0'), {fld})")

@@ -14,10 +14,8 @@ from pyelt.datalayers.dv import DvEntity, Link, Sat, LinkReference
 ########################################################################################################################
 
 
-class Subtraject(DvEntity, Act):
-    """Implementatiehandleiding HL7v3 Grouper v4.0.1, aangevuld met LBZ
-
-    Business key: AGB-code zorgaanbieder + subtrajectnummer
+class Subtraject(DvEntity):
+    """FHIR Resource = EisodeOfCare
     """
 
     class Hl7(Sat):

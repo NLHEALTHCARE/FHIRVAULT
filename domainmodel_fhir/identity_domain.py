@@ -134,18 +134,17 @@ class Practitioner(DvEntity):
             unknown = 'unknown'
 
         active = Columns.BoolColumn()
-        gender = Columns.TextColumn(default_value=GenderTypes.unknown)
+        gender = Columns.TextColumn()
         birthdate = Columns.DateColumn()
 
     class Identifier(HybridSat):
-
         class Types(HybridSat.Types):
             usual = 'usual'
             official = 'official'
             temp = 'temp'
             secondary = 'secondary'
 
-        use = Columns.TextColumn(default_value=Types.official)
+        use = Columns.TextColumn()
         id_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
         value = Columns.TextColumn()
@@ -171,7 +170,6 @@ class Practitioner(DvEntity):
         period = Columns.FHIR.PeriodColumn()
 
     class Telecom(HybridSat):
-
         class Types(HybridSat.Types):
             home = 'home'
             work = 'work'
@@ -230,7 +228,7 @@ class Organization(DvEntity):
 
     class Default(Sat):
         active = Columns.BoolColumn()
-        name = Columns.TextColumn()
+        org_name = Columns.TextColumn()
 
     class Identifier(HybridSat):
         class Types(HybridSat.Types):
@@ -239,7 +237,7 @@ class Organization(DvEntity):
             temp = 'temp'
             secondary = 'secondary'
 
-        use = Columns.TextColumn(default_value=Types.official)
+        use = Columns.TextColumn()
         org_type = Columns.FHIR.CodeableConceptColumn()
         system = Columns.TextColumn()
         value = Columns.TextColumn()
