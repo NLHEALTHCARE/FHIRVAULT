@@ -5,7 +5,6 @@ from pyelt.pipeline import Pipeline
 
 pipeline = Pipeline(test_configs)
 pipe = pipeline.get_or_create_pipe('fhir')
-pipe.register_domain(act_domain)
 pipe.register_domain(identity_domain)
 pipe.register_domain(workflow_domain)
 pipe.register_domain(clinical_domain)
