@@ -41,6 +41,11 @@ class Claim(DvEntity):
         school = Columns.TextColumn()
         accident = Columns.DateTimeColumn()
         accidentType = Columns.FHIR.CodingColumn()
+        #TODO onderstaande Codingcolumns moeten 1:N mogelijk zijn
+        condition = Columns.FHIR.CodingColumn()
+        exception = Columns.FHIR.CodingColumn()
+        interventionException = Columns.FHIR.CodingColumn()
+        additionalMaterials = Columns.FHIR.CodingColumn()
 
     class Identifier(HybridSat):
 
@@ -56,12 +61,6 @@ class Claim(DvEntity):
         value = Columns.TextColumn()
         period = Columns.FHIR.PeriodColumn()
 
-
-##CODING elementen (0 *)
-# condition (coding)
-# exception (coding)
-# interventionException (coding)
-# additionalMaterials (coding)
 
 ## ITEM (0 *)
 # sequence	positiveInt
@@ -111,16 +110,6 @@ class Claim(DvEntity):
 # diagnosis
 # sequence
 # diagnosis
-
-## COVERAGE
-# sequence
-# focal
-# coverage
-# businessArrangement
-# relationship
-# preAuthRef
-# claimResponse
-# originalRuleset
 
 
 # LINKS
@@ -187,6 +176,21 @@ class ClaimProviderLink(Link):
 #     location = LinkReference(Location)
 # prescription	Reference(MedicationOrder|VisionPrescription)
 # originalPrescription	Reference(MedicationOrder)
+
+
+# class ClaimCoverage(Link):
+#
+#     claim = LinkReference(Claim)
+#     claimResponse = LinkReference(ClaimResponse)
+#     coverage = LinkReference(Coverage)
+#
+#     class Default(Sat):
+#         sequence = Columns.IntColumn()
+#         focal = Columns.BoolColumn()
+#         businessArrangement = Columns.TextColumn()
+#         relationship = Columns.FHIR.CodingColumn()
+#         preAuthRef = Columns.TextArrayColumn()
+#         originalRuleset = Columns.FHIR.CodingColumn()
 
 
 

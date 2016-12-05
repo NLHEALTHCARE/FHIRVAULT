@@ -292,7 +292,7 @@ class Organization(DvEntity):
 class OrganizationOrganizationLink(Link):
 
     organization = LinkReference(Organization)
-    part_of_organization = LinkReference(Organization)
+    part_of = LinkReference(Organization)
 
 
 class PatientManagingOrganizationLink(Link):
