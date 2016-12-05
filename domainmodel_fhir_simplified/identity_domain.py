@@ -172,6 +172,8 @@ class Medewerker(DvEntity):
         datum_einde_beroep = Columns.DateColumn()
         is_hoogleraar = Columns.BoolColumn()
         reden_einde_beroep = Columns.TextColumn()
+        specialisme_code = Columns.RefColumn()
+        specialisme_bijzondering_code = Columns.RefColumn()
 
     class Naamgegevens(Sat):
         """Container voor naamgegevens"""
