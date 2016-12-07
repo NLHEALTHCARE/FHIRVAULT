@@ -1,5 +1,5 @@
-from domainmodel_fhir_simplified import identity_domain, workflow_domain, clinical_domain, financial_domain
-from domainmodel_fhir_simplified.test_configs import general_config
+from domainmodel import identity_domain, workflow_domain, clinical_domain, financial_domain
+from domainmodel.test_configs import general_config
 from pyelt.pipeline import Pipeline
 
 

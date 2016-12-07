@@ -1,7 +1,7 @@
 import glob
 import os
 
-from domainmodel_fhir_simplified.identity_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZorgaanbiederLink
+from domainmodel.identity_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZorgaanbiederLink
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
 from etl_mappings.vektis_agb.vektis_agb_reference_data import vektis_ref_data
 from etl_mappings.vektis_agb.vektis_agb_transformations import VektisTransformations

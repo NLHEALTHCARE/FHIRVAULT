@@ -1,4 +1,4 @@
-from domainmodel_fhir_simplified.identity_domain import Zorgaanbieder
+from domainmodel.identity_domain import Zorgaanbieder
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.sources.files import CsvFile

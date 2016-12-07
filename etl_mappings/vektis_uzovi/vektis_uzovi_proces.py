@@ -1,4 +1,4 @@
-from domainmodel_fhir_simplified import identity_domain
+from domainmodel import identity_domain
 from etl_mappings.vektis_uzovi.vektis_uzovi_mappings import init_sor_to_dv_mappings, init_source_to_sor_mappings
 
 

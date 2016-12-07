@@ -1,4 +1,4 @@
-from domainmodel_fhir_simplified.reftypes import RefTypes
+from domainmodel.reftypes import RefTypes
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Link, Sat, HybridSat, LinkReference
 

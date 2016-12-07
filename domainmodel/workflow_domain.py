@@ -1,5 +1,5 @@
-from domainmodel_fhir_simplified.identity_domain import *
-from domainmodel_fhir_simplified.reftypes import RefTypes
+from domainmodel.identity_domain import *
+from domainmodel.reftypes import RefTypes
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Link, Sat, LinkReference
 

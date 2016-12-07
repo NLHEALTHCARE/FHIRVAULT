@@ -1,4 +1,4 @@
-from domainmodel_fhir_simplified import identity_domain
+from domainmodel import identity_domain
 from etl_mappings.manual_data.manual_data_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
 from pyelt.pipeline import Pipeline
 

@@ -1,7 +1,7 @@
-from domainmodel_fhir_simplified.clinical_domain import Zorgactiviteit
-from domainmodel_fhir_simplified.identity_domain import Patient,Zorgaanbieder, Zorginkoopcombinatie, Zorgverzekeraar
-from domainmodel_fhir_simplified.workflow_domain import Subtraject
-from domainmodel_fhir_simplified.reftypes import RefTypes
+from domainmodel.clinical_domain import Zorgactiviteit
+from domainmodel.identity_domain import Patient,Zorgaanbieder, Zorginkoopcombinatie, Zorgverzekeraar
+from domainmodel.workflow_domain import Subtraject
+from domainmodel.reftypes import RefTypes
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Sat, Link, LinkReference
 

@@ -1,16 +1,5 @@
-import csv
-import glob
-import io
-import os
-import time
-import zipfile
-from chardet import detect
-
-from domainmodel_fhir_simplified import identity_domain
-from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
-from etl_mappings.vektis_agb.vektis_agb_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings, \
-    init_sor_to_ref_mappings
-from pyelt.pipeline import Pipeline
+from domainmodel import identity_domain
+from etl_mappings.vektis_agb.vektis_agb_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
 
 __author__ = 'hvreenen'
 

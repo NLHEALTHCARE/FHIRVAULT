@@ -1,4 +1,4 @@
-from domainmodels.entity_domain import RefTypes
+from domainmodel.reftypes import RefTypes
 
 __author__ = 'hvreenen'
 # vektis_ref_data = {}

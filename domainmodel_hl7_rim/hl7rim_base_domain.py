@@ -7,7 +7,7 @@
 # HL& RIM Abstract base classes met mandatory attributen
 #
 # --------------------------------------------------------------------------------------------------------------
-from domainmodels.hl7rim_enums import *
+from domainmodel_hl7_rim.hl7rim_enums import *
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import Sat
 
