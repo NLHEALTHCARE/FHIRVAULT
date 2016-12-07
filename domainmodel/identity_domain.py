@@ -23,7 +23,7 @@ class Tarieven(DvEntity):
         honorarium_poort_tarief = Columns.FloatColumn()
         honorarium_ondersteuners_tarief = Columns.FloatColumn()
 
-    class Sleutels(Sat):
+    class Identificatie(Sat):
         bron_id = Columns.TextColumn()
 
 
@@ -43,8 +43,12 @@ class Patient(DvEntity):
         overlijdens_indicator = Columns.TextColumn()
         datum_overlijden = Columns.DateTimeColumn()
 
+    class Identificatie(Sat):
+        extern_nummer = Columns.TextColumn()
+        nummer = Columns.TextColumn()
+        bron_id = Columns.TextColumn()
 
-    class Identificatie(HybridSat):
+    class IdentificatieBewijs(HybridSat):
         class Types(HybridSat.Types):
             bsn = 'BSN'
             rijbewijs = 'rijbewijs'
@@ -126,12 +130,7 @@ class Patient(DvEntity):
         code = Columns.TextColumn()
         rekeningnummer = Columns.TextColumn()
 
-    #begin aanpassing Jan
-    class Sleutels(Sat):
-        extern_nummer = Columns.TextColumn()
-        nummer = Columns.TextColumn()
-        bron_id = Columns.TextColumn()
-    #einde aanpassing Jan
+
 
 
 
@@ -483,8 +482,8 @@ class ZorgaanbiederAfdelingLink(Link):
     """
     Bedoeld om hierachieen aan te geven tussen zorgaanbieders
     """
-    child = LinkReference(Afdeling)
-    parent = LinkReference(Zorgaanbieder)
+    afdeling = LinkReference(Afdeling)
+    zorgaanbieder = LinkReference(Zorgaanbieder)
 
 
 class ZorginkoopcombinatieLink(Link):

@@ -88,9 +88,9 @@ class Afspraak(DvEntity):
 # LINKS
 ##############################
 
-class TrajectSubtrajectLink(Link):
+class ZorgTrajectSubtrajectLink(Link):
     patient = LinkReference(Patient)
-    traject = LinkReference(Subtraject)
+    zorgtraject = LinkReference(Zorgtraject)
     subtraject = LinkReference(Subtraject)
 
 class SubtrajectDeelnemersLink(Link):
@@ -102,7 +102,6 @@ class SubtrajectDeelnemersLink(Link):
     betaler = LinkReference(Zorgverzekeraar)
     huisarts = LinkReference(Zorgverlener)
     instelling = LinkReference(Zorgaanbieder)
-
 
 
 class AfspraakDeelnemersLink(Link):
