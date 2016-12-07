@@ -1,6 +1,4 @@
-from domainmodels.hl7rim_base_domain import *
-from domainmodels.hl7rim_enums import *
-from domainmodels.entity_domain import *
+from domainmodel_fhir_simplified.reftypes import RefTypes
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Link, Sat, HybridSat, LinkReference
 
@@ -13,7 +11,7 @@ from pyelt.datalayers.dv import DvEntity, Link, Sat, HybridSat, LinkReference
 
 
 
-class Tarieven(DvEntity,Role):
+class Tarieven(DvEntity):
     class Default(Sat):
         agb = Columns.TextColumn()
         declaratie_code = Columns.TextColumn()
@@ -32,9 +30,6 @@ class Tarieven(DvEntity,Role):
 
 class Patient(DvEntity):
     """https://zibs.nl/wiki/Patient
-
-    Playing Entity = Persoon
-    Scoping Entity = Zorgaanbieder
 
     Business Key: naam_bronsysteem + relatienummer/inschrijvingsnummer
     Business Key (alternatief): AGB-code zorgaanbieder (8) + BSN (9) + geboortedatum (ISO, 8) + geslachtcode (1)  (26 cijfers)
@@ -172,8 +167,8 @@ class Medewerker(DvEntity):
         datum_einde_beroep = Columns.DateColumn()
         is_hoogleraar = Columns.BoolColumn()
         reden_einde_beroep = Columns.TextColumn()
-        specialisme_code = Columns.RefColumn()
-        specialisme_bijzondering_code = Columns.RefColumn()
+        specialisme_code = Columns.RefColumn(RefTypes.specialisme_codes)
+        specialisme_bijzondering_code = Columns.RefColumn(RefTypes.specialisme_details_codes)
 
     class Naamgegevens(Sat):
         """Container voor naamgegevens"""
@@ -250,7 +245,7 @@ class Zorgverlener(Medewerker):
         specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
 
 
-class Zorgaanbieder(DvEntity, Role):
+class Zorgaanbieder(DvEntity):
     """https://zibs.nl/wiki/Zorgaanbieder
 
     Een zorgaanbieder is een organisatie die medische-, paramedische- en/of verpleegkundige zorg aanbiedt,
@@ -269,7 +264,7 @@ class Zorgaanbieder(DvEntity, Role):
         naam = Columns.TextColumn()
         extra_naam = Columns.TextColumn()
         organisatie_type = Columns.RefColumn(RefTypes.organisatie_types)
-        afdeling_specialisme_code = Columns.RefColumn(RefTypes.specialisme_codes)
+        specialisme_code = Columns.RefColumn(RefTypes.specialisme_codes)
 
 
     class Identificatie(Sat):
@@ -326,6 +321,11 @@ class Zorgaanbieder(DvEntity, Role):
             pieper = 'pieper'
 
         nummer = Columns.TextColumn()
+
+    class PraktijkGegevens(Sat):
+        datum_aanvang_praktijk = Columns.DateColumn()
+        datum_einde_praktijk = Columns.DateColumn()
+        organisatievorm = Columns.TextColumn()
 
 
 class Vestiging(Zorgaanbieder):
@@ -444,7 +444,7 @@ class Zorginkoopcombinatie(DvEntity):
 
 ########################################################################################################################
 #
-#  Links tussen rollen, om hierarchieen weer te geven en controles uit te voeren
+#  Links om hierarchieen weer te geven en controles uit te voeren
 #
 #######################################################################################################################
 
@@ -461,13 +461,15 @@ class PatientZorgaanbiederLink(Link):
 class ZorgverlenerZorgaanbiederLink(Link):
     """Link welke zorgverleners bij welke zorgaanbieder verbonden zijn
 
-    Pragmatisch opgelost, mag strict genomen niet in HL7 RIM
     """
     zorgverlener = LinkReference(Zorgverlener)
     zorgaanbieder = LinkReference(Zorgaanbieder)
 
     #to do: kenmerken uit Vektis AGB database aan linktabel toevoegen
-
+    class Default(Sat):
+        datum_toetreding = Columns.DateColumn()
+        datum_uittreding = Columns.DateColumn()
+        status = Columns.TextColumn()
 
 class ZorgaanbiederZorgaanbiederLink(Link):
     """
@@ -485,7 +487,7 @@ class ZorgaanbiederAfdelingLink(Link):
     parent = LinkReference(Zorgaanbieder)
 
 
-class ZorginkoopcombinatieLink(Link, RoleLink):
+class ZorginkoopcombinatieLink(Link):
     """http://www.vektis.nl/images/Beheer_en_onderhoud_UZOVI_v1_1.pdf"""
     verzekeraar = LinkReference(Zorgverzekeraar)
     inkoopcombinatie = LinkReference(Zorginkoopcombinatie)

@@ -1,11 +1,14 @@
-from domainmodels.role_domain import *
+from domainmodel_fhir_simplified.identity_domain import *
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.sources.files import CsvFile
 
 __author__ = 'cmesu'
 
-
+#todo bestand van vektis-uzovi moet worden voorbereid. Gaat nu handmatig.
+# -van xls met tabladen naar .csv
+# -alle returns in text-velden eruit
+# -alle ; en | in text velden eruit
 def init_source_to_sor_mappings(path):
     mappings = []
 
