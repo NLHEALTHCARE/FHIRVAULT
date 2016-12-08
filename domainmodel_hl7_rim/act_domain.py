@@ -1,7 +1,7 @@
-from domainmodels.hl7rim_base_domain import *
-from domainmodels.hl7rim_enums import *
-from domainmodels.entity_domain import *
-from domainmodels.role_domain import *
+from domainmodel_hl7_rim.hl7rim_base_domain import *
+from domainmodel_hl7_rim.hl7rim_enums import *
+from domainmodel_hl7_rim.entity_domain import *
+from domainmodel_hl7_rim.role_domain import *
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Link, Sat, LinkReference
 

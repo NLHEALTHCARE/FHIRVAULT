@@ -1,6 +1,6 @@
-from domainmodels.entity_domain import *
-from domainmodels.role_domain import *
-from domainmodels.act_domain import *
+from domainmodel_hl7_rim.entity_domain import *
+from domainmodel_hl7_rim.role_domain import *
+from domainmodel_hl7_rim.act_domain import *
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Link, Sat, HybridSat, LinkReference, DynamicLinkReference
 

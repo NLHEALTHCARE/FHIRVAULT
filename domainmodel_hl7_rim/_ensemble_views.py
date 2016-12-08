@@ -1,4 +1,4 @@
-from domainmodels.role_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZorgaanbiederLink, Medewerker
+from domainmodel_hl7_rim.role_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZorgaanbiederLink, Medewerker
 from pyelt.datalayers.dv import EnsembleView
 
 
