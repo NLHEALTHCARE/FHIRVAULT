@@ -1,6 +1,7 @@
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Sat, Link, HybridSat, HybridLink, LinkReference
 
+
 #########################################################################################################
 #                                                                                                       #
 # Eerstelijns domein model, gebasseerd op FHIR-standaard (hl7.org.fhir).                                #
