@@ -184,6 +184,17 @@ class Declaratie(DvEntity):
         bedrag = Columns.FloatColumn(fhir_name='net')
 
 
+#https://www.hl7.org/fhir/coverage.html
+class Zorgverzekering(DvEntity):  # COVERAGE
+
+    class Default(Sat):
+        begindatum = Columns.DateColumn()  # coverage.period
+        einddatum = Columns.DateColumn()  # coverage.period
+        soort = Columns.TextColumn()  # coverage.type
+        verzekerdenummer = Columns.TextColumn()  # coverage.subscriberId
+        bin = Columns.TextColumn()
+
+
 ### LINKS ###
 
 
@@ -197,6 +208,16 @@ class PatientManagingOrganisatieLink(Link):
 
     patient = LinkReference(Patient)
     organisatie = LinkReference(Organisatie)
+
+
+class ZorgverzekeringVerzekeraar(Link):
+    zorgverzekering = LinkReference(Zorgverzekering)  # coverage.Identifier
+    organisatie = LinkReference(Organisatie)  # coverage.Issuer
+
+
+class ZorgverzekeringPatient(Link):
+    zorgverzekering = LinkReference(Zorgverzekering)  # coverage.Identifier
+    patient = LinkReference(Patient)  # coverage.subscriber
 
 
 class BehandelaarOrganisatieLink(Link):
@@ -243,4 +264,6 @@ class DeclaratieOrganisatieLink(Link):
 class DeclaratiePatientLink(Link):
     declaratie = LinkReference(Declaratie)
     patient = LinkReference(Patient)
+
+
 
