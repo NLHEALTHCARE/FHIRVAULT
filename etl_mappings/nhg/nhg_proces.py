@@ -1,4 +1,4 @@
-from domainmodels import role_domain
+from domainmodel_hl7_rim import role_domain
 from etl_mappings.nhg.nhg_mappings import init_sor_to_dv_mappings, init_source_to_sor_mappings
 from pyelt.pipeline import Pipeline
 
