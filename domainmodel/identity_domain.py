@@ -27,14 +27,13 @@ class Tarieven(DvEntity):
         bron_id = Columns.TextColumn()
 
 
-
+# https://www.hl7.org/fhir/patient.html
 class Patient(DvEntity):
     """https://zibs.nl/wiki/Patient
 
     Business Key: naam_bronsysteem + relatienummer/inschrijvingsnummer
     Business Key (alternatief): AGB-code zorgaanbieder (8) + BSN (9) + geboortedatum (ISO, 8) + geslachtcode (1)  (26 cijfers)
     """
-
 
     class Default(Sat):
         geboortedatum = Columns.DateColumn()
@@ -129,9 +128,6 @@ class Patient(DvEntity):
         naam = Columns.TextColumn()
         code = Columns.TextColumn()
         rekeningnummer = Columns.TextColumn()
-
-
-
 
 
 
@@ -243,21 +239,7 @@ class Zorgverlener(Medewerker):
         uzi_nummer = Columns.TextColumn()
         specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
 
-
-class Zorgaanbieder(DvEntity):
-    """https://zibs.nl/wiki/Zorgaanbieder
-
-    Een zorgaanbieder is een organisatie die medische-, paramedische- en/of verpleegkundige zorg aanbiedt,
-    en ook daadwerkelijk verleent, aan cliënten/patiënten. Voorbeelden zijn:
-    ziekenhuis, verpleeghuis, huisartsenpraktijk.
-
-    Een zorgaanbieder heeft 1 of meerdere vestigingen.
-
-    In DWH2.0 wordt Vektis AGB database met alle zorginstellingen ingelezen
-
-    Business key: AGB-code
-    """
-
+class Organisatie(DvEntity):
 
     class Default(Sat):
         naam = Columns.TextColumn()
@@ -265,121 +247,6 @@ class Zorgaanbieder(DvEntity):
         organisatie_type = Columns.RefColumn(RefTypes.organisatie_types)
         specialisme_code = Columns.RefColumn(RefTypes.specialisme_codes)
 
-
-    class Identificatie(Sat):
-        agb_code = Columns.TextColumn()
-        wtzi_code = Columns.TextColumn()
-        kvk_nummer = Columns.TextColumn()
-        kvk_vestigingsnummer = Columns.TextColumn()
-
-    class ExternalKeys(HybridSat):
-        class Types(HybridSat.Types):
-            timeff_code = 'timeff_code'
-            timeff_pk = 'timeff_pk'
-
-        key = Columns.TextColumn()
-
-
-    class Adres(HybridSat):
-        class Types(HybridSat.Types):
-            postadres = 'postadres'  # PST
-            officieel_adres = 'officieel adres'  # HP ??
-            bezoek_adres = 'bezoek_adres adres'  # PHYS
-            factuuradres = 'factuuradres'  # staat niet in nictiz
-
-        straat = Columns.TextColumn()
-        huisnummer = Columns.IntColumn()
-        huisnummerletter = Columns.TextColumn()
-        huisnummertoevoeging = Columns.TextColumn()
-        aanduiding_bij_nummer_code = Columns.TextColumn()
-        woonplaats = Columns.TextColumn()
-        gemeente = Columns.TextColumn()
-        land_code = Columns.RefColumn(RefTypes.land_codes)
-        postcode = Columns.TextColumn()
-        additionele_informatie = Columns.TextColumn()
-
-    class Email(HybridSat):
-        """EmailSoortCodeLijst
-        https://decor.nictiz.nl/art-decor/decor-valuesets--zib1bbr-?id=2.16.840.1.113883.2.4.3.11.60.40.2.3.1.1"""
-
-        class Types(HybridSat.Types):
-            prive = 'prive'
-            werk = 'zakelijk'
-
-        adres = Columns.TextColumn()
-
-    class Telefoon(HybridSat):
-        """NummerSoortCodeLijst
-        https://decor.nictiz.nl/art-decor/decor-valuesets--zib1bbr-?id=2.16.840.1.113883.2.4.3.11.60.40.2.0.1.3"""
-
-        class Types(HybridSat.Types):
-            thuis = 'thuis'
-            tijdelijk = 'tijdelijk'
-            zakelijk = 'zakelijk'
-            mobiel = 'mobiel'
-            pieper = 'pieper'
-
-        nummer = Columns.TextColumn()
-
-    class PraktijkGegevens(Sat):
-        datum_aanvang_praktijk = Columns.DateColumn()
-        datum_einde_praktijk = Columns.DateColumn()
-        organisatievorm = Columns.TextColumn()
-
-
-class Vestiging(Zorgaanbieder):
-    """
-    Identificeerbare vestigingen, zijnde een unieke combinatie van een:
-      - zorgaanbieder
-      - adres
-      - onderneming
-
-    Business key: interne vestiging_code
-    """
-
-    class VestigingIdentificatie(Sat):
-        vestiging_code = Columns.TextColumn()
-        vestiging_naam = Columns.TextColumn()
-        agb_code = Columns.TextColumn()
-        administratie_code = Columns.TextColumn()       #verschiillende vestigingen kunnen dezelfde administratie delen
-        kvk_nummer = Columns.IntColumn()
-        btw_nummer = Columns.TextColumn()  #staat niet in nictiz
-
-
-class Afdeling(DvEntity):
-    """
-    Identificeerbare afdelingen, die mogelijjk over verschillende vestigingen verspreid zijn:
-      - specifiek domein, b.v. Finance, ICT, Kwaliteit
-       - unieke kostenplaats
-
-    Business key: vestigingcode + afdelingscode en/of kostenplaats
-    """
-
-    class Default(Sat):
-        code = Columns.TextColumn()
-        naam = Columns.TextColumn()
-        kostenplaats = Columns.TextColumn()
-
-
-class Zorgverzekeraar(DvEntity):
-    """https://zibs.nl/wiki/Betaler
-
-    Betalers zijn organisaties of individuen die betalen voor de aan de patiënt geleverde zorg.
-    Deze organisaties of individuen kunnen zijn: instellingen of personen die financieel garant staan
-    of verantwoordelijk zijn voor de patiënt (zoals ouders van minderjarigen),
-    organisaties met directe financiële verantwoordelijkheid, combinaties van deze of de patiënt zelf.
-
-    NB: de Verzekering is als aparte Act opgenomen, en staat los van de Rol BetalerVerzekeraar.
-
-    Invoice_payor: The role of an organization that undertakes to accept claims invoices,
-    assess the coverage or payments due for those invoices and pay to the designated payees for those invoices.
-    This role may be either the underwriter or a third-party organization authorized by the underwriter.
-    The scoping entity is the organization that underwrites the claimed coverage.
-    """
-
-    class Default(Sat):
-        uzovi_nummer = Columns.TextColumn()
-        naam = Columns.TextColumn()
 
     class Adres(HybridSat):
         class Types(HybridSat.Types):
@@ -423,6 +290,91 @@ class Zorgverzekeraar(DvEntity):
             pieper = 'pieper'
 
         nummer = Columns.TextColumn()
+
+
+class Zorgaanbieder(Organisatie):
+    """https://zibs.nl/wiki/Zorgaanbieder
+
+    Een zorgaanbieder is een organisatie die medische-, paramedische- en/of verpleegkundige zorg aanbiedt,
+    en ook daadwerkelijk verleent, aan cliënten/patiënten. Voorbeelden zijn:
+    ziekenhuis, verpleeghuis, huisartsenpraktijk.
+
+    Een zorgaanbieder heeft 1 of meerdere vestigingen.
+
+    In DWH2.0 wordt Vektis AGB database met alle zorginstellingen ingelezen
+
+    Business key: AGB-code
+    """
+
+
+    class Identificatie(Sat):
+        agb_code = Columns.TextColumn()
+        wtzi_code = Columns.TextColumn()
+        kvk_nummer = Columns.TextColumn()
+        kvk_vestigingsnummer = Columns.TextColumn()
+
+    class ExternalKeys(HybridSat):
+        class Types(HybridSat.Types):
+            timeff_code = 'timeff_code'
+            timeff_pk = 'timeff_pk'
+
+        key = Columns.TextColumn()
+
+    class PraktijkGegevens(Sat):
+        datum_aanvang_praktijk = Columns.DateColumn()
+        datum_einde_praktijk = Columns.DateColumn()
+        organisatievorm = Columns.TextColumn()
+
+
+class Vestiging(Zorgaanbieder):
+    """
+    Identificeerbare vestigingen, zijnde een unieke combinatie van een:
+      - zorgaanbieder
+      - adres
+      - onderneming
+
+    Business key: interne vestiging_code
+    """
+
+    class VestigingIdentificatie(Sat):
+        vestiging_code = Columns.TextColumn()
+        vestiging_naam = Columns.TextColumn()
+        agb_code = Columns.TextColumn()
+        administratie_code = Columns.TextColumn()       #verschiillende vestigingen kunnen dezelfde administratie delen
+        kvk_nummer = Columns.IntColumn()
+        btw_nummer = Columns.TextColumn()  #staat niet in nictiz
+
+
+class Afdeling(DvEntity):
+    """
+    Identificeerbare afdelingen, die mogelijjk over verschillende vestigingen verspreid zijn:
+      - specifiek domein, b.v. Finance, ICT, Kwaliteit
+       - unieke kostenplaats
+
+    Business key: vestigingcode + afdelingscode en/of kostenplaats
+    """
+
+    class Default(Sat):
+        code = Columns.TextColumn()
+        naam = Columns.TextColumn()
+        kostenplaats = Columns.TextColumn()
+
+
+class Zorgverzekeraar(Organisatie):
+    """https://zibs.nl/wiki/Betaler
+
+    Betalers zijn organisaties of individuen die betalen voor de aan de patiënt geleverde zorg.
+    Deze organisaties of individuen kunnen zijn: instellingen of personen die financieel garant staan
+    of verantwoordelijk zijn voor de patiënt (zoals ouders van minderjarigen),
+    organisaties met directe financiële verantwoordelijkheid, combinaties van deze of de patiënt zelf.
+
+    NB: de Verzekering is als aparte Act opgenomen, en staat los van de Rol BetalerVerzekeraar.
+
+    Invoice_payor: The role of an organization that undertakes to accept claims invoices,
+    assess the coverage or payments due for those invoices and pay to the designated payees for those invoices.
+    This role may be either the underwriter or a third-party organization authorized by the underwriter.
+    The scoping entity is the organization that underwrites the claimed coverage.
+    """
 
 
 class Zorginkoopcombinatie(DvEntity):

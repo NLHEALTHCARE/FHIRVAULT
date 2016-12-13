@@ -5,7 +5,7 @@ from domainmodel.reftypes import RefTypes
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Sat, Link, LinkReference
 
-
+#https://www.hl7.org/fhir/coverage.html
 class Zorgverzekering(DvEntity): #COVERAGE
     """FHIR Contract ??"""
     class Default(Sat):
