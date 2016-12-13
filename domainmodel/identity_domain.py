@@ -116,6 +116,7 @@ class Patient(DvEntity):
         nummer = Columns.TextColumn()
 
     class Inschrijving(Sat):
+        # hj hernoemt naar inschrijving, zodat zorgaanbieder (later) gaat verwijzen naar de zorgaanbieder entiteit via de link
         """Registratie van patient bij een zorgaanbieder"""
         agb_code_zorgaanbieder = Columns.TextColumn()
         inschrijfnummer = Columns.TextColumn()
