@@ -7,7 +7,6 @@ from pyelt.datalayers.dv import DvEntity, Sat, Link, LinkReference
 
 #https://www.hl7.org/fhir/coverage.html
 class Zorgverzekering(DvEntity): #COVERAGE
-    """FHIR Contract ??"""
     class Default(Sat):
         begindatum= Columns.DateColumn() #coverage.period
         einddatum = Columns.DateColumn() #coverage.period
@@ -29,6 +28,35 @@ class Verkoopprijs(DvEntity):
         begindatum = Columns.DateColumn()
         einddatum = Columns.DateColumn()
 
+
+#https://www.hl7.org/fhir/claim.html
+class Declaratie(DvEntity):
+
+    class Default(Sat):
+        ruleset = Columns.TextColumn(fhir_name='ruleset')
+        type = Columns.TextColumn(fhir_name='type')
+        factuurnummer = Columns.TextColumn()
+        factuurdatum = Columns.DateColumn()
+        is_credit = Columns.TextColumn()
+
+    class Identificatie(HybridSat): #Identifier
+
+        class Types(HybridSat.Types):
+            official = 'official'
+            secondary = 'secondary'
+
+        systeem = Columns.TextColumn(fhir_name='system')
+        waarde = Columns.TextColumn(fhir_name='value') #declaratieprestatieId
+
+    class Item(Sat):
+        prestatie = Columns.TextArrayColumn(fhir_name='service')
+        prestatiedatum = Columns.DateColumn(fhir_name='serviceDate')
+        aantal = Columns.IntColumn(fhir_name='quantity')
+        prijs = Columns.FloatColumn(fhir_name='unitPrice')
+        bedrag = Columns.FloatColumn(fhir_name='net')
+
+
+#todo kan overerven van declaratie / FHIR=Claim?
 class Factuurregel(DvEntity):
 
     class Default(Sat):
@@ -86,6 +114,7 @@ class Factuurregel(DvEntity):
 ########################################################
 # LINKS
 ########################################################
+
 class ZorgactiviteitPatient(Link):
     zorgactiviteit = LinkReference(Zorgactiviteit)
     patient = LinkReference(Patient)
