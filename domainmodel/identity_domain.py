@@ -239,6 +239,7 @@ class Zorgverlener(Medewerker):
         uzi_nummer = Columns.TextColumn()
         specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
 
+
 class Organisatie(DvEntity):
 
     class Default(Sat):
@@ -305,7 +306,6 @@ class Zorgaanbieder(Organisatie):
 
     Business key: AGB-code
     """
-
 
     class Identificatie(Sat):
         agb_code = Columns.TextColumn()
@@ -376,7 +376,14 @@ class Zorgverzekeraar(Organisatie):
     The scoping entity is the organization that underwrites the claimed coverage.
     """
 
+    class uzovi(HybridSat):
+        uzovi = Columns.TextColumn()
+        rol = Columns.TextColumn()
+        begindatum = Columns.DateColumn()
+        einddatum = Columns.DateColumn()
 
+
+#TODO CM: Zorginkoopcombinatie is mijns inziens geen aparte DVentity, maar een relatie tussen twee Organisatie-entiteiten van het type Zorgverzekeraar (ZorgverzekeraarKoepelLink).
 class Zorginkoopcombinatie(DvEntity):
     """http://www.vektis.nl/images/Beheer_en_onderhoud_UZOVI_v1_1.pdf
 
@@ -390,7 +397,6 @@ class Zorginkoopcombinatie(DvEntity):
 
     class Default(Sat):
         naam = Columns.RefColumn(RefTypes.zorginkoopcombinatie_codes)
-
 
 
 ########################################################################################################################
@@ -416,7 +422,7 @@ class ZorgverlenerZorgaanbiederLink(Link):
     zorgverlener = LinkReference(Zorgverlener)
     zorgaanbieder = LinkReference(Zorgaanbieder)
 
-    #to do: kenmerken uit Vektis AGB database aan linktabel toevoegen
+    #todo: kenmerken uit Vektis AGB database aan linktabel toevoegen
     class Default(Sat):
         datum_toetreding = Columns.DateColumn()
         datum_uittreding = Columns.DateColumn()
@@ -436,6 +442,7 @@ class ZorgaanbiederAfdelingLink(Link):
     """
     afdeling = LinkReference(Afdeling)
     zorgaanbieder = LinkReference(Zorgaanbieder)
+
 
 
 class ZorginkoopcombinatieLink(Link):

@@ -85,28 +85,32 @@ class Factuurregel(DvEntity):
 
 ########################################################
 # LINKS
+########################################################
 class ZorgactiviteitPatient(Link):
     zorgactiviteit = LinkReference(Zorgactiviteit)
     patient = LinkReference(Patient)
-
 
 
 class ZorgverzekeringVerzekeraar(Link):
     zorverzekering = LinkReference(Zorgverzekering)  # coverage.bin
     Zorgverzekeraar = LinkReference(Zorgverzekeraar)  # coverage.Issuer
 
+
 class ZorgverzekeringPatient(Link):
     zorverzekering = LinkReference(Zorgverzekering)  # coverage.bin
     patient = LinkReference(Patient)  # coverage.subscriber
+
 
 class FactuurregelSubtrajectLink(Link):
     factuurregel = LinkReference(Factuurregel)
     patient = LinkReference(Patient)
     subtraject = LinkReference(Subtraject)
 
+
 class ZorgverzekeringParticipatieLink(Link):
     patient = LinkReference(Patient)
     verzekeraar = LinkReference(Zorgverzekeraar)
+
 
 class VerkoopprijsParticipatieLink(Link):
     zorgaanbieder = LinkReference(Zorgaanbieder)
