@@ -11,6 +11,7 @@ class Zorgverzekering(DvEntity): #COVERAGE
         begindatum= Columns.DateColumn() #coverage.period
         einddatum = Columns.DateColumn() #coverage.period
         soort = Columns.TextColumn() #coverage.type
+        uzovi = Columns.TextColumn()
         verzekerdenummer = Columns.TextColumn() #coverage.subscriberId
         bin = Columns.TextColumn()
 
@@ -126,7 +127,7 @@ class ZorgverzekeringZorgverzekeraarLink(Link):
 
 
 class ZorgverzekeringPatientLink(Link):
-    zorverzekering = LinkReference(Zorgverzekering)  # coverage.bin
+    zorgverzekering = LinkReference(Zorgverzekering)  # coverage.bin
     patient = LinkReference(Patient)  # coverage.subscriber
 
 
