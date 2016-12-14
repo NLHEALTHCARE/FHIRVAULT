@@ -48,6 +48,7 @@ class Patient(DvEntity):
         bron_id = Columns.TextColumn()
 
     class IdentificatieBewijs(HybridSat):
+
         class Types(HybridSat.Types):
             bsn = 'BSN'
             rijbewijs = 'rijbewijs'
@@ -128,7 +129,6 @@ class Patient(DvEntity):
         naam = Columns.TextColumn()
         code = Columns.TextColumn()
         rekeningnummer = Columns.TextColumn()
-
 
 
 class Medewerker(DvEntity):
@@ -376,7 +376,7 @@ class Zorgverzekeraar(Organisatie):
     The scoping entity is the organization that underwrites the claimed coverage.
     """
 
-    class uzovi(HybridSat):
+    class Uzovi(Sat):
         uzovi = Columns.TextColumn()
         rol = Columns.TextColumn()
         begindatum = Columns.DateColumn()
