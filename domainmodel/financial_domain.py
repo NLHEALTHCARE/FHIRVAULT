@@ -3,7 +3,7 @@ from domainmodel.identity_domain import Patient,Zorgaanbieder, Zorginkoopcombina
 from domainmodel.workflow_domain import Subtraject
 from domainmodel.reftypes import RefTypes
 from pyelt.datalayers.database import Columns
-from pyelt.datalayers.dv import DvEntity, Sat, Link, LinkReference,
+from pyelt.datalayers.dv import DvEntity, Sat, HybridSat, LinkReference, Link
 
 #https://www.hl7.org/fhir/coverage.html
 class Zorgverzekering(DvEntity): #COVERAGE
@@ -120,8 +120,8 @@ class ZorgactiviteitPatientLink(Link):
     patient = LinkReference(Patient)
 
 
-class ZorgverzekeringVerzekeraarLink(Link):
-    zorverzekering = LinkReference(Zorgverzekering)  # coverage.bin
+class ZorgverzekeringZorgverzekeraarLink(Link):
+    zorgverzekering = LinkReference(Zorgverzekering)  # coverage.bin
     Zorgverzekeraar = LinkReference(Zorgverzekeraar)  # coverage.Issuer
 
 
