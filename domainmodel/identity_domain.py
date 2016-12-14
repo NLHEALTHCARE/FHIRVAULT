@@ -377,7 +377,7 @@ class Zorgverzekeraar(Organisatie):
     """
 
     class Uzovi(Sat):
-        uzovi = Columns.TextColumn()
+        uzovi_nummer = Columns.TextColumn()
         rol = Columns.TextColumn()
         begindatum = Columns.DateColumn()
         einddatum = Columns.DateColumn()

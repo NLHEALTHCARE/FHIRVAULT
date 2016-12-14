@@ -27,7 +27,7 @@ def init_sor_to_dv_mappings(pipe):
     mappings = []
     mapping = SorToEntityMapping('uzovi_hstage', Zorgverzekeraar, pipe.sor)
     mapping.map_bk(["right('0'||uzovi_code, 4)"])
-    mapping.map_field("right('0'||uzovi_code, 4)", Zorgverzekeraar.Default.uzovi_nummer)
+    mapping.map_field("right('0'||uzovi_code, 4)", Zorgverzekeraar.Uzovi.uzovi_nummer)
     mapping.map_field('naam', Zorgverzekeraar.Default.naam)
     mapping.filter = "einddatum IS NULL"
     mappings.append(mapping)
