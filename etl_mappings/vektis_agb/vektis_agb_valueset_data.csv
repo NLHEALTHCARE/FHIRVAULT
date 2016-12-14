@@ -1,0 +1,146 @@
+source_valueset;source_code;source_descr;target_valueset;target_code;target_descr
+geslacht_types;1;Man;geslacht_types;m;Man
+geslacht_types;0;Onbekend;geslacht_types;o;Onbekend
+geslacht_types;2;Vrouw;geslacht_types;v;Vrouw
+geslacht_types;9;Niet gespecificeerd;geslacht_types;u;Niet gespecificeerd
+academische_titels;dr;Doctor;academische_titels;dr;Doctor
+academische_titels;mr;Meester in de rechten WO;academische_titels;mr;Meester in de rechten WO
+academische_titels;ing;Ingenieur HBO;academische_titels;ing;Ingenieur HBO
+academische_titels;drs;Doctorandus;academische_titels;drs;Doctorandus
+academische_titels;ir;Ingenieur WO;academische_titels;ir;Ingenieur WO
+academische_titels;m;Master;academische_titels;m;Master
+academische_titels;bc;Baccalaureus;academische_titels;bc;Baccalaureus
+adelijke_titels;GI;Gravin;adelijke_titels;GI;Gravin
+adelijke_titels;PS;Prinses;adelijke_titels;PS;Prinses
+adelijke_titels;H;Hertog;adelijke_titels;H;Hertog
+adelijke_titels;JV;Jonkvrouw;adelijke_titels;JV;Jonkvrouw
+adelijke_titels;R;Ridder;adelijke_titels;R;Ridder
+adelijke_titels;PR;Professor;adelijke_titels;PR;Professor
+adelijke_titels;JH;Jonkheer;adelijke_titels;JH;Jonkheer
+adelijke_titels;B;Baron;adelijke_titels;B;Baron
+adelijke_titels;BS;Barones;adelijke_titels;BS;Barones
+adelijke_titels;MI;Markiezin;adelijke_titels;MI;Markiezin
+adelijke_titels;HI;Hertogin;adelijke_titels;HI;Hertogin
+adelijke_titels;P;Prins;adelijke_titels;P;Prins
+adelijke_titels;G;Graaf;adelijke_titels;G;Graaf
+adelijke_titels;M;Markies;adelijke_titels;M;Markies
+vektis_praktijk_statussen;1;vrijgevestigd;vektis_praktijk_statussen;1;vrijgevestigd
+vektis_praktijk_statussen;4;vrijgevestigd medisch specialist, toelatingsovereenkomst getekend;vektis_praktijk_statussen;4;vrijgevestigd medisch specialist, toelatingsovereenkomst getekend
+vektis_praktijk_statussen;2;vrijgevestigd medisch specialist, toelatingsovereenkomst getekend;vektis_praktijk_statussen;2;vrijgevestigd medisch specialist, toelatingsovereenkomst getekend
+vektis_praktijk_statussen;3;in loondienst;vektis_praktijk_statussen;3;in loondienst
+specialisme_codes;04;Fysiotherapeuten;specialisme_codes;04;Fysiotherapeuten
+specialisme_codes;17;Rechtspersonen;specialisme_codes;17;Rechtspersonen
+specialisme_codes;05;Logopedisten;specialisme_codes;05;Logopedisten
+specialisme_codes;96;Pedicuren;specialisme_codes;96;Pedicuren
+specialisme_codes;76;Leveranciers hulpmiddelen;specialisme_codes;76;Leveranciers hulpmiddelen
+specialisme_codes;14;Arts arbeid en gezondheid/bedrijfsgeneeskunde;specialisme_codes;14;Arts arbeid en gezondheid/bedrijfsgeneeskunde
+specialisme_codes;84;Overige artsen;specialisme_codes;84;Overige artsen
+specialisme_codes;08;Verloskundigen;specialisme_codes;08;Verloskundigen
+specialisme_codes;02;Apothekers;specialisme_codes;02;Apothekers
+specialisme_codes;11;Tandarts-specialisten mondziekten en kaakchirurgie);specialisme_codes;11;Tandarts-specialisten mondziekten en kaakchirurgie)
+specialisme_codes;91;Verpleegkundigen;specialisme_codes;91;Verpleegkundigen
+specialisme_codes;12;Tandartsen;specialisme_codes;12;Tandartsen
+specialisme_codes;13;Tandarts-specialisten dento-maxillaire orthopedie);specialisme_codes;13;Tandarts-specialisten dento-maxillaire orthopedie)
+specialisme_codes;07;Oefentherapeuten;specialisme_codes;07;Oefentherapeuten
+specialisme_codes;26;Podotherapeuten;specialisme_codes;26;Podotherapeuten
+specialisme_codes;94;Psychologische zorgverleners;specialisme_codes;94;Psychologische zorgverleners
+specialisme_codes;57;Physician assistant;specialisme_codes;57;Physician assistant
+specialisme_codes;85;Taxivervoerders;specialisme_codes;85;Taxivervoerders
+specialisme_codes;01;Huisartsen;specialisme_codes;01;Huisartsen
+specialisme_codes;93;Tandtechnici / tandprothetici;specialisme_codes;93;Tandtechnici / tandprothetici
+specialisme_codes;24;Dietisten;specialisme_codes;24;Dietisten
+specialisme_codes;03;Medisch specialisten;specialisme_codes;03;Medisch specialisten
+specialisme_codes;87;Mondhygienisten;specialisme_codes;87;Mondhygienisten
+specialisme_codes;44;Optometristen;specialisme_codes;44;Optometristen
+specialisme_codes;98;Declaranten;specialisme_codes;98;Declaranten
+specialisme_codes;89;Schoonheidsspecialistes;specialisme_codes;89;Schoonheidsspecialistes
+specialisme_codes;90;Genezers;specialisme_codes;90;Genezers
+specialisme_codes;88;Ergotherapeuten;specialisme_codes;88;Ergotherapeuten
+vektis_verbijzonderingscodes;03-22;Longziekten;vektis_verbijzonderingscodes;03-22;Longziekten
+vektis_verbijzonderingscodes;03-28;Cardio-pulmonale chirurgie;vektis_verbijzonderingscodes;03-28;Cardio-pulmonale chirurgie
+vektis_verbijzonderingscodes;04-02;Heilgymnastiek/massage;vektis_verbijzonderingscodes;04-02;Heilgymnastiek/massage
+vektis_verbijzonderingscodes;03-20;Cardiologie;vektis_verbijzonderingscodes;03-20;Cardiologie
+vektis_verbijzonderingscodes;03-27;Revalidatie;vektis_verbijzonderingscodes;03-27;Revalidatie
+vektis_verbijzonderingscodes;90-03;Acupunctuur;vektis_verbijzonderingscodes;90-03;Acupunctuur
+vektis_verbijzonderingscodes;03-24;Reumatologie;vektis_verbijzonderingscodes;03-24;Reumatologie
+vektis_verbijzonderingscodes;01-10;Apotheekhoudend;vektis_verbijzonderingscodes;01-10;Apotheekhoudend
+vektis_verbijzonderingscodes;94-05;Klinisch psycholoog;vektis_verbijzonderingscodes;94-05;Klinisch psycholoog
+vektis_verbijzonderingscodes;90-09;Enzymtherapie;vektis_verbijzonderingscodes;90-09;Enzymtherapie
+vektis_verbijzonderingscodes;90-12;Osteopathie geneeswijze;vektis_verbijzonderingscodes;90-12;Osteopathie geneeswijze
+vektis_verbijzonderingscodes;90-10;Manuele geneeskunst;vektis_verbijzonderingscodes;90-10;Manuele geneeskunst
+vektis_verbijzonderingscodes;01-01;Niet apotheekhoudend;vektis_verbijzonderingscodes;01-01;Niet apotheekhoudend
+vektis_verbijzonderingscodes;90-01;Chiropratici;vektis_verbijzonderingscodes;90-01;Chiropratici
+vektis_verbijzonderingscodes;84-07;Antroposofische geneeskunde;vektis_verbijzonderingscodes;84-07;Antroposofische geneeskunde
+vektis_verbijzonderingscodes;03-01;Oogheelkunde medisch specialist);vektis_verbijzonderingscodes;03-01;Oogheelkunde medisch specialist)
+vektis_verbijzonderingscodes;03-08;Neurochirurgie;vektis_verbijzonderingscodes;03-08;Neurochirurgie
+vektis_verbijzonderingscodes;03-05;Orthopedie;vektis_verbijzonderingscodes;03-05;Orthopedie
+vektis_verbijzonderingscodes;90-04;Iriscopie;vektis_verbijzonderingscodes;90-04;Iriscopie
+vektis_verbijzonderingscodes;03-61;Radiotherapie;vektis_verbijzonderingscodes;03-61;Radiotherapie
+vektis_verbijzonderingscodes;94-02;Psychotherapeuten;vektis_verbijzonderingscodes;94-02;Psychotherapeuten
+vektis_verbijzonderingscodes;90-16;Orthomoleculair;vektis_verbijzonderingscodes;90-16;Orthomoleculair
+vektis_verbijzonderingscodes;03-18;Gastro-enterologie;vektis_verbijzonderingscodes;03-18;Gastro-enterologie
+vektis_verbijzonderingscodes;89-03;Elektrisch epileren;vektis_verbijzonderingscodes;89-03;Elektrisch epileren
+vektis_verbijzonderingscodes;03-89;Anesthesiologie;vektis_verbijzonderingscodes;03-89;Anesthesiologie
+vektis_verbijzonderingscodes;03-86;Klinische chemie;vektis_verbijzonderingscodes;03-86;Klinische chemie
+vektis_verbijzonderingscodes;94-04;Kinder- en jeugd psycholoog;vektis_verbijzonderingscodes;94-04;Kinder- en jeugd psycholoog
+vektis_verbijzonderingscodes;84-13;Flebologie/proctologie;vektis_verbijzonderingscodes;84-13;Flebologie/proctologie
+vektis_verbijzonderingscodes;03-09;Zenuw - en zielsziekten;vektis_verbijzonderingscodes;03-09;Zenuw - en zielsziekten
+vektis_verbijzonderingscodes;90-11;Haptonomie;vektis_verbijzonderingscodes;90-11;Haptonomie
+vektis_verbijzonderingscodes;03-10;Dermatologie;vektis_verbijzonderingscodes;03-10;Dermatologie
+vektis_verbijzonderingscodes;84-06;Natuurgeneeskunde;vektis_verbijzonderingscodes;84-06;Natuurgeneeskunde
+vektis_verbijzonderingscodes;90-06;Natuurgeneeskunde;vektis_verbijzonderingscodes;90-06;Natuurgeneeskunde
+vektis_verbijzonderingscodes;07-01;Methode Cesar;vektis_verbijzonderingscodes;07-01;Methode Cesar
+vektis_verbijzonderingscodes;90-07;Antroposofische geneeskunde;vektis_verbijzonderingscodes;90-07;Antroposofische geneeskunde
+vektis_verbijzonderingscodes;89-01;Acn�;vektis_verbijzonderingscodes;89-01;Acn�
+vektis_verbijzonderingscodes;03-04;Plastische chirurgie;vektis_verbijzonderingscodes;03-04;Plastische chirurgie
+vektis_verbijzonderingscodes;84-20;Consultatieburoarts;vektis_verbijzonderingscodes;84-20;Consultatieburoarts
+vektis_verbijzonderingscodes;03-90;Klinische Genetica;vektis_verbijzonderingscodes;03-90;Klinische Genetica
+vektis_verbijzonderingscodes;03-88;Pathologische anatomie;vektis_verbijzonderingscodes;03-88;Pathologische anatomie
+vektis_verbijzonderingscodes;90-02;Orthomanuele geneeskunde;vektis_verbijzonderingscodes;90-02;Orthomanuele geneeskunde
+vektis_verbijzonderingscodes;03-29;Psychiatrie;vektis_verbijzonderingscodes;03-29;Psychiatrie
+vektis_verbijzonderingscodes;90-14;Kunstzinnig therapeuten;vektis_verbijzonderingscodes;90-14;Kunstzinnig therapeuten
+vektis_verbijzonderingscodes;84-14;Orthomoleculair;vektis_verbijzonderingscodes;84-14;Orthomoleculair
+vektis_verbijzonderingscodes;01-20;Alternatieve huisarts;vektis_verbijzonderingscodes;01-20;Alternatieve huisarts
+vektis_verbijzonderingscodes;84-21;SCEN-arts;vektis_verbijzonderingscodes;84-21;SCEN-arts
+vektis_verbijzonderingscodes;84-09;Enzymtherapie;vektis_verbijzonderingscodes;84-09;Enzymtherapie
+vektis_verbijzonderingscodes;94-01;Eerste lijns psychologen;vektis_verbijzonderingscodes;94-01;Eerste lijns psychologen
+vektis_verbijzonderingscodes;03-63;Nucleaire geneeskunde;vektis_verbijzonderingscodes;03-63;Nucleaire geneeskunde
+vektis_verbijzonderingscodes;84-10;Manuele geneeskunde;vektis_verbijzonderingscodes;84-10;Manuele geneeskunde
+vektis_verbijzonderingscodes;03-03;Chirurgie;vektis_verbijzonderingscodes;03-03;Chirurgie
+vektis_verbijzonderingscodes;05-01;Logopedie;vektis_verbijzonderingscodes;05-01;Logopedie
+vektis_verbijzonderingscodes;84-05;Homeopathie;vektis_verbijzonderingscodes;84-05;Homeopathie
+vektis_verbijzonderingscodes;84-16;Sportgeneeskunde/sportarts;vektis_verbijzonderingscodes;84-16;Sportgeneeskunde/sportarts
+vektis_verbijzonderingscodes;03-87;Medische microbiologie;vektis_verbijzonderingscodes;03-87;Medische microbiologie
+vektis_verbijzonderingscodes;03-62;Radiologie;vektis_verbijzonderingscodes;03-62;Radiologie
+vektis_verbijzonderingscodes;03-26;Allergologie;vektis_verbijzonderingscodes;03-26;Allergologie
+vektis_verbijzonderingscodes;90-13;Huidtherapie;vektis_verbijzonderingscodes;90-13;Huidtherapie
+vektis_verbijzonderingscodes;84-03;Acupunctuur;vektis_verbijzonderingscodes;84-03;Acupunctuur
+vektis_verbijzonderingscodes;94-06;Gezondheidszorgpsycholoog;vektis_verbijzonderingscodes;94-06;Gezondheidszorgpsycholoog
+vektis_verbijzonderingscodes;03-06;Urologie;vektis_verbijzonderingscodes;03-06;Urologie
+vektis_verbijzonderingscodes;84-19;Schoolarts;vektis_verbijzonderingscodes;84-19;Schoolarts
+vektis_verbijzonderingscodes;84-01;Chiropractici;vektis_verbijzonderingscodes;84-01;Chiropractici
+vektis_verbijzonderingscodes;03-30;Neurologie;vektis_verbijzonderingscodes;03-30;Neurologie
+vektis_verbijzonderingscodes;03-13;Inwendige geneeskunde;vektis_verbijzonderingscodes;03-13;Inwendige geneeskunde
+vektis_verbijzonderingscodes;84-17;EHBO-arts;vektis_verbijzonderingscodes;84-17;EHBO-arts
+vektis_verbijzonderingscodes;03-16;Kindergeneeskunde;vektis_verbijzonderingscodes;03-16;Kindergeneeskunde
+vektis_verbijzonderingscodes;84-15;Neuraal therapeut;vektis_verbijzonderingscodes;84-15;Neuraal therapeut
+vektis_verbijzonderingscodes;84-04;Iriscopie;vektis_verbijzonderingscodes;84-04;Iriscopie
+vektis_verbijzonderingscodes;84-08;Moermantherapie;vektis_verbijzonderingscodes;84-08;Moermantherapie
+vektis_verbijzonderingscodes;90-08;Moermantherapie;vektis_verbijzonderingscodes;90-08;Moermantherapie
+vektis_verbijzonderingscodes;05-02;Foniatrie;vektis_verbijzonderingscodes;05-02;Foniatrie
+vektis_verbijzonderingscodes;03-02;Keel-,neus- en oorheelkunde;vektis_verbijzonderingscodes;03-02;Keel-,neus- en oorheelkunde
+vektis_verbijzonderingscodes;07-02;Methode Mensendieck;vektis_verbijzonderingscodes;07-02;Methode Mensendieck
+vektis_verbijzonderingscodes;84-11;Haptonomie;vektis_verbijzonderingscodes;84-11;Haptonomie
+vektis_verbijzonderingscodes;04-01;Fysiotherapie;vektis_verbijzonderingscodes;04-01;Fysiotherapie
+vektis_verbijzonderingscodes;84-12;Osteopathie geneeswijze;vektis_verbijzonderingscodes;84-12;Osteopathie geneeswijze
+vektis_verbijzonderingscodes;90-05;Homeopathie;vektis_verbijzonderingscodes;90-05;Homeopathie
+vektis_verbijzonderingscodes;84-18;Verpleeghuisarts;vektis_verbijzonderingscodes;84-18;Verpleeghuisarts
+vektis_verbijzonderingscodes;94-03;Seksuologen;vektis_verbijzonderingscodes;94-03;Seksuologen
+vektis_verbijzonderingscodes;93-01;Tandprothetici;vektis_verbijzonderingscodes;93-01;Tandprothetici
+vektis_verbijzonderingscodes;84-02;Orthomanuele geneeskunde;vektis_verbijzonderingscodes;84-02;Orthomanuele geneeskunde
+vektis_verbijzonderingscodes;90-15;Podotherapie;vektis_verbijzonderingscodes;90-15;Podotherapie
+vektis_verbijzonderingscodes;93-02;Tandtechnici;vektis_verbijzonderingscodes;93-02;Tandtechnici
+vektis_verbijzonderingscodes;08-01;Bevoegdheid echoscopie;vektis_verbijzonderingscodes;08-01;Bevoegdheid echoscopie
+vektis_verbijzonderingscodes;03-07;Verloskunde en gynaecologie;vektis_verbijzonderingscodes;03-07;Verloskunde en gynaecologie
+vektis_verbijzonderingscodes;89-02;Camouflage;vektis_verbijzonderingscodes;89-02;Camouflage
+vektis_verbijzonderingscodes;03-35;Geriatrie;vektis_verbijzonderingscodes;03-35;Geriatrie

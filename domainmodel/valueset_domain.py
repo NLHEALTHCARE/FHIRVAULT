@@ -1,4 +1,8 @@
-class RefTypes:
+from pyelt.datalayers.database import Columns
+from pyelt.datalayers.dv import DvEntity, Sat, Link, LinkReference, DvValueset
+
+
+class ValueSetsEnum:
     """Referentie types omvatten alle code systems en value sets die binnen het NL Healthcare domein model worden gebruikt.
 
     De codes worden gebruikts in de SATs. Door de joinen op de referentie tabellen kunnen omschrijvingen, hierachieen
@@ -83,5 +87,101 @@ class RefTypes:
 
 
 
+class Valueset(DvValueset):
+    valueset_naam = Columns.TextColumn()
+    code = Columns.TextColumn()
+    omschrijving = Columns.TextColumn()
 
 
+class Zorgproductgroep(DvValueset):
+    """Standaard definitie nog opzoeken.
+    """
+    _schema_name = 'valset'
+
+    code = Columns.TextColumn()
+    omschrijving = Columns.TextColumn()
+    ingangsdatum = Columns.DateColumn()
+    einddatum = Columns.DateColumn()
+
+class Tarief(DvValueset):
+    """Standaard definitie nog opzoeken.
+    """
+    _schema_name = 'valset'
+
+    code = Columns.TextColumn()
+    omschrijving = Columns.TextColumn()
+    declaratiecode = Columns.TextColumn()
+    omschrijving_declaratiecode = Columns.TextColumn()
+    ingangsdatum = Columns.DateColumn()
+    einddatum = Columns.DateColumn()
+    specialisme_code = Columns.RefColumn('specialismen')
+    agb_uitvoerder= Columns.TextColumn()
+    productgroepcode= Columns.TextColumn()
+    tarief= Columns.FloatColumn()
+    kostensoort= Columns.RefColumn('kostensoorten')
+    tarieftype= Columns.RefColumn('tarieftypes')
+    declaratie_eenheid= Columns.RefColumn('declaratie_eenheden')
+    tariefsoort= Columns.RefColumn('tariefsoorten')
+    segment_aanduiding= Columns.TextColumn()
+    honorarium_soort= Columns.RefColumn('honorarium_soorten')
+    declaratie_regel= Columns.TextColumn()
+
+
+class Zorgactiviteit(DvValueset):
+    """Standaard definitie nog opzoeken.
+    """
+    _schema_name = 'valset'
+
+    code = Columns.TextColumn()
+    omschrijving = Columns.TextColumn()
+    ingangsdatum = Columns.DateColumn()
+    einddatum = Columns.DateColumn()
+    omschrijving_consument = Columns.TextColumn()
+    op_nota = Columns.BoolColumn()
+    extra = Columns.JsonColumn()
+
+class DiagnoseCombinatie(DvValueset):
+    """Standaard definitie nog opzoeken.
+    """
+    _schema_name = 'valset'
+    code = Columns.TextColumn()
+    dbc1 = Columns.TextColumn()
+    dbc2 = Columns.TextColumn()
+    omschrijving = Columns.TextColumn()
+    ingangsdatum = Columns.DateColumn()
+    einddatum = Columns.DateColumn()
+    indicatie = Columns.TextColumn()
+    specialisme_code = Columns.RefColumn('specialismen')
+
+class AfsluitRegel(Valueset):
+    """Standaard definitie nog opzoeken.
+    """
+    _schema_name = 'valset'
+
+    code = Columns.TextColumn()
+    omschrijving = Columns.TextColumn()
+    ingangsdatum = Columns.DateColumn()
+    einddatum = Columns.DateColumn()
+    specialisme_code = Columns.RefColumn('specialismen')
+    component_types = Columns.RefColumn('afsluitregel_component_types')
+    component_code = Columns.TextColumn()
+    groepsnummer = Columns.TextColumn()
+
+class AfsluitReden(DvValueset):
+    """Standaard definitie nog opzoeken.
+    """
+    _schema_name = 'valset'
+
+    code = Columns.TextColumn()
+    omschrijving = Columns.TextColumn()
+    omschrijving_kort = Columns.TextColumn()
+    ingangsdatum = Columns.DateColumn()
+    einddatum = Columns.DateColumn()
+
+###########################
+#LINKS
+###########################
+# class ZorgproductgroepTariefLink(Link):
+#     _schema_name = 'valset'
+#     zorgproductgroep = LinkReference(Zorgproductgroep)
+#     tarief = LinkReference(Tarief)

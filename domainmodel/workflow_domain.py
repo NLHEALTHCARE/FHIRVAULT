@@ -1,5 +1,5 @@
 from domainmodel.identity_domain import *
-from domainmodel.reftypes import RefTypes
+from domainmodel.valueset_domain import ValueSetsEnum
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Link, Sat, LinkReference
 
@@ -17,15 +17,15 @@ class Subtraject(DvEntity):
     """FHIR Resource = EisodeOfCare
     """
     class Default(Sat):
-        behandelend_specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
-        diagnose_code = Columns.RefColumn(RefTypes.dbc_diagnoses)
-        zorgtype = Columns.RefColumn(RefTypes.dbc_zorgtypes)
-        zorgvraag = Columns.RefColumn(RefTypes.dbc_zorgvraag_codes)
+        behandelend_specialisme = Columns.RefColumn(ValueSetsEnum.specialisme_codes)
+        diagnose_code = Columns.RefColumn(ValueSetsEnum.dbc_diagnoses)
+        zorgtype = Columns.RefColumn(ValueSetsEnum.dbc_zorgtypes)
+        zorgvraag = Columns.RefColumn(ValueSetsEnum.dbc_zorgvraag_codes)
         begindatum = Columns.DateColumn()
         einddatum = Columns.DateColumn()
-        verwijscode = Columns.RefColumn(RefTypes.dbc_verwijscodes)
-        zorgproduct_code = Columns.RefColumn(RefTypes.dbc_zorgproducten)
-        declaratie_code = Columns.RefColumn(RefTypes.dbc_declaraties)
+        verwijscode = Columns.RefColumn(ValueSetsEnum.dbc_verwijscodes)
+        zorgproduct_code = Columns.RefColumn(ValueSetsEnum.dbc_zorgproducten)
+        declaratie_code = Columns.RefColumn(ValueSetsEnum.dbc_declaraties)
         icd10_diagnose = Columns.TextColumn()
         behandeling_naam = Columns.TextColumn()
         behandeling_zijde = Columns.TextColumn()
@@ -33,8 +33,8 @@ class Subtraject(DvEntity):
         uzovinummer = Columns.TextColumn()
 
     class Status(Sat):
-        status = Columns.TextColumn(RefTypes.subtraject_status)
-        afsluitreden = Columns.RefColumn(RefTypes.dbc_afsluitredenen)
+        status = Columns.TextColumn(ValueSetsEnum.subtraject_status)
+        afsluitreden = Columns.RefColumn(ValueSetsEnum.dbc_afsluitredenen)
 
     # Sat met keys
     class Identificatie(Sat):

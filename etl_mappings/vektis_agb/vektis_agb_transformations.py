@@ -28,6 +28,13 @@ class VektisTransformations():
         transform.new_step("CASE WHEN {fld} = '1' THEN 'm' WHEN {fld} = '2' THEN 'v' ELSE 'o' END")
         return transform
 
+    @staticmethod
+    def agb_to_valueset_code(field, valueset):
+        transform = FieldTransformation()
+        transform.field_name = field
+        transform.new_step("(SELECT target_code FROM sor_vektis.valueset_translations_hstage WHERE source_valueset = '" + valueset + "' AND source_code = {fld} AND _active)")
+        return transform
+
 # transform = FieldTransformation('BK zorgverlener')
 # transform.steps['1'] = FieldTransformStep(1, 'make 6 positions, add zero to the left', "lpad({fld}, 6, '0')")
 # transform.steps['2'] = FieldTransformStep(2, 'concat zorgverlenersoort', "CONCAT(lpad(zorgverlenersoort, 2, '0'), {fld})")

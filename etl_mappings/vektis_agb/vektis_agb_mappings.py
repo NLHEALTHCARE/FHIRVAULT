@@ -2,11 +2,11 @@ import glob
 import os
 
 from domainmodel.identity_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZorgaanbiederLink
+from domainmodel.valueset_domain import Valueset
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
-from etl_mappings.vektis_agb.vektis_agb_reference_data import vektis_ref_data
 from etl_mappings.vektis_agb.vektis_agb_transformations import VektisTransformations
 from pyelt.mappings.base import ConstantValue
-from pyelt.mappings.sor_to_dv_mappings import SorToLinkMapping, SorToRefMapping, SorToEntityMapping
+from pyelt.mappings.sor_to_dv_mappings import SorToLinkMapping, SorToValueSetMapping, SorToEntityMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.sources.files import CsvFile
 
@@ -37,16 +37,30 @@ def init_source_to_sor_mappings(path):
         target_table = '{}_hstage'.format(def_name).lower()
         sor_mapping = SourceToSorMapping(source_file, target_table, auto_map=True)
         mappings.append(sor_mapping)
+
+    # VALUESETS
+    path = os.path.dirname(os.path.abspath(__file__))
+    source_file = CsvFile('{}/vektis_agb_valueset_data.csv'.format(path), delimiter=';', encoding='utf8')
+    source_file.reflect()
+    source_file.set_primary_key(['source_code'])
+    target_table = 'valueset_translations_hstage'.format(def_name).lower()
+    sor_mapping = SourceToSorMapping(source_file, target_table, auto_map=True)
+    mappings.append(sor_mapping)
     return mappings
 
 
-def init_sor_to_ref_mappings(pipe):
+def init_sor_to_valuesets_mappings(pipe):
     mappings = []
-    for key, items in vektis_ref_data.items():
-        ref_mapping = SorToRefMapping(items, key)
-        mappings.append(ref_mapping)
+    mapping = SorToValueSetMapping('valueset_translations_hstage', Valueset)
+    mapping.map_field("target_valueset", Valueset.valueset_naam)
+    mapping.map_field("target_code", Valueset.code)
+    mapping.map_field("target_descr", Valueset.omschrijving)
+    mappings.append(mapping)
+    #
+    # for key, items in vektis_valuesets_data.items():
+    #     ref_mapping = SorToValueSetMapping(items, key)
+    #     mappings.append(ref_mapping)
     return mappings
-
 
 def init_sor_to_dv_mappings(pipe):
     mappings = []
@@ -57,7 +71,7 @@ def init_sor_to_dv_mappings(pipe):
     mapping.map_bk(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
     #Default-sat
     mapping.map_field(VektisTransformations.text_to_date_transform('geboortedatum'), Zorgverlener.Default.geboortedatum)
-    mapping.map_field("geslacht", Zorgverlener.Default.geslacht_code);
+    mapping.map_field(VektisTransformations.agb_to_valueset_code("geslacht", 'geslacht_types'), Zorgverlener.Default.geslacht_code);
     # Identificatie-sat
     mapping.map_field(VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'), Zorgverlener.Identificatie.agb_code)
     # Naamgegevens-sat

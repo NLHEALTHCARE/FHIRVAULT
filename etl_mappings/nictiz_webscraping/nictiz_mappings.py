@@ -1,4 +1,4 @@
-from pyelt.mappings.sor_to_dv_mappings import SorToRefMapping
+from pyelt.mappings.sor_to_dv_mappings import SorToValueSetMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.mappings.validations import SorValidation
 from pyelt.sources.files import CsvFile
@@ -33,7 +33,7 @@ def init_sor_to_dv_mappings():
     ###############################
     # valuesets
     ###############################
-    ref_mapping = SorToRefMapping('valuesets_hstage')
+    ref_mapping = SorToValueSetMapping('valuesets_hstage')
     ref_mapping.map_code_field('code')
     ref_mapping.map_descr_field('displayName')
     ref_mapping.map_type_field('valueset', 'id')

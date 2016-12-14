@@ -17,7 +17,7 @@ class EpisodeOfCare(DvEntity):
 
     class Default(Sat):
         status = Columns.TextColumn()
-        type = Columns.TextArrayColumn()
+        _type = Columns.TextArrayColumn()
         period = Columns.FHIR.PeriodColumn()
 
     class Identifier(HybridSat):
@@ -130,7 +130,7 @@ class EncounterParticipantLink(Link):
     practitioner = LinkReference(Practitioner)
 
     class Default(Sat):
-        type = Columns.FHIR.CodeableConceptColumn()
+        _type = Columns.FHIR.CodeableConceptColumn()
         period = Columns.FHIR.PeriodColumn
 
 

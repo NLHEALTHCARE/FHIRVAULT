@@ -1,4 +1,4 @@
-from domainmodel.reftypes import RefTypes
+from domainmodel.valueset_domain import ValueSetsEnum
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Link, Sat, HybridSat, LinkReference
 
@@ -27,7 +27,7 @@ class Tarieven(DvEntity):
         bron_id = Columns.TextColumn()
 
 
-# https://www.hl7.org/fhir/patient.html
+
 class Patient(DvEntity):
     """https://zibs.nl/wiki/Patient
 
@@ -35,9 +35,10 @@ class Patient(DvEntity):
     Business Key (alternatief): AGB-code zorgaanbieder (8) + BSN (9) + geboortedatum (ISO, 8) + geslachtcode (1)  (26 cijfers)
     """
 
+
     class Default(Sat):
         geboortedatum = Columns.DateColumn()
-        geslacht_code = Columns.RefColumn(RefTypes.geslacht_types)
+        geslacht_code = Columns.RefColumn(ValueSetsEnum.geslacht_types)
         meerling_indicator = Columns.TextColumn()
         overlijdens_indicator = Columns.TextColumn()
         datum_overlijden = Columns.DateTimeColumn()
@@ -48,7 +49,6 @@ class Patient(DvEntity):
         bron_id = Columns.TextColumn()
 
     class IdentificatieBewijs(HybridSat):
-
         class Types(HybridSat.Types):
             bsn = 'BSN'
             rijbewijs = 'rijbewijs'
@@ -63,7 +63,7 @@ class Patient(DvEntity):
         initialen = Columns.TextColumn()
         voornamen = Columns.TextColumn()
         roepnaam = Columns.TextColumn()
-        naamgebruik_code = Columns.RefColumn(RefTypes.naamgebruik_codes)
+        naamgebruik_code = Columns.RefColumn(ValueSetsEnum.naamgebruik_codes)
         geslachtsnaam = Columns.TextColumn()
         geslachtsnaam_voorvoegsels = Columns.TextColumn()
         partner_geslachtsnaam = Columns.TextColumn()
@@ -87,7 +87,7 @@ class Patient(DvEntity):
         aanduiding_bij_nummer_code = Columns.TextColumn()
         woonplaats = Columns.TextColumn()
         gemeente = Columns.TextColumn()
-        land_code = Columns.RefColumn(RefTypes.land_codes)
+        land_code = Columns.RefColumn(ValueSetsEnum.land_codes)
         postcode = Columns.TextColumn()
         additionele_informatie = Columns.TextColumn()
 
@@ -131,6 +131,10 @@ class Patient(DvEntity):
         rekeningnummer = Columns.TextColumn()
 
 
+
+
+
+
 class Medewerker(DvEntity):
     """Standaard definitie nog opzoeken.
 
@@ -139,7 +143,7 @@ class Medewerker(DvEntity):
 
     class Default(Sat):
         geboortedatum = Columns.DateColumn()
-        geslacht_code = Columns.RefColumn(RefTypes.geslacht_types)
+        geslacht_code = Columns.RefColumn(ValueSetsEnum.geslacht_types)
 
     class Sleutels(Sat):
         medewerker_nummer = Columns.TextColumn()
@@ -162,15 +166,15 @@ class Medewerker(DvEntity):
         datum_einde_beroep = Columns.DateColumn()
         is_hoogleraar = Columns.BoolColumn()
         reden_einde_beroep = Columns.TextColumn()
-        specialisme_code = Columns.RefColumn(RefTypes.specialisme_codes)
-        specialisme_bijzondering_code = Columns.RefColumn(RefTypes.specialisme_details_codes)
+        specialisme_code = Columns.RefColumn(ValueSetsEnum.specialisme_codes)
+        specialisme_bijzondering_code = Columns.RefColumn(ValueSetsEnum.specialisme_details_codes)
 
     class Naamgegevens(Sat):
         """Container voor naamgegevens"""
         initialen = Columns.TextColumn()
         voornamen = Columns.TextColumn()
         roepnaam = Columns.TextColumn()
-        naamgebruik_code = Columns.RefColumn(RefTypes.naamgebruik_codes)
+        naamgebruik_code = Columns.RefColumn(ValueSetsEnum.naamgebruik_codes)
         geslachtsnaam = Columns.TextColumn()
         geslachtsnaam_voorvoegsels = Columns.TextColumn()
         partner_geslachtsnaam = Columns.TextColumn()
@@ -194,7 +198,7 @@ class Medewerker(DvEntity):
         aanduiding_bij_nummer_code = Columns.TextColumn()
         woonplaats = Columns.TextColumn()
         gemeente = Columns.TextColumn()
-        land_code = Columns.RefColumn(RefTypes.land_codes)
+        land_code = Columns.RefColumn(ValueSetsEnum.land_codes)
         postcode = Columns.TextColumn()
         additionele_informatie = Columns.TextColumn()
 
@@ -237,26 +241,27 @@ class Zorgverlener(Medewerker):
         agb_code = Columns.TextColumn()
         big_code = Columns.TextColumn()
         uzi_nummer = Columns.TextColumn()
-        specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
-
+        specialisme = Columns.RefColumn(ValueSetsEnum.specialisme_codes)
 
 class Organisatie(DvEntity):
 
     class Default(Sat):
         naam = Columns.TextColumn()
         extra_naam = Columns.TextColumn()
-        organisatie_type = Columns.RefColumn(RefTypes.organisatie_types)
-        specialisme_code = Columns.RefColumn(RefTypes.specialisme_codes)
+        organisatie_type = Columns.RefColumn(ValueSetsEnum.organisatie_types)
+        specialisme_code = Columns.RefColumn(ValueSetsEnum.specialisme_codes)
 
 
     class Adres(HybridSat):
         class Types(HybridSat.Types):
-            PHYS = 'woonadres'
-            PST = 'postadres'
-            HP = 'officieel adres'
-            TMP = 'tijdelijk adres'
-            WP = 'werkadres'
-            HV = 'vakantieadres'
+            woonadres = 'woonadres'  # HP
+            postadres = 'postadres'  # PST
+            officieel_adres = 'officieel adres'  # HP ??
+            tijdelijk_adres = 'tijdelijk adres'  # TMP
+            bezoek_adres = 'bezoek_adres adres'  # PHYS
+            werkadres = 'werkadres'  # WP
+            vakantieadres = 'vakantieadres'  # HV
+            factuuradres = 'factuuradres'  # staat niet in nictiz
 
         straat = Columns.TextColumn()
         huisnummer = Columns.IntColumn()
@@ -265,7 +270,7 @@ class Organisatie(DvEntity):
         aanduiding_bij_nummer_code = Columns.TextColumn()
         woonplaats = Columns.TextColumn()
         gemeente = Columns.TextColumn()
-        land_code = Columns.RefColumn(RefTypes.land_codes)
+        land_code = Columns.RefColumn(ValueSetsEnum.land_codes)
         postcode = Columns.TextColumn()
         additionele_informatie = Columns.TextColumn()
 
@@ -326,7 +331,7 @@ class Zorgaanbieder(Organisatie):
         organisatievorm = Columns.TextColumn()
 
 
-class Vestiging(Zorgaanbieder):
+class Vestiging(Organisatie):
     """
     Identificeerbare vestigingen, zijnde een unieke combinatie van een:
       - zorgaanbieder
@@ -396,7 +401,7 @@ class Zorginkoopcombinatie(DvEntity):
     """
 
     class Default(Sat):
-        naam = Columns.RefColumn(RefTypes.zorginkoopcombinatie_codes)
+        naam = Columns.RefColumn(ValueSetsEnum.zorginkoopcombinatie_codes)
 
 
 ########################################################################################################################
@@ -422,7 +427,7 @@ class ZorgverlenerZorgaanbiederLink(Link):
     zorgverlener = LinkReference(Zorgverlener)
     zorgaanbieder = LinkReference(Zorgaanbieder)
 
-    #todo: kenmerken uit Vektis AGB database aan linktabel toevoegen
+    #to do: kenmerken uit Vektis AGB database aan linktabel toevoegen
     class Default(Sat):
         datum_toetreding = Columns.DateColumn()
         datum_uittreding = Columns.DateColumn()
@@ -442,7 +447,6 @@ class ZorgaanbiederAfdelingLink(Link):
     """
     afdeling = LinkReference(Afdeling)
     zorgaanbieder = LinkReference(Zorgaanbieder)
-
 
 
 class ZorginkoopcombinatieLink(Link):

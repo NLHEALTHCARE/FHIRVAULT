@@ -7,7 +7,7 @@ from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
 from etl_mappings.vektis_agb.vektis_agb_reference_data import vektis_ref_data
 from etl_mappings.vektis_agb.vektis_agb_transformations import VektisTransformations
 from pyelt.mappings.base import ConstantValue
-from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping, SorToRefMapping, EntityViewToEntityMapping, EntityViewToLinkMapping, \
+from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToLinkMapping, SorToValueSetMapping, EntityViewToEntityMapping, EntityViewToLinkMapping, \
     SorToEntityMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.mappings.transformations import FieldTransformation
@@ -50,7 +50,7 @@ def init_source_to_sor_mappings(path):
 def init_sor_to_ref_mappings(pipe):
     mappings = []
     for key, items in vektis_ref_data.items():
-        ref_mapping = SorToRefMapping(items, key)
+        ref_mapping = SorToValueSetMapping(items, key)
         mappings.append(ref_mapping)
     return mappings
 

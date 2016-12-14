@@ -53,7 +53,7 @@ class Subtraject(DvEntity):
 
     class Kenmerken(Sat):
         "Kenmerken die worden achteraf afgeleid op basis van aanwezigheid zorgactiviteiten"
-        type = Columns.RefColumn("subtraject_types")  # bijvoorbeeld dbc zorgproduct of add on zorg activiteit
+        _type = Columns.RefColumn("subtraject_types")  # bijvoorbeeld dbc zorgproduct of add on zorg activiteit
         is_aanspraak_zvw = Columns.BoolColumn()
         is_aanspraak_zvw_toegepast = Columns.BoolColumn()
         heeft_za_machtiging = Columns.BoolColumn()

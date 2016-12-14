@@ -1,6 +1,6 @@
 from etl_mappings.dbc.dbc_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings
 from pyelt.pipeline import Pipeline
-from domainmodel import ref_domain
+from domainmodel import valueset_domain
 
 __author__ = 'hvreenen'
 

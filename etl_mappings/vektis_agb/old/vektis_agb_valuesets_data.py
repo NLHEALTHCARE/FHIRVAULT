@@ -1,37 +1,35 @@
-from domainmodel.reftypes import RefTypes
+from domainmodel.valueset_domain import ValueSetsEnum
 
-__author__ = 'hvreenen'
-# vektis_ref_data = {}
-vektis_ref_data = {RefTypes.specialisme_codes: {'01': 'Huisartsen',
+vektis_valuesets_data = {ValueSetsEnum.specialisme_codes: {'01': 'Huisartsen',
                                                 '02': 'Apothekers',
                                                 '03': 'Medisch specialisten',
                                                 '04': 'Fysiotherapeuten',
                                                 '05': 'Logopedisten',
                                                 '07': 'Oefentherapeuten',
                                                 '08': 'Verloskundigen',
-                                                '11': 'Tandarts-specialisten mondziekten en kaakchirurgie)',
-                                                '12': 'Tandartsen',
-                                                '13': 'Tandarts-specialisten dento-maxillaire orthopedie)',
-                                                '14': 'Arts arbeid en gezondheid/bedrijfsgeneeskunde',
-                                                '17': 'Rechtspersonen',
-                                                '24': 'Dietisten',
-                                                '26': 'Podotherapeuten',
-                                                '44': 'Optometristen',
-                                                '57': 'Physician assistant',
-                                                '76': 'Leveranciers hulpmiddelen',
-                                                '84': 'Overige artsen',
-                                                '85': 'Taxivervoerders',
-                                                '87': 'Mondhygienisten',
-                                                '88': 'Ergotherapeuten',
-                                                '89': 'Schoonheidsspecialistes',
-                                                '90': 'Genezers',
-                                                '91': 'Verpleegkundigen',
-                                                '93': 'Tandtechnici / tandprothetici',
-                                                '94': 'Psychologische zorgverleners',
-                                                '96': 'Pedicuren',
-                                                '98': 'Declaranten'},
+                                                           '11': 'Tandarts-specialisten mondziekten en kaakchirurgie)',
+                                                           '12': 'Tandartsen',
+                                                           '13': 'Tandarts-specialisten dento-maxillaire orthopedie)',
+                                                           '14': 'Arts arbeid en gezondheid/bedrijfsgeneeskunde',
+                                                           '17': 'Rechtspersonen',
+                                                           '24': 'Dietisten',
+                                                           '26': 'Podotherapeuten',
+                                                           '44': 'Optometristen',
+                                                           '57': 'Physician assistant',
+                                                           '76': 'Leveranciers hulpmiddelen',
+                                                           '84': 'Overige artsen',
+                                                           '85': 'Taxivervoerders',
+                                                           '87': 'Mondhygienisten',
+                                                           '88': 'Ergotherapeuten',
+                                                           '89': 'Schoonheidsspecialistes',
+                                                           '90': 'Genezers',
+                                                           '91': 'Verpleegkundigen',
+                                                           '93': 'Tandtechnici / tandprothetici',
+                                                           '94': 'Psychologische zorgverleners',
+                                                           '96': 'Pedicuren',
+                                                           '98': 'Declaranten'},
 
-                   RefTypes.academische_titels: {'bc': 'Baccalaureus',
+                         ValueSetsEnum.academische_titels: {'bc': 'Baccalaureus',
                                                  'dr': 'Doctor',
                                                  'drs': 'Doctorandus',
                                                  'ing': 'Ingenieur HBO',
@@ -39,7 +37,7 @@ vektis_ref_data = {RefTypes.specialisme_codes: {'01': 'Huisartsen',
                                                  'm': 'Master',
                                                  'mr': 'Meester in de rechten WO'},
 
-                   RefTypes.adelijke_titels: {'B': 'Baron',
+                         ValueSetsEnum.adelijke_titels: {'B': 'Baron',
                                               'BS': 'Barones',
                                               'G': 'Graaf',
                                               'GI': 'Gravin',
@@ -54,18 +52,18 @@ vektis_ref_data = {RefTypes.specialisme_codes: {'01': 'Huisartsen',
                                               'R': 'Ridder',
                                               'PR': 'Professor'},
 
-                   RefTypes.geslacht_types: {'0': 'Onbekend',
+                         ValueSetsEnum.geslacht_types: {'0': 'Onbekend',
                                              '1': 'Man',
                                              '2': 'Vrouw',
                                              '9': 'Niet gespecificeerd'},
 
-                   RefTypes.vektis_praktijk_statussen:
+                         ValueSetsEnum.vektis_praktijk_statussen:
                        {'1': 'vrijgevestigd',
                         '2': 'vrijgevestigd medisch specialist, toelatingsovereenkomst getekend',
                         '3': 'in loondienst',
                         '4': 'vrijgevestigd medisch specialist, toelatingsovereenkomst getekend'},
 
-                   RefTypes.vektis_verbijzonderingscodes:
+                         ValueSetsEnum.vektis_verbijzonderingscodes:
                        {'01-01': 'Niet apotheekhoudend',
                         '01-10': 'Apotheekhoudend',
                         '01-20': 'Alternatieve huisarts',
@@ -154,3 +152,10 @@ vektis_ref_data = {RefTypes.specialisme_codes: {'01': 'Huisartsen',
                         '94-04': 'Kinder- en jeugd psycholoog',
                         '94-05': 'Klinisch psycholoog',
                         '94-06': 'Gezondheidszorgpsycholoog'}}
+
+if __name__ == '__main__':
+    print('source_valueset;source_code;source_code;target_valueset;target_code;target_descr')
+
+    for valset, dict in vektis_valuesets_data.items():
+        for code, descr in dict.items():
+            print('{0};{1};{2};{0};{1};{2}'.format(valset, code, descr))

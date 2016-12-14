@@ -86,7 +86,7 @@ class ReferralRequest(DvEntity):
 
         status = Columns.TextColumn(default_value=StatusTypes.unknown)
         date = Columns.DateTimeColumn()
-        type = Columns.FHIR.CodeableConceptColumn()
+        _type = Columns.FHIR.CodeableConceptColumn()
         specialty = Columns.FHIR.CodeableConceptColumn()
         priority = Columns.FHIR.CodeableConceptColumn()
         dateSent = Columns.DateTimeColumn

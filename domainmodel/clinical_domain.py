@@ -1,7 +1,7 @@
 
 from domainmodel.identity_domain import Patient, Zorgverlener, Zorgverzekeraar
 from domainmodel.workflow_domain import Subtraject, Zorgaanbieder
-from domainmodel.reftypes import RefTypes
+from domainmodel.valueset_domain import ValueSetsEnum
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import DvEntity, Link, Sat, HybridSat, LinkReference
 
@@ -18,21 +18,21 @@ class Zorgactiviteit(DvEntity):
         zorgtrajectnummer = Columns.TextColumn()
 
     class Default(Sat):
-        zorgactiviteitcode = Columns.RefColumn(RefTypes.dbc_zorgactiviteiten)
+        zorgactiviteitcode = Columns.RefColumn(ValueSetsEnum.dbc_zorgactiviteiten)
         interne_verrichtingcode = Columns.TextColumn()
         begindatumtijd = Columns.DateTimeColumn()
         einddatumtijd = Columns.DateTimeColumn()
         aantal = Columns.FloatColumn()
-        aanvragend_specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
-        uitvoerend_specialisme = Columns.RefColumn(RefTypes.specialisme_codes)
-        cbv_code = Columns.RefColumn(RefTypes.cbv_codes)  # CBV verrichtingcodes zijn veel uitgebreider dan DBC Zorgactiviteitcodes
+        aanvragend_specialisme = Columns.RefColumn(ValueSetsEnum.specialisme_codes)
+        uitvoerend_specialisme = Columns.RefColumn(ValueSetsEnum.specialisme_codes)
+        cbv_code = Columns.RefColumn(ValueSetsEnum.cbv_codes)  # CBV verrichtingcodes zijn veel uitgebreider dan DBC Zorgactiviteitcodes
         anatomische_locatie = Columns.TextColumn()
 
 
     #Todo: JVL naamgeving? wat doen we met OZP dan ook seperate SAT?
     class AddOn(Sat):
         "Kenmerken wanneer zorgactiviteit een los te declareren add-on betreft"
-        declaratiecode = Columns.RefColumn(RefTypes.dbc_declaraties)
+        declaratiecode = Columns.RefColumn(ValueSetsEnum.dbc_declaraties)
         add_on_informatie = Columns.TextColumn()
 
 class Diagnose(DvEntity):

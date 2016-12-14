@@ -33,7 +33,7 @@ class Claim(DvEntity):
 
         ruleset = Columns.FHIR.CodingColumn()
         originalruleset = Columns.FHIR.CodingColumn()
-        type = Columns.TextColumn()
+        _type = Columns.TextColumn()
         created = Columns.DateTimeColumn()
         use = Columns.TextColumn()
         priority = Columns.TextColumn()
@@ -126,7 +126,7 @@ class ClaimPayeeLink(Link):
             subscriber = 'subscriber'
             provider = 'provider'
             other = 'other'
-        type = Columns.TextColumn(default_value=Types.other)
+        _type = Columns.TextColumn(default_value=Types.other)
 
 
 class ClaimTargetOrganizationLink(Link):
