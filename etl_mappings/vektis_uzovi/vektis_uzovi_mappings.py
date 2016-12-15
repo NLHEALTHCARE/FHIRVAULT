@@ -36,24 +36,24 @@ def init_sor_to_dv_mappings(pipe):
     mapping.filter = "einddatum_relatie IS NULL"
     mappings.append(mapping)
 
-    # mapping = SorToEntityMapping('uzovi_hstage', Zorginkoopcombinatie, pipe.sor)
-    # mapping.map_bk(['coalesce(inkoopconcern, concern)'])
-    # mapping.map_field('coalesce(inkoopconcern, concern)', Zorginkoopcombinatie.Default.naam)
-    # mapping.filter = "coalesce(inkoopconcern, concern) is not null"
-    # mappings.append(mapping)
+    mapping = SorToEntityMapping('uzovi_hstage', Zorginkoopcombinatie, pipe.sor)
+    mapping.map_bk(['coalesce(inkoopconcern, concern)'])
+    mapping.map_field('coalesce(inkoopconcern, concern)', Zorginkoopcombinatie.Default.naam)
+    mapping.filter = "coalesce(inkoopconcern, concern) is not null"
+    mappings.append(mapping)
 
-    # link_mapping = SorToLinkMapping('uzovi_hstage', ZorginkoopcombinatieLink, pipe.sor)
-    # link_mapping.map_entity(ZorginkoopcombinatieLink.verzekeraar)
-    # link_mapping.map_entity(ZorginkoopcombinatieLink.inkoopcombinatie)
-    # mappings.append(link_mapping)
+    link_mapping = SorToLinkMapping('uzovi_hstage', ZorginkoopcombinatieLink, pipe.sor)
+    link_mapping.map_entity(ZorginkoopcombinatieLink.verzekeraar)
+    link_mapping.map_entity(ZorginkoopcombinatieLink.inkoopcombinatie)
+    mappings.append(link_mapping)
 
-    # link_mapping = SorToLinkMapping("uzovi_hstage", ZorgverzekeraarKoepelLink, pipe.sor)
-    # link_mapping.map_entity(ZorgverzekeraarKoepelLink.parent)
-    # link_mapping.map_entity(ZorgverzekeraarKoepelLink.child)
-    # # link_mapping.map_field('fk_zorgverzekeraar_hub', ZorgverzekeraarKoepelLink.parent)
-    # # link_mapping.map_field('relatie_met_uzovi_code', ZorgverzekeraarKoepelLink.child)
-    # link_mapping.filter = "relatierol = 'verzekeraar van'"
-    # mappings.append(link_mapping)
+    link_mapping = SorToLinkMapping("uzovi_hstage", ZorgverzekeraarKoepelLink, pipe.sor)
+    link_mapping.map_entity(ZorgverzekeraarKoepelLink.parent, 'uzovi_code')
+    link_mapping.map_entity(ZorgverzekeraarKoepelLink.child, 'relatie_met_uzovi_code')
+    # link_mapping.map_field'uzovi_code', ZorgverzekeraarKoepelLink.parent)
+    # link_mapping.map_field('relatie_met_uzovi_code', ZorgverzekeraarKoepelLink.child)
+    link_mapping.filter = "relatierol = 'verzekeraar van'"
+    mappings.append(link_mapping)
 
     # TODO BOVENSTAANDE KOPIEREN EN VOORWAARDE "relatierol = 'verzekeraar van'" OMKEREN <>
 
