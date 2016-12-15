@@ -48,14 +48,20 @@ def init_sor_to_dv_mappings(pipe):
     mappings.append(link_mapping)
 
     link_mapping = SorToLinkMapping("uzovi_hstage", ZorgverzekeraarKoepelLink, pipe.sor)
-    link_mapping.map_entity(ZorgverzekeraarKoepelLink.parent, 'uzovi_code')
-    link_mapping.map_entity(ZorgverzekeraarKoepelLink.child, 'relatie_met_uzovi_code')
+    link_mapping.map_entity(ZorgverzekeraarKoepelLink.parent)
+    link_mapping.map_entity(ZorgverzekeraarKoepelLink.child)
     # link_mapping.map_field'uzovi_code', ZorgverzekeraarKoepelLink.parent)
     # link_mapping.map_field('relatie_met_uzovi_code', ZorgverzekeraarKoepelLink.child)
     link_mapping.filter = "relatierol = 'verzekeraar van'"
     mappings.append(link_mapping)
 
-    # TODO BOVENSTAANDE KOPIEREN EN VOORWAARDE "relatierol = 'verzekeraar van'" OMKEREN <>
+    link_mapping = SorToLinkMapping("uzovi_hstage", ZorgverzekeraarKoepelLink, pipe.sor)
+    link_mapping.map_entity(ZorgverzekeraarKoepelLink.parent)
+    link_mapping.map_entity(ZorgverzekeraarKoepelLink.child)
+    # link_mapping.map_field'uzovi_code', ZorgverzekeraarKoepelLink.parent)
+    # link_mapping.map_field('relatie_met_uzovi_code', ZorgverzekeraarKoepelLink.child)
+    link_mapping.filter = "relatierol != 'verzekeraar van'"
+    mappings.append(link_mapping)
 
     return mappings
 
