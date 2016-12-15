@@ -10,6 +10,7 @@ __author__ = 'cmesu'
 # -van xls met tabladen naar .csv
 # -alle returns in text-velden eruit
 # -alle ; en | in text velden eruit
+# - dubbele laatste mutatie kolom van rol eruit halen
 
 def init_source_to_sor_mappings(path):
     mappings = []
