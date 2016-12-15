@@ -383,9 +383,6 @@ class Zorgverzekeraar(Organisatie):
 
     class Uzovi(Sat):
         uzovi_nummer = Columns.TextColumn()
-        rol = Columns.TextColumn()
-        begindatum = Columns.DateColumn()
-        einddatum = Columns.DateColumn()
 
 
 #TODO CM: Zorginkoopcombinatie is mijns inziens geen aparte DVentity, maar een relatie tussen twee Organisatie-entiteiten van het type Zorgverzekeraar (ZorgverzekeraarKoepelLink).
@@ -461,4 +458,10 @@ class ZorgverzekeraarKoepelLink(Link):
     """
     child = LinkReference(Zorgverzekeraar)
     parent = LinkReference(Zorgverzekeraar)
+
+    class Default(Sat):
+        rol = Columns.TextColumn()
+        begindatum = Columns.DateColumn()
+        einddatum = Columns.DateColumn()
+
 
