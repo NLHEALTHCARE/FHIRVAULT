@@ -39,27 +39,16 @@ def init_source_to_sor_mappings(pipe):
     source_file.set_primary_key(['POSTCODE', 'HUISNUMMER'])
     sor_mapping = SourceToSorMapping(source_file, 'cbsbuurten_hstage', auto_map=True)
     mappings.append(sor_mapping)
-    # source_file = CsvFile(data_path + '/cbs_buurten_compleet.txt', delimiter=';') # compleetadresnlbestand
-    # source_file = CsvFile(data_path + '/cbs_buurten_tm1011DD.txt', delimiter=';')  # deel adresnlbestand
-    # source_file = CsvFile(data_path + '/cbs_buurten_encodingtest.txt', encoding='Latin-1', delimiter=';')  # deel adresnlbestand
-    # source_file = CsvFile(data_path + '/cbs_buurten_utf8.txt', delimiter=';')  # deel adresnlbestand
-    # source_file = CsvFile(data_path + '/cbs_buurten_compleet_utf8m.txt', delimiter=';')  # compleet adresbestand ,geen empty lines aan eind document
-
-
-
-
-
-
-
-
-
-
     return mappings
 
+def init_sor_to_valset_mappings(pipe):
+    mappings = []
+    return mappings
 
 def init_sor_to_dv_mappings(pipe):
     mappings = []
     sor = pipe.sor
+    return mappings
 
     ###############################
     # adresnl
