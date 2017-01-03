@@ -318,10 +318,14 @@ class Zorgaanbieder(Organisatie):
         kvk_nummer = Columns.TextColumn()
         kvk_vestigingsnummer = Columns.TextColumn()
 
+
+
+
     class ExternalKeys(HybridSat):
         class Types(HybridSat.Types):
             timeff_code = 'timeff_code'
             timeff_pk = 'timeff_pk'
+            clinic_code = 'clinic_code'
 
         key = Columns.TextColumn()
 
@@ -349,6 +353,22 @@ class Vestiging(Organisatie):
         kvk_nummer = Columns.IntColumn()
         btw_nummer = Columns.TextColumn()  #staat niet in nictiz
 
+    class ExtraVestiging(Sat):
+        vestiging_interne_code = Columns.TextColumn()
+        platform = Columns.TextColumn()
+        opmerkingen = Columns.TextColumn()
+        epd_bronsysteem_code = Columns.TextColumn()
+        medicore_kliniek_id = Columns.TextColumn()
+        dermicis_afdeling_code = Columns.TextColumn()
+        zonnestraal_epd_locatie_id = Columns.TextColumn()
+        timeff_filiaal_code = Columns.TextColumn()
+        hoofdvestiging = Columns.TextColumn()
+
+    class ExternalKeys(HybridSat):
+        class Types(HybridSat.Types):
+            timeff_code = 'timeff_code'
+            clinic_code = 'clinic_code'
+        key = Columns.TextColumn()
 
 class Afdeling(DvEntity):
     """

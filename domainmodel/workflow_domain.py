@@ -102,6 +102,7 @@ class SubtrajectDeelnemersLink(Link):
     betaler = LinkReference(Zorgverzekeraar)
     huisarts = LinkReference(Zorgverlener)
     instelling = LinkReference(Zorgaanbieder)
+    vestiging = LinkReference(Vestiging)
 
 
 class AfspraakDeelnemersLink(Link):
