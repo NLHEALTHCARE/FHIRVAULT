@@ -1,7 +1,7 @@
 import glob
 import os
 
-from domainmodel.identity_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZorgaanbiederLink
+from domainmodel.identity_domain import Zorgverlener, Zorgaanbieder, ZorgverlenerZorgaanbiederLinkEntity
 from domainmodel.valueset_domain import Valueset
 from etl_mappings.vektis_agb.vektis_agb_importdef import vektis_import_def
 from etl_mappings.vektis_agb.vektis_agb_transformations import VektisTransformations
@@ -113,9 +113,9 @@ def init_sor_to_dv_mappings(pipe):
 
     #########################################
 
-    link_mapping = SorToLinkMapping('fagbx_22_all_ab_hstage', ZorgverlenerZorgaanbiederLink, sor)
-    link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
-    link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
+    link_mapping = SorToLinkMapping('fagbx_22_all_ab_hstage', ZorgverlenerZorgaanbiederLinkEntity, sor)
+    link_mapping.map_entity(ZorgverlenerZorgaanbiederLinkEntity.Link.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
+    link_mapping.map_entity(ZorgverlenerZorgaanbiederLinkEntity.Link.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'praktijknummer'))
     mappings.append(link_mapping)
 
     #########################################
@@ -135,9 +135,9 @@ def init_sor_to_dv_mappings(pipe):
 
     #########################################
 
-    link_mapping = SorToLinkMapping('fagbx_24_all_ab_hstage', ZorgverlenerZorgaanbiederLink, sor)
-    link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
-    link_mapping.map_entity(ZorgverlenerZorgaanbiederLink.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'instellingsnummer'))
+    link_mapping = SorToLinkMapping('fagbx_24_all_ab_hstage', ZorgverlenerZorgaanbiederLinkEntity, sor)
+    link_mapping.map_entity(ZorgverlenerZorgaanbiederLinkEntity.Link.zorgverlener, bk=VektisTransformations.make_agb('zorgverlenersoort', 'zorgverlenersnummer'))
+    link_mapping.map_entity(ZorgverlenerZorgaanbiederLinkEntity.Link.zorgaanbieder, bk=VektisTransformations.make_agb('zorgverlenersoort', 'instellingsnummer'))
     #todo sat bij link vullen
     # link_mapping.map_field(VektisTransformations.text_to_date_transform("datum_toetreding_praktijk"), ZorgverlenerZorgaanbiederLink.Default.datum_toetreding);
     # link_mapping.map_field(VektisTransformations.text_to_date_transform("datum_uittreding_praktijk"), ZorgverlenerZorgaanbiederLink.Default.datum_uittreding);

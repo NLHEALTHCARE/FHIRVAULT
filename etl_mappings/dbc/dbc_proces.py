@@ -7,7 +7,7 @@ __author__ = 'hvreenen'
 
 def define_dbc_pipe(pipeline, dbc_config):
     pipe = pipeline.get_or_create_pipe('sor_dbc', dbc_config)
-    pipeline.register_domain(valueset_domain, 'valset')
+    pipeline.register_valset_domain(valueset_domain, 'valset')
 
     source_to_sor_mappings = init_source_to_sor_mappings(pipe)
     pipe.mappings.extend(source_to_sor_mappings)

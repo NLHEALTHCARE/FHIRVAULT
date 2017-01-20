@@ -1,6 +1,6 @@
 from domainmodel.valueset_domain import ValueSetsEnum
 from pyelt.datalayers.database import Columns
-from pyelt.datalayers.dv import DvEntity, Link, Sat, HybridSat, LinkReference
+from pyelt.datalayers.dv import * 
 
 
 ########################################################################################################################
@@ -11,7 +11,7 @@ from pyelt.datalayers.dv import DvEntity, Link, Sat, HybridSat, LinkReference
 
 
 
-class Tarieven(DvEntity):
+class Tarieven(HubEntity):
     class Default(Sat):
         agb = Columns.TextColumn()
         declaratie_code = Columns.TextColumn()
@@ -28,7 +28,7 @@ class Tarieven(DvEntity):
 
 
 
-class Patient(DvEntity):
+class Patient(HubEntity):
     """https://zibs.nl/wiki/Patient
 
     Business Key: naam_bronsysteem + relatienummer/inschrijvingsnummer
@@ -135,7 +135,7 @@ class Patient(DvEntity):
 
 
 
-class Medewerker(DvEntity):
+class Medewerker(HubEntity):
     """Standaard definitie nog opzoeken.
 
     Business key: KvK nummer + personeelsnummer
@@ -243,7 +243,7 @@ class Zorgverlener(Medewerker):
         uzi_nummer = Columns.TextColumn()
         specialisme = Columns.RefColumn(ValueSetsEnum.specialisme_codes)
 
-class Organisatie(DvEntity):
+class Organisatie(HubEntity):
 
     class Default(Sat):
         naam = Columns.TextColumn()
@@ -370,7 +370,7 @@ class Vestiging(Organisatie):
             clinic_code = 'clinic_code'
         key = Columns.TextColumn()
 
-class Afdeling(DvEntity):
+class Afdeling(HubEntity):
     """
     Identificeerbare afdelingen, die mogelijjk over verschillende vestigingen verspreid zijn:
       - specifiek domein, b.v. Finance, ICT, Kwaliteit
@@ -406,7 +406,7 @@ class Zorgverzekeraar(Organisatie):
 
 
 #TODO CM: Zorginkoopcombinatie is mijns inziens geen aparte DVentity, maar een relatie tussen twee Organisatie-entiteiten van het type Zorgverzekeraar (ZorgverzekeraarKoepelLink).
-class Zorginkoopcombinatie(DvEntity):
+class Zorginkoopcombinatie(HubEntity):
     """http://www.vektis.nl/images/Beheer_en_onderhoud_UZOVI_v1_1.pdf
 
         cz = 'CZ'
@@ -428,21 +428,25 @@ class Zorginkoopcombinatie(DvEntity):
 #######################################################################################################################
 
 
-class PatientZorgaanbiederLink(Link):
+class PatientZorgaanbiederLinkEntity(LinkEntity):
     """Link welke patienten bij welke zorgaanbieder patient zijn
 
     Pragmatisch opgelost, mag strict genomen niet in HL7 RIM
     """
-    patient = LinkReference(Patient)
-    zorgaanbieder = LinkReference(Zorgaanbieder)
+
+    class Link(Link):
+        patient = LinkReference(Patient)
+        zorgaanbieder = LinkReference(Zorgaanbieder)
 
 
-class ZorgverlenerZorgaanbiederLink(Link):
+class ZorgverlenerZorgaanbiederLinkEntity(LinkEntity):
     """Link welke zorgverleners bij welke zorgaanbieder verbonden zijn
 
     """
-    zorgverlener = LinkReference(Zorgverlener)
-    zorgaanbieder = LinkReference(Zorgaanbieder)
+
+    class Link(Link):
+        zorgverlener = LinkReference(Zorgverlener)
+        zorgaanbieder = LinkReference(Zorgaanbieder)
 
     #to do: kenmerken uit Vektis AGB database aan linktabel toevoegen
     class Default(Sat):
@@ -450,34 +454,41 @@ class ZorgverlenerZorgaanbiederLink(Link):
         datum_uittreding = Columns.DateColumn()
         status = Columns.TextColumn()
 
-class ZorgaanbiederZorgaanbiederLink(Link):
+class ZorgaanbiederZorgaanbiederLinkEntity(LinkEntity):
     """
     Bedoeld om hierachieen aan te geven tussen zorgaanbieders
     """
-    child = LinkReference(Zorgaanbieder)
-    parent = LinkReference(Zorgaanbieder)
+
+    class Link(Link):
+        child = LinkReference(Zorgaanbieder)
+        parent = LinkReference(Zorgaanbieder)
 
 
-class ZorgaanbiederAfdelingLink(Link):
+class ZorgaanbiederAfdelingLinkEntity(LinkEntity):
     """
     Bedoeld om hierachieen aan te geven tussen zorgaanbieders
     """
-    afdeling = LinkReference(Afdeling)
-    zorgaanbieder = LinkReference(Zorgaanbieder)
+
+    class Link(Link):
+        afdeling = LinkReference(Afdeling)
+        zorgaanbieder = LinkReference(Zorgaanbieder)
 
 
-class ZorginkoopcombinatieLink(Link):
+class ZorginkoopcombinatieLinkEntity(LinkEntity):
     """http://www.vektis.nl/images/Beheer_en_onderhoud_UZOVI_v1_1.pdf"""
-    verzekeraar = LinkReference(Zorgverzekeraar)
-    inkoopcombinatie = LinkReference(Zorginkoopcombinatie)
+
+    class Link(Link):
+        verzekeraar = LinkReference(Zorgverzekeraar)
+        inkoopcombinatie = LinkReference(Zorginkoopcombinatie)
 
 
-class ZorgverzekeraarKoepelLink(Link):
+class ZorgverzekeraarKoepelLinkEntity(LinkEntity):
     """
     Bedoeld om hierachieen aan te geven tussen zorgverzekeraars
     """
-    child = LinkReference(Zorgverzekeraar)
-    parent = LinkReference(Zorgverzekeraar)
+    class Link(Link):
+        child = LinkReference(Zorgverzekeraar)
+        parent = LinkReference(Zorgverzekeraar)
 
     class Default(Sat):
         rol = Columns.TextColumn()

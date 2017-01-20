@@ -12,7 +12,7 @@ def define_vektis_agb_pipe(pipeline, vektis_agb_config):
     pipeline.register_domain(identity_domain)
 
     source_to_sor_mappings = init_source_to_sor_mappings(vektis_agb_config['data_path'])
-    # pipe.mappings.extend(source_to_sor_mappings)
+    pipe.mappings.extend(source_to_sor_mappings)
     #todo refs van vektis
     sor_to_valueset_mappings = init_sor_to_valuesets_mappings(pipe)
     pipe.mappings.extend(sor_to_valueset_mappings)

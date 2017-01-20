@@ -1,4 +1,4 @@
-from domainmodel_hl7_rim.entity_domain import AdresNL
+# from domainmodel_hl7_rim.entity_domain import AdresNL
 
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping

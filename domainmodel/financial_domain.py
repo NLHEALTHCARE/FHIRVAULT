@@ -3,10 +3,9 @@ from domainmodel.identity_domain import Patient,Zorgaanbieder, Zorginkoopcombina
 from domainmodel.workflow_domain import Subtraject
 from domainmodel.valueset_domain import ValueSetsEnum
 from pyelt.datalayers.database import Columns
-from pyelt.datalayers.dv import DvEntity, Sat, HybridSat, LinkReference, Link
-
+from pyelt.datalayers.dv import *
 #https://www.hl7.org/fhir/coverage.html
-class Zorgverzekering(DvEntity): #COVERAGE
+class Zorgverzekering(HubEntity): #COVERAGE
     class Default(Sat):
         begindatum= Columns.DateColumn() #coverage.period
         einddatum = Columns.DateColumn() #coverage.period
@@ -15,7 +14,7 @@ class Zorgverzekering(DvEntity): #COVERAGE
         verzekerdenummer = Columns.TextColumn() #coverage.subscriberId
         bin = Columns.TextColumn()
 
-class Verkoopprijs(DvEntity):
+class Verkoopprijs(HubEntity):
     """
     Business key: AGB-code + Zorginkoopcombinatiecode
     """
@@ -31,7 +30,7 @@ class Verkoopprijs(DvEntity):
 
 
 #https://www.hl7.org/fhir/claim.html
-class Declaratie(DvEntity):
+class Declaratie(HubEntity):
 
     class Default(Sat):
         ruleset = Columns.TextColumn(fhir_name='ruleset')
@@ -58,7 +57,7 @@ class Declaratie(DvEntity):
 
 
 #todo kan overerven van declaratie / FHIR=Claim?
-class Factuurregel(DvEntity):
+class Factuurregel(HubEntity):
 
     class Default(Sat):
         omzet_totaal = Columns.FloatColumn()
@@ -117,31 +116,37 @@ class Factuurregel(DvEntity):
 ########################################################
 
 class ZorgactiviteitPatientLink(Link):
-    zorgactiviteit = LinkReference(Zorgactiviteit)
-    patient = LinkReference(Patient)
+    class Link(Link):
+        zorgactiviteit = LinkReference(Zorgactiviteit)
+        patient = LinkReference(Patient)
 
 
-class ZorgverzekeringZorgverzekeraarLink(Link):
-    zorgverzekering = LinkReference(Zorgverzekering)  # coverage.bin
-    Zorgverzekeraar = LinkReference(Zorgverzekeraar)  # coverage.Issuer
+class ZorgverzekeringZorgverzekeraarLinkEntity(LinkEntity):
+    class Link(Link):
+        zorgverzekering = LinkReference(Zorgverzekering)  # coverage.bin
+        Zorgverzekeraar = LinkReference(Zorgverzekeraar)  # coverage.Issuer
 
 
-class ZorgverzekeringPatientLink(Link):
-    zorgverzekering = LinkReference(Zorgverzekering)  # coverage.bin
-    patient = LinkReference(Patient)  # coverage.subscriber
+class ZorgverzekeringPatientLinkEntity(LinkEntity):
+    class Link(Link):
+        zorgverzekering = LinkReference(Zorgverzekering)  # coverage.bin
+        patient = LinkReference(Patient)  # coverage.subscriber
 
 
-class FactuurregelSubtrajectLink(Link):
-    factuurregel = LinkReference(Factuurregel)
-    patient = LinkReference(Patient)
-    subtraject = LinkReference(Subtraject)
+class FactuurregelSubtrajectLinkEntity(LinkEntity):
+    class Link(Link):
+        factuurregel = LinkReference(Factuurregel)
+        patient = LinkReference(Patient)
+        subtraject = LinkReference(Subtraject)
 
 
-class ZorgverzekeringParticipatieLink(Link):
-    patient = LinkReference(Patient)
-    verzekeraar = LinkReference(Zorgverzekeraar)
+class ZorgverzekeringParticipatieLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        verzekeraar = LinkReference(Zorgverzekeraar)
 
 
-class VerkoopprijsParticipatieLink(Link):
-    zorgaanbieder = LinkReference(Zorgaanbieder)
-    inkoopcombinatie = LinkReference(Zorginkoopcombinatie)
+class VerkoopprijsParticipatieLinkEntity(LinkEntity):
+    class Link(Link):
+        zorgaanbieder = LinkReference(Zorgaanbieder)
+        inkoopcombinatie = LinkReference(Zorginkoopcombinatie)

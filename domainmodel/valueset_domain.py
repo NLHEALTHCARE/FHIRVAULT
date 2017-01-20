@@ -1,5 +1,6 @@
 from pyelt.datalayers.database import Columns
-from pyelt.datalayers.dv import DvEntity, Sat, Link, LinkReference, DvValueset
+from pyelt.datalayers.dv import *
+from pyelt.datalayers.valset import *
 
 
 class ValueSetsEnum:
@@ -139,6 +140,11 @@ class Zorgactiviteit(DvValueset):
     omschrijving_consument = Columns.TextColumn()
     op_nota = Columns.BoolColumn()
     extra = Columns.JsonColumn()
+    groep_code = Columns.TextColumn()
+    groep_omschrijving = Columns.TextColumn()
+    wbmv_code = Columns.TextColumn()
+    is_addon = Columns.BoolColumn()
+    is_landelijke_code=  Columns.BoolColumn()
 
 class DiagnoseCombinatie(DvValueset):
     """Standaard definitie nog opzoeken.

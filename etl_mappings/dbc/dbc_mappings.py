@@ -10,20 +10,20 @@ def init_source_to_sor_mappings(pipe):
     mappings = []
     path = pipe.config['data_path']
 
-    source_file = CsvFile('{}{}'.format(path, 'Zorgproductgroepen Tabel v20150701.csv'), delimiter=';', encoding='latin1')
+    source_file = CsvFile('{}{}'.format(path, 'Zorgproductgroepen Tabel.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()
     source_file.set_primary_key(['zorgproductgroep_code', 'ingangsdatum'])
     sor_mapping = SourceToSorMapping(source_file, 'zorgproductgroepen_hstage', auto_map=True)
     mappings.append(sor_mapping)
 
-    source_file = CsvFile('{}{}'.format(path, 'Zorgactiviteiten Tabel v20151119.csv'), delimiter=';', encoding='latin1')
+    source_file = CsvFile('{}{}'.format(path, 'Zorgactiviteiten Tabel.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()
     source_file.set_primary_key(['zorgactiviteit_code', 'ingangsdatum'])
     sor_mapping = SourceToSorMapping(source_file, 'zorgactiviteiten_hstage', auto_map=True)
     mappings.append(sor_mapping)
 
     # todo[jan] Controle of key klopt
-    source_file = CsvFile('{}{}'.format(path, 'Tarieven Tabel v20151119.csv'), delimiter=';', encoding='latin1')
+    source_file = CsvFile('{}{}'.format(path, 'Tarieven Tabel.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()
     source_file.set_primary_key(
         ['agb_specialisme', 'agb_uitvoerder', 'productgroepcode', 'declaratiecode', 'kostensoort', 'tarieftype', 'declaratie_eenheid', 'soort_tarief', 'segment_aanduiding', 'soort_honorarium',
@@ -31,19 +31,19 @@ def init_source_to_sor_mappings(pipe):
     sor_mapping = SourceToSorMapping(source_file, 'tarieven_hstage', auto_map=True)
     mappings.append(sor_mapping)
 
-    source_file = CsvFile('{}{}'.format(path, 'Diagnose Combinatie Tabel v20151119.csv'), delimiter=';', encoding='latin1')
+    source_file = CsvFile('{}{}'.format(path, 'Diagnose Combinatie Tabel.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()
     source_file.set_primary_key(['specialisme_code', 'diagnose_dbc1', 'diagnose_dbc2', 'ingangsdatum', 'einddatum'])
     sor_mapping = SourceToSorMapping(source_file, 'diagnose_combinatie_hstage', auto_map=True)
     mappings.append(sor_mapping)
 
-    source_file = CsvFile('{}{}'.format(path, 'Afsluitregels Tabel v20151119.csv'), delimiter=';', encoding='latin1')
+    source_file = CsvFile('{}{}'.format(path, 'Afsluitregels Tabel.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()
     source_file.set_primary_key(['afsluitregelcode', 'groepnummer', 'specialismecode', 'componentcode', 'ingangsdatum', 'einddatum'])
     sor_mapping = SourceToSorMapping(source_file, 'afsluitregels_hstage', auto_map=True)
     mappings.append(sor_mapping)
 
-    source_file = CsvFile('{}{}'.format(path, 'Afsluitreden Tabel v20150701.csv'), delimiter=';', encoding='latin1')
+    source_file = CsvFile('{}{}'.format(path, 'Afsluitreden Tabel.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()
     source_file.set_primary_key(['afsluitreden_code', 'ingangsdatum', 'einddatum'])
     sor_mapping = SourceToSorMapping(source_file, 'afsluitreden_hstage', auto_map=True)
@@ -73,6 +73,10 @@ def init_sor_to_valset_mappings(pipe):
     mapping.map_field(DbcTransformations.text_to_date_transform("ingangsdatum"), Zorgactiviteit.ingangsdatum)
     mapping.map_field(DbcTransformations.text_to_date_transform("einddatum"), Zorgactiviteit.einddatum)
     mapping.map_field("(CASE WHEN op_nota='J' THEN true ELSE false END)", Zorgactiviteit.op_nota)
+    mapping.map_field("zpk_code", Zorgactiviteit.groep_code)
+    mapping.map_field("LOWER(zpk_omschrijving)", Zorgactiviteit.groep_omschrijving)
+    mapping.map_field("(CASE WHEN indicatie_addon='J' THEN true ELSE false END)", Zorgactiviteit.is_addon)
+    mapping.map_field("wbmv_code", Zorgactiviteit.wbmv_code)
     mappings.append(mapping)
 
     # Beschikbare velden TARIEVEN_HSTAGE:

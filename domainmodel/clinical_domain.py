@@ -1,13 +1,13 @@
 
-from domainmodel.identity_domain import Patient, Zorgverlener, Zorgverzekeraar
+from domainmodel.identity_domain import Patient, Zorgverlener, Zorgverzekeraar, Vestiging
 from domainmodel.workflow_domain import Subtraject, Zorgaanbieder
 from domainmodel.valueset_domain import ValueSetsEnum
 from pyelt.datalayers.database import Columns
-from pyelt.datalayers.dv import DvEntity, Link, Sat, HybridSat, LinkReference
+from pyelt.datalayers.dv import  Link, Sat, HybridSat, LinkReference, HubEntity, LinkEntity
 
 """Alle resources die te maken hebben met de zorg, zoals zorgactiviteit, diagnose"""
 
-class Zorgactiviteit(DvEntity):
+class Zorgactiviteit(HubEntity):
     """Business key: AGB-code zorgaanbieder + subtrajectnummer
     """
 
@@ -35,7 +35,7 @@ class Zorgactiviteit(DvEntity):
         declaratiecode = Columns.RefColumn(ValueSetsEnum.dbc_declaraties)
         add_on_informatie = Columns.TextColumn()
 
-class Diagnose(DvEntity):
+class Diagnose(HubEntity):
     class Identificatie(Sat):
         nummer = Columns.TextColumn()
 
@@ -46,25 +46,29 @@ class Diagnose(DvEntity):
 # LINKS
 ##############################
 
-class SubtrajectZorgactiviteitLink(Link):
-    patient = LinkReference(Patient)
-    subtraject = LinkReference(Subtraject)
-    zorgactiviteit = LinkReference(Zorgactiviteit)
+class SubtrajectZorgactiviteitLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        subtraject = LinkReference(Subtraject)
+        zorgactiviteit = LinkReference(Zorgactiviteit)
 
-class SubtrajectDiagnoseLink(Link):
-    subtraject = LinkReference(Subtraject)
-    diagnose = LinkReference(Diagnose)
+class SubtrajectDiagnoseLinkEntity(LinkEntity):
+    class Link(Link):
+        subtraject = LinkReference(Subtraject)
+        diagnose = LinkReference(Diagnose)
 
-class ZorgactviteitDeelnemersLink(Link):
-    """
+class ZorgactiviteitDeelnemersLinkEntity(LinkEntity):
+    class Link(Link):
+        """
     Definitie van Grouper heeft 1..1 relaties voor participanten, vandaar in vaste kolommen
     """
-    zorgactiviteit = LinkReference(Zorgactiviteit)
-    patient = LinkReference(Patient)
-    aanvragende_zorgaanbieder = LinkReference(Zorgaanbieder)
-    aanvragende_zorgverlener = LinkReference(Zorgverlener)
-    uitvoerende_zorgaanbieder = LinkReference(Zorgaanbieder)
-    uitvoerende_zorgverlener = LinkReference(Zorgverlener)
-    betaler = LinkReference(Zorgverzekeraar)
+        zorgactiviteit = LinkReference(Zorgactiviteit)
+        vestiging = LinkReference(Vestiging)
+        patient = LinkReference(Patient)
+        aanvragende_zorgaanbieder = LinkReference(Zorgaanbieder)
+        aanvragende_zorgverlener = LinkReference(Zorgverlener)
+        uitvoerende_zorgaanbieder = LinkReference(Zorgaanbieder)
+        uitvoerende_zorgverlener = LinkReference(Zorgverlener)
+        betaler = LinkReference(Zorgverzekeraar)
 #
 

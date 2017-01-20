@@ -39,9 +39,10 @@ class NicTizParser(HTMLParser):
                 if name == "href" and str in value:
                     self.xml_refs.append(value)
 
-html_as_string = html_to_string('https://decor.nictiz.nl/decor/services/ValueSetIndex?ref=2.16.840.1.113883.2.4.3.11.60.101')
 
 if __name__ == "__main__":
+    html_as_string = html_to_string('https://decor.nictiz.nl/decor/services/ValueSetIndex?ref=2.16.840.1.113883.2.4.3.11.60.101')
+
     parser = NicTizParser()
     parser.feed(html_as_string)
     parser.close()

@@ -1,19 +1,18 @@
 from domainmodel.identity_domain import *
 from domainmodel.valueset_domain import ValueSetsEnum
 from pyelt.datalayers.database import Columns
-from pyelt.datalayers.dv import DvEntity, Link, Sat, LinkReference
-
+from pyelt.datalayers.dv import * 
 """Workflow resources zoals traject, subtraject, afspraak"""
 
 
-class Zorgtraject(DvEntity):
+class Zorgtraject(HubEntity):
     class Default(Sat):
         nummer = Columns.TextColumn()  # uniek zorgtrajectnummer zoals in bronsysteem voorkomt
         extern_nummer = Columns.TextColumn()  # gereserveerd om secundair, extern nummer te registreren, b.v. na migratie
         begindatum = Columns.DateColumn()
         einddatum = Columns.DateColumn()
 
-class Subtraject(DvEntity):
+class Subtraject(HubEntity):
     """FHIR Resource = EisodeOfCare
     """
     class Default(Sat):
@@ -69,7 +68,7 @@ class Subtraject(DvEntity):
 
 #todo: JVL aanvliegwijze bespreken m.b.t. het vullen van de entiteiten. Nu de focus wat we hebben terwijl dit andersom wenselijk is
 
-class Afspraak(DvEntity):
+class Afspraak(HubEntity):
     class Default(Sat):
         afspraak_omschrijving = Columns.TextColumn()
         eigenaar = Columns.TextColumn()
@@ -88,26 +87,29 @@ class Afspraak(DvEntity):
 # LINKS
 ##############################
 
-class ZorgTrajectSubtrajectLink(Link):
-    patient = LinkReference(Patient)
-    zorgtraject = LinkReference(Zorgtraject)
-    subtraject = LinkReference(Subtraject)
+class ZorgTrajectSubtrajectLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        zorgtraject = LinkReference(Zorgtraject)
+        subtraject = LinkReference(Subtraject)
 
-class SubtrajectDeelnemersLink(Link):
-    subtraject = LinkReference(Subtraject)
-    patient = LinkReference(Patient)
-    hoofdbehandelaar = LinkReference(Zorgverlener)
-    verwijzer = LinkReference(Zorgverlener)
-    verwijzende_instelling = LinkReference(Zorgaanbieder)
-    betaler = LinkReference(Zorgverzekeraar)
-    huisarts = LinkReference(Zorgverlener)
-    instelling = LinkReference(Zorgaanbieder)
-    vestiging = LinkReference(Vestiging)
+class SubtrajectDeelnemersLinkEntity(LinkEntity):
+    class Link(Link):
+        subtraject = LinkReference(Subtraject)
+        patient = LinkReference(Patient)
+        hoofdbehandelaar = LinkReference(Zorgverlener)
+        verwijzer = LinkReference(Zorgverlener)
+        verwijzende_instelling = LinkReference(Zorgaanbieder)
+        betaler = LinkReference(Zorgverzekeraar)
+        huisarts = LinkReference(Zorgverlener)
+        instelling = LinkReference(Zorgaanbieder)
+        vestiging = LinkReference(Vestiging)
 
 
-class AfspraakDeelnemersLink(Link):
-    patient = LinkReference(Patient)
-    afspraak = LinkReference(Afspraak)
-    instelling = LinkReference(Zorgaanbieder)
-    medewerker = LinkReference(Medewerker)
+class AfspraakDeelnemersLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        afspraak = LinkReference(Afspraak)
+        instelling = LinkReference(Zorgaanbieder)
+        medewerker = LinkReference(Medewerker)
 
