@@ -94,6 +94,16 @@ class Valueset(DvValueset):
     omschrijving = Columns.TextColumn()
 
 
+class Zorgproduct(DvValueset):
+    omschrijving_latijn = Columns.TextColumn()
+    omschrijving_consument = Columns.TextColumn()
+    declaratie_code_verzekerde_zorg = Columns.TextColumn()
+    declaratie_code_onverzekerde_zorg = Columns.TextColumn()
+    wbmv_code = Columns.TextColumn()
+    zorgproductgroep_code = Columns.TextColumn()
+    ingangsdatum = Columns.DateColumn()
+    einddatum = Columns.DateColumn()
+
 class Zorgproductgroep(DvValueset):
     """Standaard definitie nog opzoeken.
     """
@@ -146,6 +156,13 @@ class Zorgactiviteit(DvValueset):
     is_addon = Columns.BoolColumn()
     is_landelijke_code=  Columns.BoolColumn()
 
+class Specialisme(DvValueset):
+    pass
+
+class Diagnose(DvValueset):
+    specialisme_code = Columns.RefColumn('specialismen')
+
+
 class DiagnoseCombinatie(DvValueset):
     """Standaard definitie nog opzoeken.
     """
@@ -183,6 +200,30 @@ class AfsluitReden(DvValueset):
     omschrijving_kort = Columns.TextColumn()
     ingangsdatum = Columns.DateColumn()
     einddatum = Columns.DateColumn()
+
+###########################
+#LINKS
+###########################
+# class ZorgproductgroepTariefLink(Link):
+#     _schema_name = 'valset'
+#     zorgproductgroep = LinkReference(Zorgproductgroep)
+#     tarief = LinkReference(Tarief)
+
+class Datum(DvValueset):
+    """Zie dim_dag uit dwh1
+    """
+    datum = Columns.DateColumn()
+    iso_week = Columns.IntColumn()
+    maand = Columns.IntColumn()
+    kwartaal = Columns.TextColumn()
+    jaar = Columns.IntColumn()
+    jaar_iso_week = Columns.TextColumn()
+    jaar_maand = Columns.TextColumn()
+    jaar_kwartaal = Columns.TextColumn()
+    volgnummer_dag = Columns.IntColumn()
+    volgnummer_maand = Columns.IntColumn()
+    volgnummer_jaar = Columns.IntColumn()
+    label = Columns.TextColumn()
 
 ###########################
 #LINKS

@@ -1,6 +1,6 @@
-from etl_mappings.dbc.dbc_mappings import init_source_to_sor_mappings, init_sor_to_dv_mappings, init_sor_to_valset_mappings
-from pyelt.pipeline import Pipeline
 from domainmodel import valueset_domain
+from etl_mappings.dbc.dbc_mappings import init_source_to_sor_mappings, init_sor_to_valset_mappings
+from pyelt.pipeline import Pipeline
 
 __author__ = 'hvreenen'
 
@@ -14,9 +14,9 @@ def define_dbc_pipe(pipeline, dbc_config):
 
     sor_to_valset_mappings = init_sor_to_valset_mappings(pipe)
     pipe.mappings.extend(sor_to_valset_mappings)
-
-    sor_to_dv_mappings = init_sor_to_dv_mappings(pipe)
-    pipe.mappings.extend(sor_to_dv_mappings)
+    #
+    # sor_to_dv_mappings = init_sor_to_dv_mappings(pipe)
+    # pipe.mappings.extend(sor_to_dv_mappings)
 
 
 def dbc_main(*args):
