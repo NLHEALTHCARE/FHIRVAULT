@@ -87,7 +87,7 @@ class Afspraak(HubEntity):
 # LINKS
 ##############################
 
-class ZorgTrajectSubtrajectLinkEntity(LinkEntity):
+class ZorgtrajectSubtrajectLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
         zorgtraject = LinkReference(Zorgtraject)
@@ -100,7 +100,7 @@ class SubtrajectDeelnemersLinkEntity(LinkEntity):
         hoofdbehandelaar = LinkReference(Zorgverlener)
         verwijzer = LinkReference(Zorgverlener)
         verwijzende_instelling = LinkReference(Zorgaanbieder)
-        betaler = LinkReference(Zorgverzekeraar)
+        zorgverzekeraar = LinkReference(Zorgverzekeraar)
         huisarts = LinkReference(Zorgverlener)
         instelling = LinkReference(Zorgaanbieder)
         vestiging = LinkReference(Vestiging)
