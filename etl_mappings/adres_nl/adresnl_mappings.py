@@ -1,6 +1,7 @@
 # from domainmodel_hl7_rim.entity_domain import AdresNL
-
-from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping
+from domainmodel.valueset_domain import Buurt
+from pyelt.datalayers.sor import SorQuery
+from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToValueSetMapping
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.sources.files import CsvFile
 # from etl_mappings.adres_nl._adresnl_unzip import PostcodesNL
@@ -10,24 +11,19 @@ def init_source_to_sor_mappings(pipe):
     mappings = []
     validations = []
 
+    data_path = pipe.config['data_path']
+
     ###############################
     # adresnl
     ###############################
-    data_path = pipe.config['data_path']
-    adresnl_file = pipe.config['adresnl_file']
-    source_file = CsvFile(data_path + adresnl_file, delimiter=';')
-    source_file.reflect()
-    source_file.set_primary_key(['wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
 
-    sor_mapping = SourceToSorMapping(source_file, 'adresnl_hstage', auto_map=True)
-    mappings.append(sor_mapping)
-    # source_file = CsvFile(data_path + 'pcdata_output2.csv', delimiter=';')  #deel adresnlbestand
-    # source_file = CsvFile(data_path + 'adresnl_voorpostbussentesten.csv', delimiter=';')  #deel adresnlbestand bevat ook postbussen om te testen
-    # source_file = CsvFile(data_path + 'adresnl_1000.csv', delimiter=';')  # deel adresnlbestand
-      # compleetadresnlbestand
-    # source_file = CsvFile(data_path + '/adresnl_update_20160801-20160905.csv', delimiter=';')  #  update van adresnlbestand
-    # source_file = CsvFile(data_path + '{}'.format(pcnl.csv_name), delimiter=';')  #  update van adresnlbestand
-
+    # adresnl_file = pipe.config['adresnl_file']
+    # source_file = CsvFile(data_path + adresnl_file, delimiter=';')
+    # source_file.reflect()
+    # source_file.set_primary_key(['wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
+    #
+    # sor_mapping = SourceToSorMapping(source_file, 'adresnl_hstage', auto_map=True)
+    # mappings.append(sor_mapping)
 
 
     ###############################
@@ -43,6 +39,25 @@ def init_source_to_sor_mappings(pipe):
 
 def init_sor_to_valset_mappings(pipe):
     mappings = []
+    #postcode, huisnummer, gemeenteco, gemeentena, wijkcode, wijknaam, buurtcode, buurtmnaam
+    sor_sql = """SELECT DISTINCT _valid, _active, _runid, LEFT(postcode, 4) as pc4, gemeenteco, gemeentena, wijkcode, wijknaam, buurtcode, buurtmnaam
+  FROM sor_adresnl.cbsbuurten_hstage WHERE _valid AND _active
+  --AND floor(_runid) = 8
+    """
+    sor_query = SorQuery(sor_sql, pipe.sor)
+    mapping = SorToValueSetMapping(sor_query, Buurt, pipe.sor)
+    # mapping.map_field("(postcode || '-' ||huisnummer) ", Buurt.code)
+    # mapping.map_field("(buurtmnaam) as omschr", Buurt.omschrijving)
+    # mapping.map_field("postcode", Buurt.postcode)
+    # mapping.map_field("huisnummer", Buurt.huisnummer)
+    mapping.map_field("pc4", Buurt.code)
+    mapping.map_field("(buurtmnaam) as omschr", Buurt.omschrijving)
+    mapping.map_field("gemeenteco", Buurt.gemeentecode)
+    mapping.map_field("gemeentena", Buurt.gemeentenaam)
+    mapping.map_field("wijkcode", Buurt.wijkcode)
+    mapping.map_field("buurtcode", Buurt.buurtcode)
+    mapping.map_field("buurtmnaam", Buurt.buurtnaam)
+    mappings.append(mapping)
     return mappings
 
 def init_sor_to_dv_mappings(pipe):

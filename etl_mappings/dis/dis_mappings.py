@@ -71,7 +71,7 @@ def init_sor_to_valset_mappings(pipe):
     # Beschikbare velden DIAGNOSE_HSTAGE:
     s = 'versie,datum_bestand,peildatum,diagnose_cd,specialisme_cd,diagnose_omschrijving'
     mapping = SorToValueSetMapping('diagnose_hstage', Diagnose)
-    mapping.map_field("diagnose_cd", Diagnose.code)
+    mapping.map_field("LPAD(diagnose_cd, 4, '0')", Diagnose.code)
     mapping.map_field("diagnose_omschrijving", Diagnose.omschrijving)
     mapping.map_field("specialisme_cd", Diagnose.specialisme_code)
     mappings.append(mapping)

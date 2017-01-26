@@ -161,6 +161,7 @@ class Specialisme(DvValueset):
 
 class Diagnose(DvValueset):
     specialisme_code = Columns.RefColumn('specialismen')
+    diagnose_groep = Columns.TextColumn()
 
 
 class DiagnoseCombinatie(DvValueset):
@@ -224,6 +225,19 @@ class Datum(DvValueset):
     volgnummer_maand = Columns.IntColumn()
     volgnummer_jaar = Columns.IntColumn()
     label = Columns.TextColumn()
+
+class Buurt(DvValueset):
+    """CBS buurten
+    postcode, huisnummer, gemeenteco, gemeentena, wijkcode, wijknaam, buurtcode, buurtmnaam
+    """
+    postcode = Columns.TextColumn()
+    huisnummer = Columns.TextColumn()
+    gemeente_code = Columns.TextColumn()
+    gemeentenaam = Columns.TextColumn()
+    wijk_code = Columns.TextColumn()
+    buurt_code = Columns.TextColumn()
+    buurtnaam = Columns.TextColumn()
+
 
 ###########################
 #LINKS
