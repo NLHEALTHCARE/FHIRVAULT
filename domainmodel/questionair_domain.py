@@ -1,3 +1,4 @@
+# from domainmodel.identity_domain import Patient
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import *
 
@@ -62,10 +63,16 @@ class Antwoord(HubEntity):
 
 class Score(HubEntity):
     class Default(Sat):
-        pass
+        score_label = Columns.TextColumn()
+        score = Columns.FloatColumn()
+        score_type = Columns.TextColumn()
+        datum = Columns.TextColumn()
 
     class Identificatie(Sat):
-        pass
+        patient_id = Columns.TextColumn()
+        enquete_id = Columns.TextColumn()
+        enquete_inzet_id = Columns.TextColumn()
+
 
 class Notificatie(HubEntity):  # notificatie = indications in Telepsy proms (get_indications)
     class Default(Sat):
@@ -82,4 +89,20 @@ class Notificatie(HubEntity):  # notificatie = indications in Telepsy proms (get
 class EnqueteEnqueteInzetLinkEntity(LinkEntity):
     class Link(Link):
         enquete = LinkReference(Enquete)
+        enquete_inzet = LinkReference(EnqueteInzet)
+
+
+# class PatientEnqueteInzetLinkEntity(LinkEntity):
+#     class Link(Link):
+#         patient = LinkReference(Patient)
+#         enquete_inzet = LinkReference(EnqueteInzet)
+
+class EnqueteInzetAntwoordLinkEntity(LinkEntity):
+    class Link(Link):
+        enquete_inzet = LinkReference(EnqueteInzet)
+        antwoord = LinkReference(Antwoord)
+
+class ScoreEnqueteInzetLinkEntity(LinkEntity):
+    class Link(Link):
+        score = LinkReference(Score)
         enquete_inzet = LinkReference(EnqueteInzet)
