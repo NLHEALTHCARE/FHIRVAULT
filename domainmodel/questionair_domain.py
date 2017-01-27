@@ -76,10 +76,15 @@ class Score(HubEntity):
 
 class Notificatie(HubEntity):  # notificatie = indications in Telepsy proms (get_indications)
     class Default(Sat):
-        pass
+        score_beschrijving = Columns.TextColumn()
+        notificatie_type = Columns.TextColumn()
+        datum = Columns.DateTimeColumn()
 
     class Identificatie(Sat):
-        pass
+        patient_id = Columns.TextColumn()
+        enquete_id = Columns.TextColumn()
+        enquete_inzet_id = Columns.TextColumn()
+        vraag_id = Columns.TextColumn()
 
 
 #########################
@@ -105,4 +110,9 @@ class EnqueteInzetAntwoordLinkEntity(LinkEntity):
 class ScoreEnqueteInzetLinkEntity(LinkEntity):
     class Link(Link):
         score = LinkReference(Score)
+        enquete_inzet = LinkReference(EnqueteInzet)
+
+class NotificatieEnqueteInzetLinkEntity(LinkEntity):
+    class Link(Link):
+        notificatie = LinkReference(Notificatie)
         enquete_inzet = LinkReference(EnqueteInzet)
