@@ -1,4 +1,4 @@
-# from domainmodel.identity_domain import Patient
+from domainmodel.identity_domain import Patient
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import *
 
@@ -96,23 +96,27 @@ class EnqueteEnqueteInzetLinkEntity(LinkEntity):
         enquete = LinkReference(Enquete)
         enquete_inzet = LinkReference(EnqueteInzet)
 
+        patient = LinkReference(Patient)
 
-# class PatientEnqueteInzetLinkEntity(LinkEntity):
-#     class Link(Link):
-#         patient = LinkReference(Patient)
-#         enquete_inzet = LinkReference(EnqueteInzet)
 
-class EnqueteInzetAntwoordLinkEntity(LinkEntity):
+class AntwoordEnqueteInzetLinkEntity(LinkEntity):
     class Link(Link):
-        enquete_inzet = LinkReference(EnqueteInzet)
         antwoord = LinkReference(Antwoord)
+        enquete_inzet = LinkReference(EnqueteInzet)
+
+        patient = LinkReference(Patient)
+
 
 class ScoreEnqueteInzetLinkEntity(LinkEntity):
     class Link(Link):
         score = LinkReference(Score)
         enquete_inzet = LinkReference(EnqueteInzet)
 
+        patient = LinkReference(Patient)
+
 class NotificatieEnqueteInzetLinkEntity(LinkEntity):
     class Link(Link):
         notificatie = LinkReference(Notificatie)
         enquete_inzet = LinkReference(EnqueteInzet)
+
+        patient = LinkReference(Patient)
