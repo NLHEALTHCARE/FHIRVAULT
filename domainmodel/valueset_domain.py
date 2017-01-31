@@ -159,9 +159,53 @@ class Zorgactiviteit(DvValueset):
 class Specialisme(DvValueset):
     pass
 
+
+class Zorgtype(DvValueset):
+    omschrijving_lang= Columns.TextColumn()
+    subgroep_code= Columns.TextColumn()
+    subgroep_omschrijving_kort= Columns.TextColumn()
+    subgroep_omschrijving_lang= Columns.TextColumn()
+    hoofdgroep_code= Columns.TextColumn()
+    hoofdgroep_omschrijving_kort= Columns.TextColumn()
+    hoofdgroep_omschrijving_lang= Columns.TextColumn()
+    ingangsdatum= Columns.DateColumn()
+    einddatum= Columns.DateColumn()
+
+class Zorgvraag(DvValueset):
+    omschrijving_lang= Columns.TextColumn()
+    subgroep_code= Columns.TextColumn()
+    subgroep_omschrijving_kort= Columns.TextColumn()
+    subgroep_omschrijving_lang= Columns.TextColumn()
+    hoofdgroep_code= Columns.TextColumn()
+    hoofdgroep_omschrijving_kort= Columns.TextColumn()
+    hoofdgroep_omschrijving_lang= Columns.TextColumn()
+    ingangsdatum= Columns.DateColumn()
+    einddatum= Columns.DateColumn()
+
+class Behandeling(DvValueset):
+    omschrijving_lang= Columns.TextColumn()
+    subgroep_code= Columns.TextColumn()
+    subgroep_omschrijving_kort= Columns.TextColumn()
+    subgroep_omschrijving_lang= Columns.TextColumn()
+    hoofdgroep_code= Columns.TextColumn()
+    hoofdgroep_omschrijving_kort= Columns.TextColumn()
+    hoofdgroep_omschrijving_lang= Columns.TextColumn()
+    ingangsdatum= Columns.DateColumn()
+    einddatum= Columns.DateColumn()
+
 class Diagnose(DvValueset):
+    omschrijving_lang= Columns.TextColumn()
+    subgroep_code= Columns.TextColumn()
+    subgroep_omschrijving_kort= Columns.TextColumn()
+    subgroep_omschrijving_lang= Columns.TextColumn()
+    hoofdgroep_code= Columns.TextColumn()
+    hoofdgroep_omschrijving_kort= Columns.TextColumn()
+    hoofdgroep_omschrijving_lang= Columns.TextColumn()
+    ingangsdatum= Columns.DateColumn()
+    einddatum= Columns.DateColumn()
     specialisme_code = Columns.RefColumn('specialismen')
     diagnose_groep = Columns.TextColumn()
+    
 
 
 class DiagnoseCombinatie(DvValueset):

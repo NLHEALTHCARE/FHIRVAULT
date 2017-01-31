@@ -44,20 +44,26 @@ def init_source_to_sor_mappings(pipe):
 
     source_file = CsvFile('{}{}'.format(path, '20170101 Diagnose Combinatie Tabel v20160701.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()
-    source_file.set_primary_key(['specialisme_code', 'diagnose_dbc1', 'diagnose_dbc2', 'ingangsdatum', 'einddatum'])
+    source_file.set_primary_key(['specialisme_code', 'diagnose_dbc1', 'diagnose_dbc2', 'ingangsdatum'])
     sor_mapping = SourceToSorMapping(source_file, 'diagnose_combinatie_hstage', auto_map=True)
     mappings.append(sor_mapping)
 
     source_file = CsvFile('{}{}'.format(path, '20170101 Afsluitregels Tabel v20160701.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()
-    source_file.set_primary_key(['afsluitregelcode', 'groepnummer', 'specialismecode', 'componentcode', 'ingangsdatum', 'einddatum'])
+    source_file.set_primary_key(['afsluitregelcode', 'groepnummer', 'specialismecode', 'componentcode', 'ingangsdatum'])
     sor_mapping = SourceToSorMapping(source_file, 'afsluitregels_hstage', auto_map=True)
     mappings.append(sor_mapping)
 
     source_file = CsvFile('{}{}'.format(path, '20170101 Afsluitreden Tabel v20160701.csv'), delimiter=';', encoding='latin1')
     source_file.reflect()
-    source_file.set_primary_key(['afsluitreden_code', 'ingangsdatum', 'einddatum'])
+    source_file.set_primary_key(['afsluitreden_code', 'ingangsdatum'])
     sor_mapping = SourceToSorMapping(source_file, 'afsluitreden_hstage', auto_map=True)
+    mappings.append(sor_mapping)
+
+    source_file = CsvFile('{}{}'.format(path, '20170101 Elektronische Typeringslijst v20160701.csv'), delimiter=';', encoding='latin1')
+    source_file.reflect()
+    source_file.set_primary_key(['as_code', 'component_code', 'ingangsdatum'])
+    sor_mapping = SourceToSorMapping(source_file, 'typeringslijst_hstage', auto_map=True)
     mappings.append(sor_mapping)
     return mappings
 
@@ -167,4 +173,72 @@ def init_sor_to_valset_mappings(pipe):
     mapping.filter = 'ingangsdatum = (select max(ingangsdatum) from sor_dbc.afsluitreden_hstage mx where mx.afsluitreden_code = hstg.afsluitreden_code)'
     mappings.append(mapping)
 
-    return  mappings
+    """as_code, as_omschrijving, component_code, component_omschrijving_kort,
+       component_omschrijving_lang, subgroep_code, subgroep_omschrijving_kort,
+       subgroep_omschrijving_lang, hoofdgroep_code, hoofdgroep_omschrijving_kort,
+       hoofdgroep_omschrijving_lang, ingangsdatum, afloopdatum, mutatie_reden,
+       vervangende_component_code, mutatie_toelichting, behandelsetting,
+       automatisch_verlengen_toegestaan, mutatie"""
+
+    mapping = SorToValueSetMapping('typeringslijst_hstage', Zorgtype)
+    mapping.map_field("component_code", Zorgtype.code)
+    mapping.map_field("component_omschrijving_kort", Zorgtype.omschrijving)
+    mapping.map_field("component_omschrijving_lang", Zorgtype.omschrijving_lang)
+    mapping.map_field("subgroep_code", Zorgtype.subgroep_code)
+    mapping.map_field("subgroep_omschrijving_kort", Zorgtype.subgroep_omschrijving_kort)
+    mapping.map_field("subgroep_omschrijving_lang", Zorgtype.subgroep_omschrijving_lang)
+    mapping.map_field("hoofdgroep_code", Zorgtype.hoofdgroep_code)
+    mapping.map_field("hoofdgroep_omschrijving_kort", Zorgtype.hoofdgroep_omschrijving_kort)
+    mapping.map_field("hoofdgroep_omschrijving_lang", Zorgtype.hoofdgroep_omschrijving_lang)
+    mapping.map_field(DbcTransformations.text_to_date_transform("ingangsdatum"), Zorgtype.ingangsdatum)
+    mapping.map_field(DbcTransformations.text_to_date_transform("afloopdatum"), Zorgtype.einddatum)
+    mapping.filter = "as_code = '1'"
+    mappings.append(mapping)
+
+    mapping = SorToValueSetMapping('typeringslijst_hstage', Zorgvraag)
+    mapping.map_field("component_code", Zorgvraag.code)
+    mapping.map_field("component_omschrijving_kort", Zorgvraag.omschrijving)
+    mapping.map_field("component_omschrijving_lang", Zorgvraag.omschrijving_lang)
+    mapping.map_field("subgroep_code", Zorgvraag.subgroep_code)
+    mapping.map_field("subgroep_omschrijving_kort", Zorgvraag.subgroep_omschrijving_kort)
+    mapping.map_field("subgroep_omschrijving_lang", Zorgvraag.subgroep_omschrijving_lang)
+    mapping.map_field("hoofdgroep_code", Zorgvraag.hoofdgroep_code)
+    mapping.map_field("hoofdgroep_omschrijving_kort", Zorgvraag.hoofdgroep_omschrijving_kort)
+    mapping.map_field("hoofdgroep_omschrijving_lang", Zorgvraag.hoofdgroep_omschrijving_lang)
+    mapping.map_field(DbcTransformations.text_to_date_transform("ingangsdatum"), Zorgvraag.ingangsdatum)
+    mapping.map_field(DbcTransformations.text_to_date_transform("afloopdatum"), Zorgvraag.einddatum)
+    mapping.filter = "as_code = '2'"
+    mappings.append(mapping)
+
+    mapping = SorToValueSetMapping('typeringslijst_hstage', Diagnose)
+    mapping.map_field("component_code", Diagnose.code)
+    mapping.map_field("component_omschrijving_kort", Diagnose.omschrijving)
+    mapping.map_field("component_omschrijving_lang", Diagnose.omschrijving_lang)
+    mapping.map_field("subgroep_code", Diagnose.subgroep_code)
+    mapping.map_field("subgroep_omschrijving_kort", Diagnose.subgroep_omschrijving_kort)
+    mapping.map_field("subgroep_omschrijving_lang", Diagnose.subgroep_omschrijving_lang)
+    mapping.map_field("hoofdgroep_code", Diagnose.hoofdgroep_code)
+    mapping.map_field("hoofdgroep_omschrijving_kort", Diagnose.hoofdgroep_omschrijving_kort)
+    mapping.map_field("hoofdgroep_omschrijving_lang", Diagnose.hoofdgroep_omschrijving_lang)
+    mapping.map_field(DbcTransformations.text_to_date_transform("ingangsdatum"), Diagnose.ingangsdatum)
+    mapping.map_field(DbcTransformations.text_to_date_transform("afloopdatum"), Diagnose.einddatum)
+    mapping.filter = "as_code = '3'"
+    mappings.append(mapping)
+
+    mapping = SorToValueSetMapping('typeringslijst_hstage', Behandeling)
+    mapping.map_field("component_code", Behandeling.code)
+    mapping.map_field("component_omschrijving_kort", Behandeling.omschrijving)
+    mapping.map_field("component_omschrijving_lang", Behandeling.omschrijving_lang)
+    mapping.map_field("subgroep_code", Behandeling.subgroep_code)
+    mapping.map_field("subgroep_omschrijving_kort", Behandeling.subgroep_omschrijving_kort)
+    mapping.map_field("subgroep_omschrijving_lang", Behandeling.subgroep_omschrijving_lang)
+    mapping.map_field("hoofdgroep_code", Behandeling.hoofdgroep_code)
+    mapping.map_field("hoofdgroep_omschrijving_kort", Behandeling.hoofdgroep_omschrijving_kort)
+    mapping.map_field("hoofdgroep_omschrijving_lang", Behandeling.hoofdgroep_omschrijving_lang)
+    mapping.map_field(DbcTransformations.text_to_date_transform("ingangsdatum"), Behandeling.ingangsdatum)
+    mapping.map_field(DbcTransformations.text_to_date_transform("afloopdatum"), Behandeling.einddatum)
+    mapping.filter = "as_code = '4'"
+    mappings.append(mapping)
+
+
+    return mappings
