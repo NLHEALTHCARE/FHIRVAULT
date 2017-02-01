@@ -162,9 +162,9 @@ class Specialisme(DvValueset):
 
 class Zorgtype(DvValueset):
     omschrijving_lang= Columns.TextColumn()
-    subgroep_code= Columns.TextColumn()
-    subgroep_omschrijving_kort= Columns.TextColumn()
-    subgroep_omschrijving_lang= Columns.TextColumn()
+    # subgroep_code= Columns.TextColumn()
+    # subgroep_omschrijving_kort= Columns.TextColumn()
+    # subgroep_omschrijving_lang= Columns.TextColumn()
     hoofdgroep_code= Columns.TextColumn()
     hoofdgroep_omschrijving_kort= Columns.TextColumn()
     hoofdgroep_omschrijving_lang= Columns.TextColumn()
@@ -173,9 +173,9 @@ class Zorgtype(DvValueset):
 
 class Zorgvraag(DvValueset):
     omschrijving_lang= Columns.TextColumn()
-    subgroep_code= Columns.TextColumn()
-    subgroep_omschrijving_kort= Columns.TextColumn()
-    subgroep_omschrijving_lang= Columns.TextColumn()
+    # subgroep_code= Columns.TextColumn()
+    # subgroep_omschrijving_kort= Columns.TextColumn()
+    # subgroep_omschrijving_lang= Columns.TextColumn()
     hoofdgroep_code= Columns.TextColumn()
     hoofdgroep_omschrijving_kort= Columns.TextColumn()
     hoofdgroep_omschrijving_lang= Columns.TextColumn()
@@ -190,6 +190,8 @@ class Behandeling(DvValueset):
     hoofdgroep_code= Columns.TextColumn()
     hoofdgroep_omschrijving_kort= Columns.TextColumn()
     hoofdgroep_omschrijving_lang= Columns.TextColumn()
+    behandeling_setting_code = Columns.TextColumn()
+    vervangende_component_code = Columns.TextColumn()
     ingangsdatum= Columns.DateColumn()
     einddatum= Columns.DateColumn()
 
