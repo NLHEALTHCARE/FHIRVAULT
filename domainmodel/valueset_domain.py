@@ -198,6 +198,7 @@ class Behandeling(DvPeriodicalValueset):
     hoofdgroep_omschrijving_lang= Columns.TextColumn()
     behandeling_setting_code = Columns.TextColumn()
     vervangende_component_code = Columns.TextColumn()
+
     # ingangsdatum= Columns.DateColumn()
     # einddatum= Columns.DateColumn()
 
@@ -211,9 +212,9 @@ class Diagnose(DvPeriodicalValueset):
     hoofdgroep_code= Columns.TextColumn()
     hoofdgroep_omschrijving_kort= Columns.TextColumn()
     hoofdgroep_omschrijving_lang= Columns.TextColumn()
-    ingangsdatum= Columns.DateColumn()
+    # ingangsdatum= Columns.DateColumn()
     # einddatum= Columns.DateColumn()
-    # diagnose_groep = Columns.TextColumn()
+    diagnose_groep = Columns.TextColumn()
     
 
 

@@ -210,8 +210,8 @@ def init_sor_to_valset_mappings(pipe):
 
     mapping = SorToValueSetMapping('typeringslijst_hstage', Diagnose)
     mapping.map_field("specialisme_code_agb||'-'||component_code", Diagnose.code)
-    mapping.map_field("specialisme_code_agb", Diagnose.specialisme_code)
-    mapping.map_field("component_code", Diagnose.diagnose_code)
+    mapping.map_field("lpad(specialisme_code_agb, 4, '0')", Diagnose.specialisme_code)
+    mapping.map_field("lpad(component_code, 4, '0')", Diagnose.diagnose_code)
     mapping.map_field("component_omschrijving_kort", Diagnose.omschrijving)
     mapping.map_field("component_omschrijving_lang", Diagnose.omschrijving_lang)
     mapping.map_field("subgroep_code", Diagnose.subgroep_code)
