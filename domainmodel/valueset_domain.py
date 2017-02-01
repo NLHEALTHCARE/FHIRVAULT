@@ -94,27 +94,27 @@ class Valueset(DvValueset):
     omschrijving = Columns.TextColumn()
 
 
-class Zorgproduct(DvValueset):
+class Zorgproduct(DvPeriodicalValueset):
     omschrijving_latijn = Columns.TextColumn()
     omschrijving_consument = Columns.TextColumn()
     declaratie_code_verzekerde_zorg = Columns.TextColumn()
     declaratie_code_onverzekerde_zorg = Columns.TextColumn()
     wbmv_code = Columns.TextColumn()
     zorgproductgroep_code = Columns.TextColumn()
-    ingangsdatum = Columns.DateColumn()
-    einddatum = Columns.DateColumn()
+    # ingangsdatum = Columns.DateColumn()
+    # einddatum = Columns.DateColumn()
 
-class Zorgproductgroep(DvValueset):
+class Zorgproductgroep(DvPeriodicalValueset):
     """Standaard definitie nog opzoeken.
     """
     _schema_name = 'valset'
 
     code = Columns.TextColumn()
     omschrijving = Columns.TextColumn()
-    ingangsdatum = Columns.DateColumn()
-    einddatum = Columns.DateColumn()
+    # ingangsdatum = Columns.DateColumn()
+    # einddatum = Columns.DateColumn()
 
-class Tarief(DvValueset):
+class Tarief(DvPeriodicalValueset):
     """Standaard definitie nog opzoeken.
     """
     _schema_name = 'valset'
@@ -123,8 +123,8 @@ class Tarief(DvValueset):
     omschrijving = Columns.TextColumn()
     declaratiecode = Columns.TextColumn()
     omschrijving_declaratiecode = Columns.TextColumn()
-    ingangsdatum = Columns.DateColumn()
-    einddatum = Columns.DateColumn()
+    # ingangsdatum = Columns.DateColumn()
+    # einddatum = Columns.DateColumn()
     specialisme_code = Columns.RefColumn('specialismen')
     agb_uitvoerder= Columns.TextColumn()
     productgroepcode= Columns.TextColumn()
@@ -138,15 +138,15 @@ class Tarief(DvValueset):
     declaratie_regel= Columns.TextColumn()
 
 
-class Zorgactiviteit(DvValueset):
+class Zorgactiviteit(DvPeriodicalValueset):
     """Standaard definitie nog opzoeken.
     """
     _schema_name = 'valset'
 
     code = Columns.TextColumn()
     omschrijving = Columns.TextColumn()
-    ingangsdatum = Columns.DateColumn()
-    einddatum = Columns.DateColumn()
+    # ingangsdatum = Columns.DateColumn()
+    # einddatum = Columns.DateColumn()
     omschrijving_consument = Columns.TextColumn()
     op_nota = Columns.BoolColumn()
     extra = Columns.JsonColumn()
@@ -160,7 +160,9 @@ class Specialisme(DvValueset):
     pass
 
 
-class Zorgtype(DvValueset):
+class Zorgtype(DvPeriodicalValueset):
+    specialisme_code = Columns.TextColumn()
+    zorgtype_code = Columns.TextColumn()
     omschrijving_lang= Columns.TextColumn()
     # subgroep_code= Columns.TextColumn()
     # subgroep_omschrijving_kort= Columns.TextColumn()
@@ -168,10 +170,12 @@ class Zorgtype(DvValueset):
     hoofdgroep_code= Columns.TextColumn()
     hoofdgroep_omschrijving_kort= Columns.TextColumn()
     hoofdgroep_omschrijving_lang= Columns.TextColumn()
-    ingangsdatum= Columns.DateColumn()
-    einddatum= Columns.DateColumn()
+    # ingangsdatum= Columns.DateColumn()
+    # einddatum= Columns.DateColumn()
 
-class Zorgvraag(DvValueset):
+class Zorgvraag(DvPeriodicalValueset):
+    specialisme_code = Columns.TextColumn()
+    zorgvraag_code = Columns.TextColumn()
     omschrijving_lang= Columns.TextColumn()
     # subgroep_code= Columns.TextColumn()
     # subgroep_omschrijving_kort= Columns.TextColumn()
@@ -179,10 +183,12 @@ class Zorgvraag(DvValueset):
     hoofdgroep_code= Columns.TextColumn()
     hoofdgroep_omschrijving_kort= Columns.TextColumn()
     hoofdgroep_omschrijving_lang= Columns.TextColumn()
-    ingangsdatum= Columns.DateColumn()
-    einddatum= Columns.DateColumn()
+    # ingangsdatum= Columns.DateColumn()
+    # einddatum= Columns.DateColumn()
 
-class Behandeling(DvValueset):
+class Behandeling(DvPeriodicalValueset):
+    specialisme_code = Columns.TextColumn()
+    behandeling_code = Columns.TextColumn()
     omschrijving_lang= Columns.TextColumn()
     subgroep_code= Columns.TextColumn()
     subgroep_omschrijving_kort= Columns.TextColumn()
@@ -192,10 +198,12 @@ class Behandeling(DvValueset):
     hoofdgroep_omschrijving_lang= Columns.TextColumn()
     behandeling_setting_code = Columns.TextColumn()
     vervangende_component_code = Columns.TextColumn()
-    ingangsdatum= Columns.DateColumn()
-    einddatum= Columns.DateColumn()
+    # ingangsdatum= Columns.DateColumn()
+    # einddatum= Columns.DateColumn()
 
-class Diagnose(DvValueset):
+class Diagnose(DvPeriodicalValueset):
+    specialisme_code = Columns.TextColumn()
+    diagnose_code = Columns.TextColumn()
     omschrijving_lang= Columns.TextColumn()
     subgroep_code= Columns.TextColumn()
     subgroep_omschrijving_kort= Columns.TextColumn()
@@ -204,13 +212,12 @@ class Diagnose(DvValueset):
     hoofdgroep_omschrijving_kort= Columns.TextColumn()
     hoofdgroep_omschrijving_lang= Columns.TextColumn()
     ingangsdatum= Columns.DateColumn()
-    einddatum= Columns.DateColumn()
-    specialisme_code = Columns.RefColumn('specialismen')
-    diagnose_groep = Columns.TextColumn()
+    # einddatum= Columns.DateColumn()
+    # diagnose_groep = Columns.TextColumn()
     
 
 
-class DiagnoseCombinatie(DvValueset):
+class DiagnoseCombinatie(DvPeriodicalValueset):
     """Standaard definitie nog opzoeken.
     """
     _schema_name = 'valset'
@@ -223,30 +230,27 @@ class DiagnoseCombinatie(DvValueset):
     indicatie = Columns.TextColumn()
     specialisme_code = Columns.RefColumn('specialismen')
 
-class AfsluitRegel(Valueset):
+class AfsluitRegel(DvPeriodicalValueset):
     """Standaard definitie nog opzoeken.
     """
     _schema_name = 'valset'
 
     code = Columns.TextColumn()
     omschrijving = Columns.TextColumn()
-    ingangsdatum = Columns.DateColumn()
-    einddatum = Columns.DateColumn()
+    # ingangsdatum = Columns.DateColumn()
+    # einddatum = Columns.DateColumn()
     specialisme_code = Columns.RefColumn('specialismen')
     component_types = Columns.RefColumn('afsluitregel_component_types')
     component_code = Columns.TextColumn()
     groepsnummer = Columns.TextColumn()
 
-class AfsluitReden(DvValueset):
+class AfsluitReden(DvPeriodicalValueset):
     """Standaard definitie nog opzoeken.
     """
     _schema_name = 'valset'
-
-    code = Columns.TextColumn()
-    omschrijving = Columns.TextColumn()
     omschrijving_kort = Columns.TextColumn()
-    ingangsdatum = Columns.DateColumn()
-    einddatum = Columns.DateColumn()
+    # ingangsdatum = Columns.DateColumn()
+    # einddatum = Columns.DateColumn()
 
 ###########################
 #LINKS
