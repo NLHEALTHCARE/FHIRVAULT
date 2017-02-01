@@ -52,10 +52,10 @@ def init_sor_to_valset_mappings(pipe):
     # mapping.map_field("huisnummer", Buurt.huisnummer)
     mapping.map_field("pc4", Buurt.code)
     mapping.map_field("(buurtmnaam) as omschr", Buurt.omschrijving)
-    mapping.map_field("gemeenteco", Buurt.gemeentecode)
+    mapping.map_field("gemeenteco", Buurt.gemeente_code)
     mapping.map_field("gemeentena", Buurt.gemeentenaam)
-    mapping.map_field("wijkcode", Buurt.wijkcode)
-    mapping.map_field("buurtcode", Buurt.buurtcode)
+    mapping.map_field("wijkcode", Buurt.wijk_code)
+    mapping.map_field("buurtcode", Buurt.buurt_code)
     mapping.map_field("buurtmnaam", Buurt.buurtnaam)
     mappings.append(mapping)
     return mappings
