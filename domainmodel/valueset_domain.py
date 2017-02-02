@@ -261,6 +261,77 @@ class AfsluitReden(DvPeriodicalValueset):
 #     zorgproductgroep = LinkReference(Zorgproductgroep)
 #     tarief = LinkReference(Tarief)
 
+
+
+class Buurt(DvValueset):
+    """CBS buurten
+    postcode, huisnummer, gemeenteco, gemeentena, wijkcode, wijknaam, buurtcode, buurtmnaam
+    """
+    postcode = Columns.TextColumn()
+    huisnummer = Columns.TextColumn()
+    gemeente_code = Columns.TextColumn()
+    gemeentenaam = Columns.TextColumn()
+    wijk_code = Columns.TextColumn()
+    buurt_code = Columns.TextColumn()
+    buurtnaam = Columns.TextColumn()
+
+class Gemeente(DvValueset):
+    """CBS gemeenten """
+
+    sortering_naam = Columns.TextColumn()
+    arbeidsmarktregios_code = Columns.TextColumn()
+    arbeidsmarktregios_naam = Columns.TextColumn()
+    arrondissementen_rechtsgebieden_code = Columns.TextColumn()
+    arrondissementen_rechtsgebieden_naam = Columns.TextColumn()
+    corop_gebieden_code = Columns.TextColumn()
+    corop_gebieden_naam = Columns.TextColumn()
+    corop_subgebieden_code = Columns.TextColumn()
+    corop_subgebieden_naam = Columns.TextColumn()
+    corop_plusgebieden_code = Columns.TextColumn()
+    corop_plusgebieden_naam = Columns.TextColumn()
+    ggd_regios_code = Columns.TextColumn()
+    ggd_regios_naam = Columns.TextColumn()
+    jeugdzorgregios_code = Columns.TextColumn()
+    jeugdzorgregios_naam = Columns.TextColumn()
+    kamer_van_koophandel_code = Columns.TextColumn()
+    kamer_van_koophandel_naam = Columns.TextColumn()
+    landbouwgebieden_code = Columns.TextColumn()
+    landbouwgebieden_naam = Columns.TextColumn()
+    landbouwgebieden_groepen_code = Columns.TextColumn()
+    landbouwgebieden_groepen_naam = Columns.TextColumn()
+    landsdelen_code = Columns.TextColumn()
+    landsdelen_naam = Columns.TextColumn()
+    nuts1_gebieden_code = Columns.TextColumn()
+    nuts1_gebieden_naam = Columns.TextColumn()
+    nuts2_gebieden_code = Columns.TextColumn()
+    nuts2_gebieden_naam = Columns.TextColumn()
+    nuts3_gebieden_code = Columns.TextColumn()
+    nuts3_gebieden_naam = Columns.TextColumn()
+    politie_regionale_eenheden_code = Columns.TextColumn()
+    politie_regionale_eenheden_naam = Columns.TextColumn()
+    provincies_code = Columns.TextColumn()
+    provincies_naam = Columns.TextColumn()
+    ressorten_rechtsgebieden_code = Columns.TextColumn()
+    ressorten_rechtsgebieden_naam = Columns.TextColumn()
+    rpa_gebieden_code = Columns.TextColumn()
+    rpa_gebieden_naam = Columns.TextColumn()
+    toeristengebieden_code = Columns.TextColumn()
+    toeristengebieden_naam = Columns.TextColumn()
+    veiligheidsregios_code = Columns.TextColumn()
+    veiligheidsregios_naam = Columns.TextColumn()
+    wgr_samenwerkingsgebieden_code = Columns.TextColumn()
+    wgr_samenwerkingsgebieden_naam = Columns.TextColumn()
+    zorgkantoorregios_code = Columns.TextColumn()
+    zorgkantoorregios_naam = Columns.TextColumn()
+    gemeentegrootte_code = Columns.TextColumn()
+    gemeentegrootte_omschrijving = Columns.TextColumn()
+    stedelijkheid_code = Columns.TextColumn()
+    stedelijkheid_omschrijving = Columns.TextColumn()
+    inwonertal = Columns.TextColumn()
+    omgevingsadressendichtheid = Columns.TextColumn()
+
+
+
 class Datum(DvValueset):
     """Zie dim_dag uit dwh1
     """
@@ -277,23 +348,14 @@ class Datum(DvValueset):
     volgnummer_jaar = Columns.IntColumn()
     label = Columns.TextColumn()
 
-class Buurt(DvValueset):
-    """CBS buurten
-    postcode, huisnummer, gemeenteco, gemeentena, wijkcode, wijknaam, buurtcode, buurtmnaam
+class Leeftijdsgroepen20(DvValueset):
+    """Leeftijdscategorieen opgedeeld in 20 groepen
     """
-    postcode = Columns.TextColumn()
-    huisnummer = Columns.TextColumn()
-    gemeente_code = Columns.TextColumn()
-    gemeentenaam = Columns.TextColumn()
-    wijk_code = Columns.TextColumn()
-    buurt_code = Columns.TextColumn()
-    buurtnaam = Columns.TextColumn()
+    van_leeftijd = Columns.IntColumn()
+    tot_leeftijd = Columns.IntColumn()
 
-
-###########################
-#LINKS
-###########################
-# class ZorgproductgroepTariefLink(Link):
-#     _schema_name = 'valset'
-#     zorgproductgroep = LinkReference(Zorgproductgroep)
-#     tarief = LinkReference(Tarief)
+class Leeftijdsgroepen6(DvValueset):
+    """Leeftijdscategorieen opgedeeld in 6 groepen
+    """
+    van_leeftijd = Columns.IntColumn()
+    tot_leeftijd = Columns.IntColumn()
