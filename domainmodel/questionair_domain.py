@@ -1,24 +1,60 @@
 from domainmodel.identity_domain import Patient
+from domainmodel.workflow_domain import Afspraak, Subtraject
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import *
 
 class Meettraject(HubEntity):
     class Default(Sat):
+        kliniek_code = Columns.TextColumn()
+        specialisme_code = Columns.TextColumn()
         anatomie = Columns.TextColumn()
-        diagnose_globaal = Columns.TextColumn() #episode_general
-        diagnose_specifiek = Columns.TextColumn() #episode_specific
+        diagnose_code = Columns.TextColumn()
+        episode_omschrijving_globaal = Columns.TextColumn() #episode_general
+        episode_omschrijving_specifiek = Columns.TextColumn() #episode_specific
         zijde = Columns.TextColumn()
 
         datum_aanmaak = Columns.DateTimeColumn()  # reference_date
         datum_afgerond = Columns.DateTimeColumn()
 
+    class Identificatie(Sat):
+        patient_nummer = Columns.TextColumn()
+        meettraject_volgnummer = Columns.IntColumn()
+        zorgtraject_nummer= Columns.TextColumn()
+        subtraject_nummer = Columns.TextColumn()
+        eerste_afspraak_nummer = Columns.TextColumn()
+
 class Meetmoment(HubEntity):
     class Default(Sat):
         label = Columns.TextColumn()
         omschrijving = Columns.TextColumn()
+        zijde = Columns.TextColumn()
+        specialist_code = Columns.TextColumn()
         datum_aanmaak = Columns.DateTimeColumn()
+
+    class Afspraak(Sat):
+        afspraak_nummer = Columns.TextColumn()
+        afspraak_omschrijving = Columns.TextColumn()
+        afspraak_status_code = Columns.TextColumn()
+        afspraak_status_omschrijving = Columns.TextColumn()
+        afspraak_datum = Columns.DateTimeColumn()
+        zorgactiviteit_code = Columns.TextColumn()
+        zorgactiviteit_omschrijving = Columns.TextColumn()
+
+    class Verzending(Sat):
+        datum_verstuur = Columns.DateTimeColumn()
+        trigger_na_dagen = Columns.IntColumn()
         datum_verzonden = Columns.DateColumn()
-        soap_response = Columns.TextColumn()
+        status = Columns.TextColumn()
+        status_bericht = Columns.TextColumn()
+        heeft_feedback = Columns.BoolColumn()
+
+    class Identificatie(Sat):
+        patient_nummer = Columns.TextColumn()
+        meettraject_volgnummer = Columns.IntColumn()
+        meetmoment = Columns.TextColumn()
+        meetmoment_volgnummer = Columns.IntColumn()
+        subtraject_nummer = Columns.TextColumn()
+        afspraak_nummer = Columns.TextColumn()
 
 class Enquete(HubEntity):
     class Default(Sat):
@@ -110,7 +146,20 @@ class EnqueteMetingNotificatie(HubEntity):  # notificatie = indications in Telep
 # LINKS
 #########################
 
-class EnqueteMetingLinkEntity(LinkEntity):
+class MeetmomentAfspraakLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        meetmoment = LinkReference(Meetmoment)
+        afspraak = LinkReference(Afspraak)
+
+class MeetmomentSubtrajectLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        meetmoment = LinkReference(Meetmoment)
+        subtraject = LinkReference(Subtraject)
+
+
+class EnqueteMetingMeetmomentLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
         meettraject = LinkReference(Meettraject)
@@ -118,8 +167,7 @@ class EnqueteMetingLinkEntity(LinkEntity):
         enquete = LinkReference(Enquete)
         enquete_meting = LinkReference(EnqueteMeting)
 
-
-class EnqueteResultaatLinkEntity(LinkEntity):
+class EnqueteMetingResultaatLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
         meettraject = LinkReference(Meettraject)
