@@ -1,4 +1,4 @@
-"""prepaire CBS gegevens"""
+"""prepare CBS gegevens"""
 import csv
 
 

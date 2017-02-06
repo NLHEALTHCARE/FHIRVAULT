@@ -175,7 +175,10 @@ class EnqueteMetingResultaatLinkEntity(LinkEntity):
         enquete_meting = LinkReference(EnqueteMeting)
         enquete_meting_resultaat = LinkReference(EnqueteMetingResultaat)
 
-
+class EnqueteMetingEnqueteLinkEntity(LinkEntity):
+    class Link(Link):
+        enquete = LinkReference(Enquete)
+        enquete_meting = LinkReference(EnqueteMeting)
 
 # class ScoreEnqueteInzetLinkEntity(LinkEntity):
 #     class Link(Link):
