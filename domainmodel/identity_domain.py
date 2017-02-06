@@ -75,7 +75,7 @@ class Patient(HubEntity):
             postadres = 'postadres'  # PST
             officieel_adres = 'officieel adres'  # HP ??
             tijdelijk_adres = 'tijdelijk adres'  # TMP
-            bezoek_adres = 'bezoek_adres adres'  # PHYS
+            bezoek_adres = 'bezoek_adres'  # PHYS
             werkadres = 'werkadres'  # WP
             vakantieadres = 'vakantieadres'  # HV
             factuuradres = 'factuuradres'  # staat niet in nictiz
@@ -182,14 +182,14 @@ class Medewerker(HubEntity):
 
     class Adres(HybridSat):
         class Types(HybridSat.Types):
-            woonadres = 'woonadres'  # HP
-            postadres = 'postadres'  # PST
-            officieel_adres = 'officieel adres'  # HP ??
-            tijdelijk_adres = 'tijdelijk adres'  # TMP
-            bezoek_adres = 'bezoek_adres adres'  # PHYS
-            werkadres = 'werkadres'  # WP
-            vakantieadres = 'vakantieadres'  # HV
-            factuuradres = 'factuuradres'  # staat niet in nictiz
+            woonadres = 'woon'  # HP
+            postadres = 'post'  # PST
+            officieel_adres = 'officieel'  # HP ??
+            tijdelijk_adres = 'tijdelijk'  # TMP
+            bezoek_adres = 'bezoek'  # PHYS
+            werkadres = 'werk'  # WP
+            vakantieadres = 'vakantie'  # HV
+            factuuradres = 'factuur'  # staat niet in nictiz
 
         straat = Columns.TextColumn()
         huisnummer = Columns.IntColumn()
@@ -256,9 +256,9 @@ class Organisatie(HubEntity):
         class Types(HybridSat.Types):
             woonadres = 'woonadres'  # HP
             postadres = 'postadres'  # PST
-            officieel_adres = 'officieel adres'  # HP ??
-            tijdelijk_adres = 'tijdelijk adres'  # TMP
-            bezoek_adres = 'bezoek_adres adres'  # PHYS
+            officieel_adres = 'officieel'  # HP ??
+            tijdelijk_adres = 'tijdelijk'  # TMP
+            bezoek_adres = 'bezoek_adres'  # PHYS
             werkadres = 'werkadres'  # WP
             vakantieadres = 'vakantieadres'  # HV
             factuuradres = 'factuuradres'  # staat niet in nictiz
