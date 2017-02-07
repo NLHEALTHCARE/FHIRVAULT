@@ -82,7 +82,7 @@ class EnqueteMeting(HubEntity):
         meetmoment = Columns.TextColumn()
         anatomie = Columns.TextColumn()
         zijde  = Columns.TextColumn()
-
+        uitnodingsdatum = Columns.DateTimeColumn()
         referentie_datum = Columns.DateTimeColumn() # reference_date
         aangemaakt = Columns.DateTimeColumn()
         compleet = Columns.TextColumn()
