@@ -28,6 +28,8 @@ class Meetmoment(HubEntity):
         label = Columns.TextColumn()
         omschrijving = Columns.TextColumn()
         zijde = Columns.TextColumn()
+        episode_algemeen = Columns.TextColumn()
+        episode_specifiek = Columns.TextColumn()
         specialist_code = Columns.TextColumn()
         datum_aanmaak = Columns.DateTimeColumn()
 
@@ -170,15 +172,15 @@ class EnqueteMetingMeetmomentLinkEntity(LinkEntity):
 class EnqueteMetingResultaatLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
-        meettraject = LinkReference(Meettraject)
-        meetmoment = LinkReference(Meetmoment)
+        # meettraject = LinkReference(Meettraject)
+        # meetmoment = LinkReference(Meetmoment)
         enquete_meting = LinkReference(EnqueteMeting)
         enquete_meting_resultaat = LinkReference(EnqueteMetingResultaat)
 
-class EnqueteMetingEnqueteLinkEntity(LinkEntity):
-    class Link(Link):
-        enquete = LinkReference(Enquete)
-        enquete_meting = LinkReference(EnqueteMeting)
+# class EnqueteMetingEnqueteLinkEntity(LinkEntity):
+#     class Link(Link):
+#         enquete = LinkReference(Enquete)
+#         enquete_meting = LinkReference(EnqueteMeting)
 
 # class ScoreEnqueteInzetLinkEntity(LinkEntity):
 #     class Link(Link):
