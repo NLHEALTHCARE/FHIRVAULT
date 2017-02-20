@@ -3,18 +3,20 @@ from domainmodel.workflow_domain import Afspraak, Subtraject
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import *
 
-class Meettraject(HubEntity):
+class EnqueteMeettraject(HubEntity):
     class Default(Sat):
-        kliniek_code = Columns.TextColumn()
-        specialisme_code = Columns.TextColumn()
         anatomie = Columns.TextColumn()
-        diagnose_code = Columns.TextColumn()
         episode_omschrijving_globaal = Columns.TextColumn() #episode_general
         episode_omschrijving_specifiek = Columns.TextColumn() #episode_specific
         zijde = Columns.TextColumn()
-
         datum_aanmaak = Columns.DateTimeColumn()  # reference_date
         datum_afgerond = Columns.DateTimeColumn()
+
+    class Telepsy(Sat):
+        anatomie = Columns.TextColumn()
+        episode = Columns.TextColumn()
+        zijde = Columns.TextColumn()
+        datum_aanmaak = Columns.DateTimeColumn()
 
     class Identificatie(Sat):
         patient_nummer = Columns.TextColumn()
@@ -22,16 +24,28 @@ class Meettraject(HubEntity):
         zorgtraject_nummer= Columns.TextColumn()
         subtraject_nummer = Columns.TextColumn()
         eerste_afspraak_nummer = Columns.TextColumn()
+        kliniek_code = Columns.TextColumn()
+        specialisme_code = Columns.TextColumn()
+        diagnose_code = Columns.TextColumn()
 
-class Meetmoment(HubEntity):
+
+class EnqueteMeetmoment(HubEntity):
     class Default(Sat):
         label = Columns.TextColumn()
         omschrijving = Columns.TextColumn()
         zijde = Columns.TextColumn()
         episode_algemeen = Columns.TextColumn()
         episode_specifiek = Columns.TextColumn()
-        specialist_code = Columns.TextColumn()
         datum_aanmaak = Columns.DateTimeColumn()
+
+    class Telepsy(Sat):
+        anatomie = Columns.TextColumn()
+        episode = Columns.TextColumn()
+        moment = Columns.TextColumn()
+        zijde = Columns.TextColumn()
+        testgroup_id = Columns.TextColumn()
+        datum_aanmaak = Columns.DateTimeColumn()
+        datum_afgerond = Columns.DateTimeColumn()
 
     class Afspraak(Sat):
         afspraak_nummer = Columns.TextColumn()
@@ -50,6 +64,11 @@ class Meetmoment(HubEntity):
         status_bericht = Columns.TextColumn()
         heeft_feedback = Columns.BoolColumn()
 
+    class TestInfo(Sat):
+        testgroup_id = Columns.TextColumn()
+        testgroup = Columns.TextColumn()
+
+
     class Identificatie(Sat):
         patient_nummer = Columns.TextColumn()
         meettraject_volgnummer = Columns.IntColumn()
@@ -57,6 +76,7 @@ class Meetmoment(HubEntity):
         meetmoment_volgnummer = Columns.IntColumn()
         subtraject_nummer = Columns.TextColumn()
         afspraak_nummer = Columns.TextColumn()
+        specialist_code = Columns.TextColumn()
 
 class Enquete(HubEntity):
     class Default(Sat):
@@ -79,7 +99,7 @@ class Enquete(HubEntity):
 
 
 
-class EnqueteMeting(HubEntity):
+class Enqueteafname(HubEntity):
     class Default(Sat):
         meetmoment = Columns.TextColumn()
         anatomie = Columns.TextColumn()
@@ -111,7 +131,7 @@ class EnqueteMeting(HubEntity):
     #     behandeling_id = Columns.TextColumn()  # treatment_id
 
 
-class EnqueteMetingResultaat(HubEntity): # deze class bevat gegevens met antwoorden en (totaal)scores
+class EnqueteafnameAntwoord(HubEntity): # deze class bevat gegevens met antwoorden en (totaal)scores
     class Default(Sat):
         vraag = Columns.TextColumn()
         antwoord = Columns.TextColumn()
@@ -130,7 +150,7 @@ class EnqueteMetingResultaat(HubEntity): # deze class bevat gegevens met antwoor
 #     pass
 
 
-class EnqueteMetingNotificatie(HubEntity):  # notificatie = indications in Telepsy proms (get_indications)
+class EnqueteafnameNotificatie(HubEntity):  # notificatie = indications in Telepsy proms (get_indications)
     class Default(Sat):
         score_beschrijving = Columns.TextColumn()
         notificatie_type = Columns.TextColumn()
@@ -148,34 +168,34 @@ class EnqueteMetingNotificatie(HubEntity):  # notificatie = indications in Telep
 # LINKS
 #########################
 
-class MeetmomentAfspraakLinkEntity(LinkEntity):
+class EnqueteMeetmomentAfspraakLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
-        meetmoment = LinkReference(Meetmoment)
+        meetmoment = LinkReference(EnqueteMeetmoment)
         afspraak = LinkReference(Afspraak)
 
-class MeetmomentSubtrajectLinkEntity(LinkEntity):
+class EnqueteMeetmomentSubtrajectLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
-        meetmoment = LinkReference(Meetmoment)
+        meetmoment = LinkReference(EnqueteMeetmoment)
         subtraject = LinkReference(Subtraject)
 
 
-class EnqueteMetingMeetmomentLinkEntity(LinkEntity):
+class EnqueteafnameMeetmomentLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
-        meettraject = LinkReference(Meettraject)
-        meetmoment = LinkReference(Meetmoment)
+        meettraject = LinkReference(EnqueteMeettraject)
+        meetmoment = LinkReference(EnqueteMeetmoment)
         enquete = LinkReference(Enquete)
-        enquete_meting = LinkReference(EnqueteMeting)
+        enquete_meting = LinkReference(Enqueteafname)
 
-class EnqueteMetingResultaatLinkEntity(LinkEntity):
+class EnqueteafnameAntwoordLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
         # meettraject = LinkReference(Meettraject)
         # meetmoment = LinkReference(Meetmoment)
-        enquete_meting = LinkReference(EnqueteMeting)
-        enquete_meting_resultaat = LinkReference(EnqueteMetingResultaat)
+        enquete_meting = LinkReference(Enqueteafname)
+        enquete_meting_resultaat = LinkReference(EnqueteafnameAntwoord)
 
 # class EnqueteMetingEnqueteLinkEntity(LinkEntity):
 #     class Link(Link):
@@ -192,5 +212,5 @@ class EnqueteMetingResultaatLinkEntity(LinkEntity):
 class EnqueteNotificatieMeettrajectLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
-        meettraject = LinkReference(Meettraject)
-        enquete_meting_notificatie = LinkReference(EnqueteMetingNotificatie)
+        meettraject = LinkReference(EnqueteMeettraject)
+        enquete_meting_notificatie = LinkReference(EnqueteafnameNotificatie)
