@@ -168,49 +168,43 @@ class EnqueteafnameNotificatie(HubEntity):  # notificatie = indications in Telep
 # LINKS
 #########################
 
+class EnqueteMeettrajectSubtrajectLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        meettraject = LinkReference(EnqueteMeettraject, fk='fk_enquete_meetraject_hub')
+        subtraject = LinkReference(Subtraject)
+
+class EnqueteMeettrajectMeetmomentLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        meettraject = LinkReference(EnqueteMeettraject, fk='fk_enquete_meettraject_hub')
+        meetmoment = LinkReference(EnqueteMeetmoment, fk='fk_enquete_meetmoment_hub')
+
+
 class EnqueteMeetmomentAfspraakLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
-        meetmoment = LinkReference(EnqueteMeetmoment)
+        meetmoment = LinkReference(EnqueteMeetmoment, fk='fk_enquete_meetmoment_hub')
         afspraak = LinkReference(Afspraak)
-
-class EnqueteMeetmomentSubtrajectLinkEntity(LinkEntity):
-    class Link(Link):
-        patient = LinkReference(Patient)
-        meetmoment = LinkReference(EnqueteMeetmoment)
-        subtraject = LinkReference(Subtraject)
-
 
 class EnqueteafnameMeetmomentLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
-        meettraject = LinkReference(EnqueteMeettraject)
-        meetmoment = LinkReference(EnqueteMeetmoment)
+        meettraject = LinkReference(EnqueteMeettraject, fk='fk_enquete_meettraject_hub')
+        meetmoment = LinkReference(EnqueteMeetmoment, fk='fk_enquete_meetmoment_hub')
         enquete = LinkReference(Enquete)
-        enquete_meting = LinkReference(Enqueteafname)
+        enqueteafname = LinkReference(Enqueteafname)
 
 class EnqueteafnameAntwoordLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
-        # meettraject = LinkReference(Meettraject)
-        # meetmoment = LinkReference(Meetmoment)
-        enquete_meting = LinkReference(Enqueteafname)
-        enquete_meting_resultaat = LinkReference(EnqueteafnameAntwoord)
-
-# class EnqueteMetingEnqueteLinkEntity(LinkEntity):
-#     class Link(Link):
-#         enquete = LinkReference(Enquete)
-#         enquete_meting = LinkReference(EnqueteMeting)
-
-# class ScoreEnqueteInzetLinkEntity(LinkEntity):
-#     class Link(Link):
-#         score = LinkReference(EnqueteMetingScore)
-#         enquete_inzet = LinkReference(EnqueteMeting)
-#
-#         patient = LinkReference(Patient)
+        # meettraject = LinkReference(EnqueteMeettraject, fk='fk_enquete_meettraject_hub')
+        # meetmoment = LinkReference(EnqueteMeetmoment, fk='fk_enquete_meetmoment_hub')
+        enqueteafname = LinkReference(Enqueteafname)
+        enqueteafname_antwoord = LinkReference(EnqueteafnameAntwoord)
 
 class EnqueteNotificatieMeettrajectLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
         meettraject = LinkReference(EnqueteMeettraject)
-        enquete_meting_notificatie = LinkReference(EnqueteafnameNotificatie)
+        enqueteafname_notificatie = LinkReference(EnqueteafnameNotificatie)
