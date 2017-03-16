@@ -2,21 +2,55 @@ from domainmodel.identity_domain import Patient
 from domainmodel.workflow_domain import Afspraak, Subtraject
 from pyelt.datalayers.database import Columns
 from pyelt.datalayers.dv import *
+from pyelt.datalayers.valset import DvValueset
+
+
+class TelespyTestgroep(DvValueset):
+    """
+    """
+    testgroup_id = Columns.TextColumn()
+    meetmoment = Columns.TextColumn()
+    episode = Columns.TextColumn()
+    anatomie = Columns.TextColumn()
+    tests = Columns.TextColumn()
+
+class Enquete(DvValueset):
+    omschrijving_kort = Columns.TextColumn()
+    omschrijving_lang = Columns.TextColumn()
 
 class EnqueteMeettraject(HubEntity):
     class Default(Sat):
         anatomie = Columns.TextColumn()
-        episode_omschrijving_globaal = Columns.TextColumn() #episode_general
-        episode_omschrijving_specifiek = Columns.TextColumn() #episode_specific
+        episode = Columns.TextColumn() #episode_general
         zijde = Columns.TextColumn()
         datum_aanmaak = Columns.DateTimeColumn()  # reference_date
         datum_afgerond = Columns.DateTimeColumn()
 
+    class Proms(Sat):
+        anatomie = Columns.TextColumn()
+        episode_globaal = Columns.TextColumn()  # episode_general
+        episode_specifiek = Columns.TextColumn()  # episode_specific
+        zijde = Columns.TextColumn()
+        subtraject_nummer = Columns.TextColumn()
+        zorgtraject_nummer = Columns.TextColumn()
+        kliniek_code = Columns.TextColumn()
+        specialisme_code = Columns.TextColumn()
+        diagnose_code = Columns.TextColumn()
+        behandelaar_agb = Columns.TextColumn()
+        datum_aanmaak = Columns.DateTimeColumn()
+
     class Telepsy(Sat):
         anatomie = Columns.TextColumn()
-        episode = Columns.TextColumn()
+        episode = Columns.TextColumn()  # episode_general
         zijde = Columns.TextColumn()
+        subtraject_nummer = Columns.TextColumn()
+        kliniek_code = Columns.TextColumn()
+        specialisme_code = Columns.TextColumn()
+        diagnose_code = Columns.TextColumn()
+        behandelaar_agb = Columns.TextColumn()
         datum_aanmaak = Columns.DateTimeColumn()
+        days_diff = Columns.IntColumn()
+        validation_msg = Columns.TextColumn()
 
     class Identificatie(Sat):
         patient_nummer = Columns.TextColumn()
@@ -27,6 +61,7 @@ class EnqueteMeettraject(HubEntity):
         kliniek_code = Columns.TextColumn()
         specialisme_code = Columns.TextColumn()
         diagnose_code = Columns.TextColumn()
+        behandelaar_agb = Columns.TextColumn()
 
 
 class EnqueteMeetmoment(HubEntity):
@@ -78,7 +113,7 @@ class EnqueteMeetmoment(HubEntity):
         afspraak_nummer = Columns.TextColumn()
         specialist_code = Columns.TextColumn()
 
-class Enquete(HubEntity):
+class EnqueteTest(HubEntity):
     class Default(Sat):
         label = Columns.TextColumn()
         omschrijving = Columns.TextColumn()
@@ -109,11 +144,18 @@ class Enqueteafname(HubEntity):
         aangemaakt = Columns.DateTimeColumn()
         compleet = Columns.TextColumn()
 
+    class Testgroep(Sat):
+        testgroep_id = Columns.TextColumn()
+        anatomie = Columns.TextColumn()
+        episode  = Columns.TextColumn()
+        zijde = Columns.DateTimeColumn()
+
     class ExterneGegevens(Sat):
         patient_id = Columns.TextColumn()
         enquete_id = Columns.TextColumn()  # test_id
         enquete_meting_id = Columns.TextColumn()  # test_deployment_id
         traject_id = Columns.TextColumn()
+        testgroep_id = Columns.TextColumn()
         extra_data = Columns.JsonColumn()
         # geen_reactie_type = Columns.TextColumn()  # hier eventueel ref kolom van maken
         # benchmark_type = Columns.TextColumn()  # hier eventueel ref kolom van maken
@@ -192,7 +234,7 @@ class EnqueteafnameMeetmomentLinkEntity(LinkEntity):
         patient = LinkReference(Patient)
         meettraject = LinkReference(EnqueteMeettraject, fk='fk_enquete_meettraject_hub')
         meetmoment = LinkReference(EnqueteMeetmoment, fk='fk_enquete_meetmoment_hub')
-        enquete = LinkReference(Enquete)
+        # enquete = LinkReference(Enquete)
         enqueteafname = LinkReference(Enqueteafname)
 
 class EnqueteafnameAntwoordLinkEntity(LinkEntity):
