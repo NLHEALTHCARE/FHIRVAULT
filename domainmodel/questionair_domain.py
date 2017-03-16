@@ -238,6 +238,12 @@ class EnqueteafnameMeetmomentLinkEntity(LinkEntity):
         # enquete = LinkReference(Enquete)
         enqueteafname = LinkReference(Enqueteafname)
 
+class EnqueteafnameMeettrajectLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        meettraject = LinkReference(EnqueteMeettraject, fk='fk_enquete_meettraject_hub')
+        enqueteafname = LinkReference(Enqueteafname)
+
 class EnqueteafnameAntwoordLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
