@@ -43,6 +43,7 @@ class EnqueteMeettraject(HubEntity):
         anatomie = Columns.TextColumn()
         episode = Columns.TextColumn()  # episode_general
         zijde = Columns.TextColumn()
+        zorgtraject_nummer = Columns.TextColumn()
         subtraject_nummer = Columns.TextColumn()
         kliniek_code = Columns.TextColumn()
         specialisme_code = Columns.TextColumn()
