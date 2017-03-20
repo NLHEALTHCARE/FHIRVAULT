@@ -211,6 +211,12 @@ class EnqueteafnameNotificatie(HubEntity):  # notificatie = indications in Telep
 # LINKS
 #########################
 
+class EnqueteMeettrajectZorgtrajectLinkEntity(LinkEntity):
+    class Link(Link):
+        patient = LinkReference(Patient)
+        meettraject = LinkReference(EnqueteMeettraject, fk='fk_enquete_meetraject_hub')
+        zorgtraject = LinkReference(Subtraject)
+
 class EnqueteMeettrajectSubtrajectLinkEntity(LinkEntity):
     class Link(Link):
         patient = LinkReference(Patient)
