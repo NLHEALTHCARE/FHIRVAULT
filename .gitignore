@@ -10,3 +10,7 @@ logs/
 pyelt.egg-info/
 docs/build/
 **/*configs.py
+
+# Sublime Text project and workspace files
+*.sublime-project
+*.sublime-workspace
