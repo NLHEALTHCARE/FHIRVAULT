@@ -6,7 +6,7 @@ from pyelt.sources.files import CsvFile
 
 __author__ = 'cmesu'
 
-#todo bestand van vektis-uzovi moet worden voorbereid. Gaat nu handmatig.
+#todo eventueel: bestand van vektis-uzovi moet worden voorbereid. Gaat nu handmatig.
 # -van xls met tabladen naar .csv
 # -alle returns in text-velden eruit
 # -alle ; en | in text velden eruit

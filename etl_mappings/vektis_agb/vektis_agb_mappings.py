@@ -15,6 +15,7 @@ def init_source_to_sor_mappings(path):
     mappings = []
     fixed_length_file_defs = vektis_import_def
 
+    #todo: ralph eventueel: onderstaande code kan ook geschreven worden per file, ipv van in een loop
     os.chdir(path)
     for file_name in glob.glob("*.csv"):
         if not file_name.endswith('AB.csv'):
@@ -22,8 +23,10 @@ def init_source_to_sor_mappings(path):
         def_name = file_name.split('.')[0]
         key_names = []
 
+        #in vorige versie van agb betrof het fixed length bestanden, nu is het comma seperated
+        #onderstaande code wordt nu alleen nog gebruikt om de keynames te achterhalen
+        #deze worden uit de import def gehaald
         import_def = fixed_length_file_defs[def_name]
-
         for field_def in import_def:
             if len(field_def) == 3:
                 field_name = field_def[0]
@@ -38,7 +41,9 @@ def init_source_to_sor_mappings(path):
         sor_mapping = SourceToSorMapping(source_file, target_table, auto_map=True)
         mappings.append(sor_mapping)
 
-    # VALUESETS
+    # VALUESETS INLEZEN
+    #todo ralph: onderstaande csv bestand verplaatsen naar data directory
+    #huidige pad (waar deze code staat) ophalen
     path = os.path.dirname(os.path.abspath(__file__))
     source_file = CsvFile('{}/vektis_agb_valueset_data.csv'.format(path), delimiter=';', encoding='utf8')
     source_file.reflect()
