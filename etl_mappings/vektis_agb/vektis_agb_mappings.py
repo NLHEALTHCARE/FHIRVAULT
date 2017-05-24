@@ -15,7 +15,7 @@ def init_source_to_sor_mappings(path):
     mappings = []
     fixed_length_file_defs = vektis_import_def
 
-    #todo: ralph eventueel: onderstaande code kan ook geschreven worden per file, ipv van in een loop
+    #todo ralph: eventueel: onderstaande code kan ook geschreven worden per file, ipv van in een loop
     os.chdir(path)
     for file_name in glob.glob("*.csv"):
         if not file_name.endswith('AB.csv'):
