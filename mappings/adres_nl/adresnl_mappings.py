@@ -20,7 +20,6 @@ def init_source_to_sor_mappings(pipe):
     if adresnl_file:
         source_file = CsvFile(data_path + adresnl_file, delimiter=';')
         source_file.set_primary_key(['wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
-
         sor_mapping = SourceToSorMapping(source_file, 'adresnl_hstage', auto_map=True)
         mappings.append(sor_mapping)
 
