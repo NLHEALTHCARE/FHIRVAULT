@@ -9,11 +9,11 @@ def define_vektis_uzovi_pipe(pipeline, vektis_uzovi_config):
     source_to_sor_mappings = init_source_to_sor_mappings(vektis_uzovi_config['data_path'])
     pipe.mappings.extend(source_to_sor_mappings)
     #
-    sor_to_ref_mappings = init_sor_to_dv_mappings(pipe)
-    pipe.mappings.extend(sor_to_ref_mappings)
-    #
-    sor_to_dv_mappings = init_sor_to_dv_mappings(pipe)
-    pipe.mappings.extend(sor_to_dv_mappings)
+    # sor_to_ref_mappings = init_sor_to_dv_mappings(pipe)
+    # pipe.mappings.extend(sor_to_ref_mappings)
+
+    # sor_to_dv_mappings = init_sor_to_dv_mappings(pipe)
+    # pipe.mappings.extend(sor_to_dv_mappings)
 
 
 def vektis_uzovi_main(*args):

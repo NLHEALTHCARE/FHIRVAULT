@@ -19,10 +19,21 @@ def init_source_to_sor_mappings(pipe):
     adresnl_file = pipe.config['adresnl_file']
     if adresnl_file:
         source_file = CsvFile(data_path + adresnl_file, delimiter=';')
-        source_file.reflect()
         source_file.set_primary_key(['wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
 
         sor_mapping = SourceToSorMapping(source_file, 'adresnl_hstage', auto_map=True)
+        mappings.append(sor_mapping)
+
+    ###############################
+    # adresnl updates
+    ###############################
+    adresnl_file = pipe.config['adresnl_update_file']
+    if adresnl_file:
+        source_file = CsvFile(data_path + adresnl_file, delimiter=';')
+        source_file.set_primary_key(
+            ['update_type','wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
+
+        sor_mapping = SourceToSorMapping(source_file, 'adresnl_update_hstage', auto_map=True)
         mappings.append(sor_mapping)
 
 
@@ -32,7 +43,6 @@ def init_source_to_sor_mappings(pipe):
     cbs_buurten_file = pipe.config['cbs_buurten_file']
     if cbs_buurten_file:
         source_file = CsvFile(data_path + cbs_buurten_file, delimiter=';')  # compleet adresbestand ,geen empty lines aan eind document
-        source_file.reflect()
         source_file.set_primary_key(['POSTCODE', 'HUISNUMMER'])
         sor_mapping = SourceToSorMapping(source_file, 'cbsbuurten_hstage', auto_map=True)
         mappings.append(sor_mapping)
@@ -49,7 +59,11 @@ def init_source_to_sor_mappings(pipe):
         source_file.set_primary_key(['code'])
         sor_mapping = SourceToSorMapping(source_file, 'cbsgemeenten_hstage', auto_map=True)
         mappings.append(sor_mapping)
-        return mappings
+
+
+
+
+    return mappings
 
 def init_sor_to_valset_mappings(pipe):
     mappings = []

@@ -23,6 +23,8 @@ def init_source_to_sor_mappings(path):
     source_file.set_primary_key(['UZOVI_code', 'Begindatum', 'Relatie_met_UZOVI_code', 'Relatierol', 'Begindatum_relatie'])
     sor_mapping = SourceToSorMapping(source_file, 'uzovi_hstage', auto_map=True)
     mappings.append(sor_mapping)
+
+
     return mappings
 
 

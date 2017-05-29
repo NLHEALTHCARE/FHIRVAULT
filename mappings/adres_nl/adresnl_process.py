@@ -16,7 +16,7 @@ def define_adres_nl_pipe(pipeline, adresnl_config):
     mappings = init_source_to_sor_mappings(pipe)
     pipe.mappings.extend(mappings)
 
-    pipe.mappings.extend(init_sor_to_valset_mappings(pipe))
+    # pipe.mappings.extend(init_sor_to_valset_mappings(pipe))
 
 
 def adres_nl_main(*args):
