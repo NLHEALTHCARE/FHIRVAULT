@@ -19,5 +19,5 @@ Hernoem het bestand mut_pcdata.csv naar 'adresnl_update_[yyyymmdd-yyyymmdd].csv'
 
 Wijzig in de sectie voor adresnl in de config file (vanuit Pycharm, staat onder /CLINICSVAULT/configs/) de naam van het adresnl bestand conform de nieuwe naam, feitelijk hoef je dus enkel de data te wijzen:
 
-
+![](https://github.com/NLHEALTHCARE/FHIRVAULT/blob/2.0.1-zomerwendesprint-test/mappings/adres_nl/images/wijzig_config_file.png)
 
