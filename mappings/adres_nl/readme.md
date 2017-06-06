@@ -21,3 +21,6 @@ Wijzig in de sectie voor adresnl in de config file (vanuit Pycharm, staat onder 
 
 ![](https://github.com/NLHEALTHCARE/FHIRVAULT/blob/2.0.1-zomerwendesprint-test/mappings/adres_nl/images/wijzig_config_file.png)
 
+4. Draai script om de nieuwe data in te laden
+
+Tot slot dien je nog even het script te draaien waarmee de data daadwerkelijk ingeladen wordt in de adresnl_update tabel. 
