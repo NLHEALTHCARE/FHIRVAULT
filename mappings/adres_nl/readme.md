@@ -12,7 +12,12 @@ In de titel van de zipfile is de periode zichtbaar voor welke de update geldig i
 Verplaats de csv nu naar de juiste folder op Shannon-dev (10.249.1.143). Dit kan middels FTP (bv. Filezilla) of door vanuit de Terminal het bestand te kopiëren. De betreffende folder (filesystem) is /var/dwh2_data/adres_nl/.
 
 2. Hernoemen bestand
+
 Hernoem het bestand mut_pcdata.csv naar 'adresnl_update_[yyyymmdd-yyyymmdd].csv' (o.b.v. bovenstaand voorbeeld zou het dus 'adresnl_update_20170501-20170605' worden). 
 
-3. Inladen bestand 
+3. Aanpassen config file (evt. hier later geautomatiseerd alternatief voor verzinnen)
+
+Wijzig in de sectie voor adresnl in de config file (vanuit Pycharm, staat onder /CLINICSVAULT/configs/) de naam van het adresnl bestand conform de nieuwe naam, feitelijk hoef je dus enkel de data te wijzen:
+
+
 
