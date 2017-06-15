@@ -35,7 +35,6 @@ def init_source_to_sor_mappings(pipe):
         sor_mapping = SourceToSorMapping(source_file, 'adresnl_update_hstage', auto_map=True)
         mappings.append(sor_mapping)
 
-
     ###############################
     # cbsbuurten
     ###############################

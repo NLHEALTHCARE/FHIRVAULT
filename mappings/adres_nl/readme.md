@@ -23,4 +23,4 @@ Wijzig in de sectie voor adresnl in de config file (vanuit Pycharm, staat onder 
 
 4. Draai script om de nieuwe data in te laden
 
-Tot slot dien je nog even het script te draaien waarmee de data daadwerkelijk ingeladen wordt in de adresnl_update tabel. 
+Tot slot dien je nog even het script te draaien waarmee de data daadwerkelijk ingeladen wordt in de adresnl_update tabel. Dit betreft het volgende script: ????
