@@ -2,7 +2,7 @@
 import csv
 
 
-def prepare_cbs_data(path):
+def prepare_cbs_data(path, from_file = 'Gebieden_in_Nederland_CBS.csv', to_file = 'prepared_gebieden_in_nederland.csv'):
 
     """    #BRON:     # http://statline.cbs.nl/
 
@@ -48,4 +48,4 @@ def prepare_cbs_data(path):
         writer.writerows(content)
 
 if __name__ == '__main__':
-    prepare_cbs_data('C:/!OntwikkelDATA/adres_nl/')
+    prepare_cbs_data('C:/!OntwikkelDATA/cbs/')
