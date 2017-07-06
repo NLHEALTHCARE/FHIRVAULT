@@ -89,9 +89,7 @@ class ValueSetsEnum:
 
 
 class Valueset(DvValueset):
-    valueset_naam = Columns.TextColumn()
-    code = Columns.TextColumn()
-    omschrijving = Columns.TextColumn()
+    pass
 
 
 class Zorgproduct(DvPeriodicalValueset):
@@ -261,7 +259,64 @@ class AfsluitReden(DvPeriodicalValueset):
 #     zorgproductgroep = LinkReference(Zorgproductgroep)
 #     tarief = LinkReference(Tarief)
 
+class Adres(DvValueset):
+    """ADRES NL
+    """
+    perceelid = Columns.IntColumn()
 
+    straatid = Columns.TextColumn()
+    straatnaam = Columns.TextColumn()
+    straatnaam_nen = Columns.TextColumn()
+
+    huisnr = Columns.TextColumn()
+    huisnr_bag_letter = Columns.TextColumn()
+    huisnr_bag_toevoeging = Columns.TextColumn()
+
+    postcode = Columns.TextColumn()
+
+    plaatsid = Columns.TextColumn()
+    plaatsnaam = Columns.TextColumn()
+    plaatsnaam_nen = Columns.TextColumn()
+    plaatscode = Columns.TextColumn()
+
+    perceelid = Columns.TextColumn()
+    perceeltype = Columns.TextColumn()
+
+
+
+    plaatsid = Columns.TextColumn()
+    plaatsnaam = Columns.TextColumn()
+    plaatsnaam_nen = Columns.TextColumn()
+    plaatscode = Columns.TextColumn()
+
+    gemeentecode = Columns.TextColumn()
+    gemeentenaam = Columns.TextColumn()
+    gemeentenaam_nen = Columns.TextColumn()
+
+    provinciecode = Columns.TextColumn()
+    provincielevel = Columns.TextColumn()
+    provincienaam = Columns.TextColumn()
+
+    breedtegraad = Columns.FloatColumn()
+    lengtegraad = Columns.FloatColumn()
+    rdx = Columns.FloatColumn()
+    rdy = Columns.FloatColumn()
+    oppervlakte = Columns.IntColumn()
+    gebruiksdoel = Columns.TextColumn()
+
+    """ OVERIGE VELDEN::
+    bag_nummeraandingid text COLLATE pg_catalog."default",
+    bag_adresseerbaarobjectid text COLLATE pg_catalog."default",
+    rdx text COLLATE pg_catalog."default",
+    rdy text COLLATE pg_catalog."default",
+    reeksid text COLLATE pg_catalog."default",
+    wijkcode text COLLATE pg_catalog."default",
+    lettercombinatie text COLLATE pg_catalog."default",
+    huisnr_van text COLLATE pg_catalog."default",
+    huisnr_tm text COLLATE pg_catalog."default",
+    reeksindicatie text COLLATE pg_catalog."default",
+    cebucocode text COLLATE pg_catalog."default",
+     """
 
 class Buurt(DvValueset):
     """CBS buurten

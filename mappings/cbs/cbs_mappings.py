@@ -14,6 +14,12 @@ def init_source_to_sor_mappings(pipe):
     data_path = pipe.config['data_path']
 
     ###############################
+    # test om fout te genereren
+    ###############################
+
+
+
+    ###############################
     # cbsbuurten
     ###############################
     cbs_buurten_file = pipe.config['cbs_buurten_file']
@@ -29,10 +35,10 @@ def init_source_to_sor_mappings(pipe):
     #BRON:     # http://statline.cbs.nl/
     #ZIE prepare voor prepareren van bestand
     cbs_gebieden_file = pipe.config['cbs_gebieden_file']
-
+    prepared_file = cbs_gebieden_file.lower().replace('cbs', 'prepared')
     if cbs_gebieden_file:
-        prepared_file = 'prepared_gebieden_in_nederland.csv'
-        prepare_cbs_data(pipe.config['data_path'], cbs_gebieden_file, prepared_file)
+        # prepared_file = 'prepared_gebieden_in_nederland.csv'
+        # prepare_cbs_data(path=pipe.config['data_path'], from_file=cbs_gebieden_file, to_file=prepared_file)
         source_file = CsvFile(data_path + prepared_file, delimiter=';')
         source_file.reflect()
         source_file.set_primary_key(['code'])
@@ -44,7 +50,7 @@ def init_sor_to_valset_mappings(pipe):
     mappings = []
     #postcode, huisnummer, gemeenteco, gemeentena, wijkcode, wijknaam, buurtcode, buurtmnaam
     sor_sql = """SELECT DISTINCT _valid, _active, _runid, LEFT(postcode, 4) as pc4, gemeenteco, gemeentena, wijkcode, wijknaam, buurtcode, buurtmnaam
-    FROM sor_adresnl.cbsbuurten_hstage WHERE _valid AND _active
+    FROM sor_cbs.cbsbuurten_hstage WHERE _valid AND _active
     """
     sor_query = SorQuery(sor_sql, pipe.sor)
     mapping = SorToValueSetMapping(sor_query, Buurt, pipe.sor)
@@ -59,7 +65,7 @@ def init_sor_to_valset_mappings(pipe):
     mapping.map_field("wijkcode", Buurt.wijk_code)
     mapping.map_field("buurtcode", Buurt.buurt_code)
     mapping.map_field("buurtmnaam", Buurt.buurtnaam)
-    # mappings.append(mapping)
+    mappings.append(mapping)
 
 
     mapping = SorToValueSetMapping('cbsgemeenten_hstage', Gemeente, pipe.sor)

@@ -1,6 +1,6 @@
 ### Proces inladen adres_nl data
 
-Periodiek (ongeveer maandelijks, periodiciteit is niet consequent) ontvangen wij van postcode.nl.
+Periodiek (ongeveer maandelijks, periodiciteit is niet consequent) ontvangen wij updates van postcode.nl.
 Deze data wordt in een zipfile aangeleverd. Na het openen zijn er twee bestanden te zien:
 
 ![](/images/folder_adresnl.png)
@@ -19,12 +19,6 @@ Verplaats de csv nu naar de juiste folder op Shannon-dev (10.249.1.143). Dit kan
 
 Hernoem het bestand mut_pcdata.csv naar 'adresnl_update_[yyyymmdd-yyyymmdd].csv' (o.b.v. bovenstaand voorbeeld zou het dus 'adresnl_update_20170501-20170605' worden). 
 
-3. Aanpassen config file (evt. hier later geautomatiseerd alternatief voor verzinnen)
+*LET WEL:* er dient update in de bestandsnaam voor te komen (geen hoofdletters).
 
-Wijzig in de sectie voor adresnl in de config file (vanuit Pycharm, staat onder /CLINICSVAULT/configs/) de naam van het adresnl bestand conform de nieuwe naam, feitelijk hoef je dus enkel de data te wijzen:
-
-![](/images/wijzig_config_file.png)
-
-4. Draai script om de nieuwe data in te laden
-
-Tot slot dien je nog even het script te draaien waarmee de data daadwerkelijk ingeladen wordt in de adresnl_update tabel. Dit betreft het volgende script: ????
+3. De eerst volgende keer dat pyelt runt zal die een nieuw bestand herkennen en zal het bestand worden ingelezen.

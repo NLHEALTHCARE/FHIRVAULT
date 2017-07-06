@@ -2,13 +2,16 @@
 import csv
 
 
-def prepare_cbs_data(path, from_file = 'Gebieden_in_Nederland_CBS.csv', to_file = 'prepared_gebieden_in_nederland.csv'):
+def prepare_cbs_data(path = '', from_file = 'Gebieden_in_Nederland_CBS.csv', to_file = ''):
 
     """    #BRON:     # http://statline.cbs.nl/
 
     Cbs download heeft 4 titel kolommen. Deze moeten worden samengevoegd"""
-    file_name = '{}{}'.format(path, 'Gebieden_in_Nederland_CBS.csv')
-    new_file_name = '{}{}'.format(path, 'prepared_gebieden_in_nederland.csv')
+    # if pipe:
+    #     path = pipe.config['data_path']
+    #     from_file = pipe.config['cbs_gebieden_file']
+    file_name = '{}{}'.format(path, from_file)
+    new_file_name = '{}{}'.format(path, to_file)
     with open(file_name, newline='') as file:
         reader = csv.reader(file, delimiter=';')
         i = 0
@@ -48,4 +51,4 @@ def prepare_cbs_data(path, from_file = 'Gebieden_in_Nederland_CBS.csv', to_file 
         writer.writerows(content)
 
 if __name__ == '__main__':
-    prepare_cbs_data('C:/!OntwikkelDATA/cbs/')
+    prepare_cbs_data(path = 'C:/!OntwikkelDATA/cbs/')

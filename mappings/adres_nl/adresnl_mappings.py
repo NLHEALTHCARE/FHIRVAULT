@@ -1,5 +1,5 @@
 # from domainmodel_hl7_rim.entity_domain import AdresNL
-from domainmodel.valueset_domain import Buurt, Gemeente
+from domainmodel.valueset_domain import Buurt, Gemeente, Adres
 from mappings.cbs.cbs_gebieden_prepare import prepare_cbs_data
 from pyelt.datalayers.sor import SorQuery
 from pyelt.mappings.sor_to_dv_mappings import SorToEntityMapping, SorToValueSetMapping
@@ -17,11 +17,12 @@ def init_source_to_sor_mappings(pipe):
     ###############################
     # adresnl
     ###############################
-    adresnl_compleet_file = pipe.config['adresnl_compleet_file']
-    if adresnl_compleet_file:
-        source_file = CsvFile(data_path + adresnl_compleet_file, delimiter=';')
-        source_file.set_primary_key(['wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
-        sor_mapping = SourceToSorMapping(source_file, 'adresnl_compleet_hstage', auto_map=True)
+    adresnl_complete_file = pipe.config['adresnl_complete_file']
+    if adresnl_complete_file:
+        source_file = CsvFile(data_path + adresnl_complete_file, delimiter=';')
+        # source_file.set_primary_key(['update_type','wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
+        source_file.set_primary_key(['update_type', 'perceelid'])
+        sor_mapping = SourceToSorMapping(source_file, 'adresnl_hstage', auto_map=True)
         mappings.append(sor_mapping)
 
     ###############################
@@ -30,10 +31,10 @@ def init_source_to_sor_mappings(pipe):
     adresnl_file = pipe.config['adresnl_update_file']
     if adresnl_file:
         source_file = CsvFile(data_path + adresnl_file, delimiter=';')
-        source_file.set_primary_key(
-            ['update_type','wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
-
-        sor_mapping = SourceToSorMapping(source_file, 'adresnl_update_hstage', auto_map=True)
+        # source_file.set_primary_key(
+        #     ['update_type','wijkcode', 'lettercombinatie', 'huisnr', 'huisnr_bag_letter', 'huisnr_bag_toevoeging'])
+        source_file.set_primary_key(['update_type', 'perceelid'])
+        sor_mapping = SourceToSorMapping(source_file, 'adresnl_hstage', auto_map=True)
         mappings.append(sor_mapping)
 
     return mappings
@@ -44,7 +45,28 @@ def init_source_to_sor_mappings(pipe):
 def init_sor_to_valset_mappings(pipe):
     mappings = []
 
-
+    # sor_sql = """SELECT * FROM sor_adresnl.adresnl_update_hstage WHERE _valid AND _active AND lower(update_type) IN ('insert', 'update')"""
+    # sor_query = SorQuery(sor_sql, pipe.sor)
+    mapping = SorToValueSetMapping('adresnl_hstage', Adres, pipe.sor)
+    mapping.filter = "lower(update_type) IN ('insert', 'update')"
+    mapping.map_field("(wijkcode || lettercombinatie || '-' || huisnr || coalesce(huisnr_bag_letter, '') || coalesce(huisnr_bag_toevoeging, ''))", Adres.code)
+    mapping.map_field("perceelid", Adres.perceelid)
+    mapping.map_field("straatnaam", Adres.straatnaam)
+    mapping.map_field("(huisnr || coalesce(huisnr_bag_letter, '') || coalesce(huisnr_bag_toevoeging, ''))", Adres.huisnr)
+    mapping.map_field("(wijkcode || lettercombinatie)", Adres.postcode)
+    mapping.map_field("plaatsnaam", Adres.plaatsnaam)
+    mapping.map_field("plaatscode", Adres.plaatscode)
+    mapping.map_field("gemeentenaam", Adres.gemeentenaam)
+    mapping.map_field("gemeentecode", Adres.gemeentecode)
+    mapping.map_field("provincienaam", Adres.provincienaam)
+    mapping.map_field("provincielevel", Adres.provincielevel)
+    mapping.map_field("provinciecode", Adres.provinciecode)
+    mapping.map_field("breedtegraad", Adres.breedtegraad)
+    mapping.map_field("lengtegraad", Adres.lengtegraad)
+    mapping.map_field("rdx", Adres.rdx)
+    mapping.map_field("rdy", Adres.rdy)
+    mapping.map_field("gebruiksdoel", Adres.gebruiksdoel)
+    mappings.append(mapping)
     return mappings
 
 def init_sor_to_dv_mappings(pipe):

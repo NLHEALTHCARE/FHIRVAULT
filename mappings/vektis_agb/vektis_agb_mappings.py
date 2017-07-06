@@ -10,12 +10,23 @@ from pyelt.mappings.sor_to_dv_mappings import SorToLinkMapping, SorToValueSetMap
 from pyelt.mappings.source_to_sor_mappings import SourceToSorMapping
 from pyelt.sources.files import CsvFile
 
+source_to_target_names = {
+    'FAGBX_20_All_AB': 'zorgverleners',
+    'FAGBX_21_All_AB': 'zorgverleners_extra',
+    'FAGBX_22_All_AB': 'zorgverleners_praktijken',
+    'FAGBX_23_All_AB': 'praktijken',
+    'FAGBX_24_All_AB': 'zorgverleners_inrichtingen',
+    'FAGBX_25_All_AB': 'praktijken_extra',
 
-def init_source_to_sor_mappings(path):
+}
+
+def init_source_to_sor_mappings(pipe):
     mappings = []
     fixed_length_file_defs = vektis_import_def
 
-    #todo ralph: eventueel: onderstaande code kan ook geschreven worden per file, ipv van in een loop
+
+    path = pipe.config['data_path']
+
     os.chdir(path)
     for file_name in glob.glob("*.csv"):
         if not file_name.endswith('AB.csv'):
@@ -37,14 +48,13 @@ def init_source_to_sor_mappings(path):
         source_file = CsvFile('{}{}'.format(path, file_name), delimiter=';', encoding='utf8')
         source_file.reflect()
         source_file.set_primary_key(key_names)
-        target_table = '{}_hstage'.format(def_name).lower()
+        target_name = source_to_target_names[def_name.upper()]
+        target_table = '{}_hstage'.format(target_name).lower()
         sor_mapping = SourceToSorMapping(source_file, target_table, auto_map=True)
         mappings.append(sor_mapping)
 
     # VALUESETS INLEZEN
-    #todo ralph: onderstaande csv bestand verplaatsen naar data directory
-    #huidige pad (waar deze code staat) ophalen
-    path = os.path.dirname(os.path.abspath(__file__))
+    path = pipe.config['data_path']
     source_file = CsvFile('{}/vektis_agb_valueset_data.csv'.format(path), delimiter=';', encoding='utf8')
     source_file.reflect()
     source_file.set_primary_key(['source_code'])
