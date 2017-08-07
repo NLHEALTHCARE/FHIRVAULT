@@ -3,7 +3,7 @@
 Periodiek (ongeveer maandelijks, periodiciteit is niet consequent) ontvangen wij updates van postcode.nl.
 Deze data wordt in een zipfile aangeleverd. Na het openen zijn er twee bestanden te zien:
 
-![](/images/folder_adresnl.png)
+![bestanden](https://github.com/NLHEALTHCARE/FHIRVAULT/blob/2.0.1-zomerwendesprint-test/mappings/adres_nl/images/folder_adresnl.png)
 
 In de titel van de zipfile is de periode zichtbaar voor welke de update geldig is. Deze gebruik je later om de csv te hernoemen, aangezien het csv-bestand altijd een generieke naam (mut_pcdata.csv) heeft.  
 
